@@ -183,6 +183,142 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/23/%E5%B7%A5%E5%85%B7/hexo%E7%9A%84%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AE%E4%B8%8E%E9%83%A8%E7%BD%B2%E6%96%B9%E6%B3%95%E5%A4%87%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/23/%E5%B7%A5%E5%85%B7/hexo%E7%9A%84%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AE%E4%B8%8E%E9%83%A8%E7%BD%B2%E6%96%B9%E6%B3%95%E5%A4%87%E7%94%A8/" class="post-title-link" itemprop="url">hexo的搭建配置与部署方法备用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-10-23 15:28:00 / 修改时间：15:29:38" itemprop="dateCreated datePublished" datetime="2023-10-23T15:28:00+08:00">2023-10-23</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="HEXO博客概述："><a href="#HEXO博客概述：" class="headerlink" title="HEXO博客概述："></a>HEXO博客概述：</h2><ul>
+<li>hexo：基于Node.js的静态博客框架</li>
+<li>Node.js：hexo依赖的运行环境</li>
+<li>git：将hexo生成的博客部署至github的工具</li>
+<li>nvm：windows系统下的node.js环境版本管理器<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023150605.png"></li>
+</ul>
+<h2 id="如何从零搭建："><a href="#如何从零搭建：" class="headerlink" title="如何从零搭建："></a>如何从零搭建：</h2><p>1.安装git软件:</p>
+<ul>
+<li>官网直接下载最新版安装</li>
+</ul>
+<p>2.安装Node.js运行环境：</p>
+<ul>
+<li>安装nvm <a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows">https://github.com/coreybutler/nvm-windows</a> 下载Releases安装</li>
+<li>在nvm中安装指定Node.js版本并启用<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nvm install 18.18.2</span><br><span class="line">nvm ls</span><br><span class="line">nvm use 18.18.2</span><br></pre></td></tr></table></figure>
+（大多数情况下最新版即可，有时候可能hexo版本不稳定可以尝试老版本的node环境）</li>
+</ul>
+<ol>
+<li>安装hexo<ul>
+<li>安装好node环境后直接在cmd中全局安装hexo(hexo相当于安装在当前的Node环境中,使用nvm切换另一版本则需要重新安装) <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2 id="部署："><a href="#部署：" class="headerlink" title="部署："></a>部署：</h2><ul>
+<li>在博客目录下右键选择Open Git Bash here开启git终端</li>
+<li>输入hexo -v检查hexo是否正常安装<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//清理缓存文件</span><br><span class="line">hexo clean</span><br><span class="line">//生成静态博客网页文件</span><br><span class="line">hexo g</span><br><span class="line">//部署</span><br><span class="line">hexo d</span><br><span class="line">//启动本地服务（运行可以在localhost:4000预览静态博客页面）</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure></li>
+<li>配置文件：<ul>
+<li>配置文件位于博客文件夹目录下,文件名为_config.yml，一般用于设置部署到的仓库位置</li>
+</ul>
+</li>
+</ul>
+<h3 id="两种不同部署方式："><a href="#两种不同部署方式：" class="headerlink" title="两种不同部署方式："></a>两种不同部署方式：</h3><ul>
+<li><strong>使用ssh+SSH Key方式部署：</strong><ul>
+<li><p>启动git终端，生成SSH Key</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;备注信息:邮箱&quot;</span><br></pre></td></tr></table></figure>
+<p>一路回车即可</p>
+</li>
+<li><p>cd至sshkey所在目录.ssh<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023140229.png"></p>
+</li>
+<li><p>查看生成的密钥文件并复制内容<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023140512.png"></p>
+</li>
+<li><p>在github网站的是指中添加新建的SSH Key即可<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023140854.png"></p>
+</li>
+<li><p>最后打开配置文件，将部署方式设为Git并填上ssh的仓库地址<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023141143.png"></p>
+</li>
+</ul>
+</li>
+<li><strong>使用https+Token方式部署：</strong><ul>
+<li>在github网站的Developer Settings中选择Personal access tokens中生成Token<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023141858.png"></li>
+<li>打开配置文件，将部署方式设置为Git,部署仓库地址改为https地址，并按格式在地址前加上token<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">      <span class="attr">repo:</span> <span class="string">https://oauth2:ghp_XXXXXXXXXXXXXXXXXXXXXXXXXX@github.com/porridge42/porridge42.github.io.git</span></span><br><span class="line">      <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></li>
+<li>如果部署时弹出github登录窗口，就选择token并填入。如果只能填账号密码就在密码栏填入token。（github已经关闭了账号密码登录，这里填密码是无法连接到github的）</li>
+</ul>
+</li>
+</ul>
+<h3 id="常见部署失败解决办法："><a href="#常见部署失败解决办法：" class="headerlink" title="常见部署失败解决办法："></a>常见部署失败解决办法：</h3><ul>
+<li><p>部署成功示例：<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023151810.png"></p>
+</li>
+<li><p>部署失败示例：<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023151943.png"></p>
+</li>
+<li><p>尝试切换node版本</p>
+</li>
+<li><p>hexo clean清除缓存重新生成部署</p>
+</li>
+<li><p>网络问题，关闭或开启vpn或者切换不同网络</p>
+</li>
+<li><p>git与github连接问题，切换部署方式</p>
+</li>
+<li><p>删除blog目录下的.deploy_git目录与public目录，重新生成并尝试部署</p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/22/OpenCV/3_%E8%A7%86%E9%A2%91%E7%9A%84%E9%87%87%E9%9B%86%E4%B8%8E%E4%BF%9D%E5%AD%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -408,148 +544,6 @@
 <li>waitKey() 等待用户输入</li>
 </ul>
 <figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment"># 创建窗口</span></span><br><span class="line"><span class="comment">#cv2.namedWindow(&#x27;window&#x27;, cv2.WINDOW_AUTOSIZE)</span></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;window&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line"><span class="comment"># 更改窗口的大小(要求窗口flag属性必须为cv2.WINDOW_NORMAL)</span></span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;window&#x27;</span>, <span class="number">800</span>, <span class="number">600</span>)</span><br><span class="line"><span class="comment"># 展示名字为window的窗口</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;window&#x27;</span>, <span class="number">0</span>)</span><br><span class="line"><span class="comment"># 等待按键</span></span><br><span class="line"><span class="comment"># waitKey返回按键的ascii值</span></span><br><span class="line"><span class="comment"># 0表示接受任意按键，如果给其他的整数，表示等待按键的时间，单位是毫秒</span></span><br><span class="line"><span class="comment"># 可以利用waitKey来销毁窗口，不用每次都重启Python</span></span><br><span class="line">key = cv2.waitKey(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">if</span> key &amp; <span class="number">0xFF</span> == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">    cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/22/%E5%B7%A5%E5%85%B7/hexo%E7%9A%84%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AE%E4%B8%8E%E9%83%A8%E7%BD%B2%E6%96%B9%E6%B3%95%E5%A4%87%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/22/%E5%B7%A5%E5%85%B7/hexo%E7%9A%84%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AE%E4%B8%8E%E9%83%A8%E7%BD%B2%E6%96%B9%E6%B3%95%E5%A4%87%E7%94%A8/" class="post-title-link" itemprop="url">hexo的搭建配置与部署方法备用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-10-22 11:11:00" itemprop="dateCreated datePublished" datetime="2023-10-22T11:11:00+08:00">2023-10-22</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-23 15:23:23" itemprop="dateModified" datetime="2023-10-23T15:23:23+08:00">2023-10-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">工具</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="HEXO博客概述："><a href="#HEXO博客概述：" class="headerlink" title="HEXO博客概述："></a>HEXO博客概述：</h2><ul>
-<li>hexo：基于Node.js的静态博客框架</li>
-<li>Node.js：hexo依赖的运行环境</li>
-<li>git：将hexo生成的博客部署至github的工具</li>
-<li>nvm：windows系统下的node.js环境版本管理器<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023150605.png"></li>
-</ul>
-<h2 id="如何从零搭建："><a href="#如何从零搭建：" class="headerlink" title="如何从零搭建："></a>如何从零搭建：</h2><p>1.安装git软件:</p>
-<ul>
-<li>官网直接下载最新版安装</li>
-</ul>
-<p>2.安装Node.js运行环境：</p>
-<ul>
-<li>安装nvm <a target="_blank" rel="noopener" href="https://github.com/coreybutler/nvm-windows">https://github.com/coreybutler/nvm-windows</a> 下载Releases安装</li>
-<li>在nvm中安装指定Node.js版本并启用<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">nvm install 18.18.2</span><br><span class="line">nvm ls</span><br><span class="line">nvm use 18.18.2</span><br></pre></td></tr></table></figure>
-（大多数情况下最新版即可，有时候可能hexo版本不稳定可以尝试老版本的node环境）</li>
-</ul>
-<ol>
-<li>安装hexo<ul>
-<li>安装好node环境后直接在cmd中全局安装hexo(hexo相当于安装在当前的Node环境中,使用nvm切换另一版本则需要重新安装) <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ol>
-<h2 id="部署："><a href="#部署：" class="headerlink" title="部署："></a>部署：</h2><ul>
-<li>在博客目录下右键选择Open Git Bash here开启git终端</li>
-<li>输入hexo -v检查hexo是否正常安装<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//清理缓存文件</span><br><span class="line">hexo clean</span><br><span class="line">//生成静态博客网页文件</span><br><span class="line">hexo g</span><br><span class="line">//部署</span><br><span class="line">hexo d</span><br><span class="line">//启动本地服务（运行可以在localhost:4000预览静态博客页面）</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure></li>
-<li>配置文件：<ul>
-<li>配置文件位于博客文件夹目录下,文件名为_config.yml，一般用于设置部署到的仓库位置</li>
-</ul>
-</li>
-</ul>
-<h3 id="两种不同部署方式："><a href="#两种不同部署方式：" class="headerlink" title="两种不同部署方式："></a>两种不同部署方式：</h3><ul>
-<li><strong>使用ssh+SSH Key方式部署：</strong><ul>
-<li><p>启动git终端，生成SSH Key</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;备注信息:邮箱&quot;</span><br></pre></td></tr></table></figure>
-<p>一路回车即可</p>
-</li>
-<li><p>cd至sshkey所在目录.ssh<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023140229.png"></p>
-</li>
-<li><p>查看生成的密钥文件并复制内容<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023140512.png"></p>
-</li>
-<li><p>在github网站的是指中添加新建的SSH Key即可<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023140854.png"></p>
-</li>
-<li><p>最后打开配置文件，将部署方式设为Git并填上ssh的仓库地址<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023141143.png"></p>
-</li>
-</ul>
-</li>
-<li><strong>使用https+Token方式部署：</strong><ul>
-<li>在github网站的Developer Settings中选择Personal access tokens中生成Token<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023141858.png"></li>
-<li>打开配置文件，将部署方式设置为Git,部署仓库地址改为https地址，并按格式在地址前加上token<figure class="highlight yml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">      <span class="attr">repo:</span> <span class="string">https://oauth2:ghp_XXXXXXXXXXXXXXXXXXXXXXXXXX@github.com/porridge42/porridge42.github.io.git</span></span><br><span class="line">      <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></li>
-<li>如果部署时弹出github登录窗口，就选择token并填入。如果只能填账号密码就在密码栏填入token。（github已经关闭了账号密码登录，这里填密码是无法连接到github的）</li>
-</ul>
-</li>
-</ul>
-<h3 id="常见部署失败解决办法："><a href="#常见部署失败解决办法：" class="headerlink" title="常见部署失败解决办法："></a>常见部署失败解决办法：</h3><ul>
-<li><p>部署成功示例：<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023151810.png"></p>
-</li>
-<li><p>部署失败示例：<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023151943.png"></p>
-</li>
-<li><p>尝试切换node版本</p>
-</li>
-<li><p>hexo clean清除缓存重新生成部署</p>
-</li>
-<li><p>网络问题，关闭或开启vpn或者切换不同网络</p>
-</li>
-<li><p>git与github连接问题，切换部署方式</p>
-</li>
-<li><p>删除blog目录下的.deploy_git目录与public目录，重新生成并尝试部署</p>
-</li>
-</ul>
-
       
     </div>
 
