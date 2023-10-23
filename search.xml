@@ -165,19 +165,6 @@
       </tags>
   </entry>
   <entry>
-    <title>P8_数学和统计方法</title>
-    <url>/2023/05/24/NumPy/P8_%E6%95%B0%E5%AD%A6%E5%92%8C%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[]]></content>
-      <categories>
-        <category>NumPy</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>Python</tag>
-        <tag>数据处理</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>P7_NumPy常用随机数</title>
     <url>/2023/05/21/NumPy/P7_NumPy%E5%B8%B8%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%95%B0/</url>
     <content><![CDATA[<h3 id="seed向随机数生成器传传递随机状态种子："><a href="#seed向随机数生成器传传递随机状态种子：" class="headerlink" title="seed向随机数生成器传传递随机状态种子："></a>seed向随机数生成器传传递随机状态种子：</h3><ul>
@@ -198,6 +185,103 @@
         <tag>博客</tag>
         <tag>Python</tag>
         <tag>数据处理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P8_数学和统计方法</title>
+    <url>/2023/05/24/NumPy/P8_%E6%95%B0%E5%AD%A6%E5%92%8C%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>NumPy</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>Python</tag>
+        <tag>数据处理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P1_创建显示窗口</title>
+    <url>/2023/10/22/OpenCV/1_%E5%88%9B%E5%BB%BA%E6%98%BE%E7%A4%BA%E7%AA%97%E5%8F%A3/</url>
+    <content><![CDATA[<h2 id="创建和显示窗口"><a href="#创建和显示窗口" class="headerlink" title="创建和显示窗口"></a>创建和显示窗口</h2><p><strong>api函数：</strong></p>
+<ul>
+<li>namedWindow() 创建命名窗口</li>
+<li>imshow() 显示窗口</li>
+<li>destoryAllWindows() 摧毁窗口</li>
+<li>resizeWindows() 改变窗口大小</li>
+<li>waitKey() 等待用户输入</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment"># 创建窗口</span></span><br><span class="line"><span class="comment">#cv2.namedWindow(&#x27;window&#x27;, cv2.WINDOW_AUTOSIZE)</span></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;window&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line"><span class="comment"># 更改窗口的大小(要求窗口flag属性必须为cv2.WINDOW_NORMAL)</span></span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;window&#x27;</span>, <span class="number">800</span>, <span class="number">600</span>)</span><br><span class="line"><span class="comment"># 展示名字为window的窗口</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;window&#x27;</span>, <span class="number">0</span>)</span><br><span class="line"><span class="comment"># 等待按键</span></span><br><span class="line"><span class="comment"># waitKey返回按键的ascii值</span></span><br><span class="line"><span class="comment"># 0表示接受任意按键，如果给其他的整数，表示等待按键的时间，单位是毫秒</span></span><br><span class="line"><span class="comment"># 可以利用waitKey来销毁窗口，不用每次都重启Python</span></span><br><span class="line">key = cv2.waitKey(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">if</span> key &amp; <span class="number">0xFF</span> == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">    cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>OpenCV</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>Python</tag>
+        <tag>人工智能</tag>
+        <tag>计算机视觉</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P2_读取与保存</title>
+    <url>/2023/10/22/OpenCV/2_%E8%AF%BB%E5%8F%96%E4%B8%8E%E4%BF%9D%E5%AD%98/</url>
+    <content><![CDATA[<h2 id="加载图像"><a href="#加载图像" class="headerlink" title="加载图像"></a>加载图像</h2><ul>
+<li>imread(path, flag): 使用imread可以读取图片，默认读取的是彩色图片<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment"># 读取图片</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./cat.jpeg&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+<li>imread加载的图像格式:ndarray</li>
+<li>opencv的默认色彩空间为BGR<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./1.png&#x27;</span>)</span><br><span class="line">plt.imshow(img)</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231022164456.png"></li>
+<li>使用plt显示图片，发现颜色显示不正常</li>
+<li>原因为cv中默认色彩空间为BGR而plt中是RGB</li>
+<li>尽量不要使用别的方式展示opencv的图片，使用cv.imshow()方法展示就不会出问题<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231022165136.png"></li>
+</ul>
+<h2 id="保存图片"><a href="#保存图片" class="headerlink" title="保存图片"></a>保存图片</h2><ul>
+<li>imwrite(path, img): 使用imwrite保存图片.<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;img&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;img&#x27;</span>, <span class="number">320</span>, <span class="number">240</span>)</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./1.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#利用while循环优化退出逻辑</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line">    key = cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span> (key &amp; <span class="number">0xFF</span> == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>)):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">elif</span>(key &amp; <span class="number">0xFF</span> == <span class="built_in">ord</span>(<span class="string">&#x27;s&#x27;</span>)):</span><br><span class="line">        cv2.imwrite(<span class="string">&#x27;./123.png&#x27;</span>, img)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;图像已保存！\n&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(key)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>OpenCV</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>Python</tag>
+        <tag>人工智能</tag>
+        <tag>计算机视觉</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P3_视频的采集与保存</title>
+    <url>/2023/10/22/OpenCV/3_%E8%A7%86%E9%A2%91%E7%9A%84%E9%87%87%E9%9B%86%E4%B8%8E%E4%BF%9D%E5%AD%98/</url>
+    <content><![CDATA[<h2 id="视频采集"><a href="#视频采集" class="headerlink" title="视频采集"></a>视频采集</h2><ul>
+<li><p>视频是有图片组成的，视频的每一帧就是一幅图片，一般是30帧，表示一秒显示30张图片。</p>
+</li>
+<li><p>使用cv2.VideoCapture方法可以捕获摄像头，用数字来表示不同的设备，比如0, 1。</p>
+</li>
+<li><p>如果要读取的是视频文件，直接给定路径即可。</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 打开视频文件</span></span><br><span class="line">vc = cv2.VideoCapture(<span class="string">&#x27;./1.mp4&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 捕获摄像头画面</span></span><br><span class="line">vc = cv2.VideoCapture(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>使用.isOpened()方法检测是否打开</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> vc.isOpened():</span><br><span class="line">	<span class="comment"># 读取视频的一帧</span></span><br><span class="line">	<span class="built_in">open</span>, fream = vc.read()</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	<span class="built_in">open</span> = <span class="literal">False</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="捕获摄像头代码"><a href="#捕获摄像头代码" class="headerlink" title="捕获摄像头代码"></a>捕获摄像头代码</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment">#读取摄像头示例</span></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;video&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;video&#x27;</span>, <span class="number">640</span>, <span class="number">480</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果打开失败，不会报错</span></span><br><span class="line">cap = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 循环读取摄像头的每一帧</span></span><br><span class="line"><span class="comment">#while True:</span></span><br><span class="line"><span class="keyword">while</span> cap.isOpened():</span><br><span class="line">    <span class="comment"># 读一帧数据，返回标记和这一帧数据，True表示读到了数据，False表示没读到数据</span></span><br><span class="line">    flag, frame = cap.read()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 可以根据flag做个判断</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> flag:</span><br><span class="line">        <span class="comment"># 没读到数据，直接退出</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 显示数据</span></span><br><span class="line">    cv2.imshow(<span class="string">&#x27;video&#x27;</span>, frame)</span><br><span class="line">    </span><br><span class="line">    key = cv2.waitKey(<span class="number">30</span>)</span><br><span class="line">    <span class="keyword">if</span> key &amp; <span class="number">0xFF</span> == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 别忘了释放资源</span></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+
+<h3 id="读取视频文件代码"><a href="#读取视频文件代码" class="headerlink" title="读取视频文件代码"></a>读取视频文件代码</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取视频文件示例</span></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;video&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;video&#x27;</span>, <span class="number">1280</span>, <span class="number">720</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果打开失败，不会报错</span></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">&#x27;./test_1.mp4&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 循环读取视频的每一帧</span></span><br><span class="line"><span class="comment">#while True:</span></span><br><span class="line"><span class="keyword">while</span> cap.isOpened():</span><br><span class="line">    <span class="comment"># 读一帧数据，返回标记和这一帧数据，True表示读到了数据，False表示没读到数据</span></span><br><span class="line">    flag, frame = cap.read()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 可以根据flag做个判断</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> flag:</span><br><span class="line">        <span class="comment"># 没读到数据，直接退出</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 显示数据</span></span><br><span class="line">    cv2.imshow(<span class="string">&#x27;video&#x27;</span>, frame)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 30帧就是一秒30张，每秒间隔为1000/30(ms) (因为waitKey()函数只接受整形参数，所以这里用双杠除)</span></span><br><span class="line">    key = cv2.waitKey(<span class="number">1000</span> // <span class="number">30</span>)</span><br><span class="line">    <span class="keyword">if</span> key &amp; <span class="number">0xFF</span> == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 别忘了释放资源</span></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+
+<h2 id="视频文件保存"><a href="#视频文件保存" class="headerlink" title="视频文件保存"></a>视频文件保存</h2><ul>
+<li>使用VideoWriter()方法保存视频为文件，参数列表:VideoWriter(输出文件名, 文件格式(fourcc), 帧率, 分辨率)</li>
+<li>write编写并别入缓存</li>
+<li>release缓存内容写入磁盘，并释放资源</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;frame&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;frame&#x27;</span>, <span class="number">640</span>, <span class="number">480</span>)</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">fourcc = cv2.VideoWriter_fourcc(*<span class="string">&#x27;mp4v&#x27;</span>)</span><br><span class="line"></span><br><span class="line">vm = cv2.VideoWriter(<span class="string">&#x27;output.mp4&#x27;</span>, fourcc, <span class="number">30</span>, (<span class="number">640</span>, <span class="number">480</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> cap.isOpened():</span><br><span class="line">    flag, frame  = cap.read()</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> flag:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;无法检测到输入帧，程序已退出!&#x27;</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">    vm.write(frame)</span><br><span class="line">    cv2.imshow(<span class="string">&#x27;frame&#x27;</span>, frame)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">cap.release()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 释放VideoWriter</span></span><br><span class="line">vm.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>OpenCV</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>Python</tag>
+        <tag>人工智能</tag>
+        <tag>计算机视觉</tag>
       </tags>
   </entry>
   <entry>
@@ -690,6 +774,23 @@
       </tags>
   </entry>
   <entry>
+    <title>P24方法_命令行传参</title>
+    <url>/2022/10/26/JavaSE/P24%E6%96%B9%E6%B3%95_%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BC%A0%E5%8F%82/</url>
+    <content><![CDATA[<h2 id="命令行传参"><a href="#命令行传参" class="headerlink" title="命令行传参"></a>命令行传参</h2><ul>
+<li>有时候你希望运行一个程序时候再传递给它消息。这要靠传递命令行参数给main()函数实现<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CommandLine</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String args[])</span>&#123;</span><br><span class="line">        <span class="comment">//args.lenth 数组长度</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;args.lenth; i++)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;args[&quot;</span>+i+<span class="string">&quot;]:&quot;</span>+args[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+使用命令行编译，并添加参数运行<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221020094847.png"></li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>P23方法_方法的重载</title>
     <url>/2022/10/26/JavaSE/P23%E6%96%B9%E6%B3%95_%E6%96%B9%E6%B3%95%E7%9A%84%E9%87%8D%E8%BD%BD/</url>
     <content><![CDATA[<h2 id="方法的重载"><a href="#方法的重载" class="headerlink" title="方法的重载"></a>方法的重载</h2><ul>
@@ -709,23 +810,6 @@
 <li>方法的名称相同时，编译器会根据调用的方法的参数个数，参数类型等去逐个匹配，以选择对应的方法，如果匹配失败，则编译器报错。</li>
 </ul>
 </blockquote>
-]]></content>
-      <categories>
-        <category>JavaSE</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>P24方法_命令行传参</title>
-    <url>/2022/10/26/JavaSE/P24%E6%96%B9%E6%B3%95_%E5%91%BD%E4%BB%A4%E8%A1%8C%E4%BC%A0%E5%8F%82/</url>
-    <content><![CDATA[<h2 id="命令行传参"><a href="#命令行传参" class="headerlink" title="命令行传参"></a>命令行传参</h2><ul>
-<li>有时候你希望运行一个程序时候再传递给它消息。这要靠传递命令行参数给main()函数实现<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">CommandLine</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String args[])</span>&#123;</span><br><span class="line">        <span class="comment">//args.lenth 数组长度</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;args.lenth; i++)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;args[&quot;</span>+i+<span class="string">&quot;]:&quot;</span>+args[i]);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-使用命令行编译，并添加参数运行<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221020094847.png"></li>
-</ul>
 ]]></content>
       <categories>
         <category>JavaSE</category>
@@ -891,30 +975,6 @@
       </tags>
   </entry>
   <entry>
-    <title>P31数组_二维数组</title>
-    <url>/2022/10/26/JavaSE/P31%E6%95%B0%E7%BB%84_%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/</url>
-    <content><![CDATA[<h2 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h2><ul>
-<li>多维数组可以看成是数组的数组，比如二维数组就是一个特殊的一维数组，其每一个元素都是一个一维数组。</li>
-<li>二维数组:<br><code>int a[][] = new int[2][5];</code></li>
-<li>解析: 以上二位数组 a 可以看成一个两行五列的数组。<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayDemo05</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">int</span>[][] arrays = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;, &#123;<span class="number">2</span>,<span class="number">3</span>&#125;, &#123;<span class="number">3</span>,<span class="number">4</span>&#125;, &#123;<span class="number">4</span>,<span class="number">5</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line">        printArray(arrays[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//打印数组元素</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">printArray</span><span class="params">(<span class="type">int</span>[] arrays)</span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arrays.length; i++)&#123;</span><br><span class="line">            System.out.print(arrays[i]+<span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221024151602.png"></li>
-</ul>
-<p><strong>二维数组的长度:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayDemo05</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">int</span>[][] arrays = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;, &#123;<span class="number">2</span>,<span class="number">3</span>&#125;, &#123;<span class="number">3</span>,<span class="number">4</span>&#125;, &#123;<span class="number">4</span>,<span class="number">5</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line">        System.out.println(arrays.length);</span><br><span class="line">        System.out.println(arrays[<span class="number">0</span>].length);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221024151756.png"><br>二维数组本身的长度为4，它包含了四个长度两个元素的一维数组。<br><strong>循环输出二维数组:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayDemo05</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">int</span>[][] arrays = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;, &#123;<span class="number">2</span>,<span class="number">3</span>&#125;, &#123;<span class="number">3</span>,<span class="number">4</span>&#125;, &#123;<span class="number">4</span>,<span class="number">5</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用两层循环输出整个二维数组</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arrays.length; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; arrays[i].length; j++)&#123;</span><br><span class="line">                System.out.println(arrays[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221024152449.png"></p>
-]]></content>
-      <categories>
-        <category>JavaSE</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>P30数组_数组的使用</title>
     <url>/2022/10/26/JavaSE/P30%E6%95%B0%E7%BB%84_%E6%95%B0%E7%BB%84%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<h2 id="数组的使用"><a href="#数组的使用" class="headerlink" title="数组的使用"></a>数组的使用</h2><ul>
@@ -938,6 +998,30 @@
 <p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221024111920.png"></p>
 </li>
 </ul>
+]]></content>
+      <categories>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P31数组_二维数组</title>
+    <url>/2022/10/26/JavaSE/P31%E6%95%B0%E7%BB%84_%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<h2 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h2><ul>
+<li>多维数组可以看成是数组的数组，比如二维数组就是一个特殊的一维数组，其每一个元素都是一个一维数组。</li>
+<li>二维数组:<br><code>int a[][] = new int[2][5];</code></li>
+<li>解析: 以上二位数组 a 可以看成一个两行五列的数组。<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayDemo05</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">int</span>[][] arrays = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;, &#123;<span class="number">2</span>,<span class="number">3</span>&#125;, &#123;<span class="number">3</span>,<span class="number">4</span>&#125;, &#123;<span class="number">4</span>,<span class="number">5</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line">        printArray(arrays[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//打印数组元素</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">printArray</span><span class="params">(<span class="type">int</span>[] arrays)</span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arrays.length; i++)&#123;</span><br><span class="line">            System.out.print(arrays[i]+<span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221024151602.png"></li>
+</ul>
+<p><strong>二维数组的长度:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayDemo05</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">int</span>[][] arrays = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;, &#123;<span class="number">2</span>,<span class="number">3</span>&#125;, &#123;<span class="number">3</span>,<span class="number">4</span>&#125;, &#123;<span class="number">4</span>,<span class="number">5</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line">        System.out.println(arrays.length);</span><br><span class="line">        System.out.println(arrays[<span class="number">0</span>].length);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221024151756.png"><br>二维数组本身的长度为4，它包含了四个长度两个元素的一维数组。<br><strong>循环输出二维数组:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayDemo05</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">int</span>[][] arrays = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;, &#123;<span class="number">2</span>,<span class="number">3</span>&#125;, &#123;<span class="number">3</span>,<span class="number">4</span>&#125;, &#123;<span class="number">4</span>,<span class="number">5</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用两层循环输出整个二维数组</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arrays.length; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; arrays[i].length; j++)&#123;</span><br><span class="line">                System.out.println(arrays[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221024152449.png"></p>
 ]]></content>
       <categories>
         <category>JavaSE</category>
@@ -1790,6 +1874,30 @@
       </tags>
   </entry>
   <entry>
+    <title>P54常用类_getClass方法</title>
+    <url>/2022/11/05/JavaSE/P54%E5%B8%B8%E7%94%A8%E7%B1%BB_getClass%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="getClass-方法"><a href="#getClass-方法" class="headerlink" title="getClass()方法"></a>getClass()方法</h2><ul>
+<li><p>返回值类型: final Class&lt;?&gt;</p>
+</li>
+<li><p>作用：返回引用中存储的实际对象类型</p>
+<br/>
+</li>
+<li><p>应用：通常用于判断两个引用中实际村塾对象类型是否一致</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">	Student(String name, <span class="type">int</span> age)&#123;</span><br><span class="line">		<span class="built_in">this</span>.name = name;</span><br><span class="line">		<span class="built_in">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">		<span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;aaa&quot;</span>, <span class="number">20</span>);</span><br><span class="line">		<span class="type">Student</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;bbb&quot;</span>, <span class="number">22</span>);</span><br><span class="line">		<span class="comment">//判断s1与s2是否为用一类型</span></span><br><span class="line">		<span class="type">Class</span> <span class="variable">class1</span> <span class="operator">=</span> s1.getClass();</span><br><span class="line">		<span class="type">Class</span> <span class="variable">class2</span> <span class="operator">=</span> s2.getClass();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(class1==class2)&#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;s1和s2属于同一种类型&quot;</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;s1和s2不属于同一种类型&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221105215430.png"></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>P53常用类_Object类</title>
     <url>/2022/11/04/JavaSE/P53%E5%B8%B8%E7%94%A8%E7%B1%BB_Object%E7%B1%BB%E6%A6%82%E8%BF%B0/</url>
     <content><![CDATA[<h2 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h2><ul>
@@ -1809,30 +1917,6 @@
 </ul>
 </li>
 <li><p>Object类包含以下方法:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221104234933.png"></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>JavaSE</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>P54常用类_getClass方法</title>
-    <url>/2022/11/05/JavaSE/P54%E5%B8%B8%E7%94%A8%E7%B1%BB_getClass%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h2 id="getClass-方法"><a href="#getClass-方法" class="headerlink" title="getClass()方法"></a>getClass()方法</h2><ul>
-<li><p>返回值类型: final Class&lt;?&gt;</p>
-</li>
-<li><p>作用：返回引用中存储的实际对象类型</p>
-<br/>
-</li>
-<li><p>应用：通常用于判断两个引用中实际村塾对象类型是否一致</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">	Student(String name, <span class="type">int</span> age)&#123;</span><br><span class="line">		<span class="built_in">this</span>.name = name;</span><br><span class="line">		<span class="built_in">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">		<span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;aaa&quot;</span>, <span class="number">20</span>);</span><br><span class="line">		<span class="type">Student</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;bbb&quot;</span>, <span class="number">22</span>);</span><br><span class="line">		<span class="comment">//判断s1与s2是否为用一类型</span></span><br><span class="line">		<span class="type">Class</span> <span class="variable">class1</span> <span class="operator">=</span> s1.getClass();</span><br><span class="line">		<span class="type">Class</span> <span class="variable">class2</span> <span class="operator">=</span> s2.getClass();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(class1==class2)&#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;s1和s2属于同一种类型&quot;</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;s1和s2不属于同一种类型&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221105215430.png"></p>
 </li>
 </ul>
 ]]></content>
@@ -2522,36 +2606,6 @@
       </tags>
   </entry>
   <entry>
-    <title>P76集合框架_List集合2</title>
-    <url>/2022/11/28/JavaSE/P76%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_List%E9%9B%86%E5%90%882/</url>
-    <content><![CDATA[<h2 id="List的使用2"><a href="#List的使用2" class="headerlink" title="List的使用2"></a>List的使用2</h2><ul>
-<li>添加数字数据<ul>
-<li>List集合在添加数字数据的时候会进行<strong>自动装箱操作</strong>，将基本类型的数字数据自动装箱为对相应的包装类对象。</li>
-</ul>
-</li>
-<li>删除数字数据<ul>
-<li>List集合在删除数字数据的时候需要使用<strong>引用类型</strong>来指定操作元素，如使用基本类型数字则表示删除指定下标的数据。</li>
-</ul>
-</li>
-<li>SubList()方法<ul>
-<li><code>List SubList(int fromIndex，int toIndex)</code></li>
-<li>用于返回一个子集合。</li>
-<li>子集合截取的范围从参数fromIndex指定的下标到参数toIndex所指定的下标，遵循含头不含尾规则，即<strong>包含下标为fromIndex的元素但不包含下标为toIndex的元素</strong>。<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo4</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//创建集合</span></span><br><span class="line">        <span class="type">List</span> <span class="variable">list</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//添加数字数据(自动装箱)</span></span><br><span class="line">        list.add(<span class="number">20</span>);</span><br><span class="line">        list.add(<span class="number">30</span>);</span><br><span class="line">        list.add(<span class="number">40</span>);</span><br><span class="line">        list.add(<span class="number">50</span>);</span><br><span class="line">        list.add(<span class="number">60</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;元素个数：&quot;</span>+list.size());</span><br><span class="line">        System.out.println(list.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//删除操作</span></span><br><span class="line">        <span class="comment">//list.remove(20);  //此代码义为删除下标为20的元素</span></span><br><span class="line">        <span class="comment">//若要删除指定内容的元素，则需要进行类型转换:</span></span><br><span class="line">        list.remove(<span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="number">20</span>));</span><br><span class="line">        System.out.println(<span class="string">&quot;删除后元素个数：&quot;</span>+list.size());</span><br><span class="line">        System.out.println(list.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//补充方法SubList()：返回子集合，含头不含尾</span></span><br><span class="line">        <span class="type">List</span> <span class="variable">subList</span> <span class="operator">=</span> list.subList(<span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;subList：&quot;</span>+subList.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221129003036.png"></li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>JavaSE</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>P75集合框架_List集合</title>
     <url>/2022/11/27/JavaSE/P75%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_List%E9%9B%86%E5%90%88/</url>
     <content><![CDATA[<h2 id="List接口："><a href="#List接口：" class="headerlink" title="List接口："></a>List接口：</h2><ul>
@@ -2571,6 +2625,36 @@
 </li>
 <li>方法列表:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221127232647.png"><figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.ListIterator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo3</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//先创建集合对象</span></span><br><span class="line">        <span class="type">List</span> <span class="variable">list</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">//添加元素</span></span><br><span class="line">        list.add(<span class="string">&quot;苹果&quot;</span>);</span><br><span class="line">        list.add(<span class="string">&quot;小米&quot;</span>);</span><br><span class="line">        list.add(<span class="number">0</span>, <span class="string">&quot;华为&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;元素个数:&quot;</span>+list.size());</span><br><span class="line">        System.out.println(list.toString());</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;-----------------------&quot;</span>);</span><br><span class="line">        <span class="comment">//遍历</span></span><br><span class="line">        <span class="comment">//使用for遍历</span></span><br><span class="line">        System.out.println(<span class="string">&quot;使用for：&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i&lt;list.size(); i++)&#123;</span><br><span class="line">            System.out.println(list.get(i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//使用增强for</span></span><br><span class="line">        System.out.println(<span class="string">&quot;使用增强for：&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(Object object : list)&#123;</span><br><span class="line">            System.out.println(object);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//使用迭代器</span></span><br><span class="line">        System.out.println(<span class="string">&quot;使用迭代器：&quot;</span>);</span><br><span class="line">        <span class="type">Iterator</span> <span class="variable">it</span> <span class="operator">=</span> list.iterator();</span><br><span class="line">        <span class="keyword">while</span>(it.hasNext())&#123;</span><br><span class="line">            System.out.println(it.next());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//使用列表迭代器</span></span><br><span class="line">        System.out.println(<span class="string">&quot;使用列表迭代器：&quot;</span>);</span><br><span class="line">        <span class="type">ListIterator</span> <span class="variable">lit</span> <span class="operator">=</span> list.listIterator();</span><br><span class="line">        System.out.println(<span class="string">&quot;从前往后：&quot;</span>);</span><br><span class="line">        <span class="keyword">while</span>(lit.hasNext())&#123;</span><br><span class="line">            System.out.println(lit.nextIndex()+<span class="string">&quot;:&quot;</span>+lit.next());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//因为此时迭代器已经迭代至最后一个元素，所以可以直接开始从后往前遍历。</span></span><br><span class="line">        System.out.println(<span class="string">&quot;从后往前:&quot;</span>);</span><br><span class="line">        <span class="keyword">while</span>(lit.hasPrevious())&#123;</span><br><span class="line">            System.out.println(lit.previousIndex()+<span class="string">&quot;:&quot;</span>+lit.previous());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;-----------------------&quot;</span>);</span><br><span class="line">        <span class="comment">//判断</span></span><br><span class="line">        System.out.println(list.contains(<span class="string">&quot;苹果&quot;</span>));</span><br><span class="line">        System.out.println(list.isEmpty());</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;-----------------------&quot;</span>);</span><br><span class="line">        <span class="comment">//获取</span></span><br><span class="line">        System.out.println(list.indexOf(<span class="string">&quot;华为&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221128004015.png"></li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P76集合框架_List集合2</title>
+    <url>/2022/11/28/JavaSE/P76%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_List%E9%9B%86%E5%90%882/</url>
+    <content><![CDATA[<h2 id="List的使用2"><a href="#List的使用2" class="headerlink" title="List的使用2"></a>List的使用2</h2><ul>
+<li>添加数字数据<ul>
+<li>List集合在添加数字数据的时候会进行<strong>自动装箱操作</strong>，将基本类型的数字数据自动装箱为对相应的包装类对象。</li>
+</ul>
+</li>
+<li>删除数字数据<ul>
+<li>List集合在删除数字数据的时候需要使用<strong>引用类型</strong>来指定操作元素，如使用基本类型数字则表示删除指定下标的数据。</li>
+</ul>
+</li>
+<li>SubList()方法<ul>
+<li><code>List SubList(int fromIndex，int toIndex)</code></li>
+<li>用于返回一个子集合。</li>
+<li>子集合截取的范围从参数fromIndex指定的下标到参数toIndex所指定的下标，遵循含头不含尾规则，即<strong>包含下标为fromIndex的元素但不包含下标为toIndex的元素</strong>。<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo4</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//创建集合</span></span><br><span class="line">        <span class="type">List</span> <span class="variable">list</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//添加数字数据(自动装箱)</span></span><br><span class="line">        list.add(<span class="number">20</span>);</span><br><span class="line">        list.add(<span class="number">30</span>);</span><br><span class="line">        list.add(<span class="number">40</span>);</span><br><span class="line">        list.add(<span class="number">50</span>);</span><br><span class="line">        list.add(<span class="number">60</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;元素个数：&quot;</span>+list.size());</span><br><span class="line">        System.out.println(list.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//删除操作</span></span><br><span class="line">        <span class="comment">//list.remove(20);  //此代码义为删除下标为20的元素</span></span><br><span class="line">        <span class="comment">//若要删除指定内容的元素，则需要进行类型转换:</span></span><br><span class="line">        list.remove(<span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="number">20</span>));</span><br><span class="line">        System.out.println(<span class="string">&quot;删除后元素个数：&quot;</span>+list.size());</span><br><span class="line">        System.out.println(list.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//补充方法SubList()：返回子集合，含头不含尾</span></span><br><span class="line">        <span class="type">List</span> <span class="variable">subList</span> <span class="operator">=</span> list.subList(<span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;subList：&quot;</span>+subList.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221129003036.png"></li>
 </ul>
 </li>
 </ul>
@@ -2730,31 +2814,6 @@
       </tags>
   </entry>
   <entry>
-    <title>P82集合框架_泛型类</title>
-    <url>/2022/12/06/JavaSE/P82%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_%E6%B3%9B%E5%9E%8B%E7%B1%BB/</url>
-    <content><![CDATA[<h1 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h1><ul>
-<li>泛型类的使用方法:<ul>
-<li>在定义类的时候使用泛型定义，当生成实例化对象时可以依据不同需求灵活传入不同的类型来生成需要的实例对象。</li>
-</ul>
-</li>
-<li>定义语法:<code>类名&lt;T&gt;</code>，T表示是类型占位符，表示一种引用类型，如果编写多个，可以用逗号隔开。</li>
-<li>注意:<ol>
-<li>泛型只能使用引用类型。</li>
-<li>不同泛型类型对象之间不能相互复制<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestGeneric</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//使用泛型类创建对象</span></span><br><span class="line">        MyGeneric&lt;String&gt; myGeneric = <span class="keyword">new</span> <span class="title class_">MyGeneric</span>&lt;String&gt;();</span><br><span class="line">        myGengric.t = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">        myGeneric.show(<span class="string">&quot;大家好&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">string</span>  <span class="operator">=</span>  myGeneric.getT();</span><br><span class="line"></span><br><span class="line">        MyGenceric&lt;Integer&gt; myGeneric2 = <span class="keyword">new</span> <span class="title class_">MyGeneric</span>&lt;Integer&gt;();</span><br><span class="line">        myGeneric2.t = <span class="number">100</span>;</span><br><span class="line">        myGeneric2.show(<span class="number">200</span>);</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">integer</span> <span class="operator">=</span> myGeneric2.getT();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyGeneric</span>&lt;T&gt;&#123;</span><br><span class="line">    <span class="comment">//使用泛型T</span></span><br><span class="line">    <span class="comment">//1创建变量</span></span><br><span class="line">    T t;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2作为方法的参数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(T t)</span> &#123;</span><br><span class="line">        System.out.println(t);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//3泛型作为方法的返回值</span></span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">get</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>JavaSE</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>P80集合框架_LinkedList的使用</title>
     <url>/2022/12/04/JavaSE/P80%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_LinkedList%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<h1 id="LinkedList使用："><a href="#LinkedList使用：" class="headerlink" title="LinkedList使用："></a>LinkedList使用：</h1><ul>
@@ -2799,6 +2858,31 @@
 <li>提高代码的重用性。</li>
 <li>防止类型转换异常，提高代码的安全性。</li>
 </ol>
+]]></content>
+      <categories>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P82集合框架_泛型类</title>
+    <url>/2022/12/06/JavaSE/P82%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_%E6%B3%9B%E5%9E%8B%E7%B1%BB/</url>
+    <content><![CDATA[<h1 id="泛型类"><a href="#泛型类" class="headerlink" title="泛型类"></a>泛型类</h1><ul>
+<li>泛型类的使用方法:<ul>
+<li>在定义类的时候使用泛型定义，当生成实例化对象时可以依据不同需求灵活传入不同的类型来生成需要的实例对象。</li>
+</ul>
+</li>
+<li>定义语法:<code>类名&lt;T&gt;</code>，T表示是类型占位符，表示一种引用类型，如果编写多个，可以用逗号隔开。</li>
+<li>注意:<ol>
+<li>泛型只能使用引用类型。</li>
+<li>不同泛型类型对象之间不能相互复制<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">TestGeneric</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//使用泛型类创建对象</span></span><br><span class="line">        MyGeneric&lt;String&gt; myGeneric = <span class="keyword">new</span> <span class="title class_">MyGeneric</span>&lt;String&gt;();</span><br><span class="line">        myGengric.t = <span class="string">&quot;hello&quot;</span>;</span><br><span class="line">        myGeneric.show(<span class="string">&quot;大家好&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">string</span>  <span class="operator">=</span>  myGeneric.getT();</span><br><span class="line"></span><br><span class="line">        MyGenceric&lt;Integer&gt; myGeneric2 = <span class="keyword">new</span> <span class="title class_">MyGeneric</span>&lt;Integer&gt;();</span><br><span class="line">        myGeneric2.t = <span class="number">100</span>;</span><br><span class="line">        myGeneric2.show(<span class="number">200</span>);</span><br><span class="line">        <span class="type">Integer</span> <span class="variable">integer</span> <span class="operator">=</span> myGeneric2.getT();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">MyGeneric</span>&lt;T&gt;&#123;</span><br><span class="line">    <span class="comment">//使用泛型T</span></span><br><span class="line">    <span class="comment">//1创建变量</span></span><br><span class="line">    T t;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//2作为方法的参数</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">show</span><span class="params">(T t)</span> &#123;</span><br><span class="line">        System.out.println(t);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//3泛型作为方法的返回值</span></span><br><span class="line">    <span class="keyword">public</span> T <span class="title function_">get</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> t;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
 ]]></content>
       <categories>
         <category>JavaSE</category>
@@ -2942,6 +3026,43 @@
       </tags>
   </entry>
   <entry>
+    <title>P88集合框架_HashSet存储方式</title>
+    <url>/2023/02/25/JavaSE/P88%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_HashSet%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/</url>
+    <content><![CDATA[<h1 id="HashSet存储过程"><a href="#HashSet存储过程" class="headerlink" title="HashSet存储过程:"></a>HashSet存储过程:</h1><ol>
+<li>根据hashcode计算保存的位置，如果此位置为空，则直接保存，如果不为空执行第二步。</li>
+<li>再执行equals方法，如果equals方法为true，则认为是重复，否则，行程链表。</li>
+</ol>
+<p><strong>原代码:</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo3</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String [] args)</span> &#123;</span><br><span class="line">        HashSet&lt;Person&gt; person = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">//添加数据</span></span><br><span class="line">        <span class="type">Person</span> <span class="variable">p1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;刘德华&quot;</span>, <span class="number">20</span>);</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;林志玲&quot;</span>, <span class="number">22</span>);</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;梁朝伟&quot;</span>, <span class="number">25</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>已知hashset判断是否重复并存储元素的方法依靠hashCode()与equals()两个方法，我们可以在Person类中尝试重写两个方法来改变集合对重复元素的定义，从未使集合更符合我们的需求。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//重写Hashcode方法示例</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span>  <span class="type">int</span> <span class="title function_">hashCode</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n1</span> <span class="operator">=</span> <span class="built_in">this</span>.name.hashCode();</span><br><span class="line">    <span class="type">int</span> <span class="variable">n2</span> <span class="operator">=</span> <span class="built_in">this</span>.age;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> n1 + n2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//重写equals方法示例</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object obj)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span> == obj) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (obj == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> Person) &#123;</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> (Person) obj;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span>.name.equals(p.getName()) &amp;&amp; <span class="built_in">this</span>.age == p.getAge()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">super</span>.equals(obj);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>重写了两个方法之后的变化:</strong></p>
+<ol>
+<li>添加：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">person.add(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;梁朝伟&quot;</span>, <span class="number">25</span>));</span><br></pre></td></tr></table></figure>
+<p>此时上面的代码不可以向集合中添加元素，因为重写了hashCode方法，此时两个这里new的匿名对象的属性与集合中的对象p3完全一致，所以计算出的哈希码也完全一致，判断为同一个对象不予加入。</p>
+<ol start="2">
+<li>删除：</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">person.remove(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;刘德华&quot;</span>, <span class="number">20</span>));</span><br></pre></td></tr></table></figure>
+<p>此时上面的代码可以删除集合中的p1元素，重写方法重新定义了怎样才算是同一个元素，更符合我们对集合的需求。</p>
+<ol start="3">
+<li>判断：<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(person.contains(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;刘德华&quot;</span>, <span class="number">20</span>)));</span><br></pre></td></tr></table></figure>
+此时上面的代码输出就是为true了，原理同上。</li>
+</ol>
+]]></content>
+      <categories>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>P89集合框架_TreeSet实现类</title>
     <url>/2023/02/25/JavaSE/P89%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_TreeSet%E5%AE%9E%E7%8E%B0%E7%B1%BB/</url>
     <content><![CDATA[<h2 id="TreeSet实现类概述"><a href="#TreeSet实现类概述" class="headerlink" title="TreeSet实现类概述"></a>TreeSet实现类概述</h2><ul>
@@ -2971,43 +3092,6 @@
 <li>使用方法：在创建集合时使用匿名内部类作为集合构造方法的参数，并定义好元素的比较规则。<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo6</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//创建集合，并指定比较规则</span></span><br><span class="line">        TreeSet&lt;Person&gt; persons = <span class="keyword">new</span> <span class="title class_">TreeSet</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Person&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Person o1, Person o2)</span> &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">n1</span> <span class="operator">=</span> o1.getAge() - o2.getAge();</span><br><span class="line">                <span class="type">int</span> <span class="variable">n2</span> <span class="operator">=</span> o1.getName().compareTo(o2.getName());</span><br><span class="line">                <span class="keyword">return</span> n1 == <span class="number">0</span> ? n2 : n1;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line"></span><br><span class="line">        <span class="type">Person</span> <span class="variable">p1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;xyz&quot;</span>, <span class="number">20</span>);</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;hello&quot;</span>, <span class="number">22</span>);</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;zhangsan&quot;</span>, <span class="number">25</span>);</span><br><span class="line"></span><br><span class="line">        persons.add(p1);</span><br><span class="line">        persons.add(p2);</span><br><span class="line">        persons.add(p3);</span><br><span class="line">        System.out.println(persons.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <img src="https://raw.githubusercontent.com/porridge42/picgo/main/202302262343323.png"></li>
 </ul>
-]]></content>
-      <categories>
-        <category>JavaSE</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>P88集合框架_HashSet存储方式</title>
-    <url>/2023/02/25/JavaSE/P88%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_HashSet%E5%AD%98%E5%82%A8%E6%96%B9%E5%BC%8F/</url>
-    <content><![CDATA[<h1 id="HashSet存储过程"><a href="#HashSet存储过程" class="headerlink" title="HashSet存储过程:"></a>HashSet存储过程:</h1><ol>
-<li>根据hashcode计算保存的位置，如果此位置为空，则直接保存，如果不为空执行第二步。</li>
-<li>再执行equals方法，如果equals方法为true，则认为是重复，否则，行程链表。</li>
-</ol>
-<p><strong>原代码:</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo3</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String [] args)</span> &#123;</span><br><span class="line">        HashSet&lt;Person&gt; person = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">//添加数据</span></span><br><span class="line">        <span class="type">Person</span> <span class="variable">p1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;刘德华&quot;</span>, <span class="number">20</span>);</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;林志玲&quot;</span>, <span class="number">22</span>);</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;梁朝伟&quot;</span>, <span class="number">25</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>已知hashset判断是否重复并存储元素的方法依靠hashCode()与equals()两个方法，我们可以在Person类中尝试重写两个方法来改变集合对重复元素的定义，从未使集合更符合我们的需求。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="comment">//重写Hashcode方法示例</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span>  <span class="type">int</span> <span class="title function_">hashCode</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">n1</span> <span class="operator">=</span> <span class="built_in">this</span>.name.hashCode();</span><br><span class="line">    <span class="type">int</span> <span class="variable">n2</span> <span class="operator">=</span> <span class="built_in">this</span>.age;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> n1 + n2;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//重写equals方法示例</span></span><br><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object obj)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="built_in">this</span> == obj) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (obj == <span class="literal">null</span>) &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> Person) &#123;</span><br><span class="line">        <span class="type">Person</span> <span class="variable">p</span> <span class="operator">=</span> (Person) obj;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span>.name.equals(p.getName()) &amp;&amp; <span class="built_in">this</span>.age == p.getAge()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">super</span>.equals(obj);</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
-
-<p><strong>重写了两个方法之后的变化:</strong></p>
-<ol>
-<li>添加：</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">person.add(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;梁朝伟&quot;</span>, <span class="number">25</span>));</span><br></pre></td></tr></table></figure>
-<p>此时上面的代码不可以向集合中添加元素，因为重写了hashCode方法，此时两个这里new的匿名对象的属性与集合中的对象p3完全一致，所以计算出的哈希码也完全一致，判断为同一个对象不予加入。</p>
-<ol start="2">
-<li>删除：</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">person.remove(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;刘德华&quot;</span>, <span class="number">20</span>));</span><br></pre></td></tr></table></figure>
-<p>此时上面的代码可以删除集合中的p1元素，重写方法重新定义了怎样才算是同一个元素，更符合我们对集合的需求。</p>
-<ol start="3">
-<li>判断：<figure class="highlight java"><table><tr><td class="code"><pre><span class="line">System.out.println(person.contains(<span class="keyword">new</span> <span class="title class_">Person</span>(<span class="string">&quot;刘德华&quot;</span>, <span class="number">20</span>)));</span><br></pre></td></tr></table></figure>
-此时上面的代码输出就是为true了，原理同上。</li>
-</ol>
 ]]></content>
       <categories>
         <category>JavaSE</category>
@@ -3894,6 +3978,72 @@
       </tags>
   </entry>
   <entry>
+    <title>hexo的搭建配置与部署方法备用</title>
+    <url>/2023/10/22/%E5%B7%A5%E5%85%B7/hexo%E7%9A%84%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AE%E4%B8%8E%E9%83%A8%E7%BD%B2%E6%96%B9%E6%B3%95%E5%A4%87%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="HEXO博客概述："><a href="#HEXO博客概述：" class="headerlink" title="HEXO博客概述："></a>HEXO博客概述：</h2><ul>
+<li>hexo：基于Node.js的静态博客框架</li>
+<li>Node.js：hexo依赖的运行环境</li>
+<li>git：将hexo生成的博客部署至github的工具</li>
+<li>nvm：windows系统下的node.js环境版本管理器<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023150605.png"></li>
+</ul>
+<h2 id="如何从零搭建："><a href="#如何从零搭建：" class="headerlink" title="如何从零搭建："></a>如何从零搭建：</h2><p>1.安装git软件:</p>
+<ul>
+<li>官网直接下载最新版安装</li>
+</ul>
+<p>2.安装Node.js运行环境：</p>
+<ul>
+<li>安装nvm <a href="https://github.com/coreybutler/nvm-windows">https://github.com/coreybutler/nvm-windows</a> 下载Releases安装</li>
+<li>在nvm中安装指定Node.js版本并启用<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nvm install 18.18.2</span><br><span class="line">nvm ls</span><br><span class="line">nvm use 18.18.2</span><br></pre></td></tr></table></figure>
+（大多数情况下最新版即可，有时候可能hexo版本不稳定可以尝试老版本的node环境）</li>
+</ul>
+<ol>
+<li>安装hexo<ul>
+<li>安装好node环境后直接在cmd中全局安装hexo(hexo相当于安装在当前的Node环境中,使用nvm切换另一版本则需要重新安装) <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2 id="部署："><a href="#部署：" class="headerlink" title="部署："></a>部署：</h2><ul>
+<li>在博客目录下右键选择Open Git Bash here开启git终端</li>
+<li>输入hexo -v检查hexo是否正常安装<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//清理缓存文件</span><br><span class="line">hexo clean</span><br><span class="line">//生成静态博客网页文件</span><br><span class="line">hexo g</span><br><span class="line">//部署</span><br><span class="line">hexo d</span><br><span class="line">//启动本地服务（运行可以在localhost:4000预览静态博客页面）</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure></li>
+<li>配置文件：<ul>
+<li>配置文件位于博客文件夹目录下,文件名为_config.yml，一般用于设置部署到的仓库位置</li>
+</ul>
+</li>
+</ul>
+<h3 id="两种不同部署方式："><a href="#两种不同部署方式：" class="headerlink" title="两种不同部署方式："></a>两种不同部署方式：</h3><ul>
+<li><strong>使用ssh+SSH Key方式部署：</strong><ul>
+<li><p>启动git终端，生成SSH Key</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;备注信息:邮箱&quot;</span><br></pre></td></tr></table></figure>
+<p>一路回车即可</p>
+</li>
+<li><p>cd至sshkey所在目录.ssh<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023140229.png"></p>
+</li>
+<li><p>查看生成的密钥文件并复制内容<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023140512.png"></p>
+</li>
+<li><p>在github网站的是指中添加新建的SSH Key即可<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023140854.png"></p>
+</li>
+<li><p>最后打开配置文件，将部署方式设为Git并填上ssh的仓库地址<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023141143.png"></p>
+</li>
+</ul>
+</li>
+<li><strong>使用https+Token方式部署：</strong><ul>
+<li>在github网站的Developer Settings中选择Personal access tokens中生成Token<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023141858.png"></li>
+<li>打开配置文件，将部署方式设置为Git,部署仓库地址改为https地址，并按格式在地址前加上token<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">      <span class="attr">repo:</span> <span class="string">https://oauth2:ghp_XXXXXXXXXXXXXXXXXXXXXXXXXX@github.com/porridge42/porridge42.github.io.git</span></span><br><span class="line">      <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></li>
+<li>如果部署时弹出github登录窗口，就选择token并填入。如果只能填账号密码就在密码栏填入token。（github已经关闭了账号密码登录，这里填密码是无法连接到github的）</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>工具</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>1_变量和字符串</title>
     <url>/2022/10/26/Python/1_%E5%8F%98%E9%87%8F%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2/</url>
     <content><![CDATA[<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>新建变量：<br><code>x = 3  # = 表示赋值</code></p>
@@ -4190,156 +4340,6 @@
       <tags>
         <tag>博客</tag>
         <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>P1_创建显示窗口</title>
-    <url>/2023/10/22/OpenCV/1_%E5%88%9B%E5%BB%BA%E6%98%BE%E7%A4%BA%E7%AA%97%E5%8F%A3/</url>
-    <content><![CDATA[<h2 id="创建和显示窗口"><a href="#创建和显示窗口" class="headerlink" title="创建和显示窗口"></a>创建和显示窗口</h2><p><strong>api函数：</strong></p>
-<ul>
-<li>namedWindow() 创建命名窗口</li>
-<li>imshow() 显示窗口</li>
-<li>destoryAllWindows() 摧毁窗口</li>
-<li>resizeWindows() 改变窗口大小</li>
-<li>waitKey() 等待用户输入</li>
-</ul>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment"># 创建窗口</span></span><br><span class="line"><span class="comment">#cv2.namedWindow(&#x27;window&#x27;, cv2.WINDOW_AUTOSIZE)</span></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;window&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line"><span class="comment"># 更改窗口的大小(要求窗口flag属性必须为cv2.WINDOW_NORMAL)</span></span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;window&#x27;</span>, <span class="number">800</span>, <span class="number">600</span>)</span><br><span class="line"><span class="comment"># 展示名字为window的窗口</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;window&#x27;</span>, <span class="number">0</span>)</span><br><span class="line"><span class="comment"># 等待按键</span></span><br><span class="line"><span class="comment"># waitKey返回按键的ascii值</span></span><br><span class="line"><span class="comment"># 0表示接受任意按键，如果给其他的整数，表示等待按键的时间，单位是毫秒</span></span><br><span class="line"><span class="comment"># 可以利用waitKey来销毁窗口，不用每次都重启Python</span></span><br><span class="line">key = cv2.waitKey(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">if</span> key &amp; <span class="number">0xFF</span> == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">    cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>OpenCV</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>Python</tag>
-        <tag>人工智能</tag>
-        <tag>计算机视觉</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>P2_读取与保存</title>
-    <url>/2023/10/22/OpenCV/2_%E8%AF%BB%E5%8F%96%E4%B8%8E%E4%BF%9D%E5%AD%98/</url>
-    <content><![CDATA[<h2 id="加载图像"><a href="#加载图像" class="headerlink" title="加载图像"></a>加载图像</h2><ul>
-<li>imread(path, flag): 使用imread可以读取图片，默认读取的是彩色图片<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment"># 读取图片</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./cat.jpeg&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
-<li>imread加载的图像格式:ndarray</li>
-<li>opencv的默认色彩空间为BGR<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./1.png&#x27;</span>)</span><br><span class="line">plt.imshow(img)</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231022164456.png"></li>
-<li>使用plt显示图片，发现颜色显示不正常</li>
-<li>原因为cv中默认色彩空间为BGR而plt中是RGB</li>
-<li>尽量不要使用别的方式展示opencv的图片，使用cv.imshow()方法展示就不会出问题<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231022165136.png"></li>
-</ul>
-<h2 id="保存图片"><a href="#保存图片" class="headerlink" title="保存图片"></a>保存图片</h2><ul>
-<li>imwrite(path, img): 使用imwrite保存图片.<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;img&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;img&#x27;</span>, <span class="number">320</span>, <span class="number">240</span>)</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./1.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#利用while循环优化退出逻辑</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line">    key = cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span> (key &amp; <span class="number">0xFF</span> == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>)):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">elif</span>(key &amp; <span class="number">0xFF</span> == <span class="built_in">ord</span>(<span class="string">&#x27;s&#x27;</span>)):</span><br><span class="line">        cv2.imwrite(<span class="string">&#x27;./123.png&#x27;</span>, img)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;图像已保存！\n&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(key)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure></li>
-</ul>
-]]></content>
-      <categories>
-        <category>OpenCV</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>Python</tag>
-        <tag>人工智能</tag>
-        <tag>计算机视觉</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>P3_视频的采集与保存</title>
-    <url>/2023/10/22/OpenCV/3_%E8%A7%86%E9%A2%91%E7%9A%84%E9%87%87%E9%9B%86%E4%B8%8E%E4%BF%9D%E5%AD%98/</url>
-    <content><![CDATA[<h2 id="视频采集"><a href="#视频采集" class="headerlink" title="视频采集"></a>视频采集</h2><ul>
-<li><p>视频是有图片组成的，视频的每一帧就是一幅图片，一般是30帧，表示一秒显示30张图片。</p>
-</li>
-<li><p>使用cv2.VideoCapture方法可以捕获摄像头，用数字来表示不同的设备，比如0, 1。</p>
-</li>
-<li><p>如果要读取的是视频文件，直接给定路径即可。</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 打开视频文件</span></span><br><span class="line">vc = cv2.VideoCapture(<span class="string">&#x27;./1.mp4&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 捕获摄像头画面</span></span><br><span class="line">vc = cv2.VideoCapture(<span class="number">0</span>)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>使用.isOpened()方法检测是否打开</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> vc.isOpened():</span><br><span class="line">	<span class="comment"># 读取视频的一帧</span></span><br><span class="line">	<span class="built_in">open</span>, fream = vc.read()</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	<span class="built_in">open</span> = <span class="literal">False</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="捕获摄像头代码"><a href="#捕获摄像头代码" class="headerlink" title="捕获摄像头代码"></a>捕获摄像头代码</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment">#读取摄像头示例</span></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;video&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;video&#x27;</span>, <span class="number">640</span>, <span class="number">480</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果打开失败，不会报错</span></span><br><span class="line">cap = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 循环读取摄像头的每一帧</span></span><br><span class="line"><span class="comment">#while True:</span></span><br><span class="line"><span class="keyword">while</span> cap.isOpened():</span><br><span class="line">    <span class="comment"># 读一帧数据，返回标记和这一帧数据，True表示读到了数据，False表示没读到数据</span></span><br><span class="line">    flag, frame = cap.read()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 可以根据flag做个判断</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> flag:</span><br><span class="line">        <span class="comment"># 没读到数据，直接退出</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 显示数据</span></span><br><span class="line">    cv2.imshow(<span class="string">&#x27;video&#x27;</span>, frame)</span><br><span class="line">    </span><br><span class="line">    key = cv2.waitKey(<span class="number">30</span>)</span><br><span class="line">    <span class="keyword">if</span> key &amp; <span class="number">0xFF</span> == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 别忘了释放资源</span></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-
-<h3 id="读取视频文件代码"><a href="#读取视频文件代码" class="headerlink" title="读取视频文件代码"></a>读取视频文件代码</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取视频文件示例</span></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;video&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;video&#x27;</span>, <span class="number">1280</span>, <span class="number">720</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 如果打开失败，不会报错</span></span><br><span class="line">cap = cv2.VideoCapture(<span class="string">&#x27;./test_1.mp4&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 循环读取视频的每一帧</span></span><br><span class="line"><span class="comment">#while True:</span></span><br><span class="line"><span class="keyword">while</span> cap.isOpened():</span><br><span class="line">    <span class="comment"># 读一帧数据，返回标记和这一帧数据，True表示读到了数据，False表示没读到数据</span></span><br><span class="line">    flag, frame = cap.read()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 可以根据flag做个判断</span></span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> flag:</span><br><span class="line">        <span class="comment"># 没读到数据，直接退出</span></span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 显示数据</span></span><br><span class="line">    cv2.imshow(<span class="string">&#x27;video&#x27;</span>, frame)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 30帧就是一秒30张，每秒间隔为1000/30(ms) (因为waitKey()函数只接受整形参数，所以这里用双杠除)</span></span><br><span class="line">    key = cv2.waitKey(<span class="number">1000</span> // <span class="number">30</span>)</span><br><span class="line">    <span class="keyword">if</span> key &amp; <span class="number">0xFF</span> == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 别忘了释放资源</span></span><br><span class="line">cap.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-
-<h2 id="视频文件保存"><a href="#视频文件保存" class="headerlink" title="视频文件保存"></a>视频文件保存</h2><ul>
-<li>使用VideoWriter()方法保存视频为文件，参数列表:VideoWriter(输出文件名, 文件格式(fourcc), 帧率, 分辨率)</li>
-<li>write编写并别入缓存</li>
-<li>release缓存内容写入磁盘，并释放资源</li>
-</ul>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;frame&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;frame&#x27;</span>, <span class="number">640</span>, <span class="number">480</span>)</span><br><span class="line"></span><br><span class="line">cap = cv2.VideoCapture(<span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">fourcc = cv2.VideoWriter_fourcc(*<span class="string">&#x27;mp4v&#x27;</span>)</span><br><span class="line"></span><br><span class="line">vm = cv2.VideoWriter(<span class="string">&#x27;output.mp4&#x27;</span>, fourcc, <span class="number">30</span>, (<span class="number">640</span>, <span class="number">480</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> cap.isOpened():</span><br><span class="line">    flag, frame  = cap.read()</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> flag:</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;无法检测到输入帧，程序已退出!&#x27;</span>)</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">    vm.write(frame)</span><br><span class="line">    cv2.imshow(<span class="string">&#x27;frame&#x27;</span>, frame)</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> cv2.waitKey(<span class="number">1</span>) == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">        </span><br><span class="line">cap.release()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 释放VideoWriter</span></span><br><span class="line">vm.release()</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-
-]]></content>
-      <categories>
-        <category>OpenCV</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>Python</tag>
-        <tag>人工智能</tag>
-        <tag>计算机视觉</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo的搭建配置与部署方法备用</title>
-    <url>/2023/10/22/%E5%B7%A5%E5%85%B7/hexo%E7%9A%84%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AE%E4%B8%8E%E9%83%A8%E7%BD%B2%E6%96%B9%E6%B3%95%E5%A4%87%E7%94%A8/</url>
-    <content><![CDATA[<h2 id="HEXO博客概述："><a href="#HEXO博客概述：" class="headerlink" title="HEXO博客概述："></a>HEXO博客概述：</h2><ul>
-<li>hexo：基于Node.js的静态博客框架</li>
-<li>Node.js：hexo依赖的运行环境</li>
-<li>git：将hexo生成的博客部署至github的工具</li>
-<li>nvm：windows系统下的node.js环境版本管理器<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023150605.png"></li>
-</ul>
-<h2 id="如何从零搭建："><a href="#如何从零搭建：" class="headerlink" title="如何从零搭建："></a>如何从零搭建：</h2><p>1.安装git软件:</p>
-<ul>
-<li>官网直接下载最新版安装</li>
-</ul>
-<p>2.安装Node.js运行环境：</p>
-<ul>
-<li>安装nvm <a href="https://github.com/coreybutler/nvm-windows">https://github.com/coreybutler/nvm-windows</a> 下载Releases安装</li>
-<li>在nvm中安装指定Node.js版本并启用<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nvm install 18.18.2</span><br><span class="line">nvm ls</span><br><span class="line">nvm use 18.18.2</span><br></pre></td></tr></table></figure>
-（大多数情况下最新版即可，有时候可能hexo版本不稳定可以尝试老版本的node环境）</li>
-</ul>
-<ol>
-<li>安装hexo<ul>
-<li>安装好node环境后直接在cmd中全局安装hexo(hexo相当于安装在当前的Node环境中,使用nvm切换另一版本则需要重新安装) <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ol>
-<h2 id="部署："><a href="#部署：" class="headerlink" title="部署："></a>部署：</h2><ul>
-<li>在博客目录下右键选择Open Git Bash here开启git终端</li>
-<li>输入hexo -v检查hexo是否正常安装<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//清理缓存文件</span><br><span class="line">hexo clean</span><br><span class="line">//生成静态博客网页文件</span><br><span class="line">hexo g</span><br><span class="line">//部署</span><br><span class="line">hexo d</span><br><span class="line">//启动本地服务（运行可以在localhost:4000预览静态博客页面）</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure></li>
-<li>配置文件：<ul>
-<li>配置文件位于博客文件夹目录下,文件名为_config.yml，一般用于设置部署到的仓库位置</li>
-</ul>
-</li>
-</ul>
-<h3 id="两种不同部署方式："><a href="#两种不同部署方式：" class="headerlink" title="两种不同部署方式："></a>两种不同部署方式：</h3><ul>
-<li><strong>使用ssh+SSH Key方式部署：</strong><ul>
-<li><p>启动git终端，生成SSH Key</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;备注信息:邮箱&quot;</span><br></pre></td></tr></table></figure>
-<p>一路回车即可</p>
-</li>
-<li><p>cd至sshkey所在目录.ssh<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023140229.png"></p>
-</li>
-<li><p>查看生成的密钥文件并复制内容<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023140512.png"></p>
-</li>
-<li><p>在github网站的是指中添加新建的SSH Key即可<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023140854.png"></p>
-</li>
-<li><p>最后打开配置文件，将部署方式设为Git并填上ssh的仓库地址<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023141143.png"></p>
-</li>
-</ul>
-</li>
-<li><strong>使用https+Token方式部署：</strong><ul>
-<li>在github网站的Developer Settings中选择Personal access tokens中生成Token<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023141858.png"></li>
-<li>打开配置文件，将部署方式设置为Git,部署仓库地址改为https地址，并按格式在地址前加上token<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">      <span class="attr">repo:</span> <span class="string">https://oauth2:ghp_XXXXXXXXXXXXXXXXXXXXXXXXXX@github.com/porridge42/porridge42.github.io.git</span></span><br><span class="line">      <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></li>
-<li>如果部署时弹出github登录窗口，就选择token并填入。如果只能填账号密码就在密码栏填入token。（github已经关闭了账号密码登录，这里填密码是无法连接到github的）</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>工具</tag>
       </tags>
   </entry>
 </search>
