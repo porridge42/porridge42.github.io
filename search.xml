@@ -1,26 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>P2_创建多维数组</title>
-    <url>/2023/05/10/NumPy/P2_%E5%88%9B%E5%BB%BA%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/</url>
-    <content><![CDATA[<h3 id="多维数组介绍"><a href="#多维数组介绍" class="headerlink" title="多维数组介绍"></a>多维数组介绍</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</span><br><span class="line">b = np.array(</span><br><span class="line">    [</span><br><span class="line">        [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],</span><br><span class="line">        [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line">    ]</span><br><span class="line">)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a)</span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(b)</span><br><span class="line">[[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]]</span><br></pre></td></tr></table></figure>
-<ul>
-<li>使用array方法创建的ab两个数组，其中a为一行六列的<strong>一维数组</strong>，b为两行三列的<strong>二维数组</strong>。</li>
-<li>多维数组就是数组的嵌套，是以数组为元素的数组。<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">a = np.ones((<span class="number">3</span>, <span class="number">3</span>))</span><br><span class="line">b = np.zeros((<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line">c = np.full((<span class="number">3</span>,<span class="number">3</span>), <span class="number">520</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a)</span><br><span class="line">[[<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]</span><br><span class="line"> [<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]</span><br><span class="line"> [<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(b)</span><br><span class="line">[[<span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span>]</span><br><span class="line"> [<span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span>]</span><br><span class="line"> [<span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(c)</span><br><span class="line">[[<span class="number">520</span> <span class="number">520</span> <span class="number">520</span>]</span><br><span class="line"> [<span class="number">520</span> <span class="number">520</span> <span class="number">520</span>]</span><br><span class="line"> [<span class="number">520</span> <span class="number">520</span> <span class="number">520</span>]]</span><br></pre></td></tr></table></figure></li>
-<li>使用函数的shape参数传入一个定义行列数的元组创建二维数组。<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">a = np.ones((<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a)</span><br><span class="line">[[[<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]</span><br><span class="line">  [<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]</span><br><span class="line">  [<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]]</span><br><span class="line"></span><br><span class="line"> [[<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]</span><br><span class="line">  [<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]</span><br><span class="line">  [<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a.shape)</span><br><span class="line">(<span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a.dnim)</span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure></li>
-<li>创建一个2,3,3的<strong>三维数组</strong>其由两块二维数组组成。</li>
-</ul>
-]]></content>
-      <categories>
-        <category>NumPy</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>Python</tag>
-        <tag>数据处理</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>P1_创建数组</title>
     <url>/2023/05/10/NumPy/P1_%E5%88%9B%E5%BB%BA%E6%95%B0%E7%BB%84/</url>
     <content><![CDATA[<h2 id="NumPy创建数组"><a href="#NumPy创建数组" class="headerlink" title="NumPy创建数组"></a>NumPy创建数组</h2><h3 id="array与arange方法"><a href="#array与arange方法" class="headerlink" title="array与arange方法:"></a>array与arange方法:</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>], dtype = <span class="string">&#x27;int32&#x27;</span>)</span><br><span class="line">b = np.array(<span class="built_in">range</span>(<span class="number">1</span>,<span class="number">6</span>), dtype = <span class="string">&#x27;int32&#x27;</span>)</span><br><span class="line">c = np.arange(<span class="number">1</span>, <span class="number">6</span>, dtype = <span class="string">&#x27;int32&#x27;</span>)</span><br></pre></td></tr></table></figure>
@@ -72,12 +52,14 @@
       </tags>
   </entry>
   <entry>
-    <title>P3_改变数组形状</title>
-    <url>/2023/05/12/NumPy/P3_%E6%94%B9%E5%8F%98%E6%95%B0%E7%BB%84%E5%BD%A2%E7%8A%B6/</url>
-    <content><![CDATA[<h3 id="reshape不改变值改形状"><a href="#reshape不改变值改形状" class="headerlink" title="reshape不改变值改形状"></a>reshape不改变值改形状</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">a = np.arange(<span class="number">10</span>).reshape(<span class="number">2</span>, <span class="number">5</span>)   <span class="comment">#变为2行5列</span></span><br><span class="line">b = a.reshape(<span class="number">10</span>)                 <span class="comment">#变回1行1列</span></span><br><span class="line">c =  f.flatten()</span><br></pre></td></tr></table></figure>
-<h3 id="创建形状相同的数组"><a href="#创建形状相同的数组" class="headerlink" title="创建形状相同的数组"></a>创建形状相同的数组</h3><ul>
-<li>形状相同，内容全为1:<code>np.ones_like()</code></li>
-<li>形状相同，内容全为0:<code>np.zeros_like()</code><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = array([[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]])</span><br><span class="line"></span><br><span class="line">b = np.ones_like(a)</span><br><span class="line">c = np.zeros_like(a)</span><br></pre></td></tr></table></figure></li>
+    <title>P2_创建多维数组</title>
+    <url>/2023/05/10/NumPy/P2_%E5%88%9B%E5%BB%BA%E5%A4%9A%E7%BB%B4%E6%95%B0%E7%BB%84/</url>
+    <content><![CDATA[<h3 id="多维数组介绍"><a href="#多维数组介绍" class="headerlink" title="多维数组介绍"></a>多维数组介绍</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>])</span><br><span class="line">b = np.array(</span><br><span class="line">    [</span><br><span class="line">        [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],</span><br><span class="line">        [<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>]</span><br><span class="line">    ]</span><br><span class="line">)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a)</span><br><span class="line">[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(b)</span><br><span class="line">[[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]]</span><br></pre></td></tr></table></figure>
+<ul>
+<li>使用array方法创建的ab两个数组，其中a为一行六列的<strong>一维数组</strong>，b为两行三列的<strong>二维数组</strong>。</li>
+<li>多维数组就是数组的嵌套，是以数组为元素的数组。<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">a = np.ones((<span class="number">3</span>, <span class="number">3</span>))</span><br><span class="line">b = np.zeros((<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line">c = np.full((<span class="number">3</span>,<span class="number">3</span>), <span class="number">520</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a)</span><br><span class="line">[[<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]</span><br><span class="line"> [<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]</span><br><span class="line"> [<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(b)</span><br><span class="line">[[<span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span>]</span><br><span class="line"> [<span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span>]</span><br><span class="line"> [<span class="number">0.</span> <span class="number">0.</span> <span class="number">0.</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(c)</span><br><span class="line">[[<span class="number">520</span> <span class="number">520</span> <span class="number">520</span>]</span><br><span class="line"> [<span class="number">520</span> <span class="number">520</span> <span class="number">520</span>]</span><br><span class="line"> [<span class="number">520</span> <span class="number">520</span> <span class="number">520</span>]]</span><br></pre></td></tr></table></figure></li>
+<li>使用函数的shape参数传入一个定义行列数的元组创建二维数组。<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">a = np.ones((<span class="number">2</span>,<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a)</span><br><span class="line">[[[<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]</span><br><span class="line">  [<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]</span><br><span class="line">  [<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]]</span><br><span class="line"></span><br><span class="line"> [[<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]</span><br><span class="line">  [<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]</span><br><span class="line">  [<span class="number">1.</span> <span class="number">1.</span> <span class="number">1.</span>]]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a.shape)</span><br><span class="line">(<span class="number">2</span>, <span class="number">3</span>, <span class="number">3</span>)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a.dnim)</span><br><span class="line"><span class="number">3</span></span><br></pre></td></tr></table></figure></li>
+<li>创建一个2,3,3的<strong>三维数组</strong>其由两块二维数组组成。</li>
 </ul>
 ]]></content>
       <categories>
@@ -103,6 +85,24 @@
 <li>当形状不同的数组在计算会触发广播机制，广播就是对数组维度的扩展。下面是广播的规则：<br>1. 当参与计算的两个数组维度不同时，广播会先在缺少维度的数组上补1，直到两个数组的维度相等。<br>     *  如:计算<code>np.ones((3,))+np.ones((3,2))</code>时，广播会 先将前一数组的shape改为(3,1)然后再进行后续计算。<br>2. 两个数组在经过或没经过第一步操作后，两个数组的维度值相等，此时若其中一个数组的某一维度为1，广播机制会自动扩展这个维度，使其与另一数组shape完全一致后进行计算。<br>      * <img src="https://raw.githubusercontent.com/porridge42/picgo/main/20230515212419.png"><br>      * <img src="https://raw.githubusercontent.com/porridge42/picgo/main/20230515212941.png"><br>3. 两个数组要是没有一个数组的维度为1无法进行第2步操作，则无法完成广播并抛出一个<code>ValueError</code>。</li>
 </ul>
 </li>
+</ul>
+]]></content>
+      <categories>
+        <category>NumPy</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>Python</tag>
+        <tag>数据处理</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P3_改变数组形状</title>
+    <url>/2023/05/12/NumPy/P3_%E6%94%B9%E5%8F%98%E6%95%B0%E7%BB%84%E5%BD%A2%E7%8A%B6/</url>
+    <content><![CDATA[<h3 id="reshape不改变值改形状"><a href="#reshape不改变值改形状" class="headerlink" title="reshape不改变值改形状"></a>reshape不改变值改形状</h3><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">a = np.arange(<span class="number">10</span>).reshape(<span class="number">2</span>, <span class="number">5</span>)   <span class="comment">#变为2行5列</span></span><br><span class="line">b = a.reshape(<span class="number">10</span>)                 <span class="comment">#变回1行1列</span></span><br><span class="line">c =  f.flatten()</span><br></pre></td></tr></table></figure>
+<h3 id="创建形状相同的数组"><a href="#创建形状相同的数组" class="headerlink" title="创建形状相同的数组"></a>创建形状相同的数组</h3><ul>
+<li>形状相同，内容全为1:<code>np.ones_like()</code></li>
+<li>形状相同，内容全为0:<code>np.zeros_like()</code><figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = array([[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>]])</span><br><span class="line"></span><br><span class="line">b = np.ones_like(a)</span><br><span class="line">c = np.zeros_like(a)</span><br></pre></td></tr></table></figure></li>
 </ul>
 ]]></content>
       <categories>
@@ -201,111 +201,25 @@
       </tags>
   </entry>
   <entry>
-    <title>1.基本语法</title>
-    <url>/2022/10/26/PHP/1.%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<h2 id="PHP的基本语法"><a href="#PHP的基本语法" class="headerlink" title="PHP的基本语法"></a>PHP的基本语法</h2><ol>
-<li>PHP脚本以<code>&lt;?php</code>开始，以<code>?&gt;</code>结束 </li>
-<li>PHP脚本可以放在文档中的任何位置</li>
-<li>PHP通常包含HTML标签和PHP脚本代码</li>
-<li>注释语法同C<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;h1&gt;My first PHP page&lt;/h1&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></li>
-</ol>
-]]></content>
-      <categories>
-        <category>Php</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>1.变量</title>
-    <url>/2022/10/26/PHP/2.%E5%8F%98%E9%87%8F/</url>
-    <content><![CDATA[<h3 id="PHP变量命名规则"><a href="#PHP变量命名规则" class="headerlink" title="PHP变量命名规则:"></a>PHP变量命名规则:</h3><ol>
-<li>变量名以$符号开始，后面才是变量名</li>
-<li>变量名的规范同C</li>
-<li>PHP变量不需声明，变量在第一次被声明是时候创建</li>
-<li>PHP属于弱类型语言，会根据变量的值自动转换数据类型</li>
-</ol>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$txt</span>=<span class="string">&quot;Hello world!&quot;</span>;</span><br><span class="line"><span class="variable">$x</span>=<span class="number">5</span>;</span><br><span class="line"><span class="variable">$y</span>=<span class="number">10.5</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="global关键字"><a href="#global关键字" class="headerlink" title="global关键字"></a>global关键字</h3><p><strong>在函数内访问全局变量需要使用到global关键字</strong><br>语法:在变量前加上global关键字</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$x</span>=<span class="number">5</span>;</span><br><span class="line"><span class="variable">$y</span>=<span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTest</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">global</span> <span class="variable">$x</span>,<span class="variable">$y</span>;</span><br><span class="line">    <span class="variable">$y</span>=<span class="variable">$x</span>+<span class="variable">$y</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="title function_ invoke__">myTest</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$y</span>; <span class="comment">// 输出 15</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>补充:PHP的所有全局变量存储在一个名为$GLOBAL[index]的数组里,index为保存变量的变量名，也可以通过在函数里直接访问这个数组来使用全局变量</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$x</span>=<span class="number">5</span>;</span><br><span class="line"><span class="variable">$y</span>=<span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTest</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$GLOBALS</span>[<span class="string">&#x27;y&#x27;</span>]=<span class="variable">$GLOBALS</span>[<span class="string">&#x27;x&#x27;</span>]+<span class="variable">$GLOBALS</span>[<span class="string">&#x27;y&#x27;</span>];</span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="title function_ invoke__">myTest</span>();    <span class="comment">//输出15</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$y</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="static关键字"><a href="#static关键字" class="headerlink" title="static关键字"></a>static关键字</h3><p>用于在函数里声明全局变量，使其拥有全局作用域</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTest</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">static</span> <span class="variable">$x</span>=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$x</span>;</span><br><span class="line">    <span class="variable">$x</span>++;</span><br><span class="line">    <span class="keyword">echo</span> PHP_EOL;    <span class="comment">// 换行符</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="title function_ invoke__">myTest</span>();    <span class="comment">//输出0</span></span><br><span class="line"><span class="title function_ invoke__">myTest</span>();    <span class="comment">//输出1</span></span><br><span class="line"><span class="title function_ invoke__">myTest</span>();    <span class="comment">//输出2</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Php</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>3.echo语句和print语句</title>
-    <url>/2022/10/26/PHP/3.echo%E8%AF%AD%E5%8F%A5%E5%92%8Cprint%E8%AF%AD%E5%8F%A5/</url>
-    <content><![CDATA[<h3 id="echo和print"><a href="#echo和print" class="headerlink" title="echo和print"></a>echo和print</h3><ol>
-<li>相同点:<br> echo和print都可以输出字符串和变量</li>
-<li>区别:<ul>
-<li>echo - 可以输出一个或多个字符串</li>
-<li>print - 只允许输出一个字符串，返回值总为 1</li>
+    <title>P1_创建显示窗口</title>
+    <url>/2023/10/22/OpenCV/1_%E5%88%9B%E5%BB%BA%E6%98%BE%E7%A4%BA%E7%AA%97%E5%8F%A3/</url>
+    <content><![CDATA[<h2 id="创建和显示窗口"><a href="#创建和显示窗口" class="headerlink" title="创建和显示窗口"></a>创建和显示窗口</h2><p><strong>api函数：</strong></p>
+<ul>
+<li>namedWindow() 创建命名窗口</li>
+<li>imshow() 显示窗口</li>
+<li>destoryAllWindows() 摧毁窗口</li>
+<li>resizeWindows() 改变窗口大小</li>
+<li>waitKey() 等待用户输入</li>
 </ul>
-</li>
-</ol>
-<p>注:echo的输出素的比print快,且echo没有返回值,而print又返回值,返回值为1。</p>
-<h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h3><p>echo的使用格式可以加括号，也可以不加括号，echo或echo()</p>
-<p><strong>显示字符串:</strong></p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;h2&gt;PHP 很有趣!&lt;/h2&gt;&quot;</span>;    <span class="comment">//字符串可以包含HTML标签</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Hello world!&lt;br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;我要学 PHP!&lt;br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;这是一个&quot;</span>, <span class="string">&quot;字符串，&quot;</span>, <span class="string">&quot;使用了&quot;</span>, <span class="string">&quot;多个&quot;</span>, <span class="string">&quot;参数。&quot;</span>;    <span class="comment">//此处为显示多格字符串的情况,输出字符串之间相连接且没有空格</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>显示变量:</strong></p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$txt1</span>=<span class="string">&quot;学习 PHP&quot;</span>;</span><br><span class="line"><span class="variable">$txt2</span>=<span class="string">&quot;RUNOOB.COM&quot;</span>;</span><br><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$txt1</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;在 <span class="subst">$txt2</span> 学习 PHP &quot;</span>;     <span class="comment">//变量可以直接出入字符串，相当于占位符</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;我车的品牌是 <span class="subst">&#123;$cars[0]&#125;</span>&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="print"><a href="#print" class="headerlink" title="print"></a>print</h3><ul>
-<li>print同样是一个语句结构，同样可以带括号也可以不带括号</li>
-<li>使用方法同echo,包括字符串支持HTML标签和变量名的特性</li>
-</ul>
-]]></content>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment"># 创建窗口</span></span><br><span class="line"><span class="comment">#cv2.namedWindow(&#x27;window&#x27;, cv2.WINDOW_AUTOSIZE)</span></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;window&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line"><span class="comment"># 更改窗口的大小(要求窗口flag属性必须为cv2.WINDOW_NORMAL)</span></span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;window&#x27;</span>, <span class="number">800</span>, <span class="number">600</span>)</span><br><span class="line"><span class="comment"># 展示名字为window的窗口</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;window&#x27;</span>, <span class="number">0</span>)</span><br><span class="line"><span class="comment"># 等待按键</span></span><br><span class="line"><span class="comment"># waitKey返回按键的ascii值</span></span><br><span class="line"><span class="comment"># 0表示接受任意按键，如果给其他的整数，表示等待按键的时间，单位是毫秒</span></span><br><span class="line"><span class="comment"># 可以利用waitKey来销毁窗口，不用每次都重启Python</span></span><br><span class="line">key = cv2.waitKey(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">if</span> key &amp; <span class="number">0xFF</span> == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">    cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
-        <category>Php</category>
+        <category>OpenCV</category>
       </categories>
       <tags>
         <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>4.PHP EOF(hesrdoc)</title>
-    <url>/2022/10/26/PHP/4.PHP%20EOF(heredoc)/</url>
-    <content><![CDATA[<h3 id="PHP-EOF-heredoc-使用说明"><a href="#PHP-EOF-heredoc-使用说明" class="headerlink" title="PHP EOF(heredoc) 使用说明:"></a>PHP EOF(heredoc) 使用说明:</h3><ul>
-<li>heredoc是一种定义字符串的方法</li>
-<li>使用概述:<ol>
-<li>结束表示吼必须要有分号，否则编译不通过</li>
-<li>EOF在这里是标识符，可以用其他标识符代替</li>
-<li><strong>结束标识必须顶格独自占一行(即必须从行首开始，前后不能衔接任何空白和字符)。</strong></li>
-<li>开始标识带双引号或不带时会解释内嵌的变量和转移符号，<strong>带单引号时则不解释内嵌的变量和转义符号</strong></li>
-<li>内容需要内嵌引号时不需要加转义符号<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&lt;&lt;&lt;EOF</span></span><br><span class="line"><span class="string">        &lt;h1&gt;我的第一个标题&lt;/h1&gt;</span></span><br><span class="line"><span class="string">        &lt;p&gt;我的第一个段落。&lt;/p&gt;</span></span><br><span class="line"><span class="string">EOF</span>;</span><br><span class="line"><span class="comment">// 结束需要独立一行且前后不能空格</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-注:</li>
-</ol>
-</li>
-<li>结束标记必须顶头写，不能有缩进和空格，且在结束标记末尾要有分号</li>
-<li>可以使用不同的标识符，但不能出现在正文中</li>
-<li>标识符之间的变量可以被解析，但函数不可以</li>
-<li>变量之间不需要连接符.或者,拼接</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$name</span>=<span class="string">&quot;runoob&quot;</span>;</span><br><span class="line"><span class="variable">$a</span>= <span class="string">&lt;&lt;&lt;EOF</span></span><br><span class="line"><span class="string">        &quot;abc&quot;<span class="subst">$name</span></span></span><br><span class="line"><span class="string">        &quot;123&quot;</span></span><br><span class="line"><span class="string">EOF</span>;</span><br><span class="line"><span class="comment">// 结束需要独立一行且前后不能空格</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$a</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Php</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
+        <tag>Python</tag>
+        <tag>人工智能</tag>
+        <tag>计算机视觉</tag>
       </tags>
   </entry>
   <entry>
@@ -324,28 +238,6 @@
 <li>imwrite(path, img): 使用imwrite保存图片.<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;img&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;img&#x27;</span>, <span class="number">320</span>, <span class="number">240</span>)</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./1.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">#利用while循环优化退出逻辑</span></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line">    key = cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">    <span class="keyword">if</span> (key &amp; <span class="number">0xFF</span> == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>)):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    <span class="keyword">elif</span>(key &amp; <span class="number">0xFF</span> == <span class="built_in">ord</span>(<span class="string">&#x27;s&#x27;</span>)):</span><br><span class="line">        cv2.imwrite(<span class="string">&#x27;./123.png&#x27;</span>, img)</span><br><span class="line">        <span class="built_in">print</span>(<span class="string">&#x27;图像已保存！\n&#x27;</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="built_in">print</span>(key)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure></li>
 </ul>
 ]]></content>
-      <categories>
-        <category>OpenCV</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>Python</tag>
-        <tag>人工智能</tag>
-        <tag>计算机视觉</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>P1_创建显示窗口</title>
-    <url>/2023/10/22/OpenCV/1_%E5%88%9B%E5%BB%BA%E6%98%BE%E7%A4%BA%E7%AA%97%E5%8F%A3/</url>
-    <content><![CDATA[<h2 id="创建和显示窗口"><a href="#创建和显示窗口" class="headerlink" title="创建和显示窗口"></a>创建和显示窗口</h2><p><strong>api函数：</strong></p>
-<ul>
-<li>namedWindow() 创建命名窗口</li>
-<li>imshow() 显示窗口</li>
-<li>destoryAllWindows() 摧毁窗口</li>
-<li>resizeWindows() 改变窗口大小</li>
-<li>waitKey() 等待用户输入</li>
-</ul>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="comment"># 创建窗口</span></span><br><span class="line"><span class="comment">#cv2.namedWindow(&#x27;window&#x27;, cv2.WINDOW_AUTOSIZE)</span></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;window&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line"><span class="comment"># 更改窗口的大小(要求窗口flag属性必须为cv2.WINDOW_NORMAL)</span></span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;window&#x27;</span>, <span class="number">800</span>, <span class="number">600</span>)</span><br><span class="line"><span class="comment"># 展示名字为window的窗口</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;window&#x27;</span>, <span class="number">0</span>)</span><br><span class="line"><span class="comment"># 等待按键</span></span><br><span class="line"><span class="comment"># waitKey返回按键的ascii值</span></span><br><span class="line"><span class="comment"># 0表示接受任意按键，如果给其他的整数，表示等待按键的时间，单位是毫秒</span></span><br><span class="line"><span class="comment"># 可以利用waitKey来销毁窗口，不用每次都重启Python</span></span><br><span class="line">key = cv2.waitKey(<span class="number">0</span>)</span><br><span class="line"><span class="keyword">if</span> key &amp; <span class="number">0xFF</span> == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">    cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>OpenCV</category>
       </categories>
@@ -573,25 +465,6 @@
       </tags>
   </entry>
   <entry>
-    <title>P13流程控制_顺序结构</title>
-    <url>/2022/10/26/JavaSE/P13%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6_%E9%A1%BA%E5%BA%8F%E7%BB%93%E6%9E%84/</url>
-    <content><![CDATA[<h2 id="顺序结构"><a href="#顺序结构" class="headerlink" title="顺序结构"></a>顺序结构</h2><ul>
-<li>Java的基本结构就是顺序结构，除非特别指明，否则就按照顺序一句一句执行。</li>
-<li>语句与语句之间是由从上到下的顺序进行的，它是由若干个一次执行的处理步骤组成的，<strong>它是任何一个算法都离不开的一种基本算法结构</strong></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ShunXuDemo</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello1&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello2&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello3&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello4&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello5&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221010203319.png"></p>
-]]></content>
-      <categories>
-        <category>JavaSE</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>P12流程控制_Scanner进阶使用</title>
     <url>/2022/10/26/JavaSE/P12%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6_Scanner%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8/</url>
     <content><![CDATA[<h2 id="Scanner对象进阶使用方法"><a href="#Scanner对象进阶使用方法" class="headerlink" title="Scanner对象进阶使用方法"></a>Scanner对象进阶使用方法</h2><ul>
@@ -616,26 +489,14 @@
       </tags>
   </entry>
   <entry>
-    <title>P14流程控制_if选择结构</title>
-    <url>/2022/10/26/JavaSE/P14%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6_if%E9%80%89%E6%8B%A9%E7%BB%93%E6%9E%84/</url>
-    <content><![CDATA[<h2 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h2><ol>
-<li><strong>if单选结构</strong><br> 语法: <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (布尔表达式)&#123;</span><br><span class="line">    <span class="comment">//如果布尔表达式为true将执行的语句</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- if语句用于需要选择是否执行某些语句的情况 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IfDemo01</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;请输入内容:&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> scanner.nextLine();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//equals: 判断字符串是否相等</span></span><br><span class="line">        <span class="keyword">if</span>(s.equals(<span class="string">&quot;Hello&quot;</span>))&#123;</span><br><span class="line">            System.out.println(s);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;End&quot;</span>);</span><br><span class="line">        scanner.close;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- 但输入的内容不等于”Hello”,布尔表达式不成立时<br> <img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221010204819.png"><br> 程序直接跳过了if语句内的代码，直接按顺序执行了下面的代码<br> <img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221010205022.png"><br> 当输入内容使表达式成立时，则执行语句内的内容</li>
-<li><strong>if双选结构</strong><br> 语法: <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(布尔表达式)&#123;</span><br><span class="line">    <span class="comment">//如果布尔值为true</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">//如果布尔值为false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- 例子: <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IfDemo02</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] Args)</span>&#123;</span><br><span class="line">        <span class="comment">//例:但考试分数大于等于60分为及格,小于60分为不及格</span></span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;请输入成绩:&quot;</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">score</span> <span class="operator">=</span> scanner.nextInt();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (score&gt;=<span class="number">60</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;及格&quot;</span>)</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;不及格&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        scanner.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li><strong>if多选结构</strong><br> 当用于判断多个选择结构时使用if多选结构。<br> 语法: <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(布尔表达式<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="comment">//如果布尔表达式1的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(布尔表达式<span class="number">2</span>)&#123;</span><br><span class="line">    <span class="comment">//如果布尔表达式2的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(布尔表达式<span class="number">3</span>)&#123;</span><br><span class="line">    <span class="comment">//如果布尔表达式3的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">//如果以上布尔表达式都不为true执行代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
- 例子: <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IfDemo03</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] Args)</span>&#123;</span><br><span class="line">        <span class="comment">//成绩判断，分出各成绩区间的等级</span></span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;请输入成绩:&quot;</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">score</span> <span class="operator">=</span> scanner.nextInt();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(score==<span class="number">100</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;恭喜满分!&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(score&lt;<span class="number">100</span> &amp;&amp; score&gt;=<span class="number">90</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;A级&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(score&lt;<span class="number">90</span> &amp;&amp; score&gt;=<span class="number">80</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;B级&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(score&lt;<span class="number">80</span> &amp;&amp; score&gt;=<span class="number">70</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;C级&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(score&lt;<span class="number">70</span> &amp;&amp; score&gt;=<span class="number">60</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;D级&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(score&lt;<span class="number">60</span> &amp;&amp; score&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;不合格&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;成绩不合法!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        scanner.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ol>
-<li>if语句至少多一个 else 语句，else 语句在所有的 else if语句之后.</li>
-<li>if 语句可以有若干个 else if 语句，它们必须在 else 语句之前.</li>
-<li>一旦其中一个 else if 语句检测为 true 其他的 else if 以及 else 语句将跳过执行</li>
-</ol>
-</blockquote>
-</li>
-<li><strong>嵌套的if结构</strong><br> 语法: <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(布尔表达式<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="comment">//如果表达式1的值为true执行代码</span></span><br><span class="line">    <span class="keyword">if</span>(布尔表达式<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="comment">//如果表达式2的值为true执行代码</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ol>
+    <title>P13流程控制_顺序结构</title>
+    <url>/2022/10/26/JavaSE/P13%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6_%E9%A1%BA%E5%BA%8F%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<h2 id="顺序结构"><a href="#顺序结构" class="headerlink" title="顺序结构"></a>顺序结构</h2><ul>
+<li>Java的基本结构就是顺序结构，除非特别指明，否则就按照顺序一句一句执行。</li>
+<li>语句与语句之间是由从上到下的顺序进行的，它是由若干个一次执行的处理步骤组成的，<strong>它是任何一个算法都离不开的一种基本算法结构</strong></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ShunXuDemo</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello1&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello2&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello3&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello4&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;Hello5&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221010203319.png"></p>
 ]]></content>
       <categories>
         <category>JavaSE</category>
@@ -726,6 +587,37 @@
 <p><strong>练习3:打印九九乘法表</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ForDemo04</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">/*</span></span><br><span class="line"><span class="comment">        九九乘法表:</span></span><br><span class="line"><span class="comment">        1*1=1	</span></span><br><span class="line"><span class="comment">        2*1=2	2*2=4	</span></span><br><span class="line"><span class="comment">        3*1=3	3*2=6	3*3=9	</span></span><br><span class="line"><span class="comment">        4*1=4	4*2=8	4*3=12	4*4=16	</span></span><br><span class="line"><span class="comment">        5*1=5	5*2=10	5*3=15	5*4=20	5*5=25	</span></span><br><span class="line"><span class="comment">        6*1=6	6*2=12	6*3=18	6*4=24	6*5=30	6*6=36	</span></span><br><span class="line"><span class="comment">        7*1=7	7*2=14	7*3=21	7*4=28	7*5=35	7*6=42	7*7=49	</span></span><br><span class="line"><span class="comment">        8*1=8	8*2=16	8*3=24	8*4=32	8*5=40	8*6=48	8*7=56	8*8=64	</span></span><br><span class="line"><span class="comment">        9*1=9	9*2=18	9*3=27	9*4=36	9*5=45	9*6=54	9*7=63	9*8=72	9*9=81</span></span><br><span class="line"><span class="comment">        */</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//拆解步骤</span></span><br><span class="line">        <span class="comment">//1.先用单层for循环打印第一列</span></span><br><span class="line">        <span class="comment">//2.把固定的9再用一个循环包起来，通过嵌套实现输出9行</span></span><br><span class="line">        <span class="comment">//3.去掉重复项，i&lt;=j</span></span><br><span class="line">        <span class="comment">//4.调整格式,添加空格和换行</span></span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> i, j;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span>(j = <span class="number">1</span>; j &lt;= <span class="number">9</span>; j++)&#123;</span><br><span class="line">            <span class="keyword">for</span> (i = <span class="number">1</span>;i &lt;= j; i++)</span><br><span class="line">            &#123;</span><br><span class="line">                System.out.print(j+<span class="string">&quot;*&quot;</span>+i+<span class="string">&quot;=&quot;</span>+(j * i)+<span class="string">&quot;\t&quot;</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            System.out.println();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221013151722.png"></p>
+]]></content>
+      <categories>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P14流程控制_if选择结构</title>
+    <url>/2022/10/26/JavaSE/P14%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6_if%E9%80%89%E6%8B%A9%E7%BB%93%E6%9E%84/</url>
+    <content><![CDATA[<h2 id="if语句"><a href="#if语句" class="headerlink" title="if语句"></a>if语句</h2><ol>
+<li><strong>if单选结构</strong><br> 语法: <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span> (布尔表达式)&#123;</span><br><span class="line">    <span class="comment">//如果布尔表达式为true将执行的语句</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ if语句用于需要选择是否执行某些语句的情况 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IfDemo01</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;请输入内容:&quot;</span>);</span><br><span class="line">        <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> scanner.nextLine();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//equals: 判断字符串是否相等</span></span><br><span class="line">        <span class="keyword">if</span>(s.equals(<span class="string">&quot;Hello&quot;</span>))&#123;</span><br><span class="line">            System.out.println(s);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;End&quot;</span>);</span><br><span class="line">        scanner.close;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 但输入的内容不等于”Hello”,布尔表达式不成立时<br> <img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221010204819.png"><br> 程序直接跳过了if语句内的代码，直接按顺序执行了下面的代码<br> <img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221010205022.png"><br> 当输入内容使表达式成立时，则执行语句内的内容</li>
+<li><strong>if双选结构</strong><br> 语法: <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(布尔表达式)&#123;</span><br><span class="line">    <span class="comment">//如果布尔值为true</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">//如果布尔值为false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 例子: <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IfDemo02</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] Args)</span>&#123;</span><br><span class="line">        <span class="comment">//例:但考试分数大于等于60分为及格,小于60分为不及格</span></span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;请输入成绩:&quot;</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">score</span> <span class="operator">=</span> scanner.nextInt();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (score&gt;=<span class="number">60</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;及格&quot;</span>)</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;不及格&quot;</span>)</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        scanner.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><strong>if多选结构</strong><br> 当用于判断多个选择结构时使用if多选结构。<br> 语法: <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(布尔表达式<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="comment">//如果布尔表达式1的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(布尔表达式<span class="number">2</span>)&#123;</span><br><span class="line">    <span class="comment">//如果布尔表达式2的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span> <span class="keyword">if</span>(布尔表达式<span class="number">3</span>)&#123;</span><br><span class="line">    <span class="comment">//如果布尔表达式3的值为true执行代码</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">    <span class="comment">//如果以上布尔表达式都不为true执行代码</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+ 例子: <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">IfDemo03</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] Args)</span>&#123;</span><br><span class="line">        <span class="comment">//成绩判断，分出各成绩区间的等级</span></span><br><span class="line">        <span class="type">Scanner</span> <span class="variable">scanner</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Scanner</span>(System.in);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;请输入成绩:&quot;</span>);</span><br><span class="line">        <span class="type">int</span> <span class="variable">score</span> <span class="operator">=</span> scanner.nextInt();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(score==<span class="number">100</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;恭喜满分!&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(score&lt;<span class="number">100</span> &amp;&amp; score&gt;=<span class="number">90</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;A级&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(score&lt;<span class="number">90</span> &amp;&amp; score&gt;=<span class="number">80</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;B级&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(score&lt;<span class="number">80</span> &amp;&amp; score&gt;=<span class="number">70</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;C级&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(score&lt;<span class="number">70</span> &amp;&amp; score&gt;=<span class="number">60</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;D级&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(score&lt;<span class="number">60</span> &amp;&amp; score&gt;=<span class="number">0</span>)&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;不合格&quot;</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;成绩不合法!&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        scanner.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<ol>
+<li>if语句至少多一个 else 语句，else 语句在所有的 else if语句之后.</li>
+<li>if 语句可以有若干个 else if 语句，它们必须在 else 语句之前.</li>
+<li>一旦其中一个 else if 语句检测为 true 其他的 else if 以及 else 语句将跳过执行</li>
+</ol>
+</blockquote>
+</li>
+<li><strong>嵌套的if结构</strong><br> 语法: <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">if</span>(布尔表达式<span class="number">1</span>)&#123;</span><br><span class="line">    <span class="comment">//如果表达式1的值为true执行代码</span></span><br><span class="line">    <span class="keyword">if</span>(布尔表达式<span class="number">2</span>)&#123;</span><br><span class="line">        <span class="comment">//如果表达式2的值为true执行代码</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
 ]]></content>
       <categories>
         <category>JavaSE</category>
@@ -998,6 +890,38 @@
       </tags>
   </entry>
   <entry>
+    <title>P29数组_数组概念小结</title>
+    <url>/2022/10/26/JavaSE/P29%E6%95%B0%E7%BB%84_%E6%95%B0%E7%BB%84%E6%A6%82%E5%BF%B5%E5%B0%8F%E7%BB%93/</url>
+    <content><![CDATA[<h2 id="数组的四个基本点"><a href="#数组的四个基本点" class="headerlink" title="数组的四个基本点"></a>数组的四个基本点</h2><ul>
+<li>其长度是确定的。数组一旦被创建，它的大小就是不可改变的。</li>
+<li>其元素必须是想同类型，不允许出现混合类型。</li>
+<li>数组中的元素可以是任何数据类型，包括基本类型和引用类型。</li>
+<li>数组变量属引用类型，数组也可以看成是对象，数组中的每个元素相当于该对象的成员变量。数组本身就是对象，Java中对象是在堆中的，因此数组无论保存原始类型还是其他对象类型，<strong>数组对象本身实在堆中的。</strong></li>
+</ul>
+<h2 id="数组边界"><a href="#数组边界" class="headerlink" title="数组边界"></a>数组边界</h2><ul>
+<li><p><strong>下标的合法区间:[0,lenth-1],如果越界就会报错</strong></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">    <span class="type">int</span>[] a = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>];</span><br><span class="line">    System.out.println(a[<span class="number">2</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><strong>报错:ArrayIndexOutOfBoundsException:数组下标越界异常！</strong></p>
+</li>
+<li><p>小结:</p>
+<ul>
+<li>数组是相同数据类型(数据类型可以为任意类型)的有序集合</li>
+<li>数组也是对象。数组元素相当于对象的成员变量</li>
+<li>数组长度是确定的，不可变的。如果越界，则报: ArrayIndexOutOfBounds</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>P28数组_内存分析与三种初始化</title>
     <url>/2022/10/26/JavaSE/P28%E6%95%B0%E7%BB%84_%E5%86%85%E5%AD%98%E5%88%86%E6%9E%90%E4%B8%8E%E4%B8%89%E7%A7%8D%E5%88%9D%E5%A7%8B%E5%8C%96/</url>
     <content><![CDATA[<h2 id="Java内存分析"><a href="#Java内存分析" class="headerlink" title="Java内存分析"></a>Java内存分析</h2><p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221022164728.png"></p>
@@ -1023,26 +947,22 @@
       </tags>
   </entry>
   <entry>
-    <title>P29数组_数组概念小结</title>
-    <url>/2022/10/26/JavaSE/P29%E6%95%B0%E7%BB%84_%E6%95%B0%E7%BB%84%E6%A6%82%E5%BF%B5%E5%B0%8F%E7%BB%93/</url>
-    <content><![CDATA[<h2 id="数组的四个基本点"><a href="#数组的四个基本点" class="headerlink" title="数组的四个基本点"></a>数组的四个基本点</h2><ul>
-<li>其长度是确定的。数组一旦被创建，它的大小就是不可改变的。</li>
-<li>其元素必须是想同类型，不允许出现混合类型。</li>
-<li>数组中的元素可以是任何数据类型，包括基本类型和引用类型。</li>
-<li>数组变量属引用类型，数组也可以看成是对象，数组中的每个元素相当于该对象的成员变量。数组本身就是对象，Java中对象是在堆中的，因此数组无论保存原始类型还是其他对象类型，<strong>数组对象本身实在堆中的。</strong></li>
+    <title>P2基础_标识符和关键字</title>
+    <url>/2022/10/26/JavaSE/P2%E5%9F%BA%E7%A1%80_%E6%A0%87%E8%AF%86%E7%AC%A6%E5%92%8C%E5%85%B3%E9%94%AE%E5%AD%97/</url>
+    <content><![CDATA[<h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><ul>
+<li>Java中的关键字<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20220711074335.png"></li>
 </ul>
-<h2 id="数组边界"><a href="#数组边界" class="headerlink" title="数组边界"></a>数组边界</h2><ul>
-<li><p><strong>下标的合法区间:[0,lenth-1],如果越界就会报错</strong></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">    <span class="type">int</span>[] a = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">2</span>];</span><br><span class="line">    System.out.println(a[<span class="number">2</span>]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>报错:ArrayIndexOutOfBoundsException:数组下标越界异常！</strong></p>
-</li>
-<li><p>小结:</p>
-<ul>
-<li>数组是相同数据类型(数据类型可以为任意类型)的有序集合</li>
-<li>数组也是对象。数组元素相当于对象的成员变量</li>
-<li>数组长度是确定的，不可变的。如果越界，则报: ArrayIndexOutOfBounds</li>
-</ul>
-</li>
+<blockquote>
+<p>Java的所有组成部分都要名字；类名，变量名以及方法名都被称为标识符</p>
+</blockquote>
+<h2 id="标识符注意点"><a href="#标识符注意点" class="headerlink" title="标识符注意点"></a>标识符注意点</h2><ul>
+<li>所有标识符都应该以字母（A-Z或者a-z），美元符（$）,或者下划线（_）开始</li>
+<li>首字符之后可以是字母（A-Z或者a-z），美元符（$）,者下划线（_）或数字的任何字符组合</li>
+<li><strong>不可以使用关键字作为变量名或方法名。</strong></li>
+<li>标识符是<strong>大小写敏感</strong>的</li>
+<li>合法字符举例：age &amp;emsp; $salary &amp;emsp; _value &amp;emsp; __1_value</li>
+<li>非法标识符举例：123abc &amp;emsp; -salary &amp;emsp; #abc</li>
+<li><strong>可以使用中文命名，但是一般不建议使用，也不建议使用拼音，很Low</strong></li>
 </ul>
 ]]></content>
       <categories>
@@ -1102,34 +1022,6 @@
 <p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221024151756.png"><br>二维数组本身的长度为4，它包含了四个长度两个元素的一维数组。<br><strong>循环输出二维数组:</strong></p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayDemo05</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">int</span>[][] arrays = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;, &#123;<span class="number">2</span>,<span class="number">3</span>&#125;, &#123;<span class="number">3</span>,<span class="number">4</span>&#125;, &#123;<span class="number">4</span>,<span class="number">5</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用两层循环输出整个二维数组</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arrays.length; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; arrays[i].length; j++)&#123;</span><br><span class="line">                System.out.println(arrays[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221024152449.png"></p>
-]]></content>
-      <categories>
-        <category>JavaSE</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>P2基础_标识符和关键字</title>
-    <url>/2022/10/26/JavaSE/P2%E5%9F%BA%E7%A1%80_%E6%A0%87%E8%AF%86%E7%AC%A6%E5%92%8C%E5%85%B3%E9%94%AE%E5%AD%97/</url>
-    <content><![CDATA[<h2 id="关键字"><a href="#关键字" class="headerlink" title="关键字"></a>关键字</h2><ul>
-<li>Java中的关键字<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20220711074335.png"></li>
-</ul>
-<blockquote>
-<p>Java的所有组成部分都要名字；类名，变量名以及方法名都被称为标识符</p>
-</blockquote>
-<h2 id="标识符注意点"><a href="#标识符注意点" class="headerlink" title="标识符注意点"></a>标识符注意点</h2><ul>
-<li>所有标识符都应该以字母（A-Z或者a-z），美元符（$）,或者下划线（_）开始</li>
-<li>首字符之后可以是字母（A-Z或者a-z），美元符（$）,者下划线（_）或数字的任何字符组合</li>
-<li><strong>不可以使用关键字作为变量名或方法名。</strong></li>
-<li>标识符是<strong>大小写敏感</strong>的</li>
-<li>合法字符举例：age &amp;emsp; $salary &amp;emsp; _value &amp;emsp; __1_value</li>
-<li>非法标识符举例：123abc &amp;emsp; -salary &amp;emsp; #abc</li>
-<li><strong>可以使用中文命名，但是一般不建议使用，也不建议使用拼音，很Low</strong></li>
-</ul>
 ]]></content>
       <categories>
         <category>JavaSE</category>
@@ -1552,6 +1444,41 @@
       </tags>
   </entry>
   <entry>
+    <title>P43面向对象_方法的重写</title>
+    <url>/2022/10/31/JavaSE/P43%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E6%96%B9%E6%B3%95%E7%9A%84%E9%87%8D%E5%86%99/</url>
+    <content><![CDATA[<h2 id="方法的重写"><a href="#方法的重写" class="headerlink" title="方法的重写"></a>方法的重写</h2><ul>
+<li>需要有继承关系，子类重写父类的方法</li>
+<li>重写只有方法的重写</li>
+<li>方法的重写的特点：<ol>
+<li>方法名必须相同</li>
+<li>参数列表必须相同</li>
+<li>方法体不同</li>
+<li>修饰符: 范围可以扩大但不能缩小</li>
+<li>抛出的异常: 范围可以缩小但不能扩大<blockquote>
+<p>重写方法的意义:父类的功能，子类不一定需要，或者不一定满足》</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">A</span> <span class="variable">a</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">A</span>();</span><br><span class="line">        a.test();   <span class="comment">//A</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//父类的引用指向了子类</span></span><br><span class="line">        <span class="type">B</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">A</span>();   <span class="comment">//子类重写了父类的方法</span></span><br><span class="line">        b.test();   <span class="comment">//B</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">A</span> <span class="keyword">extends</span> <span class="title class_">B</span>&#123;</span><br><span class="line">    <span class="comment">//Override  重写</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;A=&gt;test()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">B</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;B=&gt;test()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221031022242.png"></li>
+</ol>
+</li>
+<li><strong>注:不能重写的方法:</strong><ol>
+<li>static 静态方法，从属于类，与实例对象无关</li>
+<li>final 常量方法，常量不可改变</li>
+<li>private 私有方法</li>
+</ol>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>P42面向对象_Super详解</title>
     <url>/2022/10/29/JavaSE/P42%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_Super%E8%AF%A6%E8%A7%A3/</url>
     <content><![CDATA[<h2 id="Super关键字"><a href="#Super关键字" class="headerlink" title="Super关键字"></a>Super关键字</h2><ul>
@@ -1592,41 +1519,6 @@
 <li>super();  父类的构造</li>
 </ul>
 </li>
-</ol>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>JavaSE</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>P43面向对象_方法的重写</title>
-    <url>/2022/10/31/JavaSE/P43%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E6%96%B9%E6%B3%95%E7%9A%84%E9%87%8D%E5%86%99/</url>
-    <content><![CDATA[<h2 id="方法的重写"><a href="#方法的重写" class="headerlink" title="方法的重写"></a>方法的重写</h2><ul>
-<li>需要有继承关系，子类重写父类的方法</li>
-<li>重写只有方法的重写</li>
-<li>方法的重写的特点：<ol>
-<li>方法名必须相同</li>
-<li>参数列表必须相同</li>
-<li>方法体不同</li>
-<li>修饰符: 范围可以扩大但不能缩小</li>
-<li>抛出的异常: 范围可以缩小但不能扩大<blockquote>
-<p>重写方法的意义:父类的功能，子类不一定需要，或者不一定满足》</p>
-</blockquote>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">A</span> <span class="variable">a</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">A</span>();</span><br><span class="line">        a.test();   <span class="comment">//A</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//父类的引用指向了子类</span></span><br><span class="line">        <span class="type">B</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">A</span>();   <span class="comment">//子类重写了父类的方法</span></span><br><span class="line">        b.test();   <span class="comment">//B</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">A</span> <span class="keyword">extends</span> <span class="title class_">B</span>&#123;</span><br><span class="line">    <span class="comment">//Override  重写</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;A=&gt;test()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">B</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;B=&gt;test()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221031022242.png"></li>
-</ol>
-</li>
-<li><strong>注:不能重写的方法:</strong><ol>
-<li>static 静态方法，从属于类，与实例对象无关</li>
-<li>final 常量方法，常量不可改变</li>
-<li>private 私有方法</li>
 </ol>
 </li>
 </ul>
@@ -2038,30 +1930,6 @@
       </tags>
   </entry>
   <entry>
-    <title>P56常用类_toString方法</title>
-    <url>/2022/11/06/JavaSE/P56%E5%B8%B8%E7%94%A8%E7%B1%BBtoSting%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h2 id="toString-方法"><a href="#toString-方法" class="headerlink" title="toString()方法"></a>toString()方法</h2><ul>
-<li><p>返回值: String</p>
-</li>
-<li><p>作用: 返回该对象的字符串表示（表现形式）</p>
-<br/>
-</li>
-<li><p>可以根据程序需求重写该方法，如：展示对象各个属性值。</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">	Student(String name, <span class="type">int</span> age)&#123;</span><br><span class="line">		<span class="built_in">this</span>.name = name;</span><br><span class="line">		<span class="built_in">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Student [name=&quot;</span> + name + <span class="string">&quot;,age=&quot;</span> + age + <span class="string">&quot;]&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;aaa&quot;</span>, <span class="number">20</span>);</span><br><span class="line">		<span class="type">Student</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;bbb&quot;</span>, <span class="number">22</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(s1.toString());</span><br><span class="line">        System.out.println(s2.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221106161638.png"></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>JavaSE</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>P55常用类_hashCode方法</title>
     <url>/2022/11/05/JavaSE/P55%E5%B8%B8%E7%94%A8%E7%B1%BB_hashCode%E6%96%B9%E6%B3%95/</url>
     <content><![CDATA[<h2 id="hashCode-方法"><a href="#hashCode-方法" class="headerlink" title="hashCode()方法"></a>hashCode()方法</h2><ul>
@@ -2076,6 +1944,30 @@
 <li><p>一般情况下相同对象返回相同哈希码。</p>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">	Student(String name, <span class="type">int</span> age)&#123;</span><br><span class="line">		<span class="built_in">this</span>.name = name;</span><br><span class="line">		<span class="built_in">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">		<span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;aaa&quot;</span>, <span class="number">20</span>);</span><br><span class="line">		<span class="type">Student</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;bbb&quot;</span>, <span class="number">22</span>);</span><br><span class="line">		</span><br><span class="line">        System.out.println(s1.hashCode());</span><br><span class="line">        System.out.println(s2.hashCode());</span><br><span class="line"></span><br><span class="line">        <span class="type">Student</span> <span class="variable">s3</span> <span class="operator">=</span> s1;</span><br><span class="line"></span><br><span class="line">        System.out.println(s3.hashCode());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221106160154.png"></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P56常用类_toString方法</title>
+    <url>/2022/11/06/JavaSE/P56%E5%B8%B8%E7%94%A8%E7%B1%BBtoSting%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="toString-方法"><a href="#toString-方法" class="headerlink" title="toString()方法"></a>toString()方法</h2><ul>
+<li><p>返回值: String</p>
+</li>
+<li><p>作用: 返回该对象的字符串表示（表现形式）</p>
+<br/>
+</li>
+<li><p>可以根据程序需求重写该方法，如：展示对象各个属性值。</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">	Student(String name, <span class="type">int</span> age)&#123;</span><br><span class="line">		<span class="built_in">this</span>.name = name;</span><br><span class="line">		<span class="built_in">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Student [name=&quot;</span> + name + <span class="string">&quot;,age=&quot;</span> + age + <span class="string">&quot;]&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;aaa&quot;</span>, <span class="number">20</span>);</span><br><span class="line">		<span class="type">Student</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;bbb&quot;</span>, <span class="number">22</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(s1.toString());</span><br><span class="line">        System.out.println(s2.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221106161638.png"></p>
 </li>
 </ul>
 ]]></content>
@@ -2380,6 +2272,31 @@
       </tags>
   </entry>
   <entry>
+    <title>P65常用类_StringBuffer和StringBuilder</title>
+    <url>/2022/11/14/JavaSE/P65%E5%B8%B8%E7%94%A8%E7%B1%BB_StringBuffer%E5%92%8CStringBuilder/</url>
+    <content><![CDATA[<h1 id="可变字符串"><a href="#可变字符串" class="headerlink" title="可变字符串"></a>可变字符串</h1><ul>
+<li><p><strong>StringBuffer类:</strong><br>可变长字符串，JDK1.0提供，运行效率慢、线程安全。</p>
+</li>
+<li><p><strong>StringBuilder类:</strong><br>可变长字符串，JDK5.0提供，运行效率快、线程不安全。</p>
+<br/>
+</li>
+<li><p>StringBuffer的方法使用与StringBuilder完全相同：</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo05</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">StringBuffer</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuffer</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//1. append(); 追加</span></span><br><span class="line">        sb.append(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line">        sb.append(<span class="string">&quot;World&quot;</span>);</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line">        sb.append(<span class="string">&quot;!&quot;</span>);</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2. insert(); 插入</span></span><br><span class="line">        sb.insert(<span class="number">0</span>, <span class="string">&quot;我在最前面！&quot;</span>);</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3. replace(); 替换</span></span><br><span class="line">        sb.replace(<span class="number">0</span>, <span class="number">6</span>, <span class="string">&quot;我被替换了！&quot;</span>);</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4.delete();  删除</span></span><br><span class="line">        sb.delete(<span class="number">0</span>, <span class="number">6</span>);</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line">        <span class="comment">//清空</span></span><br><span class="line">        sb.delete(<span class="number">0</span>, sb.length());</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line">        System.out.println(sb.length());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221115004419.png"></p>
+]]></content>
+      <categories>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>P66常用类_BigDecimal类</title>
     <url>/2022/11/15/JavaSE/P66%E5%B8%B8%E7%94%A8%E7%B1%BB_BigDecimal%E7%B1%BB/</url>
     <content><![CDATA[<h2 id="BigDecimal类"><a href="#BigDecimal类" class="headerlink" title="BigDecimal类"></a>BigDecimal类</h2><figure class="highlight csharp"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BigDecimalTest</span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>)</span>&#123;</span><br><span class="line">		<span class="built_in">double</span> d1 = <span class="number">1.0</span>;</span><br><span class="line">		<span class="built_in">double</span> d2 = <span class="number">0.9</span>;</span><br><span class="line">		System.<span class="keyword">out</span>.println(d1-d2);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -2396,31 +2313,6 @@
 </blockquote>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.math.BigDecimal;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BigDecimalTest2</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//初始化BigDecimal对象值一定要使用字符串以保证精度</span></span><br><span class="line">        <span class="type">BigDecimal</span> <span class="variable">bd1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;1.0&quot;</span>);</span><br><span class="line">        <span class="type">BigDecimal</span> <span class="variable">bd2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;0.9&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//减法</span></span><br><span class="line">        <span class="type">BigDecimal</span> <span class="variable">r1</span> <span class="operator">=</span> bd1.subtract(bd2);</span><br><span class="line">        System.out.println(r1);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//加法</span></span><br><span class="line">        <span class="type">BigDecimal</span> <span class="variable">r2</span> <span class="operator">=</span> bd1.add(bd2);</span><br><span class="line">        System.out.println(r2);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//乘法</span></span><br><span class="line">        <span class="type">BigDecimal</span> <span class="variable">r3</span> <span class="operator">=</span> bd1.multiply(bd2);</span><br><span class="line">        System.out.println(r3);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//除法</span></span><br><span class="line">        <span class="type">BigDecimal</span> <span class="variable">r4</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;1.4&quot;</span>)</span><br><span class="line">                .subtract(<span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;0.5&quot;</span>))</span><br><span class="line">                .divide(<span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;0.9&quot;</span>));</span><br><span class="line">        System.out.println(r4);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221115233903.png"></p>
-]]></content>
-      <categories>
-        <category>JavaSE</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>P65常用类_StringBuffer和StringBuilder</title>
-    <url>/2022/11/14/JavaSE/P65%E5%B8%B8%E7%94%A8%E7%B1%BB_StringBuffer%E5%92%8CStringBuilder/</url>
-    <content><![CDATA[<h1 id="可变字符串"><a href="#可变字符串" class="headerlink" title="可变字符串"></a>可变字符串</h1><ul>
-<li><p><strong>StringBuffer类:</strong><br>可变长字符串，JDK1.0提供，运行效率慢、线程安全。</p>
-</li>
-<li><p><strong>StringBuilder类:</strong><br>可变长字符串，JDK5.0提供，运行效率快、线程不安全。</p>
-<br/>
-</li>
-<li><p>StringBuffer的方法使用与StringBuilder完全相同：</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo05</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">StringBuffer</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuffer</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//1. append(); 追加</span></span><br><span class="line">        sb.append(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line">        sb.append(<span class="string">&quot;World&quot;</span>);</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line">        sb.append(<span class="string">&quot;!&quot;</span>);</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2. insert(); 插入</span></span><br><span class="line">        sb.insert(<span class="number">0</span>, <span class="string">&quot;我在最前面！&quot;</span>);</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3. replace(); 替换</span></span><br><span class="line">        sb.replace(<span class="number">0</span>, <span class="number">6</span>, <span class="string">&quot;我被替换了！&quot;</span>);</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4.delete();  删除</span></span><br><span class="line">        sb.delete(<span class="number">0</span>, <span class="number">6</span>);</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line">        <span class="comment">//清空</span></span><br><span class="line">        sb.delete(<span class="number">0</span>, sb.length());</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line">        System.out.println(sb.length());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出：</p>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221115004419.png"></p>
 ]]></content>
       <categories>
         <category>JavaSE</category>
@@ -2880,22 +2772,6 @@
       </tags>
   </entry>
   <entry>
-    <title>P7e基础_位运算符</title>
-    <url>/2022/10/26/JavaSE/P7e%E5%9F%BA%E7%A1%80_%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
-    <content><![CDATA[<h2 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h2><blockquote>
-<p>位运算符: &amp;, &amp;|, ^, ~, &gt;&gt;, &lt;&lt;, &gt;&gt;&gt;</p>
-</blockquote>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  A = 0011 1100</span><br><span class="line">  B = 0000 1101</span><br><span class="line"></span><br><span class="line">A&amp;B = 0000 1100</span><br><span class="line">A|B = 0011 1101</span><br><span class="line">A^B = 0011 0001 //异或</span><br><span class="line"> ~B = 1111 0010 //取反</span><br><span class="line"></span><br><span class="line"> 左移 &lt;&lt;  *2</span><br><span class="line"> 右移 &gt;&gt;  /2</span><br><span class="line"></span><br><span class="line"> 0000 0000      0</span><br><span class="line"> 0000 0001      1</span><br><span class="line"> 0000 0010      2</span><br><span class="line"> 0000 0100      4</span><br><span class="line"> 0000 1000      8</span><br><span class="line"> 0001 0000      16</span><br><span class="line"></span><br><span class="line"> //位运算的效率级高</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>JavaSE</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>P7基础_基本运算符</title>
     <url>/2022/10/26/JavaSE/P7%E5%9F%BA%E7%A1%80_%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
     <content><![CDATA[<h2 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h2><ul>
@@ -2912,6 +2788,22 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo01</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//算数运算符（二元运算符）</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">20</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">c</span> <span class="operator">=</span> <span class="number">25</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">d</span> <span class="operator">=</span> <span class="number">25</span>;</span><br><span class="line"></span><br><span class="line">        System.out.println(a+b);</span><br><span class="line">        System.out.println(a-b);</span><br><span class="line">        System.out.println(a*b);</span><br><span class="line">        System.out.println(a/(<span class="type">double</span>)b); <span class="comment">//注意取值范围</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo03</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//关系运算符返回的结果: true/false (布尔值)</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> <span class="number">20</span>;</span><br><span class="line">        <span class="type">int</span> <span class="variable">c</span> <span class="operator">=</span> <span class="number">21</span>;</span><br><span class="line"></span><br><span class="line">        Syetem.out.println(c % a); <span class="comment">//%取余 输出结果:1  (c / a = 2 ....... 1)</span></span><br><span class="line"></span><br><span class="line">        System.out.println(a &gt; b);  <span class="comment">//false</span></span><br><span class="line">        System.out.println(a &lt; b);  <span class="comment">//true </span></span><br><span class="line">        System.out.println(a == b);  <span class="comment">//false</span></span><br><span class="line">        System.ouy.println(a != b);  <span class="comment">//true</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo04</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//自增自减运算符： ++  --  (一元运算符)</span></span><br><span class="line">        <span class="comment">//  a++  就等于 a = a + 1 </span></span><br><span class="line">        <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">b</span> <span class="operator">=</span> a++;  <span class="comment">//先给b赋值，再自增</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">c</span> <span class="operator">=</span> ++a;  <span class="comment">//先自增，再给c赋值</span></span><br><span class="line"></span><br><span class="line">        System.out.println(a);  <span class="comment">// 5</span></span><br><span class="line">        System.out.println(b);  <span class="comment">// 3</span></span><br><span class="line">        System.out.println(c);  <span class="comment">// 5</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//补充：幂运算 2^3  2*2*2=8 （很多运算需要使用到工具类） </span></span><br><span class="line">        <span class="type">double</span> <span class="variable">pow</span> <span class="operator">=</span> Math.pow(<span class="number">2</span>, <span class="number">3</span>);</span><br><span class="line">        System.out.println(pow); <span class="comment">// 8</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo05</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//逻辑运算符  与 或 非</span></span><br><span class="line">        <span class="comment">// &amp;&amp; 逻辑与运算：两个变量都为真，结果才为真</span></span><br><span class="line">        <span class="comment">// || 逻辑或运算，两个变量有一个为真，结果就为真</span></span><br><span class="line">        <span class="comment">// ！ 逻辑非运算，如果是真变为假，若果是假变为真</span></span><br><span class="line"></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">a</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">b</span> <span class="operator">=</span> <span class="literal">false</span>;</span><br><span class="line"></span><br><span class="line">        System.out.println(a &amp;&amp; b);  <span class="comment">//false</span></span><br><span class="line">        System.out.println(a || b);  <span class="comment">//true</span></span><br><span class="line">        System.out.println(!(a &amp;&amp; b));  <span class="comment">//true</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//短路运算 ：当程序进行与运算时符号前的变量为假，则不运行符号后的代码，直接输出结果为假</span></span><br><span class="line"></span><br><span class="line">        <span class="type">int</span> <span class="variable">c</span> <span class="operator">=</span><span class="number">5</span>;</span><br><span class="line">        <span class="type">boolean</span> <span class="variable">d</span> <span class="operator">=</span> (c &lt; <span class="number">4</span>)&amp;&amp;(c++ &lt; <span class="number">4</span>);</span><br><span class="line">        System.out.println(d);  <span class="comment">// flase</span></span><br><span class="line">        System.out.println(c);  <span class="comment">// 5</span></span><br><span class="line">        <span class="comment">//因为短路运算，此处变量c并没有进行自增运算</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
+      <categories>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P7e基础_位运算符</title>
+    <url>/2022/10/26/JavaSE/P7e%E5%9F%BA%E7%A1%80_%E4%BD%8D%E8%BF%90%E7%AE%97%E7%AC%A6/</url>
+    <content><![CDATA[<h2 id="位运算符"><a href="#位运算符" class="headerlink" title="位运算符"></a>位运算符</h2><blockquote>
+<p>位运算符: &amp;, &amp;|, ^, ~, &gt;&gt;, &lt;&lt;, &gt;&gt;&gt;</p>
+</blockquote>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">  A = 0011 1100</span><br><span class="line">  B = 0000 1101</span><br><span class="line"></span><br><span class="line">A&amp;B = 0000 1100</span><br><span class="line">A|B = 0011 1101</span><br><span class="line">A^B = 0011 0001 //异或</span><br><span class="line"> ~B = 1111 0010 //取反</span><br><span class="line"></span><br><span class="line"> 左移 &lt;&lt;  *2</span><br><span class="line"> 右移 &gt;&gt;  /2</span><br><span class="line"></span><br><span class="line"> 0000 0000      0</span><br><span class="line"> 0000 0001      1</span><br><span class="line"> 0000 0010      2</span><br><span class="line"> 0000 0100      4</span><br><span class="line"> 0000 1000      8</span><br><span class="line"> 0001 0000      16</span><br><span class="line"></span><br><span class="line"> //位运算的效率级高</span><br><span class="line"></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>JavaSE</category>
       </categories>
@@ -3245,42 +3137,6 @@
       </tags>
   </entry>
   <entry>
-    <title>P92集合框架_HashMap的使用</title>
-    <url>/2023/03/08/JavaSE/P92%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_HashMap%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
-    <content><![CDATA[<h2 id="Map集合的实现类"><a href="#Map集合的实现类" class="headerlink" title="Map集合的实现类"></a>Map集合的实现类</h2><ul>
-<li><p>HashMap【重点】：</p>
-<ul>
-<li>JDK1.2版本，线程不安全，运行效率快；允许使用null作为key或者value.</li>
-</ul>
-</li>
-<li><p>Hashtable：</p>
-<ul>
-<li>Jdk1.0版本，线程安全，运行效率慢；不允许null作为key或是value.</li>
-<li>Properties：<ul>
-<li>Hashtable的子类，要求key和value都是String，通常用于配置文件的的读取。</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>TreeMap：</p>
-<ul>
-<li>实现了SortedMap接口（Map的子接口），可以对key自动排序。</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//创建集合</span></span><br><span class="line">        HashMap&lt;Student, String&gt; students = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//添加元素</span></span><br><span class="line">        <span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;孙悟空&quot;</span>, <span class="number">100</span>);</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;猪八戒&quot;</span>, <span class="number">101</span>);</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;沙和尚&quot;</span>, <span class="number">102</span>);</span><br><span class="line">        students.put(s1, <span class="string">&quot;北京&quot;</span>);</span><br><span class="line">        students.put(s2, <span class="string">&quot;上海&quot;</span>);</span><br><span class="line">        students.put(s3, <span class="string">&quot;杭州&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;元素个数:&quot;</span>+students.size());</span><br><span class="line">        System.out.println(students.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//删除</span></span><br><span class="line">        <span class="comment">//students.remove(s1);</span></span><br><span class="line">        <span class="comment">//System.out.println(&quot;删除之后&quot;+students.size());</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//遍历</span></span><br><span class="line">        <span class="comment">//使用keySet();</span></span><br><span class="line">        System.out.println(<span class="string">&quot;-----使用keySet();-----&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (Student key : students.keySet()) &#123;</span><br><span class="line">            System.out.println(key.toString()+<span class="string">&quot;=====&quot;</span>+students.get(key));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//使用entrySet();</span></span><br><span class="line">        System.out.println(<span class="string">&quot;-----使用entrySet();-----&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;Student, String&gt; entry : students.entrySet()) &#123;</span><br><span class="line">            System.out.println(entry.getKey()+<span class="string">&quot;=====&quot;</span>+entry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//判断</span></span><br><span class="line">        System.out.println(students.containsKey(<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;孙悟空&quot;</span>, <span class="number">100</span>)));</span><br><span class="line">        System.out.println(students.containsValue(<span class="string">&quot;杭州&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> stuNo;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">(String name, <span class="type">int</span> stuNo)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.stuNo = stuNo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getStuNo</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> stuNo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setStuNo</span><span class="params">(<span class="type">int</span> stuNo)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.stuNo = stuNo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Student&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;name=&#x27;&quot;</span> + name + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, stuNo=&quot;</span> + stuNo +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object o)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span> == o) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="literal">null</span> || getClass() != o.getClass()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> (Student) o;</span><br><span class="line">        <span class="keyword">return</span> stuNo == student.stuNo &amp;&amp; Objects.equals(name, student.name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">hashCode</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Objects.hash(name, stuNo);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>HashMap集合在添加元素时会遇到和HashSet集合一样的重复元素判断问题，这时候需要重写hashCode()和equals()方法来解决。<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/202303090105871.png"></p>
-]]></content>
-      <categories>
-        <category>JavaSE</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>P91集合框架_Map集合概述</title>
     <url>/2023/03/08/JavaSE/P91%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_Map%E9%9B%86%E5%90%88%E6%A6%82%E8%BF%B0/</url>
     <content><![CDATA[<h2 id="Map集合"><a href="#Map集合" class="headerlink" title="Map集合"></a>Map集合</h2><p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/202303082250580.png"></p>
@@ -3307,6 +3163,42 @@
 <li>使用Map接口实现的集合，下面演示一些基本操作，以HashMap为例.<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo1</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//创建Map集合</span></span><br><span class="line">        Map&lt;String, String&gt; map = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">//1添加元素</span></span><br><span class="line">        map.put(<span class="string">&quot;cn&quot;</span>, <span class="string">&quot;中国&quot;</span>);</span><br><span class="line">        map.put(<span class="string">&quot;uk&quot;</span>, <span class="string">&quot;英国&quot;</span>);</span><br><span class="line">        map.put(<span class="string">&quot;usa&quot;</span>, <span class="string">&quot;美国&quot;</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;元素个数：&quot;</span>+map.size());</span><br><span class="line">        System.out.println(map.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2删除</span></span><br><span class="line">        <span class="comment">//map.remove(&quot;usa&quot;);</span></span><br><span class="line">        <span class="comment">//System.out.println(&quot;删除之后：&quot;+map.size());</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//3遍历</span></span><br><span class="line">        <span class="comment">//3.1使用keySet()方法</span></span><br><span class="line">        System.out.println(<span class="string">&quot;------keySet()------&quot;</span>);</span><br><span class="line">        Set&lt;String&gt; keyset = map.keySet();</span><br><span class="line">        <span class="keyword">for</span> (String key : keyset) &#123;</span><br><span class="line">            System.out.println(key+<span class="string">&quot;-----&quot;</span>+map.get(key));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//3.2使用entrySet()方法</span></span><br><span class="line">        System.out.println(<span class="string">&quot;-----entrySet()-----&quot;</span>);</span><br><span class="line">        Set&lt;Map.Entry&lt;String, String&gt;&gt; entries = map.entrySet();</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;String, String&gt; entry : entries) &#123;</span><br><span class="line">            System.out.println(entry.getKey()+<span class="string">&quot;------&quot;</span>+entry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4判断</span></span><br><span class="line">        System.out.println(map.containsKey(<span class="string">&quot;cn&quot;</span>));</span><br><span class="line">        System.out.println(map.containsValue(<span class="string">&quot;泰国&quot;</span>));</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <img src="https://raw.githubusercontent.com/porridge42/picgo/main/202303082349758.png"></li>
 </ul>
+]]></content>
+      <categories>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P92集合框架_HashMap的使用</title>
+    <url>/2023/03/08/JavaSE/P92%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_HashMap%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="Map集合的实现类"><a href="#Map集合的实现类" class="headerlink" title="Map集合的实现类"></a>Map集合的实现类</h2><ul>
+<li><p>HashMap【重点】：</p>
+<ul>
+<li>JDK1.2版本，线程不安全，运行效率快；允许使用null作为key或者value.</li>
+</ul>
+</li>
+<li><p>Hashtable：</p>
+<ul>
+<li>Jdk1.0版本，线程安全，运行效率慢；不允许null作为key或是value.</li>
+<li>Properties：<ul>
+<li>Hashtable的子类，要求key和value都是String，通常用于配置文件的的读取。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>TreeMap：</p>
+<ul>
+<li>实现了SortedMap接口（Map的子接口），可以对key自动排序。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//创建集合</span></span><br><span class="line">        HashMap&lt;Student, String&gt; students = <span class="keyword">new</span> <span class="title class_">HashMap</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//添加元素</span></span><br><span class="line">        <span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;孙悟空&quot;</span>, <span class="number">100</span>);</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;猪八戒&quot;</span>, <span class="number">101</span>);</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;沙和尚&quot;</span>, <span class="number">102</span>);</span><br><span class="line">        students.put(s1, <span class="string">&quot;北京&quot;</span>);</span><br><span class="line">        students.put(s2, <span class="string">&quot;上海&quot;</span>);</span><br><span class="line">        students.put(s3, <span class="string">&quot;杭州&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;元素个数:&quot;</span>+students.size());</span><br><span class="line">        System.out.println(students.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//删除</span></span><br><span class="line">        <span class="comment">//students.remove(s1);</span></span><br><span class="line">        <span class="comment">//System.out.println(&quot;删除之后&quot;+students.size());</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//遍历</span></span><br><span class="line">        <span class="comment">//使用keySet();</span></span><br><span class="line">        System.out.println(<span class="string">&quot;-----使用keySet();-----&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (Student key : students.keySet()) &#123;</span><br><span class="line">            System.out.println(key.toString()+<span class="string">&quot;=====&quot;</span>+students.get(key));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//使用entrySet();</span></span><br><span class="line">        System.out.println(<span class="string">&quot;-----使用entrySet();-----&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;Student, String&gt; entry : students.entrySet()) &#123;</span><br><span class="line">            System.out.println(entry.getKey()+<span class="string">&quot;=====&quot;</span>+entry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//判断</span></span><br><span class="line">        System.out.println(students.containsKey(<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;孙悟空&quot;</span>, <span class="number">100</span>)));</span><br><span class="line">        System.out.println(students.containsValue(<span class="string">&quot;杭州&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> stuNo;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">()</span> &#123;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">(String name, <span class="type">int</span> stuNo)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.stuNo = stuNo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getStuNo</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> stuNo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setStuNo</span><span class="params">(<span class="type">int</span> stuNo)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.stuNo = stuNo;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Student&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;name=&#x27;&quot;</span> + name + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, stuNo=&quot;</span> + stuNo +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object o)</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (<span class="built_in">this</span> == o) <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">if</span> (o == <span class="literal">null</span> || getClass() != o.getClass()) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        <span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> (Student) o;</span><br><span class="line">        <span class="keyword">return</span> stuNo == student.stuNo &amp;&amp; Objects.equals(name, student.name);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">hashCode</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> Objects.hash(name, stuNo);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>HashMap集合在添加元素时会遇到和HashSet集合一样的重复元素判断问题，这时候需要重写hashCode()和equals()方法来解决。<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/202303090105871.png"></p>
 ]]></content>
       <categories>
         <category>JavaSE</category>
@@ -3978,6 +3870,85 @@
       </tags>
   </entry>
   <entry>
+    <title>1.基本语法</title>
+    <url>/2022/10/26/PHP/1.%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="PHP的基本语法"><a href="#PHP的基本语法" class="headerlink" title="PHP的基本语法"></a>PHP的基本语法</h2><ol>
+<li>PHP脚本以<code>&lt;?php</code>开始，以<code>?&gt;</code>结束 </li>
+<li>PHP脚本可以放在文档中的任何位置</li>
+<li>PHP通常包含HTML标签和PHP脚本代码</li>
+<li>注释语法同C<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;h1&gt;My first PHP page&lt;/h1&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
+      <categories>
+        <category>Php</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1.变量</title>
+    <url>/2022/10/26/PHP/2.%E5%8F%98%E9%87%8F/</url>
+    <content><![CDATA[<h3 id="PHP变量命名规则"><a href="#PHP变量命名规则" class="headerlink" title="PHP变量命名规则:"></a>PHP变量命名规则:</h3><ol>
+<li>变量名以$符号开始，后面才是变量名</li>
+<li>变量名的规范同C</li>
+<li>PHP变量不需声明，变量在第一次被声明是时候创建</li>
+<li>PHP属于弱类型语言，会根据变量的值自动转换数据类型</li>
+</ol>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$txt</span>=<span class="string">&quot;Hello world!&quot;</span>;</span><br><span class="line"><span class="variable">$x</span>=<span class="number">5</span>;</span><br><span class="line"><span class="variable">$y</span>=<span class="number">10.5</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="global关键字"><a href="#global关键字" class="headerlink" title="global关键字"></a>global关键字</h3><p><strong>在函数内访问全局变量需要使用到global关键字</strong><br>语法:在变量前加上global关键字</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$x</span>=<span class="number">5</span>;</span><br><span class="line"><span class="variable">$y</span>=<span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTest</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">global</span> <span class="variable">$x</span>,<span class="variable">$y</span>;</span><br><span class="line">    <span class="variable">$y</span>=<span class="variable">$x</span>+<span class="variable">$y</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="title function_ invoke__">myTest</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$y</span>; <span class="comment">// 输出 15</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>补充:PHP的所有全局变量存储在一个名为$GLOBAL[index]的数组里,index为保存变量的变量名，也可以通过在函数里直接访问这个数组来使用全局变量</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$x</span>=<span class="number">5</span>;</span><br><span class="line"><span class="variable">$y</span>=<span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTest</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$GLOBALS</span>[<span class="string">&#x27;y&#x27;</span>]=<span class="variable">$GLOBALS</span>[<span class="string">&#x27;x&#x27;</span>]+<span class="variable">$GLOBALS</span>[<span class="string">&#x27;y&#x27;</span>];</span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="title function_ invoke__">myTest</span>();    <span class="comment">//输出15</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$y</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="static关键字"><a href="#static关键字" class="headerlink" title="static关键字"></a>static关键字</h3><p>用于在函数里声明全局变量，使其拥有全局作用域</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTest</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">static</span> <span class="variable">$x</span>=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$x</span>;</span><br><span class="line">    <span class="variable">$x</span>++;</span><br><span class="line">    <span class="keyword">echo</span> PHP_EOL;    <span class="comment">// 换行符</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="title function_ invoke__">myTest</span>();    <span class="comment">//输出0</span></span><br><span class="line"><span class="title function_ invoke__">myTest</span>();    <span class="comment">//输出1</span></span><br><span class="line"><span class="title function_ invoke__">myTest</span>();    <span class="comment">//输出2</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Php</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>3.echo语句和print语句</title>
+    <url>/2022/10/26/PHP/3.echo%E8%AF%AD%E5%8F%A5%E5%92%8Cprint%E8%AF%AD%E5%8F%A5/</url>
+    <content><![CDATA[<h3 id="echo和print"><a href="#echo和print" class="headerlink" title="echo和print"></a>echo和print</h3><ol>
+<li>相同点:<br> echo和print都可以输出字符串和变量</li>
+<li>区别:<ul>
+<li>echo - 可以输出一个或多个字符串</li>
+<li>print - 只允许输出一个字符串，返回值总为 1</li>
+</ul>
+</li>
+</ol>
+<p>注:echo的输出素的比print快,且echo没有返回值,而print又返回值,返回值为1。</p>
+<h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h3><p>echo的使用格式可以加括号，也可以不加括号，echo或echo()</p>
+<p><strong>显示字符串:</strong></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;h2&gt;PHP 很有趣!&lt;/h2&gt;&quot;</span>;    <span class="comment">//字符串可以包含HTML标签</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Hello world!&lt;br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;我要学 PHP!&lt;br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;这是一个&quot;</span>, <span class="string">&quot;字符串，&quot;</span>, <span class="string">&quot;使用了&quot;</span>, <span class="string">&quot;多个&quot;</span>, <span class="string">&quot;参数。&quot;</span>;    <span class="comment">//此处为显示多格字符串的情况,输出字符串之间相连接且没有空格</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>显示变量:</strong></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$txt1</span>=<span class="string">&quot;学习 PHP&quot;</span>;</span><br><span class="line"><span class="variable">$txt2</span>=<span class="string">&quot;RUNOOB.COM&quot;</span>;</span><br><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$txt1</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;在 <span class="subst">$txt2</span> 学习 PHP &quot;</span>;     <span class="comment">//变量可以直接出入字符串，相当于占位符</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;我车的品牌是 <span class="subst">&#123;$cars[0]&#125;</span>&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="print"><a href="#print" class="headerlink" title="print"></a>print</h3><ul>
+<li>print同样是一个语句结构，同样可以带括号也可以不带括号</li>
+<li>使用方法同echo,包括字符串支持HTML标签和变量名的特性</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Php</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>1_变量和字符串</title>
     <url>/2022/10/26/Python/1_%E5%8F%98%E9%87%8F%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2/</url>
     <content><![CDATA[<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>新建变量：<br><code>x = 3  # = 表示赋值</code></p>
@@ -3996,6 +3967,35 @@
       <tags>
         <tag>博客</tag>
         <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>4.PHP EOF(hesrdoc)</title>
+    <url>/2022/10/26/PHP/4.PHP%20EOF(heredoc)/</url>
+    <content><![CDATA[<h3 id="PHP-EOF-heredoc-使用说明"><a href="#PHP-EOF-heredoc-使用说明" class="headerlink" title="PHP EOF(heredoc) 使用说明:"></a>PHP EOF(heredoc) 使用说明:</h3><ul>
+<li>heredoc是一种定义字符串的方法</li>
+<li>使用概述:<ol>
+<li>结束表示吼必须要有分号，否则编译不通过</li>
+<li>EOF在这里是标识符，可以用其他标识符代替</li>
+<li><strong>结束标识必须顶格独自占一行(即必须从行首开始，前后不能衔接任何空白和字符)。</strong></li>
+<li>开始标识带双引号或不带时会解释内嵌的变量和转移符号，<strong>带单引号时则不解释内嵌的变量和转义符号</strong></li>
+<li>内容需要内嵌引号时不需要加转义符号<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&lt;&lt;&lt;EOF</span></span><br><span class="line"><span class="string">        &lt;h1&gt;我的第一个标题&lt;/h1&gt;</span></span><br><span class="line"><span class="string">        &lt;p&gt;我的第一个段落。&lt;/p&gt;</span></span><br><span class="line"><span class="string">EOF</span>;</span><br><span class="line"><span class="comment">// 结束需要独立一行且前后不能空格</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+注:</li>
+</ol>
+</li>
+<li>结束标记必须顶头写，不能有缩进和空格，且在结束标记末尾要有分号</li>
+<li>可以使用不同的标识符，但不能出现在正文中</li>
+<li>标识符之间的变量可以被解析，但函数不可以</li>
+<li>变量之间不需要连接符.或者,拼接</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$name</span>=<span class="string">&quot;runoob&quot;</span>;</span><br><span class="line"><span class="variable">$a</span>= <span class="string">&lt;&lt;&lt;EOF</span></span><br><span class="line"><span class="string">        &quot;abc&quot;<span class="subst">$name</span></span></span><br><span class="line"><span class="string">        &quot;123&quot;</span></span><br><span class="line"><span class="string">EOF</span>;</span><br><span class="line"><span class="comment">// 结束需要独立一行且前后不能空格</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$a</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Php</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
       </tags>
   </entry>
   <entry>
@@ -4204,6 +4204,24 @@
       </tags>
   </entry>
   <entry>
+    <title>7_元组</title>
+    <url>/2022/10/26/Python/7_%E5%85%83%E7%BB%84/</url>
+    <content><![CDATA[<h3 id="元组的作用"><a href="#元组的作用" class="headerlink" title="元组的作用"></a>元组的作用</h3><p><strong>元组与列表类似, 可以容纳多重不同数据类型的元素, 不同之处在于元组的元素不能修改</strong><br>格式:<br>(元素1, 元素2, 元素3, ……)<br><strong>元组的使用:</strong><br>因为元组的内容不能修改, 所以在列表的使用中使用的增，删，改，查，在元组这只剩”查”还可以实现</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment">#使用count函数查找元组数量</span></span><br><span class="line">nums = (<span class="number">3</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(nums.count())  <span class="comment">#输出: 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用index函数查找元素下标:</span></span><br><span class="line">nums = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(nums.index(<span class="number">2</span>))  <span class="comment">#输出: 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用切片:</span></span><br><span class="line">rhyme = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="string">&#x27;上山打老虎&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(rhyme[:<span class="number">3</span>])  <span class="comment">#输出: (1，2，3)</span></span><br><span class="line"><span class="built_in">print</span>(rhyme[:])  <span class="comment">#输出: (1, 2, 3, 4, 5, &#x27;上山打老虎&#x27;)</span></span><br><span class="line"><span class="built_in">print</span>(rhyme[::<span class="number">2</span>])  <span class="comment">#输出: (1, 3, 5)</span></span><br><span class="line"><span class="built_in">print</span>(rhyme[::-<span class="number">1</span>])  <span class="comment">#输出: (&#x27;上山打老虎&#x27;, 5, 4, 3, 2, 1)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用 + 和 * 运算符:</span></span><br><span class="line">s = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">t = (<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)</span><br><span class="line"><span class="built_in">print</span>(s + t)  <span class="comment">#输出: (1, 2, 3, 4, 5, 6)</span></span><br><span class="line"><span class="built_in">print</span>(s * <span class="number">3</span>)  <span class="comment">#输出: (1,2,3,1,2,3,1,2,3)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#元组的嵌套:</span></span><br><span class="line">s = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">t = (<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)</span><br><span class="line">w = s, t</span><br><span class="line"><span class="built_in">print</span>(w)  <span class="comment">#输出:((1, 2, 3),(4, 5, 6))</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> w:</span><br><span class="line">    <span class="keyword">for</span> each <span class="keyword">in</span> i:</span><br><span class="line">        <span class="built_in">print</span>(each)</span><br><span class="line"><span class="comment">#输出:1 2 3 4 5 6 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">#用元组生成列表(使用列表生成式):</span></span><br><span class="line">s = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>([each * <span class="number">2</span> <span class="keyword">for</span> each <span class="keyword">in</span> s])  <span class="comment">#输出: [2, 4, 6, 8, 10]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#生成一个只有一个元素的元组:</span></span><br><span class="line">x = (<span class="number">520</span>,)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(x))  <span class="comment">#输出:&lt;class &#x27;tuple&#x27;&gt;   #tuple:元组</span></span><br></pre></td></tr></table></figure>
+<p><strong>元组的打包和解包:</strong></p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment">#元组的打包:</span></span><br><span class="line">t = (<span class="number">123</span>, <span class="string">&#x27;Hello&#x27;</span>, <span class="number">3.14</span>)</span><br><span class="line"><span class="built_in">print</span>(t)  <span class="comment">#输出: (123, &#x27;Hello&#x27;, 3.14)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#元组的解包:</span></span><br><span class="line">x, y, z = t</span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment">#输出:123</span></span><br><span class="line"><span class="built_in">print</span>(y)  <span class="comment">#输出:&#x27;Hello&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(z)  <span class="comment">#输出:3.14</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#注:   1.赋值号左边的变量数量必须和元素数量保持一致</span></span><br><span class="line"><span class="comment">#      2.列表和字符串也同样可以同样实现这样的操作</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>如何实现内容可以修改的元组:</strong><br>在元组里嵌套列表的元素就可以实现修改和删除，虽然元组内的元素的不可变的，但如果元素内的元素指向的是一个可以修改的列表，那么我们依然可以修改列表中的元素</p>
+<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">s = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">t = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">w = (s, t)</span><br><span class="line"><span class="built_in">print</span>(w)  <span class="comment">#输出: ([1, 2, 3], [4, 5, 6])</span></span><br><span class="line">s[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line"><span class="built_in">print</span>(w)  <span class="comment">#输出: ([0, 2, 3], [4, 5, 6])</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>8_字符串</title>
     <url>/2022/10/26/Python/8_%E5%AD%97%E7%AC%A6%E4%B8%B2/</url>
     <content><![CDATA[<h2 id="字符串的序列特性"><a href="#字符串的序列特性" class="headerlink" title="字符串的序列特性"></a>字符串的序列特性</h2><ul>
@@ -4250,24 +4268,6 @@
 <figure class="highlight py"><table><tr><td class="code"><pre><span class="line"></span><br></pre></td></tr></table></figure>
 
 ]]></content>
-      <categories>
-        <category>Python</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>Python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>7_元组</title>
-    <url>/2022/10/26/Python/7_%E5%85%83%E7%BB%84/</url>
-    <content><![CDATA[<h3 id="元组的作用"><a href="#元组的作用" class="headerlink" title="元组的作用"></a>元组的作用</h3><p><strong>元组与列表类似, 可以容纳多重不同数据类型的元素, 不同之处在于元组的元素不能修改</strong><br>格式:<br>(元素1, 元素2, 元素3, ……)<br><strong>元组的使用:</strong><br>因为元组的内容不能修改, 所以在列表的使用中使用的增，删，改，查，在元组这只剩”查”还可以实现</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment">#使用count函数查找元组数量</span></span><br><span class="line">nums = (<span class="number">3</span>, <span class="number">1</span>, <span class="number">9</span>, <span class="number">6</span>, <span class="number">8</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(nums.count())  <span class="comment">#输出: 3</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用index函数查找元素下标:</span></span><br><span class="line">nums = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line"><span class="built_in">print</span>(nums.index(<span class="number">2</span>))  <span class="comment">#输出: 1</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用切片:</span></span><br><span class="line">rhyme = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="string">&#x27;上山打老虎&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(rhyme[:<span class="number">3</span>])  <span class="comment">#输出: (1，2，3)</span></span><br><span class="line"><span class="built_in">print</span>(rhyme[:])  <span class="comment">#输出: (1, 2, 3, 4, 5, &#x27;上山打老虎&#x27;)</span></span><br><span class="line"><span class="built_in">print</span>(rhyme[::<span class="number">2</span>])  <span class="comment">#输出: (1, 3, 5)</span></span><br><span class="line"><span class="built_in">print</span>(rhyme[::-<span class="number">1</span>])  <span class="comment">#输出: (&#x27;上山打老虎&#x27;, 5, 4, 3, 2, 1)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#使用 + 和 * 运算符:</span></span><br><span class="line">s = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">t = (<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)</span><br><span class="line"><span class="built_in">print</span>(s + t)  <span class="comment">#输出: (1, 2, 3, 4, 5, 6)</span></span><br><span class="line"><span class="built_in">print</span>(s * <span class="number">3</span>)  <span class="comment">#输出: (1,2,3,1,2,3,1,2,3)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#元组的嵌套:</span></span><br><span class="line">s = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>)</span><br><span class="line">t = (<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>)</span><br><span class="line">w = s, t</span><br><span class="line"><span class="built_in">print</span>(w)  <span class="comment">#输出:((1, 2, 3),(4, 5, 6))</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> w:</span><br><span class="line">    <span class="keyword">for</span> each <span class="keyword">in</span> i:</span><br><span class="line">        <span class="built_in">print</span>(each)</span><br><span class="line"><span class="comment">#输出:1 2 3 4 5 6 </span></span><br><span class="line"></span><br><span class="line"><span class="comment">#用元组生成列表(使用列表生成式):</span></span><br><span class="line">s = (<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>)</span><br><span class="line"><span class="built_in">print</span>([each * <span class="number">2</span> <span class="keyword">for</span> each <span class="keyword">in</span> s])  <span class="comment">#输出: [2, 4, 6, 8, 10]</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#生成一个只有一个元素的元组:</span></span><br><span class="line">x = (<span class="number">520</span>,)</span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">type</span>(x))  <span class="comment">#输出:&lt;class &#x27;tuple&#x27;&gt;   #tuple:元组</span></span><br></pre></td></tr></table></figure>
-<p><strong>元组的打包和解包:</strong></p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment">#元组的打包:</span></span><br><span class="line">t = (<span class="number">123</span>, <span class="string">&#x27;Hello&#x27;</span>, <span class="number">3.14</span>)</span><br><span class="line"><span class="built_in">print</span>(t)  <span class="comment">#输出: (123, &#x27;Hello&#x27;, 3.14)</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#元组的解包:</span></span><br><span class="line">x, y, z = t</span><br><span class="line"><span class="built_in">print</span>(x)  <span class="comment">#输出:123</span></span><br><span class="line"><span class="built_in">print</span>(y)  <span class="comment">#输出:&#x27;Hello&#x27;</span></span><br><span class="line"><span class="built_in">print</span>(z)  <span class="comment">#输出:3.14</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#注:   1.赋值号左边的变量数量必须和元素数量保持一致</span></span><br><span class="line"><span class="comment">#      2.列表和字符串也同样可以同样实现这样的操作</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>如何实现内容可以修改的元组:</strong><br>在元组里嵌套列表的元素就可以实现修改和删除，虽然元组内的元素的不可变的，但如果元素内的元素指向的是一个可以修改的列表，那么我们依然可以修改列表中的元素</p>
-<figure class="highlight py"><table><tr><td class="code"><pre><span class="line">s = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]</span><br><span class="line">t = [<span class="number">4</span>, <span class="number">5</span>, <span class="number">6</span>]</span><br><span class="line">w = (s, t)</span><br><span class="line"><span class="built_in">print</span>(w)  <span class="comment">#输出: ([1, 2, 3], [4, 5, 6])</span></span><br><span class="line">s[<span class="number">0</span>][<span class="number">0</span>] = <span class="number">0</span></span><br><span class="line"><span class="built_in">print</span>(w)  <span class="comment">#输出: ([0, 2, 3], [4, 5, 6])</span></span><br></pre></td></tr></table></figure>]]></content>
       <categories>
         <category>Python</category>
       </categories>
