@@ -90,6 +90,23 @@
       </tags>
   </entry>
   <entry>
+    <title>P5_数组索引</title>
+    <url>/2023/05/17/NumPy/P5_%E6%95%B0%E7%BB%84%E7%B4%A2%E5%BC%95/</url>
+    <content><![CDATA[<h2 id="基础索引"><a href="#基础索引" class="headerlink" title="基础索引"></a>基础索引</h2><ul>
+<li>下标索引和切片：numpy数组基础索引方式与python一致支持下标与切片索引.<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</span><br><span class="line">A = np.array([[<span class="number">9</span>,<span class="number">8</span>,<span class="number">7</span>],</span><br><span class="line">			  [<span class="number">6</span>,<span class="number">5</span>,<span class="number">4</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a[<span class="number">3</span>])</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a[<span class="number">2</span>:<span class="number">6</span>])</span><br><span class="line">[<span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(A[<span class="number">0</span>:<span class="number">2</span>,<span class="number">0</span>:<span class="number">2</span>])</span><br><span class="line">[[<span class="number">9</span> <span class="number">8</span>]</span><br><span class="line"> [<span class="number">6</span> <span class="number">5</span>]]</span><br></pre></td></tr></table></figure></li>
+<li>布尔索引：通过布尔运算（如：比较运算符）来获取符合指定条件的元素的数组.<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 获取大于5的元素</span></span><br><span class="line">a = np.array([[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],[<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>],[<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a[a&gt;<span class="number">5</span>])</span><br><span class="line">[ <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span> <span class="number">11</span>]</span><br><span class="line"><span class="comment"># 过滤nan</span></span><br><span class="line">a = np.array([np.nan,  <span class="number">1</span>,<span class="number">2</span>,np.nan,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a[~np.isnan(a)])</span><br><span class="line">[<span class="number">1.</span> <span class="number">2.</span> <span class="number">3.</span> <span class="number">4.</span> <span class="number">5.</span>]</span><br></pre></td></tr></table></figure></li>
+</ul>
+]]></content>
+      <categories>
+        <category>NumPy</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>Python</tag>
+        <tag>数据处理</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>P4_数组的计算与广播机制</title>
     <url>/2023/05/14/NumPy/P4_%E6%95%B0%E7%BB%84%E7%9A%84%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%B9%BF%E6%92%AD%E6%9C%BA%E5%88%B6/</url>
     <content><![CDATA[<h2 id="数组的计算"><a href="#数组的计算" class="headerlink" title="数组的计算"></a>数组的计算</h2><ul>
@@ -103,23 +120,6 @@
 <li>当形状不同的数组在计算会触发广播机制，广播就是对数组维度的扩展。下面是广播的规则：<br>1. 当参与计算的两个数组维度不同时，广播会先在缺少维度的数组上补1，直到两个数组的维度相等。<br>     *  如:计算<code>np.ones((3,))+np.ones((3,2))</code>时，广播会 先将前一数组的shape改为(3,1)然后再进行后续计算。<br>2. 两个数组在经过或没经过第一步操作后，两个数组的维度值相等，此时若其中一个数组的某一维度为1，广播机制会自动扩展这个维度，使其与另一数组shape完全一致后进行计算。<br>      * <img src="https://raw.githubusercontent.com/porridge42/picgo/main/20230515212419.png"><br>      * <img src="https://raw.githubusercontent.com/porridge42/picgo/main/20230515212941.png"><br>3. 两个数组要是没有一个数组的维度为1无法进行第2步操作，则无法完成广播并抛出一个<code>ValueError</code>。</li>
 </ul>
 </li>
-</ul>
-]]></content>
-      <categories>
-        <category>NumPy</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>Python</tag>
-        <tag>数据处理</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>P5_数组索引</title>
-    <url>/2023/05/17/NumPy/P5_%E6%95%B0%E7%BB%84%E7%B4%A2%E5%BC%95/</url>
-    <content><![CDATA[<h2 id="基础索引"><a href="#基础索引" class="headerlink" title="基础索引"></a>基础索引</h2><ul>
-<li>下标索引和切片：numpy数组基础索引方式与python一致支持下标与切片索引.<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</span><br><span class="line">A = np.array([[<span class="number">9</span>,<span class="number">8</span>,<span class="number">7</span>],</span><br><span class="line">			  [<span class="number">6</span>,<span class="number">5</span>,<span class="number">4</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a[<span class="number">3</span>])</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a[<span class="number">2</span>:<span class="number">6</span>])</span><br><span class="line">[<span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(A[<span class="number">0</span>:<span class="number">2</span>,<span class="number">0</span>:<span class="number">2</span>])</span><br><span class="line">[[<span class="number">9</span> <span class="number">8</span>]</span><br><span class="line"> [<span class="number">6</span> <span class="number">5</span>]]</span><br></pre></td></tr></table></figure></li>
-<li>布尔索引：通过布尔运算（如：比较运算符）来获取符合指定条件的元素的数组.<figure class="highlight py"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 获取大于5的元素</span></span><br><span class="line">a = np.array([[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],[<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>],[<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a[a&gt;<span class="number">5</span>])</span><br><span class="line">[ <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span> <span class="number">11</span>]</span><br><span class="line"><span class="comment"># 过滤nan</span></span><br><span class="line">a = np.array([np.nan,  <span class="number">1</span>,<span class="number">2</span>,np.nan,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a[~np.isnan(a)])</span><br><span class="line">[<span class="number">1.</span> <span class="number">2.</span> <span class="number">3.</span> <span class="number">4.</span> <span class="number">5.</span>]</span><br></pre></td></tr></table></figure></li>
 </ul>
 ]]></content>
       <categories>
@@ -165,6 +165,19 @@
       </tags>
   </entry>
   <entry>
+    <title>P8_数学和统计方法</title>
+    <url>/2023/05/24/NumPy/P8_%E6%95%B0%E5%AD%A6%E5%92%8C%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[]]></content>
+      <categories>
+        <category>NumPy</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>Python</tag>
+        <tag>数据处理</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>P7_NumPy常用随机数</title>
     <url>/2023/05/21/NumPy/P7_NumPy%E5%B8%B8%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%95%B0/</url>
     <content><![CDATA[<h3 id="seed向随机数生成器传传递随机状态种子："><a href="#seed向随机数生成器传传递随机状态种子：" class="headerlink" title="seed向随机数生成器传传递随机状态种子："></a>seed向随机数生成器传传递随机状态种子：</h3><ul>
@@ -188,16 +201,111 @@
       </tags>
   </entry>
   <entry>
-    <title>P8_数学和统计方法</title>
-    <url>/2023/05/24/NumPy/P8_%E6%95%B0%E5%AD%A6%E5%92%8C%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[]]></content>
+    <title>1.基本语法</title>
+    <url>/2022/10/26/PHP/1.%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="PHP的基本语法"><a href="#PHP的基本语法" class="headerlink" title="PHP的基本语法"></a>PHP的基本语法</h2><ol>
+<li>PHP脚本以<code>&lt;?php</code>开始，以<code>?&gt;</code>结束 </li>
+<li>PHP脚本可以放在文档中的任何位置</li>
+<li>PHP通常包含HTML标签和PHP脚本代码</li>
+<li>注释语法同C<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;h1&gt;My first PHP page&lt;/h1&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></li>
+</ol>
+]]></content>
       <categories>
-        <category>NumPy</category>
+        <category>Php</category>
       </categories>
       <tags>
         <tag>博客</tag>
-        <tag>Python</tag>
-        <tag>数据处理</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>1.变量</title>
+    <url>/2022/10/26/PHP/2.%E5%8F%98%E9%87%8F/</url>
+    <content><![CDATA[<h3 id="PHP变量命名规则"><a href="#PHP变量命名规则" class="headerlink" title="PHP变量命名规则:"></a>PHP变量命名规则:</h3><ol>
+<li>变量名以$符号开始，后面才是变量名</li>
+<li>变量名的规范同C</li>
+<li>PHP变量不需声明，变量在第一次被声明是时候创建</li>
+<li>PHP属于弱类型语言，会根据变量的值自动转换数据类型</li>
+</ol>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$txt</span>=<span class="string">&quot;Hello world!&quot;</span>;</span><br><span class="line"><span class="variable">$x</span>=<span class="number">5</span>;</span><br><span class="line"><span class="variable">$y</span>=<span class="number">10.5</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="global关键字"><a href="#global关键字" class="headerlink" title="global关键字"></a>global关键字</h3><p><strong>在函数内访问全局变量需要使用到global关键字</strong><br>语法:在变量前加上global关键字</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$x</span>=<span class="number">5</span>;</span><br><span class="line"><span class="variable">$y</span>=<span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTest</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">global</span> <span class="variable">$x</span>,<span class="variable">$y</span>;</span><br><span class="line">    <span class="variable">$y</span>=<span class="variable">$x</span>+<span class="variable">$y</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="title function_ invoke__">myTest</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$y</span>; <span class="comment">// 输出 15</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>补充:PHP的所有全局变量存储在一个名为$GLOBAL[index]的数组里,index为保存变量的变量名，也可以通过在函数里直接访问这个数组来使用全局变量</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$x</span>=<span class="number">5</span>;</span><br><span class="line"><span class="variable">$y</span>=<span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTest</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$GLOBALS</span>[<span class="string">&#x27;y&#x27;</span>]=<span class="variable">$GLOBALS</span>[<span class="string">&#x27;x&#x27;</span>]+<span class="variable">$GLOBALS</span>[<span class="string">&#x27;y&#x27;</span>];</span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="title function_ invoke__">myTest</span>();    <span class="comment">//输出15</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$y</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="static关键字"><a href="#static关键字" class="headerlink" title="static关键字"></a>static关键字</h3><p>用于在函数里声明全局变量，使其拥有全局作用域</p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTest</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">static</span> <span class="variable">$x</span>=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$x</span>;</span><br><span class="line">    <span class="variable">$x</span>++;</span><br><span class="line">    <span class="keyword">echo</span> PHP_EOL;    <span class="comment">// 换行符</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="title function_ invoke__">myTest</span>();    <span class="comment">//输出0</span></span><br><span class="line"><span class="title function_ invoke__">myTest</span>();    <span class="comment">//输出1</span></span><br><span class="line"><span class="title function_ invoke__">myTest</span>();    <span class="comment">//输出2</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Php</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>3.echo语句和print语句</title>
+    <url>/2022/10/26/PHP/3.echo%E8%AF%AD%E5%8F%A5%E5%92%8Cprint%E8%AF%AD%E5%8F%A5/</url>
+    <content><![CDATA[<h3 id="echo和print"><a href="#echo和print" class="headerlink" title="echo和print"></a>echo和print</h3><ol>
+<li>相同点:<br> echo和print都可以输出字符串和变量</li>
+<li>区别:<ul>
+<li>echo - 可以输出一个或多个字符串</li>
+<li>print - 只允许输出一个字符串，返回值总为 1</li>
+</ul>
+</li>
+</ol>
+<p>注:echo的输出素的比print快,且echo没有返回值,而print又返回值,返回值为1。</p>
+<h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h3><p>echo的使用格式可以加括号，也可以不加括号，echo或echo()</p>
+<p><strong>显示字符串:</strong></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;h2&gt;PHP 很有趣!&lt;/h2&gt;&quot;</span>;    <span class="comment">//字符串可以包含HTML标签</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Hello world!&lt;br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;我要学 PHP!&lt;br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;这是一个&quot;</span>, <span class="string">&quot;字符串，&quot;</span>, <span class="string">&quot;使用了&quot;</span>, <span class="string">&quot;多个&quot;</span>, <span class="string">&quot;参数。&quot;</span>;    <span class="comment">//此处为显示多格字符串的情况,输出字符串之间相连接且没有空格</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+<p><strong>显示变量:</strong></p>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$txt1</span>=<span class="string">&quot;学习 PHP&quot;</span>;</span><br><span class="line"><span class="variable">$txt2</span>=<span class="string">&quot;RUNOOB.COM&quot;</span>;</span><br><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$txt1</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;在 <span class="subst">$txt2</span> 学习 PHP &quot;</span>;     <span class="comment">//变量可以直接出入字符串，相当于占位符</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;我车的品牌是 <span class="subst">&#123;$cars[0]&#125;</span>&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="print"><a href="#print" class="headerlink" title="print"></a>print</h3><ul>
+<li>print同样是一个语句结构，同样可以带括号也可以不带括号</li>
+<li>使用方法同echo,包括字符串支持HTML标签和变量名的特性</li>
+</ul>
+]]></content>
+      <categories>
+        <category>Php</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>4.PHP EOF(hesrdoc)</title>
+    <url>/2022/10/26/PHP/4.PHP%20EOF(heredoc)/</url>
+    <content><![CDATA[<h3 id="PHP-EOF-heredoc-使用说明"><a href="#PHP-EOF-heredoc-使用说明" class="headerlink" title="PHP EOF(heredoc) 使用说明:"></a>PHP EOF(heredoc) 使用说明:</h3><ul>
+<li>heredoc是一种定义字符串的方法</li>
+<li>使用概述:<ol>
+<li>结束表示吼必须要有分号，否则编译不通过</li>
+<li>EOF在这里是标识符，可以用其他标识符代替</li>
+<li><strong>结束标识必须顶格独自占一行(即必须从行首开始，前后不能衔接任何空白和字符)。</strong></li>
+<li>开始标识带双引号或不带时会解释内嵌的变量和转移符号，<strong>带单引号时则不解释内嵌的变量和转义符号</strong></li>
+<li>内容需要内嵌引号时不需要加转义符号<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&lt;&lt;&lt;EOF</span></span><br><span class="line"><span class="string">        &lt;h1&gt;我的第一个标题&lt;/h1&gt;</span></span><br><span class="line"><span class="string">        &lt;p&gt;我的第一个段落。&lt;/p&gt;</span></span><br><span class="line"><span class="string">EOF</span>;</span><br><span class="line"><span class="comment">// 结束需要独立一行且前后不能空格</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+注:</li>
+</ol>
+</li>
+<li>结束标记必须顶头写，不能有缩进和空格，且在结束标记末尾要有分号</li>
+<li>可以使用不同的标识符，但不能出现在正文中</li>
+<li>标识符之间的变量可以被解析，但函数不可以</li>
+<li>变量之间不需要连接符.或者,拼接</li>
+</ul>
+<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$name</span>=<span class="string">&quot;runoob&quot;</span>;</span><br><span class="line"><span class="variable">$a</span>= <span class="string">&lt;&lt;&lt;EOF</span></span><br><span class="line"><span class="string">        &quot;abc&quot;<span class="subst">$name</span></span></span><br><span class="line"><span class="string">        &quot;123&quot;</span></span><br><span class="line"><span class="string">EOF</span>;</span><br><span class="line"><span class="comment">// 结束需要独立一行且前后不能空格</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$a</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Php</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
       </tags>
   </entry>
   <entry>
@@ -1351,34 +1459,6 @@
       </tags>
   </entry>
   <entry>
-    <title>P3基础_数据类型</title>
-    <url>/2022/10/26/JavaSE/P3%E5%9F%BA%E7%A1%80_%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
-    <content><![CDATA[<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><ul>
-<li><p><strong>强类型语言：要求变量的使用要严格符合规定，所有变量都必须先定义后再使用</strong></p>
-<blockquote>
-<p>Java属于一种强类型语言</p>
-</blockquote>
-</li>
-<li><p><strong>Java的数据类型分为两大类</strong></p>
-<ol>
-<li>基本类型(primitive type)</li>
-<li>引用类型(reference type)</li>
-</ol>
-</li>
-</ul>
-<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20220712033850.png"></p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo02</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//八大基本数据类型</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//整数</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">num1</span> <span class="operator">=</span> <span class="number">10</span>;  <span class="comment">//最常用</span></span><br><span class="line">        <span class="type">byte</span> <span class="variable">num2</span> <span class="operator">=</span> <span class="number">20</span>;</span><br><span class="line">        <span class="type">short</span> <span class="variable">num3</span> <span class="operator">=</span> <span class="number">30</span>;</span><br><span class="line">        <span class="type">long</span> <span class="variable">num4</span> <span class="operator">=</span> <span class="number">30L</span>;   <span class="comment">//Long类型要在数字后面加个L</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//小数：浮点数</span></span><br><span class="line">        <span class="type">float</span> <span class="variable">num5</span> <span class="operator">=</span> <span class="number">50.1F</span>;   <span class="comment">//float类型要在数字后面加个F</span></span><br><span class="line">        <span class="type">double</span> <span class="variable">num6</span> <span class="operator">=</span> <span class="number">3.141592653589793238462643</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//字符</span></span><br><span class="line">        <span class="type">char</span> <span class="variable">name</span> <span class="operator">=</span> <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">        <span class="comment">//字符串 注：String不是一个关键词</span></span><br><span class="line">        <span class="comment">//String name = &quot;Hello,World!&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//布尔值：是非</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">flag</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>JavaSE</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>P40面向对象_封装</title>
     <url>/2022/10/26/JavaSE/P40%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E5%B0%81%E8%A3%85/</url>
     <content><![CDATA[<h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><ul>
@@ -1400,6 +1480,34 @@
 <li>统一接口</li>
 <li>提高系统可维护性</li>
 </ol>
+]]></content>
+      <categories>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P3基础_数据类型</title>
+    <url>/2022/10/26/JavaSE/P3%E5%9F%BA%E7%A1%80_%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/</url>
+    <content><![CDATA[<h2 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h2><ul>
+<li><p><strong>强类型语言：要求变量的使用要严格符合规定，所有变量都必须先定义后再使用</strong></p>
+<blockquote>
+<p>Java属于一种强类型语言</p>
+</blockquote>
+</li>
+<li><p><strong>Java的数据类型分为两大类</strong></p>
+<ol>
+<li>基本类型(primitive type)</li>
+<li>引用类型(reference type)</li>
+</ol>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20220712033850.png"></p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo02</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//八大基本数据类型</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//整数</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">num1</span> <span class="operator">=</span> <span class="number">10</span>;  <span class="comment">//最常用</span></span><br><span class="line">        <span class="type">byte</span> <span class="variable">num2</span> <span class="operator">=</span> <span class="number">20</span>;</span><br><span class="line">        <span class="type">short</span> <span class="variable">num3</span> <span class="operator">=</span> <span class="number">30</span>;</span><br><span class="line">        <span class="type">long</span> <span class="variable">num4</span> <span class="operator">=</span> <span class="number">30L</span>;   <span class="comment">//Long类型要在数字后面加个L</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//小数：浮点数</span></span><br><span class="line">        <span class="type">float</span> <span class="variable">num5</span> <span class="operator">=</span> <span class="number">50.1F</span>;   <span class="comment">//float类型要在数字后面加个F</span></span><br><span class="line">        <span class="type">double</span> <span class="variable">num6</span> <span class="operator">=</span> <span class="number">3.141592653589793238462643</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//字符</span></span><br><span class="line">        <span class="type">char</span> <span class="variable">name</span> <span class="operator">=</span> <span class="string">&#x27;A&#x27;</span>;</span><br><span class="line">        <span class="comment">//字符串 注：String不是一个关键词</span></span><br><span class="line">        <span class="comment">//String name = &quot;Hello,World!&quot;</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//布尔值：是非</span></span><br><span class="line">        <span class="type">boolean</span> <span class="variable">flag</span> <span class="operator">=</span> <span class="literal">true</span>;</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>JavaSE</category>
@@ -1874,30 +1982,6 @@
       </tags>
   </entry>
   <entry>
-    <title>P54常用类_getClass方法</title>
-    <url>/2022/11/05/JavaSE/P54%E5%B8%B8%E7%94%A8%E7%B1%BB_getClass%E6%96%B9%E6%B3%95/</url>
-    <content><![CDATA[<h2 id="getClass-方法"><a href="#getClass-方法" class="headerlink" title="getClass()方法"></a>getClass()方法</h2><ul>
-<li><p>返回值类型: final Class&lt;?&gt;</p>
-</li>
-<li><p>作用：返回引用中存储的实际对象类型</p>
-<br/>
-</li>
-<li><p>应用：通常用于判断两个引用中实际村塾对象类型是否一致</p>
-<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">	Student(String name, <span class="type">int</span> age)&#123;</span><br><span class="line">		<span class="built_in">this</span>.name = name;</span><br><span class="line">		<span class="built_in">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">		<span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;aaa&quot;</span>, <span class="number">20</span>);</span><br><span class="line">		<span class="type">Student</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;bbb&quot;</span>, <span class="number">22</span>);</span><br><span class="line">		<span class="comment">//判断s1与s2是否为用一类型</span></span><br><span class="line">		<span class="type">Class</span> <span class="variable">class1</span> <span class="operator">=</span> s1.getClass();</span><br><span class="line">		<span class="type">Class</span> <span class="variable">class2</span> <span class="operator">=</span> s2.getClass();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(class1==class2)&#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;s1和s2属于同一种类型&quot;</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;s1和s2不属于同一种类型&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221105215430.png"></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>JavaSE</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>P53常用类_Object类</title>
     <url>/2022/11/04/JavaSE/P53%E5%B8%B8%E7%94%A8%E7%B1%BB_Object%E7%B1%BB%E6%A6%82%E8%BF%B0/</url>
     <content><![CDATA[<h2 id="Object类"><a href="#Object类" class="headerlink" title="Object类"></a>Object类</h2><ul>
@@ -1917,6 +2001,30 @@
 </ul>
 </li>
 <li><p>Object类包含以下方法:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221104234933.png"></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P54常用类_getClass方法</title>
+    <url>/2022/11/05/JavaSE/P54%E5%B8%B8%E7%94%A8%E7%B1%BB_getClass%E6%96%B9%E6%B3%95/</url>
+    <content><![CDATA[<h2 id="getClass-方法"><a href="#getClass-方法" class="headerlink" title="getClass()方法"></a>getClass()方法</h2><ul>
+<li><p>返回值类型: final Class&lt;?&gt;</p>
+</li>
+<li><p>作用：返回引用中存储的实际对象类型</p>
+<br/>
+</li>
+<li><p>应用：通常用于判断两个引用中实际村塾对象类型是否一致</p>
+<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">	Student(String name, <span class="type">int</span> age)&#123;</span><br><span class="line">		<span class="built_in">this</span>.name = name;</span><br><span class="line">		<span class="built_in">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">		<span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;aaa&quot;</span>, <span class="number">20</span>);</span><br><span class="line">		<span class="type">Student</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;bbb&quot;</span>, <span class="number">22</span>);</span><br><span class="line">		<span class="comment">//判断s1与s2是否为用一类型</span></span><br><span class="line">		<span class="type">Class</span> <span class="variable">class1</span> <span class="operator">=</span> s1.getClass();</span><br><span class="line">		<span class="type">Class</span> <span class="variable">class2</span> <span class="operator">=</span> s2.getClass();</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span>(class1==class2)&#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;s1和s2属于同一种类型&quot;</span>);</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;s1和s2不属于同一种类型&quot;</span>);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221105215430.png"></p>
 </li>
 </ul>
 ]]></content>
@@ -2589,23 +2697,6 @@
       </tags>
   </entry>
   <entry>
-    <title>P74集合框架_Collection的使用2</title>
-    <url>/2022/11/26/JavaSE/P74%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_Collection%E7%9A%84%E4%BD%BF%E7%94%A82/</url>
-    <content><![CDATA[<h2 id="集合的使用2"><a href="#集合的使用2" class="headerlink" title="集合的使用2"></a>集合的使用2</h2><ul>
-<li>保存学生信息<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collection;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo2</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//新建一个Collection对象</span></span><br><span class="line">        <span class="type">Collection</span> <span class="variable">collection</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        <span class="comment">//添加数据</span></span><br><span class="line">        <span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;张三&quot;</span>, <span class="number">20</span>);</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;张无忌&quot;</span>, <span class="number">18</span>);</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;王二&quot;</span>, <span class="number">22</span>);</span><br><span class="line">        collection.add(s1);</span><br><span class="line">        collection.add(s2);</span><br><span class="line">        collection.add(s3);</span><br><span class="line">        System.out.println(<span class="string">&quot;元素个数:&quot;</span>+collection.size());</span><br><span class="line">        System.out.println(collection.toString());</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;====================================&quot;</span>);</span><br><span class="line">        <span class="comment">//遍历</span></span><br><span class="line">        System.out.println(<span class="string">&quot;------使用增强for------&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (Object object : collection)&#123;</span><br><span class="line">            <span class="type">Student</span> <span class="variable">s</span> <span class="operator">=</span> (Student)object;</span><br><span class="line">            System.out.println(s.toString());</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;-------使用迭代器-------&quot;</span>);</span><br><span class="line">        <span class="type">Iterator</span> <span class="variable">it</span> <span class="operator">=</span> collection.iterator();</span><br><span class="line">        <span class="keyword">while</span>(it.hasNext())&#123;</span><br><span class="line">            <span class="type">Student</span> <span class="variable">s</span> <span class="operator">=</span>(Student)it.next();</span><br><span class="line">            System.out.println(s.toString());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;====================================&quot;</span>);</span><br><span class="line">        <span class="comment">//判断</span></span><br><span class="line">        System.out.println(<span class="string">&quot;判断是否包含s1:&quot;</span>+collection.contains(s1));</span><br><span class="line">        System.out.println(<span class="string">&quot;判断集合是否为空:&quot;</span>+collection.isEmpty());</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;====================================&quot;</span>);</span><br><span class="line">        <span class="comment">//删除</span></span><br><span class="line">        collection.remove(s1);</span><br><span class="line">        System.out.println(<span class="string">&quot;删除后元素个数:&quot;</span>+collection.size());</span><br><span class="line">        System.out.println(collection.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">(String name, <span class="type">int</span> age)</span>&#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">     &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Student [name=&quot;</span>+ name +<span class="string">&quot;, age= &quot;</span>+ age +<span class="string">&quot;]&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221126010751.png"></li>
-</ul>
-]]></content>
-      <categories>
-        <category>JavaSE</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>P75集合框架_List集合</title>
     <url>/2022/11/27/JavaSE/P75%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_List%E9%9B%86%E5%90%88/</url>
     <content><![CDATA[<h2 id="List接口："><a href="#List接口：" class="headerlink" title="List接口："></a>List接口：</h2><ul>
@@ -2627,6 +2718,23 @@
 <img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221128004015.png"></li>
 </ul>
 </li>
+</ul>
+]]></content>
+      <categories>
+        <category>JavaSE</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>javaweb</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>P74集合框架_Collection的使用2</title>
+    <url>/2022/11/26/JavaSE/P74%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_Collection%E7%9A%84%E4%BD%BF%E7%94%A82/</url>
+    <content><![CDATA[<h2 id="集合的使用2"><a href="#集合的使用2" class="headerlink" title="集合的使用2"></a>集合的使用2</h2><ul>
+<li>保存学生信息<figure class="highlight java"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Collection;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo2</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//新建一个Collection对象</span></span><br><span class="line">        <span class="type">Collection</span> <span class="variable">collection</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">        <span class="comment">//添加数据</span></span><br><span class="line">        <span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;张三&quot;</span>, <span class="number">20</span>);</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;张无忌&quot;</span>, <span class="number">18</span>);</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;王二&quot;</span>, <span class="number">22</span>);</span><br><span class="line">        collection.add(s1);</span><br><span class="line">        collection.add(s2);</span><br><span class="line">        collection.add(s3);</span><br><span class="line">        System.out.println(<span class="string">&quot;元素个数:&quot;</span>+collection.size());</span><br><span class="line">        System.out.println(collection.toString());</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;====================================&quot;</span>);</span><br><span class="line">        <span class="comment">//遍历</span></span><br><span class="line">        System.out.println(<span class="string">&quot;------使用增强for------&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (Object object : collection)&#123;</span><br><span class="line">            <span class="type">Student</span> <span class="variable">s</span> <span class="operator">=</span> (Student)object;</span><br><span class="line">            System.out.println(s.toString());</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;-------使用迭代器-------&quot;</span>);</span><br><span class="line">        <span class="type">Iterator</span> <span class="variable">it</span> <span class="operator">=</span> collection.iterator();</span><br><span class="line">        <span class="keyword">while</span>(it.hasNext())&#123;</span><br><span class="line">            <span class="type">Student</span> <span class="variable">s</span> <span class="operator">=</span>(Student)it.next();</span><br><span class="line">            System.out.println(s.toString());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;====================================&quot;</span>);</span><br><span class="line">        <span class="comment">//判断</span></span><br><span class="line">        System.out.println(<span class="string">&quot;判断是否包含s1:&quot;</span>+collection.contains(s1));</span><br><span class="line">        System.out.println(<span class="string">&quot;判断集合是否为空:&quot;</span>+collection.isEmpty());</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;====================================&quot;</span>);</span><br><span class="line">        <span class="comment">//删除</span></span><br><span class="line">        collection.remove(s1);</span><br><span class="line">        System.out.println(<span class="string">&quot;删除后元素个数:&quot;</span>+collection.size());</span><br><span class="line">        System.out.println(collection.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">()</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">(String name, <span class="type">int</span> age)</span>&#123;</span><br><span class="line">        <span class="built_in">super</span>();</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">     &#125;</span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Student [name=&quot;</span>+ name +<span class="string">&quot;, age= &quot;</span>+ age +<span class="string">&quot;]&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221126010751.png"></li>
 </ul>
 ]]></content>
       <categories>
@@ -3870,180 +3978,6 @@
       </tags>
   </entry>
   <entry>
-    <title>1.基本语法</title>
-    <url>/2022/10/26/PHP/1.%E5%9F%BA%E6%9C%AC%E8%AF%AD%E6%B3%95/</url>
-    <content><![CDATA[<h2 id="PHP的基本语法"><a href="#PHP的基本语法" class="headerlink" title="PHP的基本语法"></a>PHP的基本语法</h2><ol>
-<li>PHP脚本以<code>&lt;?php</code>开始，以<code>?&gt;</code>结束 </li>
-<li>PHP脚本可以放在文档中的任何位置</li>
-<li>PHP通常包含HTML标签和PHP脚本代码</li>
-<li>注释语法同C<figure class="highlight php"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line"></span><br><span class="line">&lt;h1&gt;My first PHP page&lt;/h1&gt;</span><br><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Hello World!&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br><span class="line"></span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></li>
-</ol>
-]]></content>
-      <categories>
-        <category>Php</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>1.变量</title>
-    <url>/2022/10/26/PHP/2.%E5%8F%98%E9%87%8F/</url>
-    <content><![CDATA[<h3 id="PHP变量命名规则"><a href="#PHP变量命名规则" class="headerlink" title="PHP变量命名规则:"></a>PHP变量命名规则:</h3><ol>
-<li>变量名以$符号开始，后面才是变量名</li>
-<li>变量名的规范同C</li>
-<li>PHP变量不需声明，变量在第一次被声明是时候创建</li>
-<li>PHP属于弱类型语言，会根据变量的值自动转换数据类型</li>
-</ol>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$txt</span>=<span class="string">&quot;Hello world!&quot;</span>;</span><br><span class="line"><span class="variable">$x</span>=<span class="number">5</span>;</span><br><span class="line"><span class="variable">$y</span>=<span class="number">10.5</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="global关键字"><a href="#global关键字" class="headerlink" title="global关键字"></a>global关键字</h3><p><strong>在函数内访问全局变量需要使用到global关键字</strong><br>语法:在变量前加上global关键字</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$x</span>=<span class="number">5</span>;</span><br><span class="line"><span class="variable">$y</span>=<span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTest</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">global</span> <span class="variable">$x</span>,<span class="variable">$y</span>;</span><br><span class="line">    <span class="variable">$y</span>=<span class="variable">$x</span>+<span class="variable">$y</span>;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="title function_ invoke__">myTest</span>();</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$y</span>; <span class="comment">// 输出 15</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>补充:PHP的所有全局变量存储在一个名为$GLOBAL[index]的数组里,index为保存变量的变量名，也可以通过在函数里直接访问这个数组来使用全局变量</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$x</span>=<span class="number">5</span>;</span><br><span class="line"><span class="variable">$y</span>=<span class="number">10</span>;</span><br><span class="line"> </span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTest</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="variable">$GLOBALS</span>[<span class="string">&#x27;y&#x27;</span>]=<span class="variable">$GLOBALS</span>[<span class="string">&#x27;x&#x27;</span>]+<span class="variable">$GLOBALS</span>[<span class="string">&#x27;y&#x27;</span>];</span><br><span class="line">&#125; </span><br><span class="line"> </span><br><span class="line"><span class="title function_ invoke__">myTest</span>();    <span class="comment">//输出15</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$y</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="static关键字"><a href="#static关键字" class="headerlink" title="static关键字"></a>static关键字</h3><p>用于在函数里声明全局变量，使其拥有全局作用域</p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">myTest</span>(<span class="params"></span>)</span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">static</span> <span class="variable">$x</span>=<span class="number">0</span>;</span><br><span class="line">    <span class="keyword">echo</span> <span class="variable">$x</span>;</span><br><span class="line">    <span class="variable">$x</span>++;</span><br><span class="line">    <span class="keyword">echo</span> PHP_EOL;    <span class="comment">// 换行符</span></span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="title function_ invoke__">myTest</span>();    <span class="comment">//输出0</span></span><br><span class="line"><span class="title function_ invoke__">myTest</span>();    <span class="comment">//输出1</span></span><br><span class="line"><span class="title function_ invoke__">myTest</span>();    <span class="comment">//输出2</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Php</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>3.echo语句和print语句</title>
-    <url>/2022/10/26/PHP/3.echo%E8%AF%AD%E5%8F%A5%E5%92%8Cprint%E8%AF%AD%E5%8F%A5/</url>
-    <content><![CDATA[<h3 id="echo和print"><a href="#echo和print" class="headerlink" title="echo和print"></a>echo和print</h3><ol>
-<li>相同点:<br> echo和print都可以输出字符串和变量</li>
-<li>区别:<ul>
-<li>echo - 可以输出一个或多个字符串</li>
-<li>print - 只允许输出一个字符串，返回值总为 1</li>
-</ul>
-</li>
-</ol>
-<p>注:echo的输出素的比print快,且echo没有返回值,而print又返回值,返回值为1。</p>
-<h3 id="echo"><a href="#echo" class="headerlink" title="echo"></a>echo</h3><p>echo的使用格式可以加括号，也可以不加括号，echo或echo()</p>
-<p><strong>显示字符串:</strong></p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;h2&gt;PHP 很有趣!&lt;/h2&gt;&quot;</span>;    <span class="comment">//字符串可以包含HTML标签</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Hello world!&lt;br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;我要学 PHP!&lt;br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;这是一个&quot;</span>, <span class="string">&quot;字符串，&quot;</span>, <span class="string">&quot;使用了&quot;</span>, <span class="string">&quot;多个&quot;</span>, <span class="string">&quot;参数。&quot;</span>;    <span class="comment">//此处为显示多格字符串的情况,输出字符串之间相连接且没有空格</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-<p><strong>显示变量:</strong></p>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$txt1</span>=<span class="string">&quot;学习 PHP&quot;</span>;</span><br><span class="line"><span class="variable">$txt2</span>=<span class="string">&quot;RUNOOB.COM&quot;</span>;</span><br><span class="line"><span class="variable">$cars</span>=<span class="keyword">array</span>(<span class="string">&quot;Volvo&quot;</span>,<span class="string">&quot;BMW&quot;</span>,<span class="string">&quot;Toyota&quot;</span>);</span><br><span class="line"> </span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$txt1</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;在 <span class="subst">$txt2</span> 学习 PHP &quot;</span>;     <span class="comment">//变量可以直接出入字符串，相当于占位符</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;&lt;br&gt;&quot;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;我车的品牌是 <span class="subst">&#123;$cars[0]&#125;</span>&quot;</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="print"><a href="#print" class="headerlink" title="print"></a>print</h3><ul>
-<li>print同样是一个语句结构，同样可以带括号也可以不带括号</li>
-<li>使用方法同echo,包括字符串支持HTML标签和变量名的特性</li>
-</ul>
-]]></content>
-      <categories>
-        <category>Php</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>4.PHP EOF(hesrdoc)</title>
-    <url>/2022/10/26/PHP/4.PHP%20EOF(heredoc)/</url>
-    <content><![CDATA[<h3 id="PHP-EOF-heredoc-使用说明"><a href="#PHP-EOF-heredoc-使用说明" class="headerlink" title="PHP EOF(heredoc) 使用说明:"></a>PHP EOF(heredoc) 使用说明:</h3><ul>
-<li>heredoc是一种定义字符串的方法</li>
-<li>使用概述:<ol>
-<li>结束表示吼必须要有分号，否则编译不通过</li>
-<li>EOF在这里是标识符，可以用其他标识符代替</li>
-<li><strong>结束标识必须顶格独自占一行(即必须从行首开始，前后不能衔接任何空白和字符)。</strong></li>
-<li>开始标识带双引号或不带时会解释内嵌的变量和转移符号，<strong>带单引号时则不解释内嵌的变量和转义符号</strong></li>
-<li>内容需要内嵌引号时不需要加转义符号<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&lt;&lt;&lt;EOF</span></span><br><span class="line"><span class="string">        &lt;h1&gt;我的第一个标题&lt;/h1&gt;</span></span><br><span class="line"><span class="string">        &lt;p&gt;我的第一个段落。&lt;/p&gt;</span></span><br><span class="line"><span class="string">EOF</span>;</span><br><span class="line"><span class="comment">// 结束需要独立一行且前后不能空格</span></span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
-注:</li>
-</ol>
-</li>
-<li>结束标记必须顶头写，不能有缩进和空格，且在结束标记末尾要有分号</li>
-<li>可以使用不同的标识符，但不能出现在正文中</li>
-<li>标识符之间的变量可以被解析，但函数不可以</li>
-<li>变量之间不需要连接符.或者,拼接</li>
-</ul>
-<figure class="highlight php"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="variable">$name</span>=<span class="string">&quot;runoob&quot;</span>;</span><br><span class="line"><span class="variable">$a</span>= <span class="string">&lt;&lt;&lt;EOF</span></span><br><span class="line"><span class="string">        &quot;abc&quot;<span class="subst">$name</span></span></span><br><span class="line"><span class="string">        &quot;123&quot;</span></span><br><span class="line"><span class="string">EOF</span>;</span><br><span class="line"><span class="comment">// 结束需要独立一行且前后不能空格</span></span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$a</span>;</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>]]></content>
-      <categories>
-        <category>Php</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>javaweb</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>hexo的搭建配置与部署方法备用</title>
-    <url>/2023/10/22/%E5%B7%A5%E5%85%B7/hexo%E7%9A%84%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AE%E4%B8%8E%E9%83%A8%E7%BD%B2%E6%96%B9%E6%B3%95%E5%A4%87%E7%94%A8/</url>
-    <content><![CDATA[<h2 id="HEXO博客概述："><a href="#HEXO博客概述：" class="headerlink" title="HEXO博客概述："></a>HEXO博客概述：</h2><ul>
-<li>hexo：基于Node.js的静态博客框架</li>
-<li>Node.js：hexo依赖的运行环境</li>
-<li>git：将hexo生成的博客部署至github的工具</li>
-<li>nvm：windows系统下的node.js环境版本管理器<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023150605.png"></li>
-</ul>
-<h2 id="如何从零搭建："><a href="#如何从零搭建：" class="headerlink" title="如何从零搭建："></a>如何从零搭建：</h2><p>1.安装git软件:</p>
-<ul>
-<li>官网直接下载最新版安装</li>
-</ul>
-<p>2.安装Node.js运行环境：</p>
-<ul>
-<li>安装nvm <a href="https://github.com/coreybutler/nvm-windows">https://github.com/coreybutler/nvm-windows</a> 下载Releases安装</li>
-<li>在nvm中安装指定Node.js版本并启用<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nvm install 18.18.2</span><br><span class="line">nvm ls</span><br><span class="line">nvm use 18.18.2</span><br></pre></td></tr></table></figure>
-（大多数情况下最新版即可，有时候可能hexo版本不稳定可以尝试老版本的node环境）</li>
-</ul>
-<ol>
-<li>安装hexo<ul>
-<li>安装好node环境后直接在cmd中全局安装hexo(hexo相当于安装在当前的Node环境中,使用nvm切换另一版本则需要重新安装) <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ol>
-<h2 id="部署："><a href="#部署：" class="headerlink" title="部署："></a>部署：</h2><ul>
-<li>在博客目录下右键选择Open Git Bash here开启git终端</li>
-<li>输入hexo -v检查hexo是否正常安装<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//清理缓存文件</span><br><span class="line">hexo clean</span><br><span class="line">//生成静态博客网页文件</span><br><span class="line">hexo g</span><br><span class="line">//部署</span><br><span class="line">hexo d</span><br><span class="line">//启动本地服务（运行可以在localhost:4000预览静态博客页面）</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure></li>
-<li>配置文件：<ul>
-<li>配置文件位于博客文件夹目录下,文件名为_config.yml，一般用于设置部署到的仓库位置</li>
-</ul>
-</li>
-</ul>
-<h3 id="两种不同部署方式："><a href="#两种不同部署方式：" class="headerlink" title="两种不同部署方式："></a>两种不同部署方式：</h3><ul>
-<li><strong>使用ssh+SSH Key方式部署：</strong><ul>
-<li><p>启动git终端，生成SSH Key</p>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;备注信息:邮箱&quot;</span><br></pre></td></tr></table></figure>
-<p>一路回车即可</p>
-</li>
-<li><p>cd至sshkey所在目录.ssh<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023140229.png"></p>
-</li>
-<li><p>查看生成的密钥文件并复制内容<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023140512.png"></p>
-</li>
-<li><p>在github网站的是指中添加新建的SSH Key即可<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023140854.png"></p>
-</li>
-<li><p>最后打开配置文件，将部署方式设为Git并填上ssh的仓库地址<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023141143.png"></p>
-</li>
-</ul>
-</li>
-<li><strong>使用https+Token方式部署：</strong><ul>
-<li>在github网站的Developer Settings中选择Personal access tokens中生成Token<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023141858.png"></li>
-<li>打开配置文件，将部署方式设置为Git,部署仓库地址改为https地址，并按格式在地址前加上token<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">      <span class="attr">repo:</span> <span class="string">https://oauth2:ghp_XXXXXXXXXXXXXXXXXXXXXXXXXX@github.com/porridge42/porridge42.github.io.git</span></span><br><span class="line">      <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></li>
-<li>如果部署时弹出github登录窗口，就选择token并填入。如果只能填账号密码就在密码栏填入token。（github已经关闭了账号密码登录，这里填密码是无法连接到github的）</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>工具</category>
-      </categories>
-      <tags>
-        <tag>博客</tag>
-        <tag>网站</tag>
-        <tag>工具</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>1_变量和字符串</title>
     <url>/2022/10/26/Python/1_%E5%8F%98%E9%87%8F%E5%92%8C%E5%AD%97%E7%AC%A6%E4%B8%B2/</url>
     <content><![CDATA[<h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><p>新建变量：<br><code>x = 3  # = 表示赋值</code></p>
@@ -4340,6 +4274,88 @@
       <tags>
         <tag>博客</tag>
         <tag>Python</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo的搭建配置与部署方法备用</title>
+    <url>/2023/10/22/%E5%B7%A5%E5%85%B7/hexo%E7%9A%84%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AE%E4%B8%8E%E9%83%A8%E7%BD%B2%E6%96%B9%E6%B3%95%E5%A4%87%E7%94%A8/</url>
+    <content><![CDATA[<h2 id="HEXO博客概述："><a href="#HEXO博客概述：" class="headerlink" title="HEXO博客概述："></a>HEXO博客概述：</h2><ul>
+<li>hexo：基于Node.js的静态博客框架</li>
+<li>Node.js：hexo依赖的运行环境</li>
+<li>git：将hexo生成的博客部署至github的工具</li>
+<li>nvm：windows系统下的node.js环境版本管理器<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023150605.png"></li>
+</ul>
+<h2 id="如何从零搭建："><a href="#如何从零搭建：" class="headerlink" title="如何从零搭建："></a>如何从零搭建：</h2><p>1.安装git软件:</p>
+<ul>
+<li>官网直接下载最新版安装</li>
+</ul>
+<p>2.安装Node.js运行环境：</p>
+<ul>
+<li>安装nvm <a href="https://github.com/coreybutler/nvm-windows">https://github.com/coreybutler/nvm-windows</a> 下载Releases安装</li>
+<li>在nvm中安装指定Node.js版本并启用<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nvm install 18.18.2</span><br><span class="line">nvm ls</span><br><span class="line">nvm use 18.18.2</span><br></pre></td></tr></table></figure>
+（大多数情况下最新版即可，有时候可能hexo版本不稳定可以尝试老版本的node环境）</li>
+</ul>
+<ol>
+<li>安装hexo<ul>
+<li>安装好node环境后直接在cmd中全局安装hexo(hexo相当于安装在当前的Node环境中,使用nvm切换另一版本则需要重新安装) <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">npm install hexo-cli -g</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h2 id="部署："><a href="#部署：" class="headerlink" title="部署："></a>部署：</h2><ul>
+<li>在博客目录下右键选择Open Git Bash here开启git终端</li>
+<li>输入hexo -v检查hexo是否正常安装<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">//清理缓存文件</span><br><span class="line">hexo clean</span><br><span class="line">//生成静态博客网页文件</span><br><span class="line">hexo g</span><br><span class="line">//部署</span><br><span class="line">hexo d</span><br><span class="line">//启动本地服务（运行可以在localhost:4000预览静态博客页面）</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure></li>
+<li>配置文件：<ul>
+<li>配置文件位于博客文件夹目录下,文件名为_config.yml，一般用于设置部署到的仓库位置</li>
+</ul>
+</li>
+</ul>
+<h3 id="两种不同部署方式："><a href="#两种不同部署方式：" class="headerlink" title="两种不同部署方式："></a>两种不同部署方式：</h3><ul>
+<li><strong>使用ssh+SSH Key方式部署：</strong><ul>
+<li><p>启动git终端，生成SSH Key</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh-keygen -t rsa -C &quot;备注信息:邮箱&quot;</span><br></pre></td></tr></table></figure>
+<p>一路回车即可</p>
+</li>
+<li><p>cd至sshkey所在目录.ssh<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023140229.png"></p>
+</li>
+<li><p>查看生成的密钥文件并复制内容<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023140512.png"></p>
+</li>
+<li><p>在github网站的是指中添加新建的SSH Key即可<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023140854.png"></p>
+</li>
+<li><p>最后打开配置文件，将部署方式设为Git并填上ssh的仓库地址<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023141143.png"></p>
+</li>
+</ul>
+</li>
+<li><strong>使用https+Token方式部署：</strong><ul>
+<li>在github网站的Developer Settings中选择Personal access tokens中生成Token<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023141858.png"></li>
+<li>打开配置文件，将部署方式设置为Git,部署仓库地址改为https地址，并按格式在地址前加上token<figure class="highlight yml"><table><tr><td class="code"><pre><span class="line"><span class="attr">deploy:</span></span><br><span class="line">      <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">      <span class="attr">repo:</span> <span class="string">https://oauth2:ghp_XXXXXXXXXXXXXXXXXXXXXXXXXX@github.com/porridge42/porridge42.github.io.git</span></span><br><span class="line">      <span class="attr">branch:</span> <span class="string">master</span></span><br></pre></td></tr></table></figure></li>
+<li>如果部署时弹出github登录窗口，就选择token并填入。如果只能填账号密码就在密码栏填入token。（github已经关闭了账号密码登录，这里填密码是无法连接到github的）</li>
+</ul>
+</li>
+</ul>
+<h3 id="常见部署失败解决办法："><a href="#常见部署失败解决办法：" class="headerlink" title="常见部署失败解决办法："></a>常见部署失败解决办法：</h3><ul>
+<li><p>部署成功示例：<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023151810.png"></p>
+</li>
+<li><p>部署失败示例：<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231023151943.png"></p>
+</li>
+<li><p>尝试切换node版本</p>
+</li>
+<li><p>hexo clean清除缓存重新生成部署</p>
+</li>
+<li><p>网络问题，关闭或开启vpn或者切换不同网络</p>
+</li>
+<li><p>git与github连接问题，切换部署方式</p>
+</li>
+<li><p>删除blog目录下的.deploy_git目录与public目录，重新生成并尝试部署</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>工具</category>
+      </categories>
+      <tags>
+        <tag>博客</tag>
+        <tag>网站</tag>
+        <tag>工具</tag>
       </tags>
   </entry>
 </search>
