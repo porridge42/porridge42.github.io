@@ -183,6 +183,93 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/JavaSE/P15%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6_Switch%E9%80%89%E6%8B%A9%E7%BB%93%E6%9E%84/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/26/JavaSE/P15%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6_Switch%E9%80%89%E6%8B%A9%E7%BB%93%E6%9E%84/" class="post-title-link" itemprop="url">P15流程控制_Switch选择结构</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-26 10:00:15" itemprop="dateCreated datePublished" datetime="2022-10-26T10:00:15+08:00">2022-10-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-27 10:21:46" itemprop="dateModified" datetime="2022-10-27T10:21:46+08:00">2022-10-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="switch-case语句"><a href="#switch-case语句" class="headerlink" title="switch case语句"></a>switch case语句</h2><ul>
+<li>实现多选择结构的一种语句switch case。</li>
+<li>switch case语句判断一个变量与一系列值中某个值是否相等,每个值称为一个分支。</li>
+<li>语法:<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span>(表达式)&#123;</span><br><span class="line">    <span class="keyword">case</span> 值<span class="number">1</span> :</span><br><span class="line">        <span class="comment">//语句</span></span><br><span class="line">        <span class="keyword">break</span>;  <span class="comment">//可选</span></span><br><span class="line">    <span class="keyword">case</span> 值<span class="number">2</span> :</span><br><span class="line">        <span class="comment">//语句</span></span><br><span class="line">        <span class="keyword">break</span>;  <span class="comment">//可选</span></span><br><span class="line">    <span class="comment">//case的数量可以是任意的</span></span><br><span class="line">    <span class="keyword">default</span> :  <span class="comment">//可选</span></span><br><span class="line">        <span class="comment">//语句</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>语句会自动从上往下匹配与表达式值相等的 case 语句并执行,若所有  case 语句的值都不匹配则默认执行default语句中的代码。</li>
+<li>switch 语句中的变量类型可以是:<ul>
+<li>byte, short, int 或者 char。</li>
+<li>从Java SE7 开始。</li>
+<li>switch 支持字符串(String)类型。</li>
+<li>同时 case 标签必须为字符串常量或者字面量。<br>例子:<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">SwitchDemo01</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[]args)</span>&#123;</span><br><span class="line">        <span class="type">char</span> <span class="variable">grade</span> <span class="operator">=</span> <span class="string">&#x27;C&#x27;</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">switch</span>(grade)&#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;A&#x27;</span>:</span><br><span class="line">                System.out.println(<span class="string">&quot;优秀&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;B&#x27;</span>:</span><br><span class="line">                System.out.println(<span class="string">&quot;良好&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;C&#x27;</span>:</span><br><span class="line">                System.out.println(<span class="string">&quot;及格&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;D&#x27;</span>:</span><br><span class="line">                System.out.println(<span class="string">&quot;再接再厉&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">&#x27;E&#x27;</span>:</span><br><span class="line">                System.out.println(<span class="string">&quot;挂科&quot;</span>);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">            <span class="keyword">default</span>:</span><br><span class="line">                System.out.println(<span class="string">&quot;未知等级&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<strong>写完每个case后按需要添加break语句，否则语句会接着执行后面的所有case。这种情况被称为“case穿透，编程中需要回避因case穿透现象导致的程序bug”</strong></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/JavaSE/P14%E6%B5%81%E7%A8%8B%E6%8E%A7%E5%88%B6_if%E9%80%89%E6%8B%A9%E7%BB%93%E6%9E%84/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -953,121 +1040,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/JavaSE/P6%E5%9F%BA%E7%A1%80_%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E4%BD%9C%E7%94%A8%E5%9F%9F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/26/JavaSE/P6%E5%9F%BA%E7%A1%80_%E5%8F%98%E9%87%8F%EF%BC%8C%E5%B8%B8%E9%87%8F%EF%BC%8C%E4%BD%9C%E7%94%A8%E5%9F%9F/" class="post-title-link" itemprop="url">P6基础_变量，常量，作用域</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-10-26 10:00:06" itemprop="dateCreated datePublished" datetime="2022-10-26T10:00:06+08:00">2022-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-27 10:20:16" itemprop="dateModified" datetime="2022-10-27T10:20:16+08:00">2022-10-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h2><ul>
-<li><p>变量是什么:就是意义变化的量！</p>
-</li>
-<li><p>Java是一种强类型语言，每个变量都必须声明其类型。</p>
-</li>
-<li><p>Java变量是程序中最基本的存储单元，其要素包括变量名，变量类型和<strong>作用域</strong></p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">type varName [=value] [&#123;,varName[=value]&#125;];</span><br><span class="line"><span class="comment">//数据类型 变量名 = 值;  可以使用逗号隔开来声明多个同类型变量。</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>注意事项:</p>
-<ul>
-<li>每个变量都有类型，类型可以是基本类型，也可以是引用类型。</li>
-<li>变量名必须是合法的标识符。</li>
-<li>变量声明是一条完整的语句，因此每一个声明都必须以分号结束</li>
-</ul>
-</li>
-</ul>
-<h2 id="变量作用域"><a href="#变量作用域" class="headerlink" title="变量作用域"></a>变量作用域</h2><ul>
-<li>类变量</li>
-<li>实例变量</li>
-<li>局部变量</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">pubilc <span class="keyword">class</span> <span class="title class_">Variable</span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="type">int</span> <span class="variable">allClicks</span> <span class="operator">=</span> <span class="number">0</span>;    <span class="comment">//类变量（static前缀）</span></span><br><span class="line">  <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> <span class="string">&quot;Hello,world&quot;</span>;    <span class="comment">//实例变量 (在类里)</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">public</span> <span class="keyword">void</span>  <span class="title function_">method</span><span class="params">()</span>&#123;</span><br><span class="line">    <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>;    <span class="comment">//局部变量 (在方法里)</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>局部变量</strong>:<br>定义在方法内，作用域尽在方法内可用，使用前必须先声明和初始化值。</p>
-<p><strong>实例变量</strong>:<br>从属于对象，如果不自行初始化，默认值一般为0，布尔值为flase，基本类型以外均为null。</p>
-<p><strong>类变量</strong>:<br>使用static关键词，从属于类。</p>
-<h2 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h2><ul>
-<li><p>常量(Constant):初始化(initialize)后不能再改变值！不会变动的值。</p>
-</li>
-<li><p>所谓常量可以理解成一种特殊的变量，它的值被设定后，在程序运行过程中不允许被改变。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//使用 final 关键词定义常量</span></span><br><span class="line"><span class="keyword">final</span> 常量名 = 值;</span><br><span class="line"><span class="keyword">final</span> <span class="type">double</span> PI - <span class="number">3.14</span>;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>常量名一般使用大写字符。</p>
-</li>
-</ul>
-<h2 id="变量的命名规则"><a href="#变量的命名规则" class="headerlink" title="变量的命名规则"></a>变量的命名规则</h2><ul>
-<li>所有变量，方法，类名: 见名知意</li>
-<li><strong>类成员变量: 首字母小写的驼峰原则: monthSalary</strong></li>
-<li><strong>局部变量: 首字母小写的驼峰原则: (同上）</strong></li>
-<li><strong>常量: 大写组合下划线: MAX_VALUE</strong></li>
-<li><strong>类名: 首字母大写的驼峰原则: Man, GoodMan</strong></li>
-<li><strong>方法名:首字母小写的驼峰原则: run(),runRun()</strong></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1139,14 +1111,14 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">127</span>
+          <span class="site-state-item-count">128</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">

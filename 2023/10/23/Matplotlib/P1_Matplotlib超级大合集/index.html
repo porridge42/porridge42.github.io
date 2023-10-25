@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="绘制x点和y点 使用 plt.plot 函数，传入两个点的坐标默认绘制一条线123456789import matplotlib.pyplot as pltimport numpy as np# 在图中从(1, 3)到(8, 10)画一条线xpoints &#x3D; np.array([1, 3])ypoints &#x3D; np.array([3, 10])plt.plot(xpoints, ypoints)p">
+<meta property="og:type" content="article">
+<meta property="og:title" content="P1_Matplotlib超级大合集">
+<meta property="og:url" content="http://example.com/2023/10/23/Matplotlib/P1_Matplotlib%E8%B6%85%E7%BA%A7%E5%A4%A7%E5%90%88%E9%9B%86/index.html">
+<meta property="og:site_name" content="NanBlog 稀饭目标">
+<meta property="og:description" content="绘制x点和y点 使用 plt.plot 函数，传入两个点的坐标默认绘制一条线123456789import matplotlib.pyplot as pltimport numpy as np# 在图中从(1, 3)到(8, 10)画一条线xpoints &#x3D; np.array([1, 3])ypoints &#x3D; np.array([3, 10])plt.plot(xpoints, ypoints)p">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024092330.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024091656.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024092753.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024093203.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024093630.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024093823.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024093936.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024094100.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024094151.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024094748.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024100826.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024110847.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024111052.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024111615.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024143205.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024143845.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024144627.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024150627.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024161503.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024162017.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024203223.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024204431.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024205434.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024205736.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024210932.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024222454.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024223315.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024224041.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024224323.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025100044.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025101231.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025162244.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025155849.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025155605.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025160812.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025184747.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025185110.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025185412.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025185631.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025190524.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025190955.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025191618.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025193307.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025194058.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025194422.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025195322.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025200151.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025201123.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025201731.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025202836.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231025203210.png">
+<meta property="article:published_time" content="2023-10-23T11:56:00.000Z">
+<meta property="article:modified_time" content="2023-10-25T12:57:22.513Z">
+<meta property="article:author" content="porridge42">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="人工智能">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231024092330.png">
+
+<link rel="canonical" href="http://example.com/2023/10/23/Matplotlib/P1_Matplotlib%E8%B6%85%E7%BA%A7%E5%A4%A7%E5%90%88%E9%9B%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>P1_Matplotlib超级大合集 | NanBlog 稀饭目标</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">NanBlog 稀饭目标</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-fa fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/23/Matplotlib/P1_Matplotlib%E8%B6%85%E7%BA%A7%E5%A4%A7%E5%90%88%E9%9B%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          P1_Matplotlib超级大合集
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-10-23 19:56:00" itemprop="dateCreated datePublished" datetime="2023-10-23T19:56:00+08:00">2023-10-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-25 20:57:22" itemprop="dateModified" datetime="2023-10-25T20:57:22+08:00">2023-10-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Matplotlib/" itemprop="url" rel="index"><span itemprop="name">Matplotlib</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="绘制x点和y点"><a href="#绘制x点和y点" class="headerlink" title="绘制x点和y点"></a>绘制x点和y点</h2><ul>
+<li>使用 plt.plot 函数，传入两个点的坐标默认绘制一条线<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在图中从(1, 3)到(8, 10)画一条线</span></span><br><span class="line">xpoints = np.array([<span class="number">1</span>, <span class="number">3</span>])</span><br><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(xpoints, ypoints)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024092330.png"></li>
+</ul>
+<h3 id="无线绘图："><a href="#无线绘图：" class="headerlink" title="无线绘图："></a>无线绘图：</h3><ul>
+<li>仅绘制标记，使用快捷字符号参数’o’<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在图中绘制两个点，一个位置在(1, 3),一个位置在(8, 10)</span></span><br><span class="line">plt.plot(xpoints, ypoints, <span class="string">&#x27;o&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024091656.png"></li>
+</ul>
+<h3 id="多点："><a href="#多点：" class="headerlink" title="多点："></a>多点：</h3><ul>
+<li>根据需要绘制任意数量的点，只要确保两个轴上的点数相同即可<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在图中画一条线，从位置(1, 3)到(2, 8)然后到(6, 1)最后到为止(8, 10)</span></span><br><span class="line">xpoints = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">8</span>])</span><br><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(xpoints, ypoints)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024092753.png"></li>
+</ul>
+<h3 id="默认x点"><a href="#默认x点" class="headerlink" title="默认x点:"></a>默认x点:</h3><ul>
+<li>如果不指定x轴上的点，x轴坐标将会使用默认值0,1,2,3…..<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">5</span>, <span class="number">7</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(ypoints)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024093203.png"></li>
+</ul>
+<h2 id="标记"><a href="#标记" class="headerlink" title="标记"></a>标记</h2><ul>
+<li>使用标记参数 maker ,来指定标记强调每个点：<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(ypoints, marker = <span class="string">&#x27;o&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024093630.png"><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用星星标记</span></span><br><span class="line">plt.plot(ypoints, marker = <span class="string">&#x27;*&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024093823.png"></li>
+</ul>
+<h3 id="可使用的字符参考："><a href="#可使用的字符参考：" class="headerlink" title="可使用的字符参考："></a>可使用的字符参考：</h3><ul>
+<li>标记参考：<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024093936.png"></li>
+<li>线参考:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024094100.png"></li>
+<li>颜色参考：<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024094151.png"></li>
+</ul>
+<h3 id="格式化字符串fmt："><a href="#格式化字符串fmt：" class="headerlink" title="格式化字符串fmt："></a>格式化字符串fmt：</h3><ul>
+<li>使用快捷字符号参数来指定标记</li>
+<li>此参数也称为fmt，使用以下语法来编写：<br>marker,line,color<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 点标记使用圆，线标记使用虚线，颜色标记使用红色</span></span><br><span class="line">plt.plot(ypoints, <span class="string">&#x27;o:r&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024094748.png"></li>
+</ul>
+<h3 id="标记尺寸："><a href="#标记尺寸：" class="headerlink" title="标记尺寸："></a>标记尺寸：</h3><ul>
+<li>使用markersize 或者 ms 来设置标记的大小：<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(ypoints, marker = <span class="string">&#x27;o&#x27;</span>, ms = <span class="number">20</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024100826.png"></li>
+</ul>
+<h3 id="标记颜色："><a href="#标记颜色：" class="headerlink" title="标记颜色："></a>标记颜色：</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用关键字参数 markeredgecolor 或 mec 来设置标记边缘的颜色：</span></span><br><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(ypoints, marker = <span class="string">&#x27;o&#x27;</span>, ms = <span class="number">20</span>, mec = <span class="string">&#x27;r&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024110847.png"></p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关键字参数 markerfacecolor 或较短的 mfc 来设置标记边缘内的颜色：</span></span><br><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(ypoints, marker = <span class="string">&#x27;o&#x27;</span>, ms = <span class="number">20</span>, mfc = <span class="string">&#x27;r&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024111052.png"></p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 同时设置边缘与标记边缘内的颜色</span></span><br><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 除了可以使用标记字符号表示颜色，也可是使用十六进制颜色编码或颜色名</span></span><br><span class="line">plt.plot(ypoints, marker = <span class="string">&#x27;o&#x27;</span>, ms = <span class="number">20</span>, mec = <span class="string">&#x27;#4CAF50&#x27;</span>, mfc = <span class="string">&#x27;hotpink&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024111615.png"></p>
+<h2 id="线条"><a href="#线条" class="headerlink" title="线条"></a>线条</h2><h3 id="线型："><a href="#线型：" class="headerlink" title="线型："></a>线型：</h3><ul>
+<li>使用关键字参数 linestyle 或者 ls 来更改绘制线的样式：<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置线型为点虚线</span></span><br><span class="line">plt = plot(ypoints, linestyle = <span class="string">&#x27;dotted&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024143205.png"></li>
+</ul>
+<h3 id="线型更短的语法："><a href="#线型更短的语法：" class="headerlink" title="线型更短的语法："></a>线型更短的语法：</h3><ul>
+<li>线条原始可以用更短的语法编写：<ul>
+<li>linestyle 可以写成 ls</li>
+<li>dotted 可以写成 :</li>
+<li>dashed 可以写成 –<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(ypoints, ls = <span class="string">&#x27;:&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="线条颜色："><a href="#线条颜色：" class="headerlink" title="线条颜色："></a>线条颜色：</h3><ul>
+<li>使用关键字参数 color 或 c 来设置线条的颜色：<ul>
+<li>可以使用快捷字符码也可以使用十六进制或颜色名<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置线条颜色为红色（快捷字符码&#x27;r&#x27;）</span></span><br><span class="line">plt.plot(ypoints, color = <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">plt.show</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024143845.png"></li>
+</ul>
+</li>
+</ul>
+<h3 id="线宽度："><a href="#线宽度：" class="headerlink" title="线宽度："></a>线宽度：</h3><ul>
+<li>使用关键字参数 linewidth 或 lw 来更改线条的宽度<ul>
+<li>参数是一个浮点数，单位为磅<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(ypoints, lw = <span class="string">&#x27;20.5&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024144627.png"></li>
+</ul>
+</li>
+</ul>
+<h3 id="多行："><a href="#多行：" class="headerlink" title="多行："></a>多行：</h3><ul>
+<li>通过简单地添加更多 plt.plot() 函数来绘制任意数量的线：<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自定义两个y轴轴数组</span></span><br><span class="line">y1 = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line">y2 = np.array([<span class="number">6</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">11</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用默认x坐标绘出两条线</span></span><br><span class="line">plt.plot(y1)</span><br><span class="line">plt.plot(y2)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024150627.png"></li>
+<li>还可以同时添加每条线的xy坐标，只需要使用一个函数，将xy坐标成对写入就可以<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加x轴坐标数组（同默认坐标）</span></span><br><span class="line">x1 = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y1 = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line">x2 = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y2 = np.array([<span class="number">6</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">11</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 同时传入x,y轴的参数</span></span><br><span class="line">plt.plot(x1, y1, x2, y2)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+(图像同上)</li>
+</ul>
+<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><h3 id="为绘图创建标签："><a href="#为绘图创建标签：" class="headerlink" title="为绘图创建标签："></a>为绘图创建标签：</h3><ul>
+<li>使用 xlabel() 和 ylabel() 函数为x轴与y轴设置标签<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="number">80</span>, <span class="number">85</span>, <span class="number">90</span>, <span class="number">95</span>, <span class="number">100</span>, <span class="number">105</span>, <span class="number">110</span>, <span class="number">115</span>, <span class="number">120</span>, <span class="number">125</span>])</span><br><span class="line">y = np.array([<span class="number">240</span>, <span class="number">250</span>, <span class="number">260</span>, <span class="number">270</span>, <span class="number">280</span>, <span class="number">290</span>, <span class="number">300</span>, <span class="number">310</span>, <span class="number">320</span>, <span class="number">330</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加x轴与y轴标题</span></span><br><span class="line">plt.xlabel(<span class="string">&quot;平均脉搏&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;卡路里消耗量&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024161503.png"></li>
+</ul>
+<h3 id="为绘图创建标题："><a href="#为绘图创建标题：" class="headerlink" title="为绘图创建标题："></a>为绘图创建标题：</h3><ul>
+<li>使用 title() 函数为绘图设置标题<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">80</span>, <span class="number">85</span>, <span class="number">90</span>, <span class="number">95</span>, <span class="number">100</span>, <span class="number">105</span>, <span class="number">110</span>, <span class="number">115</span>, <span class="number">120</span>, <span class="number">125</span>])</span><br><span class="line">y = np.array([<span class="number">240</span>, <span class="number">250</span>, <span class="number">260</span>, <span class="number">270</span>, <span class="number">280</span>, <span class="number">290</span>, <span class="number">300</span>, <span class="number">310</span>, <span class="number">320</span>, <span class="number">330</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># title()函数添加整图标题</span></span><br><span class="line">plt.title(<span class="string">&quot;运动手表数据&quot;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&quot;平均脉搏&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;卡路里消耗量&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024162017.png"></li>
+</ul>
+<h3 id="设置标题和标签的字体属性："><a href="#设置标题和标签的字体属性：" class="headerlink" title="设置标题和标签的字体属性："></a>设置标题和标签的字体属性：</h3><ul>
+<li>使用 xlabel()、ylabel() 和 title() 中的 fontdict 参数来设置标题和标签的字体属性。<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">80</span>, <span class="number">85</span>, <span class="number">90</span>, <span class="number">95</span>, <span class="number">100</span>, <span class="number">105</span>, <span class="number">110</span>, <span class="number">115</span>, <span class="number">120</span>, <span class="number">125</span>])</span><br><span class="line">y = np.array([<span class="number">240</span>, <span class="number">250</span>, <span class="number">260</span>, <span class="number">270</span>, <span class="number">280</span>, <span class="number">290</span>, <span class="number">300</span>, <span class="number">310</span>, <span class="number">320</span>, <span class="number">330</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自定义字体参数font1, font2</span></span><br><span class="line">font1 = &#123;<span class="string">&#x27;family&#x27;</span>:<span class="string">&#x27;serif&#x27;</span>, <span class="string">&#x27;color&#x27;</span>:<span class="string">&#x27;blue&#x27;</span>, <span class="string">&#x27;size&#x27;</span>:<span class="number">20</span>&#125;</span><br><span class="line">font2 = &#123;<span class="string">&#x27;family&#x27;</span>:<span class="string">&#x27;serif&#x27;</span>, <span class="string">&#x27;color&#x27;</span>:<span class="string">&#x27;darkred&#x27;</span>, <span class="string">&#x27;size&#x27;</span>:<span class="number">15</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用fontdict参数指定字体</span></span><br><span class="line">plt.title(<span class="string">&quot;运动手表数据&quot;</span>, fontdict = font1)</span><br><span class="line">plt.xlabel(<span class="string">&quot;平均脉搏&quot;</span>, fontdict = font2)</span><br><span class="line">plt.ylabel(<span class="string">&quot;卡路里消耗量&quot;</span>, fontdict = font2)</span><br><span class="line"></span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024203223.png"><br>（字体原因没有显示出来）</li>
+</ul>
+<h3 id="定位标题："><a href="#定位标题：" class="headerlink" title="定位标题："></a>定位标题：</h3><ul>
+<li>使用 title() 函数中的 loc 参数来定位标题的位置</li>
+<li>合法值是：”left”、”right” 和 “center”<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">80</span>, <span class="number">85</span>, <span class="number">90</span>, <span class="number">95</span>, <span class="number">100</span>, <span class="number">105</span>, <span class="number">110</span>, <span class="number">115</span>, <span class="number">120</span>, <span class="number">125</span>])</span><br><span class="line">y = np.array([<span class="number">240</span>, <span class="number">250</span>, <span class="number">260</span>, <span class="number">270</span>, <span class="number">280</span>, <span class="number">290</span>, <span class="number">300</span>, <span class="number">310</span>, <span class="number">320</span>, <span class="number">330</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置标题位置为左侧</span></span><br><span class="line">plt.title(<span class="string">&quot;运动手表数据&quot;</span>, loc = <span class="string">&quot;left&quot;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&quot;平均脉搏&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;卡路里消耗量&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.plot(x, y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024204431.png"></li>
+</ul>
+<h2 id="网格线"><a href="#网格线" class="headerlink" title="网格线"></a>网格线</h2><h3 id="向绘图中添加网格线："><a href="#向绘图中添加网格线：" class="headerlink" title="向绘图中添加网格线："></a>向绘图中添加网格线：</h3><ul>
+<li>使用 grid() 函数将网格线添加到绘图中<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="number">80</span>, <span class="number">85</span>, <span class="number">90</span>, <span class="number">95</span>, <span class="number">100</span>, <span class="number">105</span>, <span class="number">110</span>, <span class="number">115</span>, <span class="number">120</span>, <span class="number">125</span>])</span><br><span class="line">y = np.array([<span class="number">240</span>, <span class="number">250</span>, <span class="number">260</span>, <span class="number">270</span>, <span class="number">280</span>, <span class="number">290</span>, <span class="number">300</span>, <span class="number">310</span>, <span class="number">320</span>, <span class="number">330</span>])</span><br><span class="line"></span><br><span class="line">plt.title(<span class="string">&quot;运动手表数据&quot;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&quot;平均脉搏&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;卡路里消耗量&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># grid()函数显示网格</span></span><br><span class="line">plt.grid()</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024205434.png"></li>
+</ul>
+<h3 id="指定要显示的网格线："><a href="#指定要显示的网格线：" class="headerlink" title="指定要显示的网格线："></a>指定要显示的网格线：</h3><ul>
+<li>使用 grid() 函数中的轴参数来指定要显示的网格线</li>
+<li>合法值为：”x”、”y” 和 “both” ,默认值为 “both”<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">80</span>, <span class="number">85</span>, <span class="number">90</span>, <span class="number">95</span>, <span class="number">100</span>, <span class="number">105</span>, <span class="number">110</span>, <span class="number">115</span>, <span class="number">120</span>, <span class="number">125</span>])</span><br><span class="line">y = np.array([<span class="number">240</span>, <span class="number">250</span>, <span class="number">260</span>, <span class="number">270</span>, <span class="number">280</span>, <span class="number">290</span>, <span class="number">300</span>, <span class="number">310</span>, <span class="number">320</span>, <span class="number">330</span>])</span><br><span class="line"></span><br><span class="line">plt.title(<span class="string">&quot;运动手表数据&quot;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&quot;平均脉搏&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;卡路里消耗量&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只显示x轴网格</span></span><br><span class="line">plt.grid(axis = <span class="string">&#x27;x&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024205736.png"></li>
+</ul>
+<h3 id="设置网格的线属性："><a href="#设置网格的线属性：" class="headerlink" title="设置网格的线属性："></a>设置网格的线属性：</h3><ul>
+<li>自定义网格线的线条属性<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">80</span>, <span class="number">85</span>, <span class="number">90</span>, <span class="number">95</span>, <span class="number">100</span>, <span class="number">105</span>, <span class="number">110</span>, <span class="number">115</span>, <span class="number">120</span>, <span class="number">125</span>])</span><br><span class="line">y = np.array([<span class="number">240</span>, <span class="number">250</span>, <span class="number">260</span>, <span class="number">270</span>, <span class="number">280</span>, <span class="number">290</span>, <span class="number">300</span>, <span class="number">310</span>, <span class="number">320</span>, <span class="number">330</span>])</span><br><span class="line"></span><br><span class="line">plt.title(<span class="string">&quot;运动手表数据&quot;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&quot;平均脉搏&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;卡路里消耗量&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自定义网格线的属性：颜色为绿色，线型为虚线，宽度为1.5磅</span></span><br><span class="line">plt.grid(color = <span class="string">&#x27;green&#x27;</span>, linestyle = <span class="string">&quot;--&quot;</span>, linewidth = <span class="number">1.5</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024210932.png"></li>
+</ul>
+<h2 id="多图"><a href="#多图" class="headerlink" title="多图"></a>多图</h2><h3 id="subplot显示多个图："><a href="#subplot显示多个图：" class="headerlink" title="subplot显示多个图："></a>subplot显示多个图：</h3><ul>
+<li>使用 subplots() 函数，可以在一张图中绘制多个图:</li>
+<li>参数：subplot(&lt;几行子图&gt;， &lt;几列子图&gt;， &lt;第几张子图&gt;)<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot 1</span></span><br><span class="line">x = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一行两列，第一张</span></span><br><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot 2</span></span><br><span class="line">x = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">y = np.array([<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一行两列，第二章</span></span><br><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024222454.png"></li>
+<li>两行一列示例：<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 两行一列</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># plot1</span></span><br><span class="line">x = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot2</span></span><br><span class="line">x = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y = np.array([<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>])</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024223315.png"></li>
+</ul>
+<h3 id="子图标题："><a href="#子图标题：" class="headerlink" title="子图标题："></a>子图标题：</h3><ul>
+<li>子图也可以使用 title() 函数添加标题<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># plot 1</span></span><br><span class="line">x = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">plt.plot(x, y)</span><br><span class="line">plt.title(<span class="string">&quot;SALES&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot 2</span></span><br><span class="line">x = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">y = np.array([<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>])</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">plt.plot(x, y)</span><br><span class="line">plt.title(<span class="string">&quot;INCOME&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024224041.png"></li>
+</ul>
+<h3 id="超级标题："><a href="#超级标题：" class="headerlink" title="超级标题："></a>超级标题：</h3><ul>
+<li>使用 suptitle() 函数为多张子图添加超级标题<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># plot 1</span></span><br><span class="line">x = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">plt.plot(x, y)</span><br><span class="line">plt.title(<span class="string">&quot;SALES&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot 2</span></span><br><span class="line">x = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">y = np.array([<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>])</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">plt.plot(x, y)</span><br><span class="line">plt.title(<span class="string">&quot;INCOME&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.suptitle(<span class="string">&quot;MY SHOP&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024224323.png"></li>
+</ul>
+<h2 id="散点图"><a href="#散点图" class="headerlink" title="散点图"></a>散点图</h2><h3 id="创建散点图："><a href="#创建散点图：" class="headerlink" title="创建散点图："></a>创建散点图：</h3><ul>
+<li>使用 scatter() 函数会值散点图</li>
+<li>船传入参数需要两个长度相同的数组，一个用作x轴的值，一个用作y轴的值<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="number">5</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">17</span>,<span class="number">2</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">9</span>,<span class="number">6</span>])</span><br><span class="line">y = np.array([<span class="number">98</span>,<span class="number">86</span>,<span class="number">87</span>,<span class="number">88</span>,<span class="number">111</span>,<span class="number">86</span>,<span class="number">103</span>,<span class="number">87</span>,<span class="number">94</span>,<span class="number">78</span>,<span class="number">77</span>,<span class="number">85</span>,<span class="number">86</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建散点图</span></span><br><span class="line">plt.scatter(x, y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025100044.png"></li>
+</ul>
+<h3 id="颜色："><a href="#颜色：" class="headerlink" title="颜色："></a>颜色：</h3><ul>
+<li>使用 color 或 c 参数为每个散点图设置自己的颜色<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">5</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">17</span>,<span class="number">2</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">9</span>,<span class="number">6</span>])</span><br><span class="line">y = np.array([<span class="number">98</span>,<span class="number">86</span>,<span class="number">87</span>,<span class="number">88</span>,<span class="number">111</span>,<span class="number">86</span>,<span class="number">103</span>,<span class="number">87</span>,<span class="number">94</span>,<span class="number">78</span>,<span class="number">77</span>,<span class="number">85</span>,<span class="number">86</span>])</span><br><span class="line"><span class="comment"># 设置为粉色</span></span><br><span class="line">plt.scatter(x, y, color = <span class="string">&#x27;hotpink&#x27;</span>)</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="number">2</span>,<span class="number">2</span>,<span class="number">8</span>,<span class="number">1</span>,<span class="number">15</span>,<span class="number">8</span>,<span class="number">12</span>,<span class="number">9</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">11</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">14</span>,<span class="number">12</span>])</span><br><span class="line">y = np.array([<span class="number">100</span>,<span class="number">105</span>,<span class="number">84</span>,<span class="number">105</span>,<span class="number">90</span>,<span class="number">99</span>,<span class="number">90</span>,<span class="number">95</span>,<span class="number">94</span>,<span class="number">100</span>,<span class="number">79</span>,<span class="number">112</span>,<span class="number">91</span>,<span class="number">80</span>,<span class="number">85</span>])</span><br><span class="line"><span class="comment"># 使用十六进制色码</span></span><br><span class="line">plt.scatter(x, y, color = <span class="string">&#x27;#88c999&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025101231.png"></li>
+</ul>
+<h3 id="为每个点上色："><a href="#为每个点上色：" class="headerlink" title="为每个点上色："></a>为每个点上色：</h3><ul>
+<li>color 参数传入一个数组，可以对分别为每个点上色<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">5</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">17</span>,<span class="number">2</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">9</span>,<span class="number">6</span>])</span><br><span class="line">y = np.array([<span class="number">98</span>,<span class="number">86</span>,<span class="number">87</span>,<span class="number">88</span>,<span class="number">111</span>,<span class="number">86</span>,<span class="number">103</span>,<span class="number">87</span>,<span class="number">94</span>,<span class="number">78</span>,<span class="number">77</span>,<span class="number">85</span>,<span class="number">86</span>])</span><br><span class="line"><span class="comment"># 创建代表颜色的数组 colors</span></span><br><span class="line">colors = np.array([<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>, <span class="string">&quot;yellow&quot;</span>, <span class="string">&quot;pink&quot;</span>, <span class="string">&quot;black&quot;</span>, <span class="string">&quot;orange&quot;</span>, <span class="string">&quot;purple&quot;</span>, <span class="string">&quot;beige&quot;</span>, <span class="string">&quot;brown&quot;</span>, <span class="string">&quot;gray&quot;</span>, <span class="string">&quot;cyan&quot;</span>, <span class="string">&quot;magenta&quot;</span>])</span><br><span class="line"></span><br><span class="line">plt.scatter(x, y, c = colors)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="颜色图："><a href="#颜色图：" class="headerlink" title="颜色图："></a>颜色图：</h3><ul>
+<li>使用 cmap 参数指定颜色图，在使用颜色图的散点图中，此外还需要创建一个 0-100 取值范围内的数组。<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">5</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">17</span>,<span class="number">2</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">9</span>,<span class="number">6</span>])</span><br><span class="line">y = np.array([<span class="number">98</span>,<span class="number">86</span>,<span class="number">87</span>,<span class="number">88</span>,<span class="number">111</span>,<span class="number">86</span>,<span class="number">103</span>,<span class="number">87</span>,<span class="number">94</span>,<span class="number">78</span>,<span class="number">77</span>,<span class="number">85</span>,<span class="number">86</span>])</span><br><span class="line">colors = np.array([<span class="number">0</span>,<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>,<span class="number">40</span>,<span class="number">45</span>,<span class="number">50</span>,<span class="number">55</span>,<span class="number">60</span>,<span class="number">70</span>,<span class="number">80</span>,<span class="number">90</span>,<span class="number">100</span>])</span><br><span class="line"></span><br><span class="line">plt.scatter(x, y, c= colors, cmap=<span class="string">&#x27;viridis&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.colorbar()</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025162244.png"></li>
+</ul>
+<h3 id="尺寸："><a href="#尺寸：" class="headerlink" title="尺寸："></a>尺寸：</h3><ul>
+<li>使用 s 参数更改点的大小</li>
+<li>就像颜色一样，需要确保大小数组的长度与x和y轴的数组长度相同<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">5</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">17</span>,<span class="number">2</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">9</span>,<span class="number">6</span>])</span><br><span class="line">y = np.array([<span class="number">98</span>,<span class="number">86</span>,<span class="number">87</span>,<span class="number">88</span>,<span class="number">111</span>,<span class="number">86</span>,<span class="number">103</span>,<span class="number">87</span>,<span class="number">94</span>,<span class="number">78</span>,<span class="number">77</span>,<span class="number">85</span>,<span class="number">86</span>])</span><br><span class="line"><span class="comment"># 创建代表每个点尺寸的数组</span></span><br><span class="line">sizes = np.array([<span class="number">20</span>,<span class="number">50</span>,<span class="number">100</span>,<span class="number">200</span>,<span class="number">500</span>,<span class="number">1000</span>,<span class="number">60</span>,<span class="number">90</span>,<span class="number">10</span>,<span class="number">300</span>,<span class="number">600</span>,<span class="number">800</span>,<span class="number">75</span>])</span><br><span class="line"></span><br><span class="line">plt.scatter(x, y, s=sizes)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025155849.png"></li>
+</ul>
+<h3 id="透明度："><a href="#透明度：" class="headerlink" title="透明度："></a>透明度：</h3><ul>
+<li>使用 alpha 参数可以调整点的透明度</li>
+<li>就像颜色一样，需要确保大小数组的长度与x和y轴的数组长度相同<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">5</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">17</span>,<span class="number">2</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">9</span>,<span class="number">6</span>])</span><br><span class="line">y = np.array([<span class="number">98</span>,<span class="number">86</span>,<span class="number">87</span>,<span class="number">88</span>,<span class="number">111</span>,<span class="number">86</span>,<span class="number">103</span>,<span class="number">87</span>,<span class="number">94</span>,<span class="number">78</span>,<span class="number">77</span>,<span class="number">85</span>,<span class="number">86</span>])</span><br><span class="line">sizes = np.array([<span class="number">20</span>,<span class="number">50</span>,<span class="number">100</span>,<span class="number">200</span>,<span class="number">500</span>,<span class="number">1000</span>,<span class="number">60</span>,<span class="number">90</span>,<span class="number">10</span>,<span class="number">300</span>,<span class="number">600</span>,<span class="number">800</span>,<span class="number">75</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 直接传入表示透明度的数值</span></span><br><span class="line">plt.scatter(x, y, s=sizes, alpha=<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025155605.png"></li>
+</ul>
+<h3 id="组合颜色大小透明度："><a href="#组合颜色大小透明度：" class="headerlink" title="组合颜色大小透明度："></a>组合颜色大小透明度：</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成随机xy轴坐标</span></span><br><span class="line">x = np.random.randint(<span class="number">100</span>, size=(<span class="number">100</span>))</span><br><span class="line">y = np.random.randint(<span class="number">100</span>, size=(<span class="number">100</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机生成代表颜色与尺寸的参数数组</span></span><br><span class="line">colors = np.random.randint(<span class="number">100</span>, size=(<span class="number">100</span>))</span><br><span class="line">sizes = <span class="number">10</span> * np.random.randint(<span class="number">100</span>, size=(<span class="number">100</span>))</span><br><span class="line"></span><br><span class="line">plt.scatter(x, y, c=colors, s=sizes, alpha=<span class="number">0.5</span>, cmap=<span class="string">&#x27;nipy_spectral&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.colorbar()</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025160812.png"></p>
+<h2 id="柱状图"><a href="#柱状图" class="headerlink" title="柱状图"></a>柱状图</h2><h3 id="创建柱状图："><a href="#创建柱状图：" class="headerlink" title="创建柱状图："></a>创建柱状图：</h3><ul>
+<li>使用 bar() 函数绘制柱状图<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;D&quot;</span>])</span><br><span class="line">y = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.bar(x, y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025184747.png"></li>
+<li>另一种参数设置方法<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = [<span class="string">&quot;APPLES&quot;</span>, <span class="string">&quot;BANANAS&quot;</span>]</span><br><span class="line">y = [<span class="number">400</span>, <span class="number">350</span>]</span><br><span class="line"></span><br><span class="line">plt.bar(x, y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025185110.png"></li>
+</ul>
+<h3 id="水平柱状图："><a href="#水平柱状图：" class="headerlink" title="水平柱状图："></a>水平柱状图：</h3><ul>
+<li>要创建水平形态的柱状图，需使用 barh() 函数<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;D&quot;</span>])</span><br><span class="line">y = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.barh(x, y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025185412.png"></li>
+</ul>
+<h3 id="柱状图颜色："><a href="#柱状图颜色：" class="headerlink" title="柱状图颜色："></a>柱状图颜色：</h3><ul>
+<li>bar( ) 或 barh () 函数，都可以使用 color 参数来设置颜色：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;])</span><br><span class="line">y = np.array([3, 8, 1, 10])</span><br><span class="line"></span><br><span class="line">plt.bar(x, y, color=&quot;red&quot;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025185631.png"></li>
+</ul>
+<h3 id="线条宽度："><a href="#线条宽度：" class="headerlink" title="线条宽度："></a>线条宽度：</h3><ul>
+<li>bar() 函数生成的竖型柱状图要想设置柱状图宽度，可以使用 width 参数<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;D&quot;</span>])</span><br><span class="line">y = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 因为是竖型，所以只能调节宽度值</span></span><br><span class="line">plt.bar(x, y, width=<span class="number">0.1</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025190524.png"></li>
+</ul>
+<h3 id="线条高度："><a href="#线条高度：" class="headerlink" title="线条高度："></a>线条高度：</h3><ul>
+<li>barh() 函数成成的横型柱状图要想设置柱状图高度，可以使用 hight 参数<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;D&quot;</span>])</span><br><span class="line">y = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 因为是横型，所以只能调节高度值</span></span><br><span class="line">plt.barh(x, y, height=<span class="number">0.1</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025190955.png"></li>
+</ul>
+<h2 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h2><h3 id="创建直方图："><a href="#创建直方图：" class="headerlink" title="创建直方图："></a>创建直方图：</h3><ul>
+<li>使用 hist() 函数来创建直方图，参数为一个数字数组<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> py</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机生成一个250个值的数组，中值为170，标准差为10</span></span><br><span class="line">x = np.random.normal(<span class="number">170</span>, <span class="number">10</span>, <span class="number">250</span>)</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"></span><br><span class="line">plt.hist(x)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025191618.png"></li>
+</ul>
+<h2 id="饼图"><a href="#饼图" class="headerlink" title="饼图"></a>饼图</h2><h3 id="创建饼图："><a href="#创建饼图：" class="headerlink" title="创建饼图："></a>创建饼图：</h3><ul>
+<li>使用 pie() 函数创建饼图：<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">y= np.array([<span class="number">35</span>, <span class="number">25</span>, <span class="number">25</span>, <span class="number">15</span>])</span><br><span class="line"></span><br><span class="line">plt.pie(y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025193307.png"></li>
+</ul>
+<h3 id="标签："><a href="#标签：" class="headerlink" title="标签："></a>标签：</h3><ul>
+<li>使用 label 参数为饼图添加标签</li>
+<li>label必须是一个数组，每个楔形都有一个标签<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">y = np.array([<span class="number">35</span>, <span class="number">25</span>, <span class="number">25</span>, <span class="number">15</span>])</span><br><span class="line">mylabels = [<span class="string">&quot;Apples&quot;</span>, <span class="string">&quot;Bananas&quot;</span>, <span class="string">&quot;Cherries&quot;</span>, <span class="string">&quot;Dates&quot;</span>]</span><br><span class="line"></span><br><span class="line">plt.pie(y, labels=mylabels)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025194058.png"></li>
+</ul>
+<h3 id="起始角度："><a href="#起始角度：" class="headerlink" title="起始角度："></a>起始角度：</h3><ul>
+<li>饼图默认起始角位于x轴，若要自定义起始角度可以使用 startangle 参数来设置</li>
+<li>startangle 参数的单位为度，默认值为0度,从x轴正半轴向逆时针计算角度<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025194422.png"><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">y = np.array([<span class="number">35</span>, <span class="number">25</span>, <span class="number">25</span>, <span class="number">15</span>])</span><br><span class="line">mylabels = [<span class="string">&quot;Apples&quot;</span>, <span class="string">&quot;Bananas&quot;</span>, <span class="string">&quot;Cherries&quot;</span>, <span class="string">&quot;Dates&quot;</span>]</span><br><span class="line"></span><br><span class="line">plt.pie(y, labels=mylabels, startangle=<span class="number">90</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025195322.png"></li>
+</ul>
+<h3 id="Explode："><a href="#Explode：" class="headerlink" title="Explode："></a>Explode：</h3><ul>
+<li>使用 explode 参数使饼图其中一个楔子脱离饼图，着重显示</li>
+<li>explode 参数的值为一个数组，每个数组元素对应一个楔子，总数需要相等</li>
+<li>数组中的每个元素为浮点型，表示对应楔子距离圆心有多远<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">y = np.array([<span class="number">35</span>, <span class="number">25</span>, <span class="number">25</span>,<span class="number">15</span>])</span><br><span class="line">mylabels = [<span class="string">&quot;Apples&quot;</span>, <span class="string">&quot;Bananas&quot;</span>, <span class="string">&quot;Cherries&quot;</span>, <span class="string">&quot;Dates&quot;</span>]</span><br><span class="line">myexplode = [<span class="number">0.2</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">plt.pie(y, labels=mylabels, explode=myexplode)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025200151.png"></li>
+</ul>
+<h3 id="阴影："><a href="#阴影：" class="headerlink" title="阴影："></a>阴影：</h3><ul>
+<li>通过 shadow 参数为 True 为饼图添加阴影<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">y = np.array([<span class="number">35</span>, <span class="number">25</span>, <span class="number">25</span>,<span class="number">15</span>])</span><br><span class="line">mylabels = [<span class="string">&quot;Apples&quot;</span>, <span class="string">&quot;Bananas&quot;</span>, <span class="string">&quot;Cherries&quot;</span>, <span class="string">&quot;Dates&quot;</span>]</span><br><span class="line">myexplode = [<span class="number">0.2</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">plt.pie(y, labels=mylabels, explode=myexplode, shadow=<span class="literal">True</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025201123.png"></li>
+</ul>
+<h3 id="颜色：-1"><a href="#颜色：-1" class="headerlink" title="颜色："></a>颜色：</h3><ul>
+<li>使用 colors 参数设置每个楔形的颜色</li>
+<li>如果指定了颜色参数，则必须传入一个数组，对应每个楔形的值<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">y = np.array([<span class="number">35</span>, <span class="number">25</span>, <span class="number">25</span>,<span class="number">15</span>])</span><br><span class="line">mylabels = [<span class="string">&quot;Apples&quot;</span>, <span class="string">&quot;Bananas&quot;</span>, <span class="string">&quot;Cherries&quot;</span>, <span class="string">&quot;Dates&quot;</span>]</span><br><span class="line">mycolors = [<span class="string">&quot;yellow&quot;</span>, <span class="string">&quot;hotpink&quot;</span>, <span class="string">&quot;aqua&quot;</span>, <span class="string">&quot;#4CAF50&quot;</span>]</span><br><span class="line"></span><br><span class="line">plt.pie(y, labels=mylabels, colors=mycolors)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025201731.png"></li>
+</ul>
+<h3 id="图例："><a href="#图例：" class="headerlink" title="图例："></a>图例：</h3><ul>
+<li>使用 legend() 函数为每个楔形添加解释列表<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">y = np.array([<span class="number">35</span>, <span class="number">25</span>, <span class="number">25</span>,<span class="number">15</span>])</span><br><span class="line">mylabels = [<span class="string">&quot;Apples&quot;</span>, <span class="string">&quot;Bananas&quot;</span>, <span class="string">&quot;Cherries&quot;</span>, <span class="string">&quot;Dates&quot;</span>]</span><br><span class="line"></span><br><span class="line">plt.pie(y, labels = mylabels)</span><br><span class="line"></span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025202836.png"></li>
+</ul>
+<h3 id="带标题的图例："><a href="#带标题的图例：" class="headerlink" title="带标题的图例："></a>带标题的图例：</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">y = np.array([<span class="number">35</span>, <span class="number">25</span>, <span class="number">25</span>,<span class="number">15</span>])</span><br><span class="line">mylabels = [<span class="string">&quot;Apples&quot;</span>, <span class="string">&quot;Bananas&quot;</span>, <span class="string">&quot;Cherries&quot;</span>, <span class="string">&quot;Dates&quot;</span>]</span><br><span class="line"></span><br><span class="line">plt.pie(y, labels = mylabels)</span><br><span class="line"></span><br><span class="line">plt,legend(title=<span class="string">&quot;Four Fruite:&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025203210.png"></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag"># 博客</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="tag"># 人工智能</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/10/23/%E5%B7%A5%E5%85%B7/hexo%E7%9A%84%E6%90%AD%E5%BB%BA%E9%85%8D%E7%BD%AE%E4%B8%8E%E9%83%A8%E7%BD%B2%E6%96%B9%E6%B3%95%E5%A4%87%E7%94%A8/" rel="prev" title="hexo的搭建配置与部署方法备用">
+      <i class="fa fa-chevron-left"></i> hexo的搭建配置与部署方法备用
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%98%E5%88%B6x%E7%82%B9%E5%92%8Cy%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">绘制x点和y点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%97%A0%E7%BA%BF%E7%BB%98%E5%9B%BE%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">无线绘图：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E7%82%B9%EF%BC%9A"><span class="nav-number">1.2.</span> <span class="nav-text">多点：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%BB%98%E8%AE%A4x%E7%82%B9"><span class="nav-number">1.3.</span> <span class="nav-text">默认x点:</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0"><span class="nav-number">2.</span> <span class="nav-text">标记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%AF%E4%BD%BF%E7%94%A8%E7%9A%84%E5%AD%97%E7%AC%A6%E5%8F%82%E8%80%83%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">可使用的字符参考：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E5%AD%97%E7%AC%A6%E4%B8%B2fmt%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">格式化字符串fmt：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0%E5%B0%BA%E5%AF%B8%EF%BC%9A"><span class="nav-number">2.3.</span> <span class="nav-text">标记尺寸：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E8%AE%B0%E9%A2%9C%E8%89%B2%EF%BC%9A"><span class="nav-number">2.4.</span> <span class="nav-text">标记颜色：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BA%BF%E6%9D%A1"><span class="nav-number">3.</span> <span class="nav-text">线条</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E5%9E%8B%EF%BC%9A"><span class="nav-number">3.1.</span> <span class="nav-text">线型：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E5%9E%8B%E6%9B%B4%E7%9F%AD%E7%9A%84%E8%AF%AD%E6%B3%95%EF%BC%9A"><span class="nav-number">3.2.</span> <span class="nav-text">线型更短的语法：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%9D%A1%E9%A2%9C%E8%89%B2%EF%BC%9A"><span class="nav-number">3.3.</span> <span class="nav-text">线条颜色：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E5%AE%BD%E5%BA%A6%EF%BC%9A"><span class="nav-number">3.4.</span> <span class="nav-text">线宽度：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%9A%E8%A1%8C%EF%BC%9A"><span class="nav-number">3.5.</span> <span class="nav-text">多行：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE"><span class="nav-number">4.</span> <span class="nav-text">标签</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E7%BB%98%E5%9B%BE%E5%88%9B%E5%BB%BA%E6%A0%87%E7%AD%BE%EF%BC%9A"><span class="nav-number">4.1.</span> <span class="nav-text">为绘图创建标签：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E7%BB%98%E5%9B%BE%E5%88%9B%E5%BB%BA%E6%A0%87%E9%A2%98%EF%BC%9A"><span class="nav-number">4.2.</span> <span class="nav-text">为绘图创建标题：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E6%A0%87%E9%A2%98%E5%92%8C%E6%A0%87%E7%AD%BE%E7%9A%84%E5%AD%97%E4%BD%93%E5%B1%9E%E6%80%A7%EF%BC%9A"><span class="nav-number">4.3.</span> <span class="nav-text">设置标题和标签的字体属性：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%BD%8D%E6%A0%87%E9%A2%98%EF%BC%9A"><span class="nav-number">4.4.</span> <span class="nav-text">定位标题：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%91%E6%A0%BC%E7%BA%BF"><span class="nav-number">5.</span> <span class="nav-text">网格线</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%90%91%E7%BB%98%E5%9B%BE%E4%B8%AD%E6%B7%BB%E5%8A%A0%E7%BD%91%E6%A0%BC%E7%BA%BF%EF%BC%9A"><span class="nav-number">5.1.</span> <span class="nav-text">向绘图中添加网格线：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8C%87%E5%AE%9A%E8%A6%81%E6%98%BE%E7%A4%BA%E7%9A%84%E7%BD%91%E6%A0%BC%E7%BA%BF%EF%BC%9A"><span class="nav-number">5.2.</span> <span class="nav-text">指定要显示的网格线：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%BE%E7%BD%AE%E7%BD%91%E6%A0%BC%E7%9A%84%E7%BA%BF%E5%B1%9E%E6%80%A7%EF%BC%9A"><span class="nav-number">5.3.</span> <span class="nav-text">设置网格的线属性：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%9A%E5%9B%BE"><span class="nav-number">6.</span> <span class="nav-text">多图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#subplot%E6%98%BE%E7%A4%BA%E5%A4%9A%E4%B8%AA%E5%9B%BE%EF%BC%9A"><span class="nav-number">6.1.</span> <span class="nav-text">subplot显示多个图：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%90%E5%9B%BE%E6%A0%87%E9%A2%98%EF%BC%9A"><span class="nav-number">6.2.</span> <span class="nav-text">子图标题：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B6%85%E7%BA%A7%E6%A0%87%E9%A2%98%EF%BC%9A"><span class="nav-number">6.3.</span> <span class="nav-text">超级标题：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%95%A3%E7%82%B9%E5%9B%BE"><span class="nav-number">7.</span> <span class="nav-text">散点图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%95%A3%E7%82%B9%E5%9B%BE%EF%BC%9A"><span class="nav-number">7.1.</span> <span class="nav-text">创建散点图：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2%EF%BC%9A"><span class="nav-number">7.2.</span> <span class="nav-text">颜色：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E6%AF%8F%E4%B8%AA%E7%82%B9%E4%B8%8A%E8%89%B2%EF%BC%9A"><span class="nav-number">7.3.</span> <span class="nav-text">为每个点上色：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2%E5%9B%BE%EF%BC%9A"><span class="nav-number">7.4.</span> <span class="nav-text">颜色图：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B0%BA%E5%AF%B8%EF%BC%9A"><span class="nav-number">7.5.</span> <span class="nav-text">尺寸：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%8F%E6%98%8E%E5%BA%A6%EF%BC%9A"><span class="nav-number">7.6.</span> <span class="nav-text">透明度：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E5%90%88%E9%A2%9C%E8%89%B2%E5%A4%A7%E5%B0%8F%E9%80%8F%E6%98%8E%E5%BA%A6%EF%BC%9A"><span class="nav-number">7.7.</span> <span class="nav-text">组合颜色大小透明度：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%B1%E7%8A%B6%E5%9B%BE"><span class="nav-number">8.</span> <span class="nav-text">柱状图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%9F%B1%E7%8A%B6%E5%9B%BE%EF%BC%9A"><span class="nav-number">8.1.</span> <span class="nav-text">创建柱状图：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B0%B4%E5%B9%B3%E6%9F%B1%E7%8A%B6%E5%9B%BE%EF%BC%9A"><span class="nav-number">8.2.</span> <span class="nav-text">水平柱状图：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9F%B1%E7%8A%B6%E5%9B%BE%E9%A2%9C%E8%89%B2%EF%BC%9A"><span class="nav-number">8.3.</span> <span class="nav-text">柱状图颜色：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%9D%A1%E5%AE%BD%E5%BA%A6%EF%BC%9A"><span class="nav-number">8.4.</span> <span class="nav-text">线条宽度：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BA%BF%E6%9D%A1%E9%AB%98%E5%BA%A6%EF%BC%9A"><span class="nav-number">8.5.</span> <span class="nav-text">线条高度：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B4%E6%96%B9%E5%9B%BE"><span class="nav-number">9.</span> <span class="nav-text">直方图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E7%9B%B4%E6%96%B9%E5%9B%BE%EF%BC%9A"><span class="nav-number">9.1.</span> <span class="nav-text">创建直方图：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A5%BC%E5%9B%BE"><span class="nav-number">10.</span> <span class="nav-text">饼图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E9%A5%BC%E5%9B%BE%EF%BC%9A"><span class="nav-number">10.1.</span> <span class="nav-text">创建饼图：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%87%E7%AD%BE%EF%BC%9A"><span class="nav-number">10.2.</span> <span class="nav-text">标签：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B5%B7%E5%A7%8B%E8%A7%92%E5%BA%A6%EF%BC%9A"><span class="nav-number">10.3.</span> <span class="nav-text">起始角度：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Explode%EF%BC%9A"><span class="nav-number">10.4.</span> <span class="nav-text">Explode：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%98%B4%E5%BD%B1%EF%BC%9A"><span class="nav-number">10.5.</span> <span class="nav-text">阴影：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%A2%9C%E8%89%B2%EF%BC%9A-1"><span class="nav-number">10.6.</span> <span class="nav-text">颜色：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%BE%E4%BE%8B%EF%BC%9A"><span class="nav-number">10.7.</span> <span class="nav-text">图例：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%A6%E6%A0%87%E9%A2%98%E7%9A%84%E5%9B%BE%E4%BE%8B%EF%BC%9A"><span class="nav-number">10.8.</span> <span class="nav-text">带标题的图例：</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="porridge42"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">porridge42</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">128</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/porridge42" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;porridge42" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">porridge42</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
