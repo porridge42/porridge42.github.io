@@ -183,6 +183,725 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/30/OpenCV/20_%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%AE%97%E5%AD%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/30/OpenCV/20_%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%AE%97%E5%AD%90/" class="post-title-link" itemprop="url">P20_拉普拉斯算子</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-10-30 10:32:00 / 修改时间：13:38:00" itemprop="dateCreated datePublished" datetime="2023-10-30T10:32:00+08:00">2023-10-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="拉普拉斯算子"><a href="#拉普拉斯算子" class="headerlink" title="拉普拉斯算子"></a>拉普拉斯算子</h2><ul>
+<li><p>索贝尔算子是模拟一阶求导，导数越大的地方说明变化越剧烈，越有可能是边缘.</p>
+<ul>
+<li><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231030103420.png"></li>
+</ul>
+</li>
+<li><p>那如果继续对$f’(t)$求导呢？</p>
+<ul>
+<li><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231030103722.png"></li>
+</ul>
+</li>
+<li><p>我们可以发现“边缘处的二阶导数&#x3D;0”，可以利用这一特性去寻找图像的边缘.<strong>注意有一个问题，二阶求导的0的位置也可能是无意义的位置.</strong></p>
+</li>
+<li><p><strong>拉普拉斯算子的推导过程：</strong></p>
+<ul>
+<li><p>以x方向求解为例：<br>一阶差分：$f’(x) &#x3D; f(x) - f(x-1)$<br>二阶差分：$f’’(x) &#x3D; f’(x+1) - f’(x) &#x3D; (f(x+1)-f(x))-(f(x)-f(x-1))$<br>化简后：$f’’(y)&#x3D;(f(y-1)-2f(y))+f(y+1)$</p>
+<p>把x,y方向的梯度叠加在一起.<br>$f’’(x, y) &#x3D; f’_x(x, y)+f’_y(x,y)$<br>$f’’(x, y) &#x3D; f(x-1, y)-2f(x, y)+f(x+1,y)+f(x,y-1)-2f(x,y)+f(x, y+1)$<br>$f’’(x, y) &#x3D; f(x-1, y)+f(x+1,y)+f(x,y-1)+f(x,y+1)-4f(x,y)$</p>
+<p>这个等式可以写成:<br>$$<br>f’’(x,y) &#x3D; \begin{bmatrix}<br>0 &amp; 1 &amp; 1 \<br>1 &amp; -4 &amp; 1 \<br>0 &amp; 1 &amp; 0 \end{bmatrix}<br>\odot<br>\begin{bmatrix}<br>f(x-1, y-1) &amp; f(x, y-1) &amp; f(x+1, y-1) \<br>f(x-1, y) &amp; f(x, y) &amp; f(x + 1, y) \<br>f(x-1, y+1) &amp; f(x,y+1) &amp; f(x+1, y+1) \end{bmatrix}<br>$$<br>这样就得到了拉普拉斯算子的卷积核即卷积模板</p>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/30/OpenCV/19_%E6%B2%99%E5%B0%94(Scharr)%E7%AE%97%E5%AD%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/30/OpenCV/19_%E6%B2%99%E5%B0%94(Scharr)%E7%AE%97%E5%AD%90/" class="post-title-link" itemprop="url">P19_沙尔(Scharr)算子</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-10-30 10:14:00 / 修改时间：10:32:45" itemprop="dateCreated datePublished" datetime="2023-10-30T10:14:00+08:00">2023-10-30</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="沙尔-Scharr-算子"><a href="#沙尔-Scharr-算子" class="headerlink" title="沙尔(Scharr)算子"></a>沙尔(Scharr)算子</h2><ul>
+<li>Scharr(src, ddepth, dx, dy[, dst[, scale[, delta[, borderType]]]])</li>
+<li>当内核大小为3时，以上Sobel内核可能产生比较明显的误差（毕竟Sobel算子只是求取了导数的近似值）。为了解决这一问题，OpenCV提供了Scharr函数，但该函数仅作用于大小为3的内核。该函数的运算与Sobel函数一样快，但结果更加精确.</li>
+<li>Scharr算子和Sobel很类似，只不过使用了不同的Kernel值，放大了像素变化的情况：<ul>
+<li><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231030102046.png"></li>
+</ul>
+</li>
+<li>Scharr算子的特点：<ul>
+<li>只支持3*3大小的kernel，所以没有kernel参数.</li>
+<li>只能求x方向或y方向的边缘.</li>
+<li>把Sobel算子的ksize设为-1就是Scharr算子.</li>
+<li>Scharr算子擅长寻找细小的边缘，一般用的较少.<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./avatar2.png&#x27;</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分别生成按x轴的边缘检测结果和按y轴的边缘检测结果</span></span><br><span class="line">dx = cv2.Scharr(img, cv2.CV_64F, dx=<span class="number">1</span>, dy=<span class="number">0</span>)</span><br><span class="line">dy = cv2.Scharr(img, cv2.CV_64F, dx=<span class="number">0</span>, dy=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用add()函数将两张图合成一张</span></span><br><span class="line">dst = cv2.add(dx, dy)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, dst)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231030102925.png"></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/29/OpenCV/18_%E7%B4%A2%E8%B4%9D%E5%B0%94(sobel)%E7%AE%97%E5%AD%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/29/OpenCV/18_%E7%B4%A2%E8%B4%9D%E5%B0%94(sobel)%E7%AE%97%E5%AD%90/" class="post-title-link" itemprop="url">P18_索贝尔(sobel)算子</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-10-29 20:07:00" itemprop="dateCreated datePublished" datetime="2023-10-29T20:07:00+08:00">2023-10-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-30 10:28:17" itemprop="dateModified" datetime="2023-10-30T10:28:17+08:00">2023-10-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="索贝尔-sobel-算子"><a href="#索贝尔-sobel-算子" class="headerlink" title="索贝尔(sobel)算子"></a>索贝尔(sobel)算子</h2><ul>
+<li>前面讲的各种滤波主要功能都是去除噪声，这样的滤波统称为高通滤波；而接下里要将的各种算子，主要是用来寻找边缘，统称为低通滤波.</li>
+<li>边缘是像素值发生跃迁的位置，是图像的显著特征之一，在图像特征提取，对象检测，模式识别等方面都有重要的作用.</li>
+<li>人眼如何识别边缘？<ul>
+<li>比如有一幅图，图里面有一条线，左边很亮，右边很暗，那人眼就容易识别这条线作为边缘.也就是像素的灰度值快速变化的地方.</li>
+</ul>
+</li>
+<li>sobel算子对于图像求一阶导数。一阶导数越大，说明像素在该方向的变化越大，边缘信号越强。</li>
+<li>因为图像的灰度值都是离散的数字，sobel算子采用离散差分算子计算图像像素点值的近似梯度.</li>
+<li>图像是二维的，即沿着宽度&#x2F;高度两个方向.</li>
+<li>我们使用两个卷积核对原图像进行处理：<ul>
+<li>水平方向<ul>
+<li><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231029202144.png"></li>
+</ul>
+</li>
+<li>垂直方向<ul>
+<li><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231029202211.png"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>这样，我们就得到了两个新的矩阵，分别反映了每一点像素在水平方向的亮度变化情况和在垂直方向上的亮度变化情况.</li>
+<li>综合考虑这两个反向的变化，我们使用以下公式反应某个像素的梯度变化情况.<br>$$<br>G &#x3D; \sqrt{G_x^2 + G_y^2}<br>$$</li>
+<li>有时候为了简单起见，也直接用绝对值相加替代：$G &#x3D; |G_x|+|G_y|$<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./shudu.png&#x27;</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 分别生成按x轴的边缘检测结果和按y轴的边缘检测结果</span></span><br><span class="line"><span class="comment"># sobel算子必须分开计算x轴，y轴，否则效果很差</span></span><br><span class="line">dx = cv2.Sobel(img, cv2.CV_64F, dx=<span class="number">1</span>, dy=<span class="number">0</span>, ksize=<span class="number">5</span>)</span><br><span class="line">dy = cv2.Sobel(img, cv2.CV_64F, dx=<span class="number">0</span>, dy=<span class="number">1</span>, ksize=<span class="number">5</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用add()函数将两张图合成一张</span></span><br><span class="line">dst = cv2.add(dx, dy)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, dst)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231030100303.png"></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/29/OpenCV/17_%E5%8F%8C%E8%BE%B9%E6%BB%A4%E6%B3%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/29/OpenCV/17_%E5%8F%8C%E8%BE%B9%E6%BB%A4%E6%B3%A2/" class="post-title-link" itemprop="url">P17_双边滤波</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-10-29 19:44:00 / 修改时间：20:06:29" itemprop="dateCreated datePublished" datetime="2023-10-29T19:44:00+08:00">2023-10-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="双边滤波"><a href="#双边滤波" class="headerlink" title="双边滤波"></a>双边滤波</h2><ul>
+<li>双边滤波对于图像的边缘信息能够更好的保存；其原理为一个空间距离相关的高斯函数与一个灰度距离相关的高斯函数相乘.<ul>
+<li>空间距离：值得是当前点与中心点的欧氏距离.</li>
+<li>灰度距离：值得是当前点与中心点灰度的差的绝对值.</li>
+</ul>
+</li>
+<li>双边滤波本质上还是高斯滤波，双边滤波和高斯滤波不同搞得就是：双边滤波既利用了位置信息又利用了像素信息来定义滤波窗口的权重。而高斯滤波只占用了位置信息。</li>
+<li>双边滤波可以保留边缘，同时可以对边缘内的区域进行平滑处理.</li>
+<li>双边滤波的作用就相当于做了美颜.<ul>
+<li>bilateralFilteer(src, d, sigmaColor, sigmaSpace[, dst[, borderType]])<ul>
+<li>sigmaColor 是计算像素信息使用的sigma</li>
+<li>sigmaSpace 是计算空间信息使用的sigma<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./avatar1.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 双边滤波</span></span><br><span class="line">dst = cv2.bilateralFilter(img, <span class="number">7</span>, sigmaColor=<span class="number">20</span>, sigmaSpace=<span class="number">50</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, np.hstack((img, dst)))</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231029200323.png"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/29/OpenCV/16_%E4%B8%AD%E5%80%BC%E6%BB%A4%E6%B3%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/29/OpenCV/16_%E4%B8%AD%E5%80%BC%E6%BB%A4%E6%B3%A2/" class="post-title-link" itemprop="url">P16_中值滤波</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-10-29 19:20:00 / 修改时间：19:44:18" itemprop="dateCreated datePublished" datetime="2023-10-29T19:20:00+08:00">2023-10-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="中值滤波"><a href="#中值滤波" class="headerlink" title="中值滤波"></a>中值滤波</h2><ul>
+<li>中值滤波的原理非常简单，假设有一个数组[1,5,5,6,7,8,9],取其中的中间值（即中位数），也就是6作为卷积后的结果即可.中值滤波对胡椒噪音（也叫椒盐噪音）效果明显.</li>
+<li>medianBlur(src, ksize[, dst])</li>
+<li><strong>中值滤波的ksize参数为一个整数，若传入元组会报错</strong><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./avatar1_sp.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 中值滤波</span></span><br><span class="line">dst = cv2.medianBlur(img, <span class="number">3</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, np.hstack((img, dst)))</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231029193721.png"></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/29/OpenCV/15_%E9%AB%98%E6%96%AF%E6%BB%A4%E6%B3%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/29/OpenCV/15_%E9%AB%98%E6%96%AF%E6%BB%A4%E6%B3%A2/" class="post-title-link" itemprop="url">P15_高斯滤波</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-10-29 18:51:00 / 修改时间：19:20:15" itemprop="dateCreated datePublished" datetime="2023-10-29T18:51:00+08:00">2023-10-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="高斯滤波"><a href="#高斯滤波" class="headerlink" title="高斯滤波"></a>高斯滤波</h2><ul>
+<li>高斯函数：高斯函数实在符合高斯分布（也叫正态分布）的数据的概率密度函数</li>
+<li>高斯函数的特点是以x轴某一点（这一点称为均值）为对称轴，越靠近中心数据发生的概率越高，最终形成一个两边平缓，中间陡峭的钟型（有地方称为帽子）的图形.</li>
+<li>高斯函数的一般形式：<ul>
+<li><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231029185645.png"></li>
+</ul>
+</li>
+<li>高斯滤波就是使用符合高斯分布的卷积核对图片进行卷积操作，所以高斯滤波的重点就是如何计算符合高斯分布的卷积核，即高斯模板.</li>
+<li>假定中心点的坐标是(0, 0)，那么取距离它最近的8个坐标，为了计算，需要设定$\sigma$的值.假定$\sigma$&#x3D;1.5，则模糊半径为1的高斯模板如下：<ul>
+<li><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231029190505.png"></li>
+</ul>
+</li>
+<li>通过高斯函数计算出来的是概率密度函数，所以需要确保这九个点加起来为1，这9个点的权重总和等于0.4787147.因此上面9个值还要分别除以0.4787147，得到最终的高斯模板.</li>
+<li>注：有些整数高斯模板是在归一化后的高斯模板的基础上每个数除以左上角的值，然后取整.</li>
+<li>有了卷积核，计算高斯滤波就简单了.假设现有9个像素点，灰度值(0-255)的高斯滤波计算如下：<ul>
+<li><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231029191001.png"></li>
+</ul>
+</li>
+<li>将这9个值加起来，就是中心点的高斯滤波的值.对所有点重复这个过程，就得到了高斯模糊后的图像.</li>
+<li>GaussianBlur(src, ksize, sigmaX[, dst[, sigmaY[, borderType]]])<ul>
+<li><strong>kernel</strong> 高斯卷积核的大小</li>
+<li><strong>sigmaX</strong> X轴的标准差</li>
+<li><strong>sigmaY</strong> Y轴的保准差，默认值为0，这是sigmaY &#x3D; sigmaX</li>
+<li>如果没有指定sigma值，会分别从ksize的宽度核高度中计算sigma.</li>
+</ul>
+</li>
+<li>选择不同的sigma值会得到不同的平滑效果，sigma越大，平滑的效果越明显.<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./avatar1.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line">dst = cv2.GaussianBlur(img, (<span class="number">5</span>, <span class="number">5</span>), sigmaX=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, np.hstack((img, dst)))</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.deatroyAllWindows()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231029191838.png"></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/29/OpenCV/14_%E6%96%B9%E7%9B%92%E6%BB%A4%E6%B3%A2%E4%B8%8E%E5%9D%87%E5%80%BC%E6%BB%A4%E6%B3%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/29/OpenCV/14_%E6%96%B9%E7%9B%92%E6%BB%A4%E6%B3%A2%E4%B8%8E%E5%9D%87%E5%80%BC%E6%BB%A4%E6%B3%A2/" class="post-title-link" itemprop="url">P14_方盒滤波与均值滤波</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-10-29 17:05:00 / 修改时间：18:50:09" itemprop="dateCreated datePublished" datetime="2023-10-29T17:05:00+08:00">2023-10-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="方盒滤波"><a href="#方盒滤波" class="headerlink" title="方盒滤波"></a>方盒滤波</h2><ul>
+<li>boxFilter(src, ddepth, ksize[, dst[, anchor[, normalize[, borderType]]]])<ul>
+<li>方盒滤波的卷积核的形式如下：<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231029171244.png"></li>
+<li>normalize &#x3D; True时，a &#x3D; 1&#x2F;(W * H)</li>
+<li>normalize &#x3D; False时，a &#x3D; 1</li>
+<li>一般情况我们格斗使用normalize &#x3D; True的情况，这是方盒滤波等价于均值滤波.<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./avatar1.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 不用手动创建卷积核，只需要告诉函数，卷积核的大小是多少.</span></span><br><span class="line">dst = cv2.boxFilter(img, -<span class="number">1</span>, (<span class="number">5</span>, <span class="number">5</span>), normalize=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, np.hstack((img, dst)))</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231029184337.png"></li>
+</ul>
+</li>
+</ul>
+<h2 id="均值滤波"><a href="#均值滤波" class="headerlink" title="均值滤波"></a>均值滤波</h2><ul>
+<li>blur(src, ksize[, dst[, anchor[, borderType]]]) 均值滤波.</li>
+<li>均值滤波没有位深参数，其他使用方法同方盒滤波<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./avatar1.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 均值滤波</span></span><br><span class="line">dst = cv2.blur(img, (<span class="number">5</span>, <span class="number">5</span>))</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, np.hstack((img, dst)))</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231029185001.png"></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/29/OpenCV/13_%E5%8D%B7%E7%A7%AF%E6%93%8D%E4%BD%9C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/29/OpenCV/13_%E5%8D%B7%E7%A7%AF%E6%93%8D%E4%BD%9C/" class="post-title-link" itemprop="url">P13_卷积操作</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-10-29 16:10:00 / 修改时间：17:00:39" itemprop="dateCreated datePublished" datetime="2023-10-29T16:10:00+08:00">2023-10-29</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="卷积"><a href="#卷积" class="headerlink" title="卷积"></a>卷积</h2><h3 id="什么是图片卷积"><a href="#什么是图片卷积" class="headerlink" title="什么是图片卷积"></a>什么是图片卷积</h3><ul>
+<li>图片卷积就是卷积核在图像上按行滑动遍历像素时不断地相乘求和的过程</li>
+</ul>
+<h3 id="步长"><a href="#步长" class="headerlink" title="步长"></a>步长</h3><ul>
+<li>步长就是卷积核在图像上移动的步幅，为了充分扫描图片，步长一般设为1</li>
+</ul>
+<h3 id="padding"><a href="#padding" class="headerlink" title="padding"></a>padding</h3><ul>
+<li>经过卷积之后的图片的长宽会变小，如果要保持图片大小不变，我们更需要在图片周围填充0；padding值得就是填充0的圈数</li>
+<li>我们可以通过公式计算出需要填充0的圈数.<ul>
+<li>输入体积大小$H_1 * W_1 * D_1$</li>
+<li>四个超参数：<ul>
+<li>Filter数量K</li>
+<li>Filter大小F</li>
+<li>步长S</li>
+<li>零填充大小P</li>
+</ul>
+</li>
+<li>输出体积大小$H_2 * W_2 * D_2$<ul>
+<li>$H_2 &#x3D; (H_1 - F + 2P)&#x2F;S +1$</li>
+<li>$W_2 &#x3D; (W_1 - F + 2P)&#x2F;S +1$</li>
+<li>$D_2 &#x3D; K$</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>如果要保持卷积之后图片大小不变，可以得出等式：$(N + 2P -F +1) &#x3D; N$，从而推导出$P &#x3D; \frac{F - 1}{2}$</li>
+</ul>
+<h3 id="卷积核的大小"><a href="#卷积核的大小" class="headerlink" title="卷积核的大小"></a>卷积核的大小</h3><ul>
+<li>图片卷积中，卷积核的大小一般为奇数，比如3<em>3, 5</em>5, 7*7.为什么是奇数呢，出于以下两个方面的考虑：<ol>
+<li>根据上面padding的计算公式，如果要保持图片大小不变，采用偶数卷积核的话，比如4*4，将会出现填充1.5圈0的情况.</li>
+<li>奇数维度的过滤器有中心，便于指示出过滤器的位置，即OpenCV卷积核的锚点.</li>
+</ol>
+</li>
+</ul>
+<h3 id="卷积的使用示例"><a href="#卷积的使用示例" class="headerlink" title="卷积的使用示例"></a>卷积的使用示例</h3><ul>
+<li>filter2D(src, ddepth, kernel[, dst[, anchor[, delta[, borderType]]]])<ul>
+<li><strong>ddepth</strong> 是卷积之后图片的位深，即卷积之后图片的数据类型，一般设为-1，表示和原题类型一致</li>
+<li><strong>kernel</strong> 是卷积核大小，用元组或者ndarray表示，要求数据类型必须是float型.</li>
+<li><strong>anchor</strong> 锚点，即卷积核的中心点，是可选参数，默认是(-1, -1)</li>
+<li><strong>delta</strong> 可选参数，表示卷积之后额外加的一个值，相当于线性方程中的偏差，默认为0.</li>
+<li><strong>borderType</strong> 边界类型，一般不设.<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># OpenCV图像卷积操作</span></span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入图片</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./avatar.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 相当于原始图片中的每一个点都被平均了一下，所以图像变模糊了.</span></span><br><span class="line">kernel = np.ones((<span class="number">5</span>, <span class="number">5</span>), np.float32) / <span class="number">25</span></span><br><span class="line"><span class="comment"># ddepth = -1 表示图片的数据类型不变</span></span><br><span class="line">dst = cv2.filter2D(img, -<span class="number">1</span>, kernel)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 很明显卷积之后的图片模糊了.</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, np.hstack((img, dst)))</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231029165637.png"></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/29/OpenCV/12_%E4%BB%BF%E5%B0%84%E5%8F%98%E6%8D%A2%E4%B8%8E%E9%80%8F%E8%A7%86%E5%8F%98%E6%8D%A2/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -206,10 +925,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-10-29 12:37:00 / 修改时间：15:08:31" itemprop="dateCreated datePublished" datetime="2023-10-29T12:37:00+08:00">2023-10-29</time>
+              <time title="创建时间：2023-10-29 12:37:00" itemprop="dateCreated datePublished" datetime="2023-10-29T12:37:00+08:00">2023-10-29</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-30 13:38:31" itemprop="dateModified" datetime="2023-10-30T13:38:31+08:00">2023-10-30</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -376,942 +1101,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/28/OpenCV/9_%E5%9B%BE%E5%83%8F%E7%9A%84%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/28/OpenCV/9_%E5%9B%BE%E5%83%8F%E7%9A%84%E9%80%BB%E8%BE%91%E8%BF%90%E7%AE%97/" class="post-title-link" itemprop="url">P9_图像的逻辑运算</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-10-28 19:41:00 / 修改时间：22:06:32" itemprop="dateCreated datePublished" datetime="2023-10-28T19:41:00+08:00">2023-10-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="图像的逻辑运算"><a href="#图像的逻辑运算" class="headerlink" title="图像的逻辑运算"></a>图像的逻辑运算</h2><h3 id="非运算"><a href="#非运算" class="headerlink" title="非运算"></a>非运算</h3><ul>
-<li>与Python原生的非运算不同</li>
-<li>图像非运算，用255减每个像素的值，底片效果<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">fsize = (<span class="number">215</span>, <span class="number">215</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图片</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./avatar.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调整图片大小</span></span><br><span class="line">fimg = cv2.resize(img, fsize)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 非运算</span></span><br><span class="line">new_img = cv2.bitwise_not(fimg)</span><br><span class="line"></span><br><span class="line"><span class="comment">#显示图片</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, np.hstack((fimg, new_img)))</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028195335.png"></li>
-</ul>
-<h3 id="与运算"><a href="#与运算" class="headerlink" title="与运算"></a>与运算</h3><ul>
-<li>图像之间与运算：</li>
-<li>对应位置像素进行与运算，两张图片尺寸通道需相同.</li>
-<li>两个数相与，结果通常会变小，255&amp;255的结果是255，所以图片的与运算结果不会超过255<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">fsize = (<span class="number">215</span>, <span class="number">215</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图片</span></span><br><span class="line">img1 = cv2.imread(<span class="string">&#x27;./avatar.png&#x27;</span>)</span><br><span class="line">img2 = cv2.imread(<span class="string">&#x27;./avatar1.png&#x27;</span>)</span><br><span class="line">z</span><br><span class="line"><span class="comment"># 调整图片大小</span></span><br><span class="line">fimg1 = cv2.resize(img1, fsize)</span><br><span class="line">fimg2 = cv2.resize(img2, fsize)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 与运算</span></span><br><span class="line">new_img = cv2.bitwise_and(fimg1, fimg2)</span><br><span class="line"></span><br><span class="line"><span class="comment">#显示图片</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, new_img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028200641.png"></li>
-</ul>
-<h3 id="或运算"><a href="#或运算" class="headerlink" title="或运算"></a>或运算</h3><ul>
-<li>图像之间或运算：</li>
-<li>对应位置像素进行或运算，两张图片的尺寸通道需相同.</li>
-<li>或运是与运算的相反运算，结果相比原图会更亮<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">fsize = (<span class="number">215</span>, <span class="number">215</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图片</span></span><br><span class="line">img1 = cv2.imread(<span class="string">&#x27;./avatar.png&#x27;</span>)</span><br><span class="line">img2 = cv2.imread(<span class="string">&#x27;./avatar1.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调整图片大小</span></span><br><span class="line">fimg1 = cv2.resize(img1, fsize)</span><br><span class="line">fimg2 = cv2.resize(img2, fsize)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或运算</span></span><br><span class="line">new_img = cv2.bitwise_or(fimg1, fimg2)</span><br><span class="line"></span><br><span class="line"><span class="comment">#显示图片</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, new_img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028215756.png"></li>
-</ul>
-<h3 id="异或运算"><a href="#异或运算" class="headerlink" title="异或运算"></a>异或运算</h3><ul>
-<li>图像之间运算</li>
-<li>对应位置进行异或运算，两张图片的尺寸通道需相同.<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">fsize = (<span class="number">215</span>, <span class="number">215</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图片</span></span><br><span class="line">img1 = cv2.imread(<span class="string">&#x27;./avatar.png&#x27;</span>)</span><br><span class="line">img2 = cv2.imread(<span class="string">&#x27;./avatar1.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调整图片大小</span></span><br><span class="line">fimg1 = cv2.resize(img1, fsize)</span><br><span class="line">fimg2 = cv2.resize(img2, fsize)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 或运算</span></span><br><span class="line">new_img = cv2.bitwise_xor(fimg1, fimg2)</span><br><span class="line"></span><br><span class="line"><span class="comment">#显示图片</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, new_img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028220559.png"></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/28/OpenCV/8_%E5%9B%BE%E5%83%8F%E7%9A%84%E8%9E%8D%E5%90%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/28/OpenCV/8_%E5%9B%BE%E5%83%8F%E7%9A%84%E8%9E%8D%E5%90%88/" class="post-title-link" itemprop="url">P8_图像的融合</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-10-28 19:37:00 / 修改时间：19:41:03" itemprop="dateCreated datePublished" datetime="2023-10-28T19:37:00+08:00">2023-10-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="图像的融合"><a href="#图像的融合" class="headerlink" title="图像的融合"></a>图像的融合</h2><ul>
-<li>cv2.addWeighted(src1, alpha, src2, beta, gamma)</li>
-<li>图片的融合操作相当于对图片进程线型运算 <code>w1*x1 + w2*x2 + b</code> 其中alpha是第一个权重参数，beta是第二个权重参数，gamma是偏差.<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">fsize = (<span class="number">215</span>, <span class="number">215</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图片</span></span><br><span class="line">img1 = cv2.imread(<span class="string">&#x27;./avatar.png&#x27;</span>)</span><br><span class="line">img2 = cv2.imread(<span class="string">&#x27;./avatar1.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调整图片大小</span></span><br><span class="line">fimg1 = cv2.resize(img1, fsize)</span><br><span class="line">fimg2 = cv2.resize(img2, fsize)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 融合图片</span></span><br><span class="line">new_img = cv2.addWeighted(fimg1, <span class="number">0.3</span>, fimg2, <span class="number">0.7</span>, -<span class="number">15</span>)</span><br><span class="line"><span class="comment"># 偏置的作用：当输出图片亮度偏亮的时候可以设置小一点，反之可以增加亮度</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#显示图片</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, new_img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028193830.png"></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/28/OpenCV/7_%E5%9B%BE%E5%83%8F%E7%9A%84%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/28/OpenCV/7_%E5%9B%BE%E5%83%8F%E7%9A%84%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97/" class="post-title-link" itemprop="url">P7_图像的算数运算</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-10-28 13:37:00 / 修改时间：19:18:46" itemprop="dateCreated datePublished" datetime="2023-10-28T13:37:00+08:00">2023-10-28</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="图像的加减乘除运算"><a href="#图像的加减乘除运算" class="headerlink" title="图像的加减乘除运算"></a>图像的加减乘除运算</h2><h3 id="图像的加运算"><a href="#图像的加运算" class="headerlink" title="图像的加运算"></a>图像的加运算</h3><h4 id="图像与图像相加"><a href="#图像与图像相加" class="headerlink" title="图像与图像相加"></a>图像与图像相加</h4><ul>
-<li>图片与图片相加：<strong>对应像素的值相加</strong>.</li>
-<li>两种方法，使用<code>+</code>运算符或使用cv2.add()函数执行图像的加法运算</li>
-<li>运算规则：<ul>
-<li>使用<code>+</code>运算符：超出255的数字会被截断（相当于%255或-255）.</li>
-<li>使用cv2.add()：超过255的值全部设为255.</li>
-</ul>
-</li>
-<li>加法操作要求两个图片的长宽相同，通道数相同.<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">fsize = (<span class="number">215</span>, <span class="number">215</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图片</span></span><br><span class="line">img1 = cv2.imread(<span class="string">&#x27;./avatar.png&#x27;</span>)</span><br><span class="line">img2 = cv2.imread(<span class="string">&#x27;./avatar1.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(img1.shape)</span><br><span class="line"><span class="built_in">print</span>(img2.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 做加法前需要把图片的形状变得完全一致</span></span><br><span class="line"><span class="comment"># 通过rcv2.resize()函数修改图片的大小</span></span><br><span class="line">fimg1 = cv2.resize(img1, fsize)</span><br><span class="line">fimg2 = cv2.resize(img2, fsize)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 展示相加前的图像</span></span><br><span class="line">imghstack = np.hstack((fimg1, fimg2))</span><br><span class="line">cv2.imshow(<span class="string">&#x27;input&#x27;</span>, imghstack)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 图片与图片相加：</span></span><br><span class="line"><span class="comment"># 使用+</span></span><br><span class="line">res_1 = fimg1 + fimg2</span><br><span class="line"><span class="comment"># 使用add()</span></span><br><span class="line">res_2 = cv2.add(fimg1, fimg2)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;use +&#x27;</span>, res_1)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;add()&#x27;</span>, res_2)</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028182522.png"></li>
-</ul>
-<h5 id="图像与一个值相加"><a href="#图像与一个值相加" class="headerlink" title="图像与一个值相加"></a>图像与一个值相加</h5><ul>
-<li>图像与单个数相加：每个像素分别与这个值相加.</li>
-<li>只能使用<code>+</code>运算符，cv2.add()函数不适用此类运算.</li>
-<li>运算规则：同上使用<code>+</code>运算符，超出255的数字会被截断（相当于%255或-255）<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 图片与单个数字相加：</span></span><br><span class="line"><span class="comment"># 使用+</span></span><br><span class="line">res1, res2 = fimg1 + <span class="number">100</span>, fimg2 +<span class="number">100</span></span><br><span class="line"></span><br><span class="line">hstack = np.hstack(res1, res2)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;use +&#x27;</span>, hstack)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;add()&#x27;</span>, hstack)</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028184905.png"></li>
-</ul>
-<h3 id="图像的减乘除"><a href="#图像的减乘除" class="headerlink" title="图像的减乘除"></a>图像的减乘除</h3><ul>
-<li>所有运算规则同加法</li>
-</ul>
-<h4 id="图像的减法运算"><a href="#图像的减法运算" class="headerlink" title="图像的减法运算"></a>图像的减法运算</h4><ul>
-<li>图像减图像，可以使用cv2.subtract()函数或<code>-</code>运算符，规则同加法</li>
-<li>图像减一个数，只能使用运算符，规则同加法<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 图像的减法运算示例代码</span></span><br><span class="line">res1_1, res1_2 = fimg1 - <span class="number">100</span>, fimg2 - <span class="number">100</span></span><br><span class="line">res2_1, res2_2 = fimg1 - fimg2, cv2.subtract(fimg1, fimg2)</span><br><span class="line"></span><br><span class="line">res1_hstack = np.hstack((res1_1, res1_2))</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;fimg1,fimg2 - 100&#x27;</span>, res1_hstack)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;use -&#x27;</span>, res2_1)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;subtract()&#x27;</span>, res2_2)</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028190559.png"></li>
-</ul>
-<h4 id="图像的乘法运算"><a href="#图像的乘法运算" class="headerlink" title="图像的乘法运算"></a>图像的乘法运算</h4><ul>
-<li>图像乘图像，可以使用cv2.multiply()函数或<code>*</code>运算符，规则同加法</li>
-<li>图像乘一个数，只能使用运算符，规则同加法<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 图像的乘法运算示例代码</span></span><br><span class="line">res1_1, res1_2 = fimg1 * <span class="number">100</span>, fimg2 * <span class="number">100</span></span><br><span class="line">res2_1, res2_2 = fimg1 * fimg2, cv2.multiply(fimg1, fimg2)</span><br><span class="line"></span><br><span class="line">res1_hstack = np.hstack((res1_1, res1_2))</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;fimg1,fimg2 * 100&#x27;</span>, res1_hstack)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;use *&#x27;</span>, res2_1)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;multply()&#x27;</span>, res2_2)</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028191258.png"></li>
-</ul>
-<h4 id="图像的除法运算"><a href="#图像的除法运算" class="headerlink" title="图像的除法运算"></a>图像的除法运算</h4><ul>
-<li>图像除图像，可以使用cv2.divede()函数或<code>/</code>运算符，规则同加法</li>
-<li>图像除一个数，只能使用运算符，规则同加法<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 图像的除法运算示例代码</span></span><br><span class="line">res1_1, res1_2 = fimg1 / <span class="number">100</span>, fimg2 / <span class="number">100</span></span><br><span class="line">res2_1, res2_2 = fimg1 / fimg2, cv2.divide(fimg1, fimg2)</span><br><span class="line"></span><br><span class="line">res1_hstack = np.hstack((res1_1, res1_2))</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;fimg1,fimg2 / 100&#x27;</span>, res1_hstack)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;use /&#x27;</span>, res2_1)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;divide()&#x27;</span>, res2_2)</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028191702.png"></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/28/OpenCV/10_resize%E6%96%B9%E6%B3%95%E7%94%A8%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/28/OpenCV/10_resize%E6%96%B9%E6%B3%95%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">P10_resize方法用法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-10-28 12:07:00" itemprop="dateCreated datePublished" datetime="2023-10-28T12:07:00+08:00">2023-10-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-29 12:37:44" itemprop="dateModified" datetime="2023-10-29T12:37:44+08:00">2023-10-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="图像的放大与缩小"><a href="#图像的放大与缩小" class="headerlink" title="图像的放大与缩小"></a>图像的放大与缩小</h2><ul>
-<li><p>resize(src, dsize[, fx[,fy[, interpolation]]])</p>
-<ul>
-<li>src：要缩放的图片</li>
-<li>dsize：缩放后的图片大小，元组和列表表示均可.</li>
-<li>dst：可选参数，缩放之后的输出图片.</li>
-<li>fx, yx：x轴和y轴的缩放比，即高度和宽度的缩放比.</li>
-<li>interpolation：插值算法，只要有以下几种：<ul>
-<li>INTER_NEAREST：邻近插值，速度快，效果差.</li>
-<li>INTER_LINEAR：双线性插值，使用原图中的4个点进行插值，默认为此选项.</li>
-<li>INTER_CUBIC：三次插值，原图中的16个点.</li>
-<li>INTER_AREA：区域插值，效果最好，计算时间最长.<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img1 = cv2.imread(<span class="string">&#x27;./avatar1.png&#x27;</span>)</span><br><span class="line">img2 = cv2.imread(<span class="string">&#x27;./avatar2.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印两张图片的原始尺寸</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;img1原始尺寸：&#x27;</span>, img1.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;img2原始尺寸：&#x27;</span>, img2.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将img1缩放至与img2相同尺寸</span></span><br><span class="line">resized_img2 = cv2.resize(img2, (img1.shape[-<span class="number">2</span>::-<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 展示缩放后的图片与原图进行对比</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, np.hstack((img1, resized_img2)))</span><br><span class="line">cv2.imshow(<span class="string">&#x27;img2&#x27;</span>, img2)</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028230433.png"></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>使用不同插值算法：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img2 = cv2.imread(<span class="string">&#x27;./avatar2.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用不同插值算法</span></span><br><span class="line">new_img1 = cv2.resize(img2, (<span class="number">500</span>, <span class="number">500</span>), interpolation=cv2.INTER_NEAREST)</span><br><span class="line">new_img2 = cv2.resize(img2, (<span class="number">500</span>, <span class="number">500</span>), interpolation=cv2.INTER_LINEAR)</span><br><span class="line">new_img3 = cv2.resize(img2, (<span class="number">500</span>, <span class="number">500</span>), interpolation=cv2.INTER_CUBIC)  <span class="comment"># 默认效果</span></span><br><span class="line">new_img4 = cv2.resize(img2, (<span class="number">500</span>, <span class="number">500</span>), interpolation=cv2.INTER_AREA)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 展示缩放后的图片与原图进行对比</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output1&#x27;</span>, new_img1)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;output2&#x27;</span>, new_img2)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;output3&#x27;</span>, new_img3)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;output4&#x27;</span>, new_img4)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;img2&#x27;</span>, img2)</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028233647.png"></p>
-</li>
-<li><p>按xy比例缩放：</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img2 = cv2.imread(<span class="string">&#x27;./avatar2.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按比例缩放</span></span><br><span class="line">new_img = cv2.resize(img2, dsize=<span class="literal">None</span>, fx=<span class="number">1.5</span>, fy=<span class="number">2</span>, interpolation=cv2.INTER_AREA)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 展示缩放后的图片与原图进行对比</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, new_img)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;img2&#x27;</span>, img2)</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028234316.png"></p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/27/OpenCV/6_%E7%BB%98%E5%88%B6%E5%9B%BE%E5%BD%A2%E4%B8%8E%E6%96%87%E5%AD%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/27/OpenCV/6_%E7%BB%98%E5%88%B6%E5%9B%BE%E5%BD%A2%E4%B8%8E%E6%96%87%E5%AD%97/" class="post-title-link" itemprop="url">P6_绘制图形与文字</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-10-27 09:39:00" itemprop="dateCreated datePublished" datetime="2023-10-27T09:39:00+08:00">2023-10-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-28 19:18:30" itemprop="dateModified" datetime="2023-10-28T19:18:30+08:00">2023-10-28</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <blockquote>
-<p>利用OpenCv提供的绘制图形api可以轻松的在图像上绘制各种图形，比如直线，矩形，圆，椭圆等图形。</p>
-</blockquote>
-<h3 id="直线和矩形"><a href="#直线和矩形" class="headerlink" title="直线和矩形"></a>直线和矩形</h3><ul>
-<li><p>line(img, pt1, pt2, color, thickness, lineType, shift)</p>
-<ul>
-<li>img：在哪个图像上画线</li>
-<li>pt1, pt2：开始点，结束点（元组）指定线的开始与结束位置</li>
-<li>color：颜色</li>
-<li>thickness：线宽</li>
-<li>lineType：线型，线型为-1, 4, 6, 16,默认为8</li>
-<li>shift：坐标缩放比例<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建纯黑图像背景用来画图</span></span><br><span class="line">img = np.zeros((<span class="number">480</span>, <span class="number">640</span>, <span class="number">3</span>), np.uint8)</span><br><span class="line"><span class="comment"># line(img, pt1, pt2, color, thickness, lineType, shift)</span></span><br><span class="line"><span class="comment"># lineType参数代表线的粗糙度，数值越大越光滑</span></span><br><span class="line">cv2.line(img, (<span class="number">10</span>, <span class="number">20</span>), (<span class="number">550</span>, <span class="number">320</span>), (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">5</span>, <span class="number">4</span>)  </span><br><span class="line">cv2.line(img, (<span class="number">10</span>, <span class="number">50</span>), (<span class="number">550</span>, <span class="number">350</span>), (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">5</span>, <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;draw&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231027101156.png"></li>
-</ul>
-</li>
-<li><p>rectangle(img, pt1, pt2, color, thickness lineType, shift)</p>
-<ul>
-<li>参数与line()函数一致<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建纯黑图像背景用来画图</span></span><br><span class="line">img = np.zeros((<span class="number">480</span>, <span class="number">640</span>, <span class="number">3</span>), np.uint8)</span><br><span class="line"></span><br><span class="line">cv2.rectangle(img, (<span class="number">10</span>, <span class="number">20</span>), (<span class="number">550</span>, <span class="number">320</span>), (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">5</span>, <span class="number">4</span>)</span><br><span class="line">cv2.rectangle(img, (<span class="number">50</span>, <span class="number">70</span>), (<span class="number">500</span>, <span class="number">300</span>), (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">5</span>, <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;draw&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231027103431.png"></li>
-</ul>
-</li>
-</ul>
-<h3 id="圆形"><a href="#圆形" class="headerlink" title="圆形"></a>圆形</h3><ul>
-<li>circle(img, center, radius, color, thickness, lineType, shift)<ul>
-<li>img：在哪个图像上画圆</li>
-<li>center：中心点（元组）</li>
-<li>radius：半径</li>
-<li>color：颜色</li>
-<li>thickness 线宽</li>
-<li>lineType：线型，线型为-1, 4, 6, 16,默认为8</li>
-<li>shift：坐标缩放比例<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建纯黑图像背景用来画图</span></span><br><span class="line">img = np.zeros((<span class="number">480</span>, <span class="number">640</span>, <span class="number">3</span>), np.uint8)</span><br><span class="line"></span><br><span class="line">cv2.circle(img, (<span class="number">320</span>, <span class="number">240</span>), <span class="number">50</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">5</span>, <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;draw&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231027105711.png"></li>
-</ul>
-</li>
-</ul>
-<h3 id="椭圆"><a href="#椭圆" class="headerlink" title="椭圆"></a>椭圆</h3><ul>
-<li>ellipse(img, 中心点, 长宽的一半, 角度, 从哪个角度开始，从哪个角度结束, …)<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231027110652.png"><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建纯黑图像背景用来画图</span></span><br><span class="line">img = np.zeros((<span class="number">480</span>, <span class="number">640</span>, <span class="number">3</span>), np.uint8)</span><br><span class="line"></span><br><span class="line">cv2.ellipse(img, (<span class="number">170</span>, <span class="number">240</span>), (<span class="number">100</span>, <span class="number">50</span>), <span class="number">0</span>, <span class="number">0</span>, <span class="number">360</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>], <span class="number">5</span>, <span class="number">16</span>)</span><br><span class="line">cv2.ellipse(img, (<span class="number">490</span>, <span class="number">240</span>), (<span class="number">100</span>, <span class="number">50</span>), <span class="number">45</span>, <span class="number">0</span>, <span class="number">360</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>], <span class="number">5</span>, <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;draw&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231027111346.png"></li>
-</ul>
-<h3 id="多边形"><a href="#多边形" class="headerlink" title="多边形"></a>多边形</h3><ul>
-<li>polylines(img, pts, isClosed, color, thickness, lineType bottomLeftOrigin)<ul>
-<li>img：绘制在那张图像上</li>
-<li>pts：多边形角点集合(元组或列表, int32)</li>
-<li>isClosed：多边形是否闭合</li>
-<li>color：颜色</li>
-<li>thickness：线宽</li>
-<li>lineType：线型</li>
-<li><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># 创建纯黑图像背景用来画图</span></span><br><span class="line">img = np.zeros((<span class="number">480</span>, <span class="number">640</span>, <span class="number">3</span>), np.uint8)</span><br><span class="line"></span><br><span class="line">pts = np.array([(<span class="number">250</span>, <span class="number">100</span>), (<span class="number">100</span>, <span class="number">300</span>), (<span class="number">50</span>, <span class="number">280</span>)], np.int32)</span><br><span class="line"><span class="comment"># 注意：pts是3维的</span></span><br><span class="line">cv2.polylines(img, [pts], <span class="literal">True</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;draw&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231027154118.png"></li>
-</ul>
-</li>
-<li>填充多边形：fillPoly()函数</li>
-<li>参数与polylines相同<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建纯黑图像背景用来画图</span></span><br><span class="line">img = np.zeros((<span class="number">480</span>, <span class="number">640</span>, <span class="number">3</span>), np.uint8)</span><br><span class="line"></span><br><span class="line">pts = np.array([(<span class="number">250</span>, <span class="number">100</span>), (<span class="number">100</span>, <span class="number">300</span>), (<span class="number">50</span>, <span class="number">280</span>)], np.int32)</span><br><span class="line"><span class="comment"># 注意：pts是3维的</span></span><br><span class="line">cv2.fillPoly(img, [pts], (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>))</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;draw&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231027160042.png"></li>
-</ul>
-<h3 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h3><ul>
-<li><p>putText(img, text, org, fontFace, fontScale, color, thinkness, lineType, bottomLeftOrigin)</p>
-<ul>
-<li>text：要绘制的文本</li>
-<li>org：文本在图片中的左下角坐标</li>
-<li>fontFace：字体类型即字体</li>
-<li>fontScale：字体大小<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建纯黑图像背景用来画图</span></span><br><span class="line">img = np.zeros((<span class="number">480</span>, <span class="number">640</span>, <span class="number">3</span>), np.uint8)</span><br><span class="line"></span><br><span class="line">cv2.putText(img, <span class="string">&#x27;Hello,OpenCV!&#x27;</span>, (<span class="number">50</span>, <span class="number">280</span>), cv2.FONT_HERSHEY_COMPLEX, <span class="number">2</span>, (<span class="number">0</span>, <span class="number">0</span> , <span class="number">255</span>))</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;draw&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231027161759.png"></li>
-</ul>
-</li>
-<li><p><strong>绘制中文文本：</strong></p>
-</li>
-<li><p>opencv无法绘制中文文本，需要借助pillow包的功能实现绘制中文字体</p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> ImageFont, ImageDraw, Image</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = np.full((<span class="number">500</span>, <span class="number">500</span>, <span class="number">3</span>), fill_value=<span class="number">255</span>, dtype=np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入字体文件</span></span><br><span class="line">font = ImageFont.truetype(<span class="string">&#x27;./Deng.ttf&#x27;</span>, <span class="number">15</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个pillow的图片</span></span><br><span class="line">img_pil = Image.fromarray(img)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 利用draw去绘制中文</span></span><br><span class="line">draw = ImageDraw.Draw(img_pil)</span><br><span class="line">draw.text((<span class="number">100</span>, <span class="number">250</span>), <span class="string">&#x27;你好！&#x27;</span>, font=font, fill=(<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">#重新变回ndarray</span></span><br><span class="line">img = np.array(img_pil)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028132311.png"></p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/26/OpenCV/5_%E9%A2%9C%E8%89%B2%E9%80%9A%E9%81%93%E7%9A%84%E5%88%86%E7%A6%BB%E4%B8%8E%E5%90%88%E5%B9%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/26/OpenCV/5_%E9%A2%9C%E8%89%B2%E9%80%9A%E9%81%93%E7%9A%84%E5%88%86%E7%A6%BB%E4%B8%8E%E5%90%88%E5%B9%B6/" class="post-title-link" itemprop="url">P5_颜色通道的分离与合并</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-10-26 15:13:00 / 修改时间：21:28:32" itemprop="dateCreated datePublished" datetime="2023-10-26T15:13:00+08:00">2023-10-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="通道的分离与合并"><a href="#通道的分离与合并" class="headerlink" title="通道的分离与合并"></a>通道的分离与合并</h2><ul>
-<li>split(mat)分割图像的通道</li>
-<li>merge((ch1, cha2, ch3))融合多个通道</li>
-</ul>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载色彩图</span></span><br><span class="line">img = cv2.imread(<span class="string">&quot;./1.png&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通道分割</span></span><br><span class="line">b, g, r = cv2.split(img)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;BGR_Image&#x27;</span>, img)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;B_Image&#x27;</span>, b)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;G_Image&#x27;</span>, g)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;R_Image&#x27;</span>, r)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 通道合并</span></span><br><span class="line">img = cv2.merge((b, g, r))</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;BGRALL_Image&#x27;</span>, img)</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231026212444.png">
- </p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/26/OpenCV/4_%E9%A2%9C%E8%89%B2%E7%A9%BA%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/26/OpenCV/4_%E9%A2%9C%E8%89%B2%E7%A9%BA%E9%97%B4%E7%9A%84%E8%BD%AC%E6%8D%A2/" class="post-title-link" itemprop="url">P4_颜色空间的转换</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-10-26 09:34:00 / 修改时间：15:03:36" itemprop="dateCreated datePublished" datetime="2023-10-26T09:34:00+08:00">2023-10-26</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="色彩空间转换"><a href="#色彩空间转换" class="headerlink" title="色彩空间转换"></a>色彩空间转换</h2><ul>
-<li>使用cvtColor(img, colorspace)函数对图像进行色彩空间的转换<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">callback</span>(<span class="params">value</span>):</span><br><span class="line">    <span class="keyword">pass</span></span><br><span class="line"></span><br><span class="line">cv2.namedWindow(<span class="string">&#x27;color&#x27;</span>, cv2.WINDOW_NORMAL)</span><br><span class="line">cv2.resizeWindow(<span class="string">&#x27;color&#x27;</span>, <span class="number">480</span>, <span class="number">480</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取照片，OpenCV读进来的图片默认都是BGR的色彩空间</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./1.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义颜色空间转化列表</span></span><br><span class="line">color_spaces = [</span><br><span class="line">    <span class="comment"># 所有颜色空间转化都是COLOR开头</span></span><br><span class="line">    cv2.COLOR_BGR2RGBA, cv2.COLOR_BGR2BGRA,</span><br><span class="line">    cv2.COLOR_BGR2GRAY, cv2.COLOR_BGR2HSV,</span><br><span class="line">    cv2.COLOR_BGR2YUV</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="comment">#  设置trackbar</span></span><br><span class="line">cv2.createTrackbar(<span class="string">&#x27;trackbar&#x27;</span>, <span class="string">&#x27;color&#x27;</span>, <span class="number">0</span>, <span class="number">4</span>, callback)</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    <span class="comment"># 获取当前trackbar的值</span></span><br><span class="line">    index = cv2.getTrackbarPos(<span class="string">&#x27;trackbar&#x27;</span>, <span class="string">&#x27;color&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 进行颜色空间转换</span></span><br><span class="line">    cvt_img = cv2.cvtColor(img, color_spaces[index])</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    cv2.imshow(<span class="string">&#x27;color&#x27;</span>, cvt_img)</span><br><span class="line">    key = cv2.waitKey(<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">if</span> key == <span class="built_in">ord</span>(<span class="string">&#x27;q&#x27;</span>):</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line"></span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231026150304.png"><br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231026150329.png"></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/23/Matplotlib/P1_Matplotlib%E8%B6%85%E7%BA%A7%E5%A4%A7%E5%90%88%E9%9B%86/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/23/Matplotlib/P1_Matplotlib%E8%B6%85%E7%BA%A7%E5%A4%A7%E5%90%88%E9%9B%86/" class="post-title-link" itemprop="url">P1_Matplotlib超级大合集</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-10-23 19:56:00" itemprop="dateCreated datePublished" datetime="2023-10-23T19:56:00+08:00">2023-10-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-25 21:00:09" itemprop="dateModified" datetime="2023-10-25T21:00:09+08:00">2023-10-25</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Matplotlib/" itemprop="url" rel="index"><span itemprop="name">Matplotlib</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="绘制x点和y点"><a href="#绘制x点和y点" class="headerlink" title="绘制x点和y点"></a>绘制x点和y点</h2><ul>
-<li>使用 plt.plot 函数，传入两个点的坐标默认绘制一条线<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 在图中从(1, 3)到(8, 10)画一条线</span></span><br><span class="line">xpoints = np.array([<span class="number">1</span>, <span class="number">3</span>])</span><br><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(xpoints, ypoints)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024092330.png"></li>
-</ul>
-<h3 id="无线绘图："><a href="#无线绘图：" class="headerlink" title="无线绘图："></a>无线绘图：</h3><ul>
-<li>仅绘制标记，使用快捷字符号参数’o’<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在图中绘制两个点，一个位置在(1, 3),一个位置在(8, 10)</span></span><br><span class="line">plt.plot(xpoints, ypoints, <span class="string">&#x27;o&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024091656.png"></li>
-</ul>
-<h3 id="多点："><a href="#多点：" class="headerlink" title="多点："></a>多点：</h3><ul>
-<li>根据需要绘制任意数量的点，只要确保两个轴上的点数相同即可<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 在图中画一条线，从位置(1, 3)到(2, 8)然后到(6, 1)最后到为止(8, 10)</span></span><br><span class="line">xpoints = np.array([<span class="number">1</span>, <span class="number">2</span>, <span class="number">6</span>, <span class="number">8</span>])</span><br><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(xpoints, ypoints)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024092753.png"></li>
-</ul>
-<h3 id="默认x点"><a href="#默认x点" class="headerlink" title="默认x点:"></a>默认x点:</h3><ul>
-<li>如果不指定x轴上的点，x轴坐标将会使用默认值0,1,2,3…..<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>, <span class="number">5</span>, <span class="number">7</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(ypoints)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024093203.png"></li>
-</ul>
-<h2 id="标记"><a href="#标记" class="headerlink" title="标记"></a>标记</h2><ul>
-<li>使用标记参数 maker ,来指定标记强调每个点：<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(ypoints, marker = <span class="string">&#x27;o&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024093630.png"><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用星星标记</span></span><br><span class="line">plt.plot(ypoints, marker = <span class="string">&#x27;*&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024093823.png"></li>
-</ul>
-<h3 id="可使用的字符参考："><a href="#可使用的字符参考：" class="headerlink" title="可使用的字符参考："></a>可使用的字符参考：</h3><ul>
-<li>标记参考：<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024093936.png"></li>
-<li>线参考:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024094100.png"></li>
-<li>颜色参考：<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024094151.png"></li>
-</ul>
-<h3 id="格式化字符串fmt："><a href="#格式化字符串fmt：" class="headerlink" title="格式化字符串fmt："></a>格式化字符串fmt：</h3><ul>
-<li>使用快捷字符号参数来指定标记</li>
-<li>此参数也称为fmt，使用以下语法来编写：<br>marker,line,color<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 点标记使用圆，线标记使用虚线，颜色标记使用红色</span></span><br><span class="line">plt.plot(ypoints, <span class="string">&#x27;o:r&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024094748.png"></li>
-</ul>
-<h3 id="标记尺寸："><a href="#标记尺寸：" class="headerlink" title="标记尺寸："></a>标记尺寸：</h3><ul>
-<li>使用markersize 或者 ms 来设置标记的大小：<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(ypoints, marker = <span class="string">&#x27;o&#x27;</span>, ms = <span class="number">20</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024100826.png"></li>
-</ul>
-<h3 id="标记颜色："><a href="#标记颜色：" class="headerlink" title="标记颜色："></a>标记颜色：</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用关键字参数 markeredgecolor 或 mec 来设置标记边缘的颜色：</span></span><br><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(ypoints, marker = <span class="string">&#x27;o&#x27;</span>, ms = <span class="number">20</span>, mec = <span class="string">&#x27;r&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024110847.png"></p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 关键字参数 markerfacecolor 或较短的 mfc 来设置标记边缘内的颜色：</span></span><br><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(ypoints, marker = <span class="string">&#x27;o&#x27;</span>, ms = <span class="number">20</span>, mfc = <span class="string">&#x27;r&#x27;</span>)</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024111052.png"></p>
-<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 同时设置边缘与标记边缘内的颜色</span></span><br><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 除了可以使用标记字符号表示颜色，也可是使用十六进制颜色编码或颜色名</span></span><br><span class="line">plt.plot(ypoints, marker = <span class="string">&#x27;o&#x27;</span>, ms = <span class="number">20</span>, mec = <span class="string">&#x27;#4CAF50&#x27;</span>, mfc = <span class="string">&#x27;hotpink&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024111615.png"></p>
-<h2 id="线条"><a href="#线条" class="headerlink" title="线条"></a>线条</h2><h3 id="线型："><a href="#线型：" class="headerlink" title="线型："></a>线型：</h3><ul>
-<li>使用关键字参数 linestyle 或者 ls 来更改绘制线的样式：<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置线型为点虚线</span></span><br><span class="line">plt = plot(ypoints, linestyle = <span class="string">&#x27;dotted&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024143205.png"></li>
-</ul>
-<h3 id="线型更短的语法："><a href="#线型更短的语法：" class="headerlink" title="线型更短的语法："></a>线型更短的语法：</h3><ul>
-<li>线条原始可以用更短的语法编写：<ul>
-<li>linestyle 可以写成 ls</li>
-<li>dotted 可以写成 :</li>
-<li>dashed 可以写成 –<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(ypoints, ls = <span class="string">&#x27;:&#x27;</span>)</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h3 id="线条颜色："><a href="#线条颜色：" class="headerlink" title="线条颜色："></a>线条颜色：</h3><ul>
-<li>使用关键字参数 color 或 c 来设置线条的颜色：<ul>
-<li>可以使用快捷字符码也可以使用十六进制或颜色名<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置线条颜色为红色（快捷字符码&#x27;r&#x27;）</span></span><br><span class="line">plt.plot(ypoints, color = <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">plt.show</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024143845.png"></li>
-</ul>
-</li>
-</ul>
-<h3 id="线宽度："><a href="#线宽度：" class="headerlink" title="线宽度："></a>线宽度：</h3><ul>
-<li>使用关键字参数 linewidth 或 lw 来更改线条的宽度<ul>
-<li>参数是一个浮点数，单位为磅<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">ypoints = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(ypoints, lw = <span class="string">&#x27;20.5&#x27;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024144627.png"></li>
-</ul>
-</li>
-</ul>
-<h3 id="多行："><a href="#多行：" class="headerlink" title="多行："></a>多行：</h3><ul>
-<li>通过简单地添加更多 plt.plot() 函数来绘制任意数量的线：<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 自定义两个y轴轴数组</span></span><br><span class="line">y1 = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line">y2 = np.array([<span class="number">6</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">11</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用默认x坐标绘出两条线</span></span><br><span class="line">plt.plot(y1)</span><br><span class="line">plt.plot(y2)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024150627.png"></li>
-<li>还可以同时添加每条线的xy坐标，只需要使用一个函数，将xy坐标成对写入就可以<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 添加x轴坐标数组（同默认坐标）</span></span><br><span class="line">x1 = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y1 = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line">x2 = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y2 = np.array([<span class="number">6</span>, <span class="number">2</span>, <span class="number">7</span>, <span class="number">11</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 同时传入x,y轴的参数</span></span><br><span class="line">plt.plot(x1, y1, x2, y2)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-(图像同上)</li>
-</ul>
-<h2 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h2><h3 id="为绘图创建标签："><a href="#为绘图创建标签：" class="headerlink" title="为绘图创建标签："></a>为绘图创建标签：</h3><ul>
-<li>使用 xlabel() 和 ylabel() 函数为x轴与y轴设置标签<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="number">80</span>, <span class="number">85</span>, <span class="number">90</span>, <span class="number">95</span>, <span class="number">100</span>, <span class="number">105</span>, <span class="number">110</span>, <span class="number">115</span>, <span class="number">120</span>, <span class="number">125</span>])</span><br><span class="line">y = np.array([<span class="number">240</span>, <span class="number">250</span>, <span class="number">260</span>, <span class="number">270</span>, <span class="number">280</span>, <span class="number">290</span>, <span class="number">300</span>, <span class="number">310</span>, <span class="number">320</span>, <span class="number">330</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 添加x轴与y轴标题</span></span><br><span class="line">plt.xlabel(<span class="string">&quot;平均脉搏&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;卡路里消耗量&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024161503.png"></li>
-</ul>
-<h3 id="为绘图创建标题："><a href="#为绘图创建标题：" class="headerlink" title="为绘图创建标题："></a>为绘图创建标题：</h3><ul>
-<li>使用 title() 函数为绘图设置标题<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">80</span>, <span class="number">85</span>, <span class="number">90</span>, <span class="number">95</span>, <span class="number">100</span>, <span class="number">105</span>, <span class="number">110</span>, <span class="number">115</span>, <span class="number">120</span>, <span class="number">125</span>])</span><br><span class="line">y = np.array([<span class="number">240</span>, <span class="number">250</span>, <span class="number">260</span>, <span class="number">270</span>, <span class="number">280</span>, <span class="number">290</span>, <span class="number">300</span>, <span class="number">310</span>, <span class="number">320</span>, <span class="number">330</span>])</span><br><span class="line"></span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># title()函数添加整图标题</span></span><br><span class="line">plt.title(<span class="string">&quot;运动手表数据&quot;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&quot;平均脉搏&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;卡路里消耗量&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024162017.png"></li>
-</ul>
-<h3 id="设置标题和标签的字体属性："><a href="#设置标题和标签的字体属性：" class="headerlink" title="设置标题和标签的字体属性："></a>设置标题和标签的字体属性：</h3><ul>
-<li>使用 xlabel()、ylabel() 和 title() 中的 fontdict 参数来设置标题和标签的字体属性。<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">80</span>, <span class="number">85</span>, <span class="number">90</span>, <span class="number">95</span>, <span class="number">100</span>, <span class="number">105</span>, <span class="number">110</span>, <span class="number">115</span>, <span class="number">120</span>, <span class="number">125</span>])</span><br><span class="line">y = np.array([<span class="number">240</span>, <span class="number">250</span>, <span class="number">260</span>, <span class="number">270</span>, <span class="number">280</span>, <span class="number">290</span>, <span class="number">300</span>, <span class="number">310</span>, <span class="number">320</span>, <span class="number">330</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自定义字体参数font1, font2</span></span><br><span class="line">font1 = &#123;<span class="string">&#x27;family&#x27;</span>:<span class="string">&#x27;serif&#x27;</span>, <span class="string">&#x27;color&#x27;</span>:<span class="string">&#x27;blue&#x27;</span>, <span class="string">&#x27;size&#x27;</span>:<span class="number">20</span>&#125;</span><br><span class="line">font2 = &#123;<span class="string">&#x27;family&#x27;</span>:<span class="string">&#x27;serif&#x27;</span>, <span class="string">&#x27;color&#x27;</span>:<span class="string">&#x27;darkred&#x27;</span>, <span class="string">&#x27;size&#x27;</span>:<span class="number">15</span>&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用fontdict参数指定字体</span></span><br><span class="line">plt.title(<span class="string">&quot;运动手表数据&quot;</span>, fontdict = font1)</span><br><span class="line">plt.xlabel(<span class="string">&quot;平均脉搏&quot;</span>, fontdict = font2)</span><br><span class="line">plt.ylabel(<span class="string">&quot;卡路里消耗量&quot;</span>, fontdict = font2)</span><br><span class="line"></span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024203223.png"><br>（字体原因没有显示出来）</li>
-</ul>
-<h3 id="定位标题："><a href="#定位标题：" class="headerlink" title="定位标题："></a>定位标题：</h3><ul>
-<li>使用 title() 函数中的 loc 参数来定位标题的位置</li>
-<li>合法值是：”left”、”right” 和 “center”<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">80</span>, <span class="number">85</span>, <span class="number">90</span>, <span class="number">95</span>, <span class="number">100</span>, <span class="number">105</span>, <span class="number">110</span>, <span class="number">115</span>, <span class="number">120</span>, <span class="number">125</span>])</span><br><span class="line">y = np.array([<span class="number">240</span>, <span class="number">250</span>, <span class="number">260</span>, <span class="number">270</span>, <span class="number">280</span>, <span class="number">290</span>, <span class="number">300</span>, <span class="number">310</span>, <span class="number">320</span>, <span class="number">330</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 设置标题位置为左侧</span></span><br><span class="line">plt.title(<span class="string">&quot;运动手表数据&quot;</span>, loc = <span class="string">&quot;left&quot;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&quot;平均脉搏&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;卡路里消耗量&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.plot(x, y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024204431.png"></li>
-</ul>
-<h2 id="网格线"><a href="#网格线" class="headerlink" title="网格线"></a>网格线</h2><h3 id="向绘图中添加网格线："><a href="#向绘图中添加网格线：" class="headerlink" title="向绘图中添加网格线："></a>向绘图中添加网格线：</h3><ul>
-<li>使用 grid() 函数将网格线添加到绘图中<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="number">80</span>, <span class="number">85</span>, <span class="number">90</span>, <span class="number">95</span>, <span class="number">100</span>, <span class="number">105</span>, <span class="number">110</span>, <span class="number">115</span>, <span class="number">120</span>, <span class="number">125</span>])</span><br><span class="line">y = np.array([<span class="number">240</span>, <span class="number">250</span>, <span class="number">260</span>, <span class="number">270</span>, <span class="number">280</span>, <span class="number">290</span>, <span class="number">300</span>, <span class="number">310</span>, <span class="number">320</span>, <span class="number">330</span>])</span><br><span class="line"></span><br><span class="line">plt.title(<span class="string">&quot;运动手表数据&quot;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&quot;平均脉搏&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;卡路里消耗量&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># grid()函数显示网格</span></span><br><span class="line">plt.grid()</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024205434.png"></li>
-</ul>
-<h3 id="指定要显示的网格线："><a href="#指定要显示的网格线：" class="headerlink" title="指定要显示的网格线："></a>指定要显示的网格线：</h3><ul>
-<li>使用 grid() 函数中的轴参数来指定要显示的网格线</li>
-<li>合法值为：”x”、”y” 和 “both” ,默认值为 “both”<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">80</span>, <span class="number">85</span>, <span class="number">90</span>, <span class="number">95</span>, <span class="number">100</span>, <span class="number">105</span>, <span class="number">110</span>, <span class="number">115</span>, <span class="number">120</span>, <span class="number">125</span>])</span><br><span class="line">y = np.array([<span class="number">240</span>, <span class="number">250</span>, <span class="number">260</span>, <span class="number">270</span>, <span class="number">280</span>, <span class="number">290</span>, <span class="number">300</span>, <span class="number">310</span>, <span class="number">320</span>, <span class="number">330</span>])</span><br><span class="line"></span><br><span class="line">plt.title(<span class="string">&quot;运动手表数据&quot;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&quot;平均脉搏&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;卡路里消耗量&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 只显示x轴网格</span></span><br><span class="line">plt.grid(axis = <span class="string">&#x27;x&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024205736.png"></li>
-</ul>
-<h3 id="设置网格的线属性："><a href="#设置网格的线属性：" class="headerlink" title="设置网格的线属性："></a>设置网格的线属性：</h3><ul>
-<li>自定义网格线的线条属性<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">80</span>, <span class="number">85</span>, <span class="number">90</span>, <span class="number">95</span>, <span class="number">100</span>, <span class="number">105</span>, <span class="number">110</span>, <span class="number">115</span>, <span class="number">120</span>, <span class="number">125</span>])</span><br><span class="line">y = np.array([<span class="number">240</span>, <span class="number">250</span>, <span class="number">260</span>, <span class="number">270</span>, <span class="number">280</span>, <span class="number">290</span>, <span class="number">300</span>, <span class="number">310</span>, <span class="number">320</span>, <span class="number">330</span>])</span><br><span class="line"></span><br><span class="line">plt.title(<span class="string">&quot;运动手表数据&quot;</span>)</span><br><span class="line">plt.xlabel(<span class="string">&quot;平均脉搏&quot;</span>)</span><br><span class="line">plt.ylabel(<span class="string">&quot;卡路里消耗量&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自定义网格线的属性：颜色为绿色，线型为虚线，宽度为1.5磅</span></span><br><span class="line">plt.grid(color = <span class="string">&#x27;green&#x27;</span>, linestyle = <span class="string">&quot;--&quot;</span>, linewidth = <span class="number">1.5</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024210932.png"></li>
-</ul>
-<h2 id="多图"><a href="#多图" class="headerlink" title="多图"></a>多图</h2><h3 id="subplot显示多个图："><a href="#subplot显示多个图：" class="headerlink" title="subplot显示多个图："></a>subplot显示多个图：</h3><ul>
-<li>使用 subplots() 函数，可以在一张图中绘制多个图:</li>
-<li>参数：subplot(&lt;几行子图&gt;， &lt;几列子图&gt;， &lt;第几张子图&gt;)<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot 1</span></span><br><span class="line">x = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一行两列，第一张</span></span><br><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot 2</span></span><br><span class="line">x = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">y = np.array([<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 一行两列，第二章</span></span><br><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024222454.png"></li>
-<li>两行一列示例：<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 两行一列</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># plot1</span></span><br><span class="line">x = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">1</span>)</span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot2</span></span><br><span class="line">x = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y = np.array([<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>])</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">2</span>, <span class="number">1</span>, <span class="number">2</span>)</span><br><span class="line">plt.plot(x, y)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024223315.png"></li>
-</ul>
-<h3 id="子图标题："><a href="#子图标题：" class="headerlink" title="子图标题："></a>子图标题：</h3><ul>
-<li>子图也可以使用 title() 函数添加标题<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># plot 1</span></span><br><span class="line">x = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">plt.plot(x, y)</span><br><span class="line">plt.title(<span class="string">&quot;SALES&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot 2</span></span><br><span class="line">x = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">y = np.array([<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>])</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">plt.plot(x, y)</span><br><span class="line">plt.title(<span class="string">&quot;INCOME&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024224041.png"></li>
-</ul>
-<h3 id="超级标题："><a href="#超级标题：" class="headerlink" title="超级标题："></a>超级标题：</h3><ul>
-<li>使用 suptitle() 函数为多张子图添加超级标题<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># plot 1</span></span><br><span class="line">x = np.array([<span class="number">0</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>])</span><br><span class="line">y = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">1</span>)</span><br><span class="line">plt.plot(x, y)</span><br><span class="line">plt.title(<span class="string">&quot;SALES&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot 2</span></span><br><span class="line">x = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>])</span><br><span class="line">y = np.array([<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>])</span><br><span class="line"></span><br><span class="line">plt.subplot(<span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>)</span><br><span class="line">plt.plot(x, y)</span><br><span class="line">plt.title(<span class="string">&quot;INCOME&quot;</span>)</span><br><span class="line"></span><br><span class="line">plt.suptitle(<span class="string">&quot;MY SHOP&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231024224323.png"></li>
-</ul>
-<h2 id="散点图"><a href="#散点图" class="headerlink" title="散点图"></a>散点图</h2><h3 id="创建散点图："><a href="#创建散点图：" class="headerlink" title="创建散点图："></a>创建散点图：</h3><ul>
-<li>使用 scatter() 函数会值散点图</li>
-<li>船传入参数需要两个长度相同的数组，一个用作x轴的值，一个用作y轴的值<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="number">5</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">17</span>,<span class="number">2</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">9</span>,<span class="number">6</span>])</span><br><span class="line">y = np.array([<span class="number">98</span>,<span class="number">86</span>,<span class="number">87</span>,<span class="number">88</span>,<span class="number">111</span>,<span class="number">86</span>,<span class="number">103</span>,<span class="number">87</span>,<span class="number">94</span>,<span class="number">78</span>,<span class="number">77</span>,<span class="number">85</span>,<span class="number">86</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建散点图</span></span><br><span class="line">plt.scatter(x, y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025100044.png"></li>
-</ul>
-<h3 id="颜色："><a href="#颜色：" class="headerlink" title="颜色："></a>颜色：</h3><ul>
-<li>使用 color 或 c 参数为每个散点图设置自己的颜色<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">5</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">17</span>,<span class="number">2</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">9</span>,<span class="number">6</span>])</span><br><span class="line">y = np.array([<span class="number">98</span>,<span class="number">86</span>,<span class="number">87</span>,<span class="number">88</span>,<span class="number">111</span>,<span class="number">86</span>,<span class="number">103</span>,<span class="number">87</span>,<span class="number">94</span>,<span class="number">78</span>,<span class="number">77</span>,<span class="number">85</span>,<span class="number">86</span>])</span><br><span class="line"><span class="comment"># 设置为粉色</span></span><br><span class="line">plt.scatter(x, y, color = <span class="string">&#x27;hotpink&#x27;</span>)</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="number">2</span>,<span class="number">2</span>,<span class="number">8</span>,<span class="number">1</span>,<span class="number">15</span>,<span class="number">8</span>,<span class="number">12</span>,<span class="number">9</span>,<span class="number">7</span>,<span class="number">3</span>,<span class="number">11</span>,<span class="number">4</span>,<span class="number">7</span>,<span class="number">14</span>,<span class="number">12</span>])</span><br><span class="line">y = np.array([<span class="number">100</span>,<span class="number">105</span>,<span class="number">84</span>,<span class="number">105</span>,<span class="number">90</span>,<span class="number">99</span>,<span class="number">90</span>,<span class="number">95</span>,<span class="number">94</span>,<span class="number">100</span>,<span class="number">79</span>,<span class="number">112</span>,<span class="number">91</span>,<span class="number">80</span>,<span class="number">85</span>])</span><br><span class="line"><span class="comment"># 使用十六进制色码</span></span><br><span class="line">plt.scatter(x, y, color = <span class="string">&#x27;#88c999&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025101231.png"></li>
-</ul>
-<h3 id="为每个点上色："><a href="#为每个点上色：" class="headerlink" title="为每个点上色："></a>为每个点上色：</h3><ul>
-<li>color 参数传入一个数组，可以对分别为每个点上色<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">5</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">17</span>,<span class="number">2</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">9</span>,<span class="number">6</span>])</span><br><span class="line">y = np.array([<span class="number">98</span>,<span class="number">86</span>,<span class="number">87</span>,<span class="number">88</span>,<span class="number">111</span>,<span class="number">86</span>,<span class="number">103</span>,<span class="number">87</span>,<span class="number">94</span>,<span class="number">78</span>,<span class="number">77</span>,<span class="number">85</span>,<span class="number">86</span>])</span><br><span class="line"><span class="comment"># 创建代表颜色的数组 colors</span></span><br><span class="line">colors = np.array([<span class="string">&quot;red&quot;</span>, <span class="string">&quot;green&quot;</span>, <span class="string">&quot;blue&quot;</span>, <span class="string">&quot;yellow&quot;</span>, <span class="string">&quot;pink&quot;</span>, <span class="string">&quot;black&quot;</span>, <span class="string">&quot;orange&quot;</span>, <span class="string">&quot;purple&quot;</span>, <span class="string">&quot;beige&quot;</span>, <span class="string">&quot;brown&quot;</span>, <span class="string">&quot;gray&quot;</span>, <span class="string">&quot;cyan&quot;</span>, <span class="string">&quot;magenta&quot;</span>])</span><br><span class="line"></span><br><span class="line">plt.scatter(x, y, c = colors)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="颜色图："><a href="#颜色图：" class="headerlink" title="颜色图："></a>颜色图：</h3><ul>
-<li>使用 cmap 参数指定颜色图，在使用颜色图的散点图中，此外还需要创建一个 0-100 取值范围内的数组。<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">5</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">17</span>,<span class="number">2</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">9</span>,<span class="number">6</span>])</span><br><span class="line">y = np.array([<span class="number">98</span>,<span class="number">86</span>,<span class="number">87</span>,<span class="number">88</span>,<span class="number">111</span>,<span class="number">86</span>,<span class="number">103</span>,<span class="number">87</span>,<span class="number">94</span>,<span class="number">78</span>,<span class="number">77</span>,<span class="number">85</span>,<span class="number">86</span>])</span><br><span class="line">colors = np.array([<span class="number">0</span>,<span class="number">10</span>,<span class="number">20</span>,<span class="number">30</span>,<span class="number">40</span>,<span class="number">45</span>,<span class="number">50</span>,<span class="number">55</span>,<span class="number">60</span>,<span class="number">70</span>,<span class="number">80</span>,<span class="number">90</span>,<span class="number">100</span>])</span><br><span class="line"></span><br><span class="line">plt.scatter(x, y, c= colors, cmap=<span class="string">&#x27;viridis&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.colorbar()</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025162244.png"></li>
-</ul>
-<h3 id="尺寸："><a href="#尺寸：" class="headerlink" title="尺寸："></a>尺寸：</h3><ul>
-<li>使用 s 参数更改点的大小</li>
-<li>就像颜色一样，需要确保大小数组的长度与x和y轴的数组长度相同<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">5</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">17</span>,<span class="number">2</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">9</span>,<span class="number">6</span>])</span><br><span class="line">y = np.array([<span class="number">98</span>,<span class="number">86</span>,<span class="number">87</span>,<span class="number">88</span>,<span class="number">111</span>,<span class="number">86</span>,<span class="number">103</span>,<span class="number">87</span>,<span class="number">94</span>,<span class="number">78</span>,<span class="number">77</span>,<span class="number">85</span>,<span class="number">86</span>])</span><br><span class="line"><span class="comment"># 创建代表每个点尺寸的数组</span></span><br><span class="line">sizes = np.array([<span class="number">20</span>,<span class="number">50</span>,<span class="number">100</span>,<span class="number">200</span>,<span class="number">500</span>,<span class="number">1000</span>,<span class="number">60</span>,<span class="number">90</span>,<span class="number">10</span>,<span class="number">300</span>,<span class="number">600</span>,<span class="number">800</span>,<span class="number">75</span>])</span><br><span class="line"></span><br><span class="line">plt.scatter(x, y, s=sizes)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025155849.png"></li>
-</ul>
-<h3 id="透明度："><a href="#透明度：" class="headerlink" title="透明度："></a>透明度：</h3><ul>
-<li>使用 alpha 参数可以调整点的透明度</li>
-<li>就像颜色一样，需要确保大小数组的长度与x和y轴的数组长度相同<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">5</span>,<span class="number">7</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">17</span>,<span class="number">2</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">11</span>,<span class="number">12</span>,<span class="number">9</span>,<span class="number">6</span>])</span><br><span class="line">y = np.array([<span class="number">98</span>,<span class="number">86</span>,<span class="number">87</span>,<span class="number">88</span>,<span class="number">111</span>,<span class="number">86</span>,<span class="number">103</span>,<span class="number">87</span>,<span class="number">94</span>,<span class="number">78</span>,<span class="number">77</span>,<span class="number">85</span>,<span class="number">86</span>])</span><br><span class="line">sizes = np.array([<span class="number">20</span>,<span class="number">50</span>,<span class="number">100</span>,<span class="number">200</span>,<span class="number">500</span>,<span class="number">1000</span>,<span class="number">60</span>,<span class="number">90</span>,<span class="number">10</span>,<span class="number">300</span>,<span class="number">600</span>,<span class="number">800</span>,<span class="number">75</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 直接传入表示透明度的数值</span></span><br><span class="line">plt.scatter(x, y, s=sizes, alpha=<span class="number">0.5</span>)</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025155605.png"></li>
-</ul>
-<h3 id="组合颜色大小透明度："><a href="#组合颜色大小透明度：" class="headerlink" title="组合颜色大小透明度："></a>组合颜色大小透明度：</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成随机xy轴坐标</span></span><br><span class="line">x = np.random.randint(<span class="number">100</span>, size=(<span class="number">100</span>))</span><br><span class="line">y = np.random.randint(<span class="number">100</span>, size=(<span class="number">100</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机生成代表颜色与尺寸的参数数组</span></span><br><span class="line">colors = np.random.randint(<span class="number">100</span>, size=(<span class="number">100</span>))</span><br><span class="line">sizes = <span class="number">10</span> * np.random.randint(<span class="number">100</span>, size=(<span class="number">100</span>))</span><br><span class="line"></span><br><span class="line">plt.scatter(x, y, c=colors, s=sizes, alpha=<span class="number">0.5</span>, cmap=<span class="string">&#x27;nipy_spectral&#x27;</span>)</span><br><span class="line"></span><br><span class="line">plt.colorbar()</span><br><span class="line"></span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025160812.png"></p>
-<h2 id="柱状图"><a href="#柱状图" class="headerlink" title="柱状图"></a>柱状图</h2><h3 id="创建柱状图："><a href="#创建柱状图：" class="headerlink" title="创建柱状图："></a>创建柱状图：</h3><ul>
-<li>使用 bar() 函数绘制柱状图<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">x = np.array([<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;D&quot;</span>])</span><br><span class="line">y = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.bar(x, y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025184747.png"></li>
-<li>另一种参数设置方法<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = [<span class="string">&quot;APPLES&quot;</span>, <span class="string">&quot;BANANAS&quot;</span>]</span><br><span class="line">y = [<span class="number">400</span>, <span class="number">350</span>]</span><br><span class="line"></span><br><span class="line">plt.bar(x, y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025185110.png"></li>
-</ul>
-<h3 id="水平柱状图："><a href="#水平柱状图：" class="headerlink" title="水平柱状图："></a>水平柱状图：</h3><ul>
-<li>要创建水平形态的柱状图，需使用 barh() 函数<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;D&quot;</span>])</span><br><span class="line">y = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line">plt.barh(x, y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025185412.png"></li>
-</ul>
-<h3 id="柱状图颜色："><a href="#柱状图颜色：" class="headerlink" title="柱状图颜色："></a>柱状图颜色：</h3><ul>
-<li>bar( ) 或 barh () 函数，都可以使用 color 参数来设置颜色：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([&quot;A&quot;, &quot;B&quot;, &quot;C&quot;, &quot;D&quot;])</span><br><span class="line">y = np.array([3, 8, 1, 10])</span><br><span class="line"></span><br><span class="line">plt.bar(x, y, color=&quot;red&quot;)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025185631.png"></li>
-</ul>
-<h3 id="线条宽度："><a href="#线条宽度：" class="headerlink" title="线条宽度："></a>线条宽度：</h3><ul>
-<li>bar() 函数生成的竖型柱状图要想设置柱状图宽度，可以使用 width 参数<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;D&quot;</span>])</span><br><span class="line">y = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 因为是竖型，所以只能调节宽度值</span></span><br><span class="line">plt.bar(x, y, width=<span class="number">0.1</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025190524.png"></li>
-</ul>
-<h3 id="线条高度："><a href="#线条高度：" class="headerlink" title="线条高度："></a>线条高度：</h3><ul>
-<li>barh() 函数成成的横型柱状图要想设置柱状图高度，可以使用 hight 参数<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="string">&quot;A&quot;</span>, <span class="string">&quot;B&quot;</span>, <span class="string">&quot;C&quot;</span>, <span class="string">&quot;D&quot;</span>])</span><br><span class="line">y = np.array([<span class="number">3</span>, <span class="number">8</span>, <span class="number">1</span>, <span class="number">10</span>])</span><br><span class="line"></span><br><span class="line"><span class="comment"># 因为是横型，所以只能调节高度值</span></span><br><span class="line">plt.barh(x, y, height=<span class="number">0.1</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025190955.png"></li>
-</ul>
-<h2 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h2><h3 id="创建直方图："><a href="#创建直方图：" class="headerlink" title="创建直方图："></a>创建直方图：</h3><ul>
-<li>使用 hist() 函数来创建直方图，参数为一个数字数组<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> py</span><br><span class="line"></span><br><span class="line"><span class="comment"># 随机生成一个250个值的数组，中值为170，标准差为10</span></span><br><span class="line">x = np.random.normal(<span class="number">170</span>, <span class="number">10</span>, <span class="number">250</span>)</span><br><span class="line"><span class="built_in">print</span>(x)</span><br><span class="line"></span><br><span class="line">plt.hist(x)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025191618.png"></li>
-</ul>
-<h2 id="饼图"><a href="#饼图" class="headerlink" title="饼图"></a>饼图</h2><h3 id="创建饼图："><a href="#创建饼图：" class="headerlink" title="创建饼图："></a>创建饼图：</h3><ul>
-<li>使用 pie() 函数创建饼图：<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">y= np.array([<span class="number">35</span>, <span class="number">25</span>, <span class="number">25</span>, <span class="number">15</span>])</span><br><span class="line"></span><br><span class="line">plt.pie(y)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025193307.png"></li>
-</ul>
-<h3 id="标签："><a href="#标签：" class="headerlink" title="标签："></a>标签：</h3><ul>
-<li>使用 label 参数为饼图添加标签</li>
-<li>label必须是一个数组，每个楔形都有一个标签<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">y = np.array([<span class="number">35</span>, <span class="number">25</span>, <span class="number">25</span>, <span class="number">15</span>])</span><br><span class="line">mylabels = [<span class="string">&quot;Apples&quot;</span>, <span class="string">&quot;Bananas&quot;</span>, <span class="string">&quot;Cherries&quot;</span>, <span class="string">&quot;Dates&quot;</span>]</span><br><span class="line"></span><br><span class="line">plt.pie(y, labels=mylabels)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025194058.png"></li>
-</ul>
-<h3 id="起始角度："><a href="#起始角度：" class="headerlink" title="起始角度："></a>起始角度：</h3><ul>
-<li>饼图默认起始角位于x轴，若要自定义起始角度可以使用 startangle 参数来设置</li>
-<li>startangle 参数的单位为度，默认值为0度,从x轴正半轴向逆时针计算角度<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025194422.png"><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">y = np.array([<span class="number">35</span>, <span class="number">25</span>, <span class="number">25</span>, <span class="number">15</span>])</span><br><span class="line">mylabels = [<span class="string">&quot;Apples&quot;</span>, <span class="string">&quot;Bananas&quot;</span>, <span class="string">&quot;Cherries&quot;</span>, <span class="string">&quot;Dates&quot;</span>]</span><br><span class="line"></span><br><span class="line">plt.pie(y, labels=mylabels, startangle=<span class="number">90</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025195322.png"></li>
-</ul>
-<h3 id="Explode："><a href="#Explode：" class="headerlink" title="Explode："></a>Explode：</h3><ul>
-<li>使用 explode 参数使饼图其中一个楔子脱离饼图，着重显示</li>
-<li>explode 参数的值为一个数组，每个数组元素对应一个楔子，总数需要相等</li>
-<li>数组中的每个元素为浮点型，表示对应楔子距离圆心有多远<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">y = np.array([<span class="number">35</span>, <span class="number">25</span>, <span class="number">25</span>,<span class="number">15</span>])</span><br><span class="line">mylabels = [<span class="string">&quot;Apples&quot;</span>, <span class="string">&quot;Bananas&quot;</span>, <span class="string">&quot;Cherries&quot;</span>, <span class="string">&quot;Dates&quot;</span>]</span><br><span class="line">myexplode = [<span class="number">0.2</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">plt.pie(y, labels=mylabels, explode=myexplode)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025200151.png"></li>
-</ul>
-<h3 id="阴影："><a href="#阴影：" class="headerlink" title="阴影："></a>阴影：</h3><ul>
-<li>通过 shadow 参数为 True 为饼图添加阴影<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">y = np.array([<span class="number">35</span>, <span class="number">25</span>, <span class="number">25</span>,<span class="number">15</span>])</span><br><span class="line">mylabels = [<span class="string">&quot;Apples&quot;</span>, <span class="string">&quot;Bananas&quot;</span>, <span class="string">&quot;Cherries&quot;</span>, <span class="string">&quot;Dates&quot;</span>]</span><br><span class="line">myexplode = [<span class="number">0.2</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">plt.pie(y, labels=mylabels, explode=myexplode, shadow=<span class="literal">True</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025201123.png"></li>
-</ul>
-<h3 id="颜色：-1"><a href="#颜色：-1" class="headerlink" title="颜色："></a>颜色：</h3><ul>
-<li>使用 colors 参数设置每个楔形的颜色</li>
-<li>如果指定了颜色参数，则必须传入一个数组，对应每个楔形的值<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">y = np.array([<span class="number">35</span>, <span class="number">25</span>, <span class="number">25</span>,<span class="number">15</span>])</span><br><span class="line">mylabels = [<span class="string">&quot;Apples&quot;</span>, <span class="string">&quot;Bananas&quot;</span>, <span class="string">&quot;Cherries&quot;</span>, <span class="string">&quot;Dates&quot;</span>]</span><br><span class="line">mycolors = [<span class="string">&quot;yellow&quot;</span>, <span class="string">&quot;hotpink&quot;</span>, <span class="string">&quot;aqua&quot;</span>, <span class="string">&quot;#4CAF50&quot;</span>]</span><br><span class="line"></span><br><span class="line">plt.pie(y, labels=mylabels, colors=mycolors)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025201731.png"></li>
-</ul>
-<h3 id="图例："><a href="#图例：" class="headerlink" title="图例："></a>图例：</h3><ul>
-<li>使用 legend() 函数为每个楔形添加解释列表<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">y = np.array([<span class="number">35</span>, <span class="number">25</span>, <span class="number">25</span>,<span class="number">15</span>])</span><br><span class="line">mylabels = [<span class="string">&quot;Apples&quot;</span>, <span class="string">&quot;Bananas&quot;</span>, <span class="string">&quot;Cherries&quot;</span>, <span class="string">&quot;Dates&quot;</span>]</span><br><span class="line"></span><br><span class="line">plt.pie(y, labels = mylabels)</span><br><span class="line"></span><br><span class="line">plt.legend()</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025202836.png"></li>
-</ul>
-<h3 id="带标题的图例："><a href="#带标题的图例：" class="headerlink" title="带标题的图例："></a>带标题的图例：</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">y = np.array([<span class="number">35</span>, <span class="number">25</span>, <span class="number">25</span>,<span class="number">15</span>])</span><br><span class="line">mylabels = [<span class="string">&quot;Apples&quot;</span>, <span class="string">&quot;Bananas&quot;</span>, <span class="string">&quot;Cherries&quot;</span>, <span class="string">&quot;Dates&quot;</span>]</span><br><span class="line"></span><br><span class="line">plt.pie(y, labels = mylabels)</span><br><span class="line"></span><br><span class="line">plt,legend(title=<span class="string">&quot;Four Fruite:&quot;</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231025203210.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1379,7 +1172,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">137</span>
+          <span class="site-state-item-count">145</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
