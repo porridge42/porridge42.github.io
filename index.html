@@ -206,10 +206,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2023-10-31 19:31:00 / 修改时间：20:02:55" itemprop="dateCreated datePublished" datetime="2023-10-31T19:31:00+08:00">2023-10-31</time>
+              <time title="创建时间：2023-10-31 19:31:00" itemprop="dateCreated datePublished" datetime="2023-10-31T19:31:00+08:00">2023-10-31</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-01 09:39:20" itemprop="dateModified" datetime="2023-11-01T09:39:20+08:00">2023-11-01</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -245,7 +251,7 @@
 </ul>
 </li>
 </ul>
-<h2 id="获取sklearn小型数据集"><a href="#获取sklearn小型数据集" class="headerlink" title="获取sklearn小型数据集"></a>获取sklearn小型数据集</h2><ul>
+<h2 id="获取sklearn小数据集"><a href="#获取sklearn小数据集" class="headerlink" title="获取sklearn小数据集"></a>获取sklearn小数据集</h2><ul>
 <li>sklearn.datasets.load_iris()<ul>
 <li>加载并返回鸢尾花数据集<table>
 <thead>
@@ -295,6 +301,79 @@
 <td align="right">506</td>
 </tr>
 </tbody></table>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="获取sklearn大数据集"><a href="#获取sklearn大数据集" class="headerlink" title="获取sklearn大数据集"></a>获取sklearn大数据集</h2><ul>
+<li>sklearn.datasets.fetch_20newsgroups(data_home&#x3D;None, subset&#x3D;’train’)<ul>
+<li>subset：’train’或者’test’,’all’，可选，选择需要加载的数据集</li>
+<li>数据集的“训练”，测试集的“测试”，两者的“全部”</li>
+</ul>
+</li>
+</ul>
+<h2 id="sklearn数据集的使用"><a href="#sklearn数据集的使用" class="headerlink" title="sklearn数据集的使用"></a>sklearn数据集的使用</h2><ul>
+<li><p>以鸢尾花数据集为例：</p>
+</li>
+<li><p>特征值4个：花瓣、花萼的长度、宽度</p>
+</li>
+<li><p>目标值3个：setosa, vericolor, virginica</p>
+</li>
+<li><p><strong>sklearn数据集返回值介绍：</strong></p>
+<ul>
+<li>load和fetch返回的数据类型为dataset.base.Bunch（字典格式）<ul>
+<li>data：特征数据数组，是 [n_samples * n_features]的二维ndarray数组</li>
+<li>target：标签数组，是 n_samples 的以为ndarray数组</li>
+<li>DESCR：数据描述</li>
+<li>feature_names：特征名，新闻数据、手写数字、回归数据集没有</li>
+<li>target_names：标签名</li>
+</ul>
+</li>
+<li>数据集的索引方法：<ul>
+<li>dict[“key”] &#x3D; values</li>
+<li>bunch.key &#x3D; values<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sklearn加载数据集演示代码</span></span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"></span><br><span class="line">iris = load_iris()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;鸢尾花数据集：\n&quot;</span>, iris)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;查看数据描述：\n&quot;</span>, iris[<span class="string">&quot;DESCR&quot;</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;查看特征值的名字：\n&quot;</span>, iris.feature_names)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;查看特征值：\n&quot;</span>, iris.data)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;查看特征值shape：\n&quot;</span>, iris.data.shape)</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p><strong>思考：拿到的数据是否全部都用来训练第一个模型？</strong></p>
+<ul>
+<li>如果数据全部用来训练模型，就没有数据用来测试。</li>
+<li>获取到数据后可以划分为训练集与测试集。</li>
+<li>一部分数据用于训练模型，一部分数据用来验证模型的准确度。</li>
+</ul>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="数据集的划分"><a href="#数据集的划分" class="headerlink" title="数据集的划分"></a>数据集的划分</h2><ul>
+<li><p>机器学习一般分分为两个部分：</p>
+<ul>
+<li>训练数据：用于训练，构建模型</li>
+<li>测试数据：在模型验证时使用，，用于评估模型是否有效</li>
+</ul>
+</li>
+<li><p>划分比例：</p>
+<ul>
+<li>训练集：70%，80%，75%</li>
+<li>测试集：30%，20%，30%</li>
+</ul>
+</li>
+<li><p><strong>数据集划分api：</strong></p>
+<ul>
+<li>sklearn.model_selection.train_test_split(arrays, *iptions)</li>
+<li>参数列表：<ul>
+<li>x 数据集的特征值</li>
+<li>y 数据集的标签值</li>
+<li>test_size 测试集的大小</li>
+<li>random_state 随机数种子，不同的种子会造成不同的随机采样结果。相同的种子采样结果相同。</li>
+</ul>
+</li>
+<li>返回值：<ul>
+<li>训练集特征值，测试集特征值，训练集目标值，测试集目标值。</li>
+<li>一般命名：x_train, x_test, y_train, y_test<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据集划分演示代码</span></span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection.train_test_split</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载数据集</span></span><br><span class="line">iris = load_iris()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 划分数据集</span></span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.traget, test_size=<span class="number">0.2</span>, random_state=<span class="number">114514</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;数据集的特征值：\n&#x27;</span>, iris.data, iris.data.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;划分后训练集的特征值：\n&#x27;</span>, x_train, x_train.shape)</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231101093726.png"><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231101093841.png"></li>
+</ul>
 </li>
 </ul>
 </li>
