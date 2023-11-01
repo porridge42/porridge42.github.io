@@ -214,7 +214,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-01 09:39:20" itemprop="dateModified" datetime="2023-11-01T09:39:20+08:00">2023-11-01</time>
+                <time title="修改时间：2023-11-01 10:05:28" itemprop="dateModified" datetime="2023-11-01T10:05:28+08:00">2023-11-01</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -331,7 +331,14 @@
 </li>
 <li>数据集的索引方法：<ul>
 <li>dict[“key”] &#x3D; values</li>
-<li>bunch.key &#x3D; values<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sklearn加载数据集演示代码</span></span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"></span><br><span class="line">iris = load_iris()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;鸢尾花数据集：\n&quot;</span>, iris)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;查看数据描述：\n&quot;</span>, iris[<span class="string">&quot;DESCR&quot;</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;查看特征值的名字：\n&quot;</span>, iris.feature_names)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;查看特征值：\n&quot;</span>, iris.data)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;查看特征值shape：\n&quot;</span>, iris.data.shape)</span><br></pre></td></tr></table></figure>
+<li>bunch.key &#x3D; values</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># sklearn加载数据集演示代码</span></span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"></span><br><span class="line">iris = load_iris()</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;鸢尾花数据集：\n&quot;</span>, iris)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;查看数据描述：\n&quot;</span>, iris[<span class="string">&quot;DESCR&quot;</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;查看特征值的名字：\n&quot;</span>, iris.feature_names)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;查看特征值：\n&quot;</span>, iris.data)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;查看特征值shape：\n&quot;</span>, iris.data.shape)</span><br></pre></td></tr></table></figure>
+
 <blockquote>
 <p><strong>思考：拿到的数据是否全部都用来训练第一个模型？</strong></p>
 <ul>
@@ -340,12 +347,6 @@
 <li>一部分数据用于训练模型，一部分数据用来验证模型的准确度。</li>
 </ul>
 </blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
 <h2 id="数据集的划分"><a href="#数据集的划分" class="headerlink" title="数据集的划分"></a>数据集的划分</h2><ul>
 <li><p>机器学习一般分分为两个部分：</p>
 <ul>
@@ -371,14 +372,16 @@
 </li>
 <li>返回值：<ul>
 <li>训练集特征值，测试集特征值，训练集目标值，测试集目标值。</li>
-<li>一般命名：x_train, x_test, y_train, y_test<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据集划分演示代码</span></span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection.train_test_split</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载数据集</span></span><br><span class="line">iris = load_iris()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 划分数据集</span></span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.traget, test_size=<span class="number">0.2</span>, random_state=<span class="number">114514</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;数据集的特征值：\n&#x27;</span>, iris.data, iris.data.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;划分后训练集的特征值：\n&#x27;</span>, x_train, x_train.shape)</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231101093726.png"><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231101093841.png"></li>
+<li>一般命名：x_train, x_test, y_train, y_test<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 数据集划分演示代码</span></span><br><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection.train_test_split</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加载数据集</span></span><br><span class="line">iris = load_iris()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 划分数据集</span></span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.traget, test_size=<span class="number">0.2</span>, random_state=<span class="number">114514</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;数据集的特征值：\n&#x27;</span>, iris.data, iris.data.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;划分后训练集的特征值：\n&#x27;</span>, x_train, x_train.shape)</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-
+<div align="center">
+   <img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231101093726.png"  height=130>
+   <img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231101093841.png" height=130>
+</div>
       
     </div>
 
