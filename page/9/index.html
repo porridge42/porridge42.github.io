@@ -183,6 +183,172 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/15/JavaSE/P66%E5%B8%B8%E7%94%A8%E7%B1%BB_BigDecimal%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/15/JavaSE/P66%E5%B8%B8%E7%94%A8%E7%B1%BB_BigDecimal%E7%B1%BB/" class="post-title-link" itemprop="url">P66常用类_BigDecimal类</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-11-15 23:39:00 / 修改时间：23:39:42" itemprop="dateCreated datePublished" datetime="2022-11-15T23:39:00+08:00">2022-11-15</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="BigDecimal类"><a href="#BigDecimal类" class="headerlink" title="BigDecimal类"></a>BigDecimal类</h2><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">BigDecimalTest</span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>)</span>&#123;</span><br><span class="line">		<span class="built_in">double</span> d1 = <span class="number">1.0</span>;</span><br><span class="line">		<span class="built_in">double</span> d2 = <span class="number">0.9</span>;</span><br><span class="line">		System.<span class="keyword">out</span>.println(d1-d2);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221115230423.png"></p>
+<ul>
+<li><p>使用基本类型进行运算会出现如上精度丢失的情况，如果需要高精度计算的场合则需要使用到BigDecimal类以保证运算精度。</p>
+<br/>
+</li>
+<li><p>使用包:<code>import java.math.BigDecimal;</code></p>
+</li>
+</ul>
+<blockquote>
+<p> 初始化BigDecimal对象值一定要使用字符串以保证精度</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.math.BigDecimal;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">BigDecimalTest2</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//初始化BigDecimal对象值一定要使用字符串以保证精度</span></span><br><span class="line">        <span class="type">BigDecimal</span> <span class="variable">bd1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;1.0&quot;</span>);</span><br><span class="line">        <span class="type">BigDecimal</span> <span class="variable">bd2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;0.9&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//减法</span></span><br><span class="line">        <span class="type">BigDecimal</span> <span class="variable">r1</span> <span class="operator">=</span> bd1.subtract(bd2);</span><br><span class="line">        System.out.println(r1);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//加法</span></span><br><span class="line">        <span class="type">BigDecimal</span> <span class="variable">r2</span> <span class="operator">=</span> bd1.add(bd2);</span><br><span class="line">        System.out.println(r2);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//乘法</span></span><br><span class="line">        <span class="type">BigDecimal</span> <span class="variable">r3</span> <span class="operator">=</span> bd1.multiply(bd2);</span><br><span class="line">        System.out.println(r3);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//除法</span></span><br><span class="line">        <span class="type">BigDecimal</span> <span class="variable">r4</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;1.4&quot;</span>)</span><br><span class="line">                .subtract(<span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;0.5&quot;</span>))</span><br><span class="line">                .divide(<span class="keyword">new</span> <span class="title class_">BigDecimal</span>(<span class="string">&quot;0.9&quot;</span>));</span><br><span class="line">        System.out.println(r4);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221115233903.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/14/JavaSE/P65%E5%B8%B8%E7%94%A8%E7%B1%BB_StringBuffer%E5%92%8CStringBuilder/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/14/JavaSE/P65%E5%B8%B8%E7%94%A8%E7%B1%BB_StringBuffer%E5%92%8CStringBuilder/" class="post-title-link" itemprop="url">P65常用类_StringBuffer和StringBuilder</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-14 23:11:00" itemprop="dateCreated datePublished" datetime="2022-11-14T23:11:00+08:00">2022-11-14</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-15 22:46:06" itemprop="dateModified" datetime="2022-11-15T22:46:06+08:00">2022-11-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="可变字符串"><a href="#可变字符串" class="headerlink" title="可变字符串"></a>可变字符串</h1><ul>
+<li><p><strong>StringBuffer类:</strong><br>可变长字符串，JDK1.0提供，运行效率慢、线程安全。</p>
+</li>
+<li><p><strong>StringBuilder类:</strong><br>可变长字符串，JDK5.0提供，运行效率快、线程不安全。</p>
+<br/>
+</li>
+<li><p>StringBuffer的方法使用与StringBuilder完全相同：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo05</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">StringBuffer</span> <span class="variable">sb</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">StringBuffer</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//1. append(); 追加</span></span><br><span class="line">        sb.append(<span class="string">&quot;Hello&quot;</span>);</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line">        sb.append(<span class="string">&quot;World&quot;</span>);</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line">        sb.append(<span class="string">&quot;!&quot;</span>);</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2. insert(); 插入</span></span><br><span class="line">        sb.insert(<span class="number">0</span>, <span class="string">&quot;我在最前面！&quot;</span>);</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3. replace(); 替换</span></span><br><span class="line">        sb.replace(<span class="number">0</span>, <span class="number">6</span>, <span class="string">&quot;我被替换了！&quot;</span>);</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4.delete();  删除</span></span><br><span class="line">        sb.delete(<span class="number">0</span>, <span class="number">6</span>);</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line">        <span class="comment">//清空</span></span><br><span class="line">        sb.delete(<span class="number">0</span>, sb.length());</span><br><span class="line">        System.out.println(sb.toString());</span><br><span class="line">        System.out.println(sb.length());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+</li>
+</ul>
+<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221115004419.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/13/JavaSE/P64%E5%B8%B8%E7%94%A8%E7%B1%BB_String%E6%A1%88%E4%BE%8B%E6%BC%94%E7%A4%BA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -896,177 +1062,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/06/JavaSE/P56%E5%B8%B8%E7%94%A8%E7%B1%BBtoSting%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/06/JavaSE/P56%E5%B8%B8%E7%94%A8%E7%B1%BBtoSting%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">P56常用类_toString方法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-11-06 16:04:00" itemprop="dateCreated datePublished" datetime="2022-11-06T16:04:00+08:00">2022-11-06</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-07 21:59:22" itemprop="dateModified" datetime="2022-11-07T21:59:22+08:00">2022-11-07</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="toString-方法"><a href="#toString-方法" class="headerlink" title="toString()方法"></a>toString()方法</h2><ul>
-<li><p>返回值: String</p>
-</li>
-<li><p>作用: 返回该对象的字符串表示（表现形式）</p>
-<br/>
-</li>
-<li><p>可以根据程序需求重写该方法，如：展示对象各个属性值。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">	Student(String name, <span class="type">int</span> age)&#123;</span><br><span class="line">		<span class="built_in">this</span>.name = name;</span><br><span class="line">		<span class="built_in">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Student [name=&quot;</span> + name + <span class="string">&quot;,age=&quot;</span> + age + <span class="string">&quot;]&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;aaa&quot;</span>, <span class="number">20</span>);</span><br><span class="line">		<span class="type">Student</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;bbb&quot;</span>, <span class="number">22</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(s1.toString());</span><br><span class="line">        System.out.println(s2.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221106161638.png"></p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/05/JavaSE/P55%E5%B8%B8%E7%94%A8%E7%B1%BB_hashCode%E6%96%B9%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/05/JavaSE/P55%E5%B8%B8%E7%94%A8%E7%B1%BB_hashCode%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">P55常用类_hashCode方法</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-11-05 21:56:00" itemprop="dateCreated datePublished" datetime="2022-11-05T21:56:00+08:00">2022-11-05</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-06 16:02:14" itemprop="dateModified" datetime="2022-11-06T16:02:14+08:00">2022-11-06</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="hashCode-方法"><a href="#hashCode-方法" class="headerlink" title="hashCode()方法"></a>hashCode()方法</h2><ul>
-<li><p>返回值类型: int</p>
-</li>
-<li><p>用于返回对象的哈希码值。</p>
-<br/>
-</li>
-<li><p>哈希值根据对象的<strong>地址</strong>或<strong>字符串</strong>或<strong>数字</strong>使用hash算法计算出来的int类型的数值。</p>
-<br/>
-</li>
-<li><p>一般情况下相同对象返回相同哈希码。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">	<span class="keyword">private</span> String name;</span><br><span class="line">	<span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">	Student(String name, <span class="type">int</span> age)&#123;</span><br><span class="line">		<span class="built_in">this</span>.name = name;</span><br><span class="line">		<span class="built_in">this</span>.age = age;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">		<span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;aaa&quot;</span>, <span class="number">20</span>);</span><br><span class="line">		<span class="type">Student</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;bbb&quot;</span>, <span class="number">22</span>);</span><br><span class="line">		</span><br><span class="line">        System.out.println(s1.hashCode());</span><br><span class="line">        System.out.println(s2.hashCode());</span><br><span class="line"></span><br><span class="line">        <span class="type">Student</span> <span class="variable">s3</span> <span class="operator">=</span> s1;</span><br><span class="line"></span><br><span class="line">        System.out.println(s3.hashCode());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221106160154.png"></p>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1138,7 +1133,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">157</span>
+          <span class="site-state-item-count">159</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -183,6 +183,180 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/08/JavaSE/P86%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_Set%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/08/JavaSE/P86%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_Set%E9%9B%86%E5%90%88%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">P86集合框架_Set集合使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-08 02:30:00 / 修改时间：03:05:24" itemprop="dateCreated datePublished" datetime="2022-12-08T02:30:00+08:00">2022-12-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Set-子接口"><a href="#Set-子接口" class="headerlink" title="Set 子接口"></a>Set 子接口</h1><ul>
+<li><p>特点：无序、无下标、元素不可重复。</p>
+</li>
+<li><p>方法：全部继承自Collection中的方法，并未增加方法。</p>
+<br/>
+</li>
+<li><p>Set接口的实现类:</p>
+<ul>
+<li>HashSet(重点)：<ul>
+<li>基于HashCode实现元素不重复。</li>
+<li>但存入元素的哈希码表时，会调用equals进行确认，如果结果为true，则拒绝后者存入。</li>
+</ul>
+</li>
+<li>TreeSet：<ul>
+<li>基于排列顺序实现元素不重复。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.HashSet;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.Set;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo1</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//创建集合</span></span><br><span class="line">        Set&lt;String&gt; set = <span class="keyword">new</span> <span class="title class_">HashSet</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">//添加元素</span></span><br><span class="line">        set.add(<span class="string">&quot;小米&quot;</span>);</span><br><span class="line">        set.add(<span class="string">&quot;苹果&quot;</span>);</span><br><span class="line">        set.add(<span class="string">&quot;华为&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;数据个数：&quot;</span>+set.size());</span><br><span class="line">        System.out.println(set.toString());</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;-------------------------&quot;</span>);</span><br><span class="line">        <span class="comment">//遍历：因为不存在脚标，所以只能使用迭代器或增强for</span></span><br><span class="line">        System.out.println(<span class="string">&quot;使用增强for遍历：&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (String string : set) &#123;</span><br><span class="line">            System.out.println(string);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;使用迭代器遍历：&quot;</span>);</span><br><span class="line">        Iterator&lt;String&gt; it = set.iterator();</span><br><span class="line">        <span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">            System.out.println(it.next());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;-------------------------&quot;</span>);</span><br><span class="line">        <span class="comment">//判断</span></span><br><span class="line">        System.out.println(set.contains(<span class="string">&quot;华为&quot;</span>));</span><br><span class="line">        System.out.println(set.isEmpty());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221208025803.png"></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/08/JavaSE/P85%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_%E6%B3%9B%E5%9E%8B%E9%9B%86%E5%90%88/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/08/JavaSE/P85%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_%E6%B3%9B%E5%9E%8B%E9%9B%86%E5%90%88/" class="post-title-link" itemprop="url">P85集合框架_泛型集合</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-08 02:02:00 / 修改时间：02:22:46" itemprop="dateCreated datePublished" datetime="2022-12-08T02:02:00+08:00">2022-12-08</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="泛型集合"><a href="#泛型集合" class="headerlink" title="泛型集合"></a>泛型集合</h1><ul>
+<li><p>概念：参数化类型、烈性安全的集合，强制集合元素的类型必须一致。</p>
+<br/>
+</li>
+<li><p>特点：</p>
+<ul>
+<li>编译时即可检查，而非运行时抛出异常。</li>
+<li>访问时，不必类型转换（拆箱）。</li>
+<li>不同泛型之间引用不能相互赋值，泛型不存在多态。<br/></li>
+</ul>
+</li>
+<li><p>在使用集合时有时候会因为类型转换原因抛出异常：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">ArrayList</span> <span class="variable">arrayList</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line">arrayList.add(<span class="string">&quot;xxx&quot;</span>);</span><br><span class="line">arrayList.add(<span class="string">&quot;yyy&quot;</span>);</span><br><span class="line">arrayList.add(<span class="number">10</span>);</span><br><span class="line">arrayList.add(<span class="number">20</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (Object object : arrayList) &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> (String)object;</span><br><span class="line">    System.out.println(str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>  因为集合未指定泛型类型，所以在编写这段代码时向集合中添加不同种类型的元素并不会报错，但实际运行时会抛出类型转换异常。</p>
+<br/>
+</li>
+<li><p>为了防止这种情况，可以在初始化集合时就给定泛型类型：</p>
+  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">ArrayList&lt;String&gt; arrayList = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;String&gt;();</span><br><span class="line">arrayList.add(<span class="string">&quot;xxx&quot;</span>);</span><br><span class="line">arrayList.add(<span class="string">&quot;yyy&quot;</span>);</span><br><span class="line"><span class="comment">//arrayList.add(10);</span></span><br><span class="line"><span class="comment">//arrayList.add(20);</span></span><br><span class="line"><span class="comment">//给明泛型类型后再添加不同类型的元素会直接报错</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (String string : arrayList) &#123;</span><br><span class="line">    <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> (String)string;</span><br><span class="line">    System.out.println(str);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/07/JavaSE/P84%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_%E6%B3%9B%E5%9E%8B%E6%96%B9%E6%B3%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -866,189 +1040,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/28/JavaSE/P76%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_List%E9%9B%86%E5%90%882/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/28/JavaSE/P76%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_List%E9%9B%86%E5%90%882/" class="post-title-link" itemprop="url">P76集合框架_List集合2</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-11-28 11:39:00" itemprop="dateCreated datePublished" datetime="2022-11-28T11:39:00+08:00">2022-11-28</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-12-02 23:31:18" itemprop="dateModified" datetime="2022-12-02T23:31:18+08:00">2022-12-02</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="List的使用2"><a href="#List的使用2" class="headerlink" title="List的使用2"></a>List的使用2</h2><ul>
-<li>添加数字数据<ul>
-<li>List集合在添加数字数据的时候会进行<strong>自动装箱操作</strong>，将基本类型的数字数据自动装箱为对相应的包装类对象。</li>
-</ul>
-</li>
-<li>删除数字数据<ul>
-<li>List集合在删除数字数据的时候需要使用<strong>引用类型</strong>来指定操作元素，如使用基本类型数字则表示删除指定下标的数据。</li>
-</ul>
-</li>
-<li>SubList()方法<ul>
-<li><code>List SubList(int fromIndex，int toIndex)</code></li>
-<li>用于返回一个子集合。</li>
-<li>子集合截取的范围从参数fromIndex指定的下标到参数toIndex所指定的下标，遵循含头不含尾规则，即<strong>包含下标为fromIndex的元素但不包含下标为toIndex的元素</strong>。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo4</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//创建集合</span></span><br><span class="line">        <span class="type">List</span> <span class="variable">list</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//添加数字数据(自动装箱)</span></span><br><span class="line">        list.add(<span class="number">20</span>);</span><br><span class="line">        list.add(<span class="number">30</span>);</span><br><span class="line">        list.add(<span class="number">40</span>);</span><br><span class="line">        list.add(<span class="number">50</span>);</span><br><span class="line">        list.add(<span class="number">60</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;元素个数：&quot;</span>+list.size());</span><br><span class="line">        System.out.println(list.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//删除操作</span></span><br><span class="line">        <span class="comment">//list.remove(20);  //此代码义为删除下标为20的元素</span></span><br><span class="line">        <span class="comment">//若要删除指定内容的元素，则需要进行类型转换:</span></span><br><span class="line">        list.remove(<span class="keyword">new</span> <span class="title class_">Integer</span>(<span class="number">20</span>));</span><br><span class="line">        System.out.println(<span class="string">&quot;删除后元素个数：&quot;</span>+list.size());</span><br><span class="line">        System.out.println(list.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//补充方法SubList()：返回子集合，含头不含尾</span></span><br><span class="line">        <span class="type">List</span> <span class="variable">subList</span> <span class="operator">=</span> list.subList(<span class="number">1</span>, <span class="number">3</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;subList：&quot;</span>+subList.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221129003036.png"></li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/27/JavaSE/P75%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_List%E9%9B%86%E5%90%88/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/27/JavaSE/P75%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_List%E9%9B%86%E5%90%88/" class="post-title-link" itemprop="url">P75集合框架_List集合</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-11-27 01:16:00" itemprop="dateCreated datePublished" datetime="2022-11-27T01:16:00+08:00">2022-11-27</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-29 00:17:26" itemprop="dateModified" datetime="2022-11-29T00:17:26+08:00">2022-11-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="List接口："><a href="#List接口：" class="headerlink" title="List接口："></a>List接口：</h2><ul>
-<li>特点：有序、有下标、元素可以重复。</li>
-<li>方法：<ul>
-<li><code>void add(int index, Object o)</code><br> &#x2F;&#x2F;在index位置插入对象o</li>
-<li><code>boolean addAll(int index, Collection c)</code><br> &#x2F;&#x2F;将一个集合中的元素添加到此集合中的index位置。</li>
-<li><code>Object get(int index)</code><br> &#x2F;&#x2F;返回集合中指定位置的元素</li>
-<li><code>List subList(int formIndex, int toIndex)</code><br> &#x2F;&#x2F;返回fromIndex和toIndex之间的集合元素。</li>
-</ul>
-</li>
-<li>List迭代器:<ul>
-<li><code>ListIterator lit = list.listIterator();</code></li>
-<li>与Iterator的区别：<ul>
-<li>ListIterator的功能更加强大，可以向前或向后遍历、添加、删除、修改元素。</li>
-</ul>
-</li>
-<li>方法列表:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221127232647.png"><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"><span class="keyword">import</span> java.util.ListIterator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo3</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//先创建集合对象</span></span><br><span class="line">        <span class="type">List</span> <span class="variable">list</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="comment">//添加元素</span></span><br><span class="line">        list.add(<span class="string">&quot;苹果&quot;</span>);</span><br><span class="line">        list.add(<span class="string">&quot;小米&quot;</span>);</span><br><span class="line">        list.add(<span class="number">0</span>, <span class="string">&quot;华为&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;元素个数:&quot;</span>+list.size());</span><br><span class="line">        System.out.println(list.toString());</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;-----------------------&quot;</span>);</span><br><span class="line">        <span class="comment">//遍历</span></span><br><span class="line">        <span class="comment">//使用for遍历</span></span><br><span class="line">        System.out.println(<span class="string">&quot;使用for：&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i&lt;list.size(); i++)&#123;</span><br><span class="line">            System.out.println(list.get(i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//使用增强for</span></span><br><span class="line">        System.out.println(<span class="string">&quot;使用增强for：&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span>(Object object : list)&#123;</span><br><span class="line">            System.out.println(object);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//使用迭代器</span></span><br><span class="line">        System.out.println(<span class="string">&quot;使用迭代器：&quot;</span>);</span><br><span class="line">        <span class="type">Iterator</span> <span class="variable">it</span> <span class="operator">=</span> list.iterator();</span><br><span class="line">        <span class="keyword">while</span>(it.hasNext())&#123;</span><br><span class="line">            System.out.println(it.next());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//使用列表迭代器</span></span><br><span class="line">        System.out.println(<span class="string">&quot;使用列表迭代器：&quot;</span>);</span><br><span class="line">        <span class="type">ListIterator</span> <span class="variable">lit</span> <span class="operator">=</span> list.listIterator();</span><br><span class="line">        System.out.println(<span class="string">&quot;从前往后：&quot;</span>);</span><br><span class="line">        <span class="keyword">while</span>(lit.hasNext())&#123;</span><br><span class="line">            System.out.println(lit.nextIndex()+<span class="string">&quot;:&quot;</span>+lit.next());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//因为此时迭代器已经迭代至最后一个元素，所以可以直接开始从后往前遍历。</span></span><br><span class="line">        System.out.println(<span class="string">&quot;从后往前:&quot;</span>);</span><br><span class="line">        <span class="keyword">while</span>(lit.hasPrevious())&#123;</span><br><span class="line">            System.out.println(lit.previousIndex()+<span class="string">&quot;:&quot;</span>+lit.previous());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;-----------------------&quot;</span>);</span><br><span class="line">        <span class="comment">//判断</span></span><br><span class="line">        System.out.println(list.contains(<span class="string">&quot;苹果&quot;</span>));</span><br><span class="line">        System.out.println(list.isEmpty());</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;-----------------------&quot;</span>);</span><br><span class="line">        <span class="comment">//获取</span></span><br><span class="line">        System.out.println(list.indexOf(<span class="string">&quot;华为&quot;</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221128004015.png"></li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1120,7 +1111,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">157</span>
+          <span class="site-state-item-count">159</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -183,6 +183,287 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/02/sklearn/3_sklearn%E7%89%B9%E5%BE%81%E9%A2%84%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/11/02/sklearn/3_sklearn%E7%89%B9%E5%BE%81%E9%A2%84%E5%A4%84%E7%90%86/" class="post-title-link" itemprop="url">未命名</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-11-02 20:41:30" itemprop="dateCreated datePublished" datetime="2023-11-02T20:41:30+08:00">2023-11-02</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/01/sklearn/2_sklearn%E7%89%B9%E5%BE%81%E6%8A%BD%E5%8F%96/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/11/01/sklearn/2_sklearn%E7%89%B9%E5%BE%81%E6%8A%BD%E5%8F%96/" class="post-title-link" itemprop="url">P2_sklearn特征抽取</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-11-01 10:44:00" itemprop="dateCreated datePublished" datetime="2023-11-01T10:44:00+08:00">2023-11-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-02 20:30:54" itemprop="dateModified" datetime="2023-11-02T20:30:54+08:00">2023-11-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sklearn/" itemprop="url" rel="index"><span itemprop="name">sklearn</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="特征工程-数据抽取"><a href="#特征工程-数据抽取" class="headerlink" title="特征工程-数据抽取"></a>特征工程-数据抽取</h2><ul>
+<li>特征提取&#x2F;特城抽取定义：将任意数据（如文本或图像）转换为可用于机器学习的数字特征</li>
+<li>特征提取的类别：<ul>
+<li>字典特征提取（特征离散化）</li>
+<li>文本特征提取</li>
+<li>图像特征提取（主要在深度学习部分学习）</li>
+</ul>
+</li>
+<li>特征提取api:<ul>
+<li>sklearn.feature_extraceion</li>
+</ul>
+</li>
+</ul>
+<h3 id="字典特征提取"><a href="#字典特征提取" class="headerlink" title="字典特征提取"></a>字典特征提取</h3><ul>
+<li><p>作用：对字典数据进行特征值化</p>
+</li>
+<li><p>sklearn.feature_extraction.DictVectorizer(sparse&#x3D;True, …)</p>
+<ul>
+<li>DictVectorizer.fit_transform(字典或包含字典的可迭代对象)<ul>
+<li>返回值：sparse矩阵</li>
+</ul>
+</li>
+<li>DictVercotizer.inverse_transform(数组或者sparse矩阵)<ul>
+<li>返回值：转换之前的数据格式</li>
+</ul>
+</li>
+<li>DictVercotizer.get_feature_names()<ul>
+<li>返回值：返回类别名称</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>示例：</p>
+<ul>
+<li>对下面的数据进行特征提取<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[&#123;<span class="string">&#x27;city&#x27;</span>: <span class="string">&#x27;北京&#x27;</span>, <span class="string">&#x27;temperature&#x27;</span>:<span class="number">100</span>&#125;,</span><br><span class="line">&#123;<span class="string">&#x27;city&#x27;</span>: <span class="string">&#x27;上海&#x27;</span>, <span class="string">&#x27;temperature&#x27;</span>:<span class="number">60</span>&#125;,</span><br><span class="line">&#123;<span class="string">&#x27;city&#x27;</span>: <span class="string">&#x27;深圳&#x27;</span>, <span class="string">&#x27;temperature&#x27;</span>:<span class="number">30</span>&#125;]</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>流程分析：</p>
+<ul>
+<li>实例化类：DictVectorizer</li>
+<li>调用fit_transform方法输入数据并转换（注意返回格式）</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_extraction <span class="keyword">import</span> DictVectorizer</span><br><span class="line"></span><br><span class="line">data = [&#123;<span class="string">&#x27;city&#x27;</span>: <span class="string">&#x27;北京&#x27;</span>, <span class="string">&#x27;temperature&#x27;</span>:<span class="number">100</span>&#125;,&#123;<span class="string">&#x27;city&#x27;</span>: <span class="string">&#x27;上海&#x27;</span>, <span class="string">&#x27;temperature&#x27;</span>:<span class="number">60</span>&#125;,&#123;<span class="string">&#x27;city&#x27;</span>: <span class="string">&#x27;深圳&#x27;</span>, <span class="string">&#x27;temperature&#x27;</span>:<span class="number">30</span>&#125;]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1.实例化一个转换器类</span></span><br><span class="line">transfer = DictVectorizer()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.调用fit_trancform()方法</span></span><br><span class="line">data_new = transfer.fit_transform(data)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;data_new:\n&quot;</span>, data_new)</span><br></pre></td></tr></table></figure>
+<p>输出：sparse矩阵（稀疏矩阵）<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231101154856.png"></p>
+<ul>
+<li>如何返回一般矩阵：<ul>
+<li>初始化DictVectorizer类时方法拥有一个参数 sparse 若不指定，默认 sparse&#x3D;True 使用关键字参数将其指定为False即可返回一般矩阵</li>
+</ul>
+</li>
+</ul>
+<p>修改初始化参数后返回的矩阵：<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231101155556.png"></p>
+<ul>
+<li>查看特征值：<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;特征名字：\n&quot;</span>, transfer.get_feature_names())</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="文本特征抽取CountVectorizer"><a href="#文本特征抽取CountVectorizer" class="headerlink" title="文本特征抽取CountVectorizer"></a>文本特征抽取CountVectorizer</h3><ul>
+<li><p>作用：对文本数据进行特征值化</p>
+</li>
+<li><p>sklearn.feature_extraction.text.ConuntVectorizer(stop_words&#x3D;[])</p>
+<ul>
+<li>返回词频矩阵</li>
+</ul>
+</li>
+<li><p>CountVectorizer.fit_transform(包含文本字符串的可迭代对象)</p>
+<ul>
+<li>返回 sparse 矩阵</li>
+</ul>
+</li>
+<li><p>CountVectorizer.inverse_atransform(数组或者 sparse 矩阵)</p>
+<ul>
+<li>返回转换之前的数据格式</li>
+</ul>
+</li>
+<li><p>CountVectorizer.get_feature_names()</p>
+<ul>
+<li>返回单词列表</li>
+</ul>
+</li>
+<li><p>stop_words：停用词，如果需要过滤无用的单词就添加到列表中传入这个参数。</p>
+</li>
+<li><p>sklearn.feature_extraceion.text.TfidfVectorizer</p>
+</li>
+<li><p>示例：</p>
+<ul>
+<li>对以下数据进行特征提取：<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[<span class="string">&quot;life is short,i like python&quot;</span>,</span><br><span class="line"><span class="string">&quot;Life is too long,i dislike python&quot;</span>]</span><br></pre></td></tr></table></figure>
+演示代码：<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> CountVectorizer</span><br><span class="line"></span><br><span class="line">data = [<span class="string">&quot;life is short,i like python&quot;</span>,<span class="string">&quot;Life is too long,i dislike python&quot;</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1.实例化一个转换器类</span></span><br><span class="line">transfer = CountVectorizer()</span><br><span class="line"><span class="comment"># 2.调用fit_transform</span></span><br><span class="line">data_new = transfer.fit_transform(data)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;data_new：\n&quot;</span>, data_new)</span><br></pre></td></tr></table></figure>
+默认输入 sparse 稀疏数组<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">data_new：</span><br><span class="line">   (<span class="number">0</span>, <span class="number">2</span>)	<span class="number">1</span></span><br><span class="line">  (<span class="number">0</span>, <span class="number">1</span>)	<span class="number">1</span></span><br><span class="line">  (<span class="number">0</span>, <span class="number">6</span>)	<span class="number">1</span></span><br><span class="line">  (<span class="number">0</span>, <span class="number">3</span>)	<span class="number">1</span></span><br><span class="line">  (<span class="number">0</span>, <span class="number">5</span>)	<span class="number">1</span></span><br><span class="line">  (<span class="number">1</span>, <span class="number">2</span>)	<span class="number">1</span></span><br><span class="line">  (<span class="number">1</span>, <span class="number">1</span>)	<span class="number">1</span></span><br><span class="line">  (<span class="number">1</span>, <span class="number">5</span>)	<span class="number">1</span></span><br><span class="line">  (<span class="number">1</span>, <span class="number">7</span>)	<span class="number">1</span></span><br><span class="line">  (<span class="number">1</span>, <span class="number">4</span>)	<span class="number">1</span></span><br><span class="line">  (<span class="number">1</span>, <span class="number">0</span>)	<span class="number">1</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>CountVectorizer转换器没有 sparse 参数，若要输出一般数组，需要使用到 sparse 对象的toarray()方法。</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 顺便显示特征名：</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;特征名字：\n&quot;</span>, transfer.get_feature_names())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;data_new：\n&quot;</span>, data_new.toarray())</span><br></pre></td></tr></table></figure>
+<p>输出：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">特征名字：</span><br><span class="line"> [<span class="string">&#x27;dislike&#x27;</span>, <span class="string">&#x27;is&#x27;</span>, <span class="string">&#x27;life&#x27;</span>, <span class="string">&#x27;like&#x27;</span>, <span class="string">&#x27;long&#x27;</span>, <span class="string">&#x27;python&#x27;</span>, <span class="string">&#x27;short&#x27;</span>, <span class="string">&#x27;too&#x27;</span>]</span><br><span class="line">data_new：</span><br><span class="line"> [[<span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span>]</span><br><span class="line"> [<span class="number">1</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span> <span class="number">1</span> <span class="number">0</span> <span class="number">1</span>]]</span><br></pre></td></tr></table></figure></li>
+<li><p>尝试使用中文句子：<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231101185826.png"></p>
+</li>
+<li><p>可以看到转换器把整个句子当做了特征，这显然不是我们想要的效果。</p>
+</li>
+<li><p>原因是因为CountVertorizer转换器本身是适配英文的，英文的每个单词之间是自带空格的，如果要正确为中文句子提取特征，需要添加空格。<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231101191230.png"></p>
+</li>
+</ul>
+<h3 id="CountVectorizer中文文本提取"><a href="#CountVectorizer中文文本提取" class="headerlink" title="CountVectorizer中文文本提取"></a>CountVectorizer中文文本提取</h3><ul>
+<li>上面使用中文发现需要手动对词语进行空格隔开，接下要做的事就是自动化这个步骤</li>
+<li>借助 jieba 库先将中文文本的词语按词分开，然后再使用转换器提取特征。<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> CountVectorizer</span><br><span class="line"><span class="keyword">import</span> jieba</span><br><span class="line"></span><br><span class="line">data = [<span class="string">&quot;今天很残酷，明天更残酷，后天很美好，但绝对大部分是死在明天晚上，所以每个人都不要放弃今天。&quot;</span>,</span><br><span class="line">        <span class="string">&quot;我们看到的从很远的星系来的光是在几百万年之前发出的，这样当我们看到宇宙时，我们是在看它的过去。&quot;</span>,</span><br><span class="line">        <span class="string">&quot;如果只用一种方式了解某样事物，你就不会真正了解它。了解事物真正含义的秘密取决于如何将其与我们所了解的事物相联系。&quot;</span> ]</span><br><span class="line"></span><br><span class="line">data_new = [<span class="string">&#x27; &#x27;</span>.join(jieba.cut(i)) <span class="keyword">for</span> i <span class="keyword">in</span> data]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1.实例化一个转换器类</span></span><br><span class="line">transfer = CountVectorizer()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.调用fit_transform</span></span><br><span class="line">data_final = transfer.fit_transform(data_new)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;data_new：\n&quot;</span>, data_final.toarray())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;特征名字：\n&quot;</span>, transfer.get_feature_names())</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231102202921.png"></li>
+</ul>
+<h3 id="Tf-idf文本特征提取"><a href="#Tf-idf文本特征提取" class="headerlink" title="Tf-idf文本特征提取"></a>Tf-idf文本特征提取</h3><ul>
+<li><p>什么是关键词？</p>
+<ul>
+<li>在某一个类别的文章中，出现的次数很多，但是在其他类别的文章中出现很少</li>
+<li>关键词是区分文章类别的关键信息<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231102092030.png"></li>
+</ul>
+</li>
+<li><p>TF-IDF</p>
+<ul>
+<li>TF-IDF的主要是想是：如果某个词或短语在一篇文章中出现的概率高，并且在其他文章中很少出现，则认为此词或者短语具有很好的区分类别能力，适合用来分类。</li>
+<li>TF-IDF作用：用以评估一个词对于一个文件集或一个语料库中的其中一份文件的重要程度。</li>
+</ul>
+</li>
+<li><p>公式</p>
+<ul>
+<li>词频（term frequency, tf）指的是某一个给定的词语在该文件中出现的频率</li>
+<li>逆向文档频率（inverse document frequency, idf）是一个词语普遍重性的程度。某一特定词语的idf，可以由文件总数目除以包含该词语 的文件的树木，再将得到的商取以10为底的对数得到。<br>$$<br>tfidf_i,j &#x3D; tf_i,j \times idf_i<br>$$</li>
+<li>最终得出结果可以理解为重要程度</li>
+</ul>
+</li>
+<li><p>计算tf-idf例：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">有两个词“经济”与“非常”</span><br><span class="line"><span class="number">1000</span>篇文章 - 语料库</span><br><span class="line"><span class="number">100</span>篇文章 - 包含“非常”</span><br><span class="line"><span class="number">10</span>篇文章 - 包含“经济”</span><br><span class="line"></span><br><span class="line">两篇文章：</span><br><span class="line">文章A(<span class="number">100</span>词)：出现<span class="number">10</span>次“经济”</span><br><span class="line">    tf: <span class="number">10</span>/<span class="number">100</span> = <span class="number">0.1</span></span><br><span class="line">    idf: lg <span class="number">1000</span>/<span class="number">10</span> = <span class="number">2</span></span><br><span class="line">文章B(<span class="number">100</span>词)：出现<span class="number">10</span>次“非常”</span><br><span class="line">    tf: <span class="number">10</span>/<span class="number">1000</span> = <span class="number">0.1</span></span><br><span class="line">    idf: lg <span class="number">1000</span>/<span class="number">100</span> = <span class="number">1</span></span><br><span class="line"></span><br><span class="line">“经济”tf-idf：<span class="number">0.2</span></span><br><span class="line">“非常”tf-idf：<span class="number">0.1</span></span><br></pre></td></tr></table></figure></li>
+<li><p>API</p>
+<ul>
+<li>sklearn.feature_extraction.text.TfidfVectorizer(stop_words&#x3D;None,…)</li>
+<li>返回词的权重矩阵<ul>
+<li>TfidfVectorizer.fit_transform(文本或包含文本字符串的可迭代对象)<ul>
+<li>返回 sparse 矩阵</li>
+</ul>
+</li>
+<li>TfidfVectorizer.inverse_transform(array数组或者sparse矩阵)<ul>
+<li>返回转换之前的数据格式</li>
+</ul>
+</li>
+<li>TfidfVectorizer.get_feature_names()<ul>
+<li>返回单词列表</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfVectorizer</span><br><span class="line"><span class="keyword">import</span> jieba</span><br><span class="line"></span><br><span class="line">data = [<span class="string">&quot;今天很残酷，明天更残酷，后天很美好，但绝对大部分是死在明天晚上，所以每个人都不要放弃今天。&quot;</span>,</span><br><span class="line">        <span class="string">&quot;我们看到的从很远的星系来的光是在几百万年之前发出的，这样当我们看到宇宙时，我们是在看它的过去。&quot;</span>,</span><br><span class="line">        <span class="string">&quot;如果只用一种方式了解某样事物，你就不会真正了解它。了解事物真正含义的秘密取决于如何将其与我们所了解的事物相联系。&quot;</span> ]</span><br><span class="line"></span><br><span class="line">data_new = [<span class="string">&#x27; &#x27;</span>.join(jieba.cut(i)) <span class="keyword">for</span> i <span class="keyword">in</span> data]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1.实例化TfidfVectorizer</span></span><br><span class="line">transfer = TfidfVectorizer()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2.调用fit_transform</span></span><br><span class="line">data_final = transfer.fit_transform(data_new)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;data_new：\n&quot;</span>, data_final.toarray())</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;特征名字：\n&quot;</span>, transfer.get_feature_names())</span><br></pre></td></tr></table></figure>
+<p>输出：<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231102202952.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/31/sklearn/1_%E8%8E%B7%E5%8F%96sklearn%E6%95%B0%E6%8D%AE%E9%9B%86/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -993,174 +1274,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/30/OpenCV/24_%E8%85%90%E8%9A%80%E6%93%8D%E4%BD%9C%E4%B8%8E%E8%8E%B7%E5%8F%96%E5%BD%A2%E6%80%81%E5%AD%A6%E5%8D%B7%E7%A7%AF%E6%A0%B8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/30/OpenCV/24_%E8%85%90%E8%9A%80%E6%93%8D%E4%BD%9C%E4%B8%8E%E8%8E%B7%E5%8F%96%E5%BD%A2%E6%80%81%E5%AD%A6%E5%8D%B7%E7%A7%AF%E6%A0%B8/" class="post-title-link" itemprop="url">P24_腐蚀操作与获取形态学卷积核</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-10-30 16:13:00 / 修改时间：19:45:22" itemprop="dateCreated datePublished" datetime="2023-10-30T16:13:00+08:00">2023-10-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="腐蚀操作"><a href="#腐蚀操作" class="headerlink" title="腐蚀操作"></a>腐蚀操作</h2><ul>
-<li>腐蚀操作也就是用卷积核扫描图像，只不过腐蚀操作的卷积核一般都是1，如果卷积核内所有像素都为白色，那么锚点即为白色.<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231030161725.png"></li>
-<li>大部分时候腐蚀操作使用的都是为全为1的卷积核.</li>
-<li>erode(src, kernel[, dst[, anchor[, iterations[, borderType[, borderValue]]]]])<ul>
-<li>iterations是腐蚀操作的迭代次数，次数越多，腐蚀操作执行的次数越多，腐蚀效果越明显<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入图片</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./xx.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 定义卷积核</span></span><br><span class="line">kernel = np.ones((<span class="number">3</span>,<span class="number">3</span>), np.int8)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 腐蚀操作</span></span><br><span class="line">dst = cv2.erode(img, kernel, iterations=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, np.hstack((img, dst)))</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231030191816.png"></li>
-</ul>
-</li>
-</ul>
-<h2 id="获取形态学卷积核"><a href="#获取形态学卷积核" class="headerlink" title="获取形态学卷积核"></a>获取形态学卷积核</h2><ul>
-<li>opencv提供了获取卷积核的api函数，不需要手工创建卷积核.</li>
-<li>getStructuringElement(shape, ksize[, anchor])<ul>
-<li>shape是卷积核的形状，注意不是长宽，是卷积核中1形成的形状.</li>
-<li>MORTH_RECT：卷积核中的1是矩形，最常用</li>
-<li>MORTH_ELLIPSE：椭圆</li>
-<li>MORTH_CROSS：十字<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (<span class="number">5</span>, <span class="number">5</span>))</span><br><span class="line"><span class="built_in">print</span>(kernel)</span><br><span class="line"><span class="comment"># 输出：</span></span><br><span class="line"><span class="comment"># [[1 1 1 1 1]</span></span><br><span class="line"><span class="comment">#  [1 1 1 1 1]</span></span><br><span class="line"><span class="comment">#  [1 1 1 1 1]</span></span><br><span class="line"><span class="comment">#  [1 1 1 1 1]</span></span><br><span class="line"><span class="comment">#  [1 1 1 1 1]]</span></span><br><span class="line">kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (<span class="number">5</span>, <span class="number">5</span>))</span><br><span class="line"><span class="built_in">print</span>(kernel)</span><br><span class="line"><span class="comment"># 输出：</span></span><br><span class="line"><span class="comment"># [[0 0 1 0 0]</span></span><br><span class="line"><span class="comment">#  [1 1 1 1 1]</span></span><br><span class="line"><span class="comment">#  [1 1 1 1 1]</span></span><br><span class="line"><span class="comment">#  [1 1 1 1 1]</span></span><br><span class="line"><span class="comment">#  [0 0 1 0 0]]</span></span><br><span class="line">kernel = cv2.getStructuringElement(cv2.MORPH_CROSS, (<span class="number">5</span>, <span class="number">5</span>))</span><br><span class="line"><span class="built_in">print</span>(kernel)</span><br><span class="line"><span class="comment"># 输出：</span></span><br><span class="line"><span class="comment"># [[0 0 1 0 0]</span></span><br><span class="line"><span class="comment">#  [0 0 1 0 0]</span></span><br><span class="line"><span class="comment">#  [1 1 1 1 1]</span></span><br><span class="line"><span class="comment">#  [0 0 1 0 0]</span></span><br><span class="line"><span class="comment">#  [0 0 1 0 0]]</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/30/OpenCV/23_%E8%87%AA%E9%80%82%E5%BA%94%E9%98%88%E5%80%BC%E4%BA%8C%E5%80%BC%E5%8C%96/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/30/OpenCV/23_%E8%87%AA%E9%80%82%E5%BA%94%E9%98%88%E5%80%BC%E4%BA%8C%E5%80%BC%E5%8C%96/" class="post-title-link" itemprop="url">P23_自适应阈值二值化</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-10-30 15:19:00 / 修改时间：16:13:23" itemprop="dateCreated datePublished" datetime="2023-10-30T15:19:00+08:00">2023-10-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="自适应阈值二值化"><a href="#自适应阈值二值化" class="headerlink" title="自适应阈值二值化"></a>自适应阈值二值化</h2><ul>
-<li>在前面的部分我们使用的是全局阈值，整幅图像采用同一个数作为阈值；这种方法并不适用于所有情况，尤其是当同一幅图像上的不同部分具有不同亮度时。这种情况下我们需要采用自适应阈值。此时的阈值是根据图像上的每一小区域计算预期对应的阈值。因此在同一幅图像上的不同区域采用的是不同的阈值，从而使我们能在亮度不同的情况下得到更好的结果。</li>
-<li>adaptiveThreshold(src, maxValue, adaptiveMethod, thresholdType, blockSize, C, dst&#x3D;None)<ul>
-<li>这种方法需要我们指定6个参数，返回值只有一个。</li>
-<li>Adaptive Method：指定计算阈值的方法<ul>
-<li>cv2.ADPTIVE_THRESH_MEAN_C：阈值取自相邻区域的平均值.</li>
-<li>cv2.ADPTIVE_THRESH_GAUSSIAN_C：取值取值相邻区域的加权和，权重为一个高斯窗口.</li>
-</ul>
-</li>
-<li>BlockSize：邻域大小（用来计算阈值的区域大小）</li>
-<li>C：这既是一个常数，阈值就等于的平均值或者加权平均值减去这个常数。、<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;./photo.jpg&#x27;</span>)</span><br><span class="line"></span><br><span class="line">resized_img = cv2.resize(img, (<span class="number">800</span>, <span class="number">600</span>))</span><br><span class="line">gray = cv2.cvtColor(resized_img, cv2.COLOR_BGR2GRAY)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 自适应阈值二值化只返回一个值，即二值化后的结果</span></span><br><span class="line">dst = cv2.adaptiveThreshold(gray, <span class="number">255</span>, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY_INV, <span class="number">9</span>, <span class="number">0</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, np.hstack((gray, dst)))</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231030160800.png"></li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1232,7 +1345,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">157</span>
+          <span class="site-state-item-count">159</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

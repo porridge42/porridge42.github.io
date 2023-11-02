@@ -183,6 +183,189 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/01/JavaSE/P46%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_static%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/01/JavaSE/P46%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_static%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">P46面向对象_static详解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-01 00:00:00" itemprop="dateCreated datePublished" datetime="2022-11-01T00:00:00+08:00">2022-11-01</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-18 23:17:22" itemprop="dateModified" datetime="2022-11-18T23:17:22+08:00">2022-11-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="static静态"><a href="#static静态" class="headerlink" title="static静态"></a>static静态</h2><ul>
+<li>静态属性</li>
+<li>静态方法</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//静态属性</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="type">int</span> ags;   <span class="comment">//静态属性</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">double</span> score;   <span class="comment">//非静态属性</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//静态方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> go&#123;    <span class="comment">//静态方法</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> run&#123;    <span class="comment">//非静态方法</span></span><br><span class="line">        go();  </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line"></span><br><span class="line">        System.out.println(Student.age);</span><br><span class="line">        System.out.println(s1.age);</span><br><span class="line">        System.out.println(s1.score);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        Student.go();   <span class="comment">//类名.方法名 调用类方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>静态代码块</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    &#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;匿名代码块&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span>&#123;    <span class="comment">//只执行一次</span></span><br><span class="line">        System.out.println(<span class="string">&quot;静态代码块&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;构造方法&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">Person</span> <span class="variable">perosn</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">        System.out.println(<span class="string">&quot;===========&quot;</span>);</span><br><span class="line">        <span class="type">Person</span> <span class="variable">person2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221101215855.png"></p>
+</li>
+<li><p>最先执行的为静态代码块，然后再按顺序结构</p>
+</li>
+<li><p>静态代码块只执行一次</p>
+<br/>
+</li>
+<li><p>静态导入包</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        System.out.println(Math.random());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>在测试类Test中，想要使用random方法,必须采用 类名.方法名 的格式调用,使用静态导入包操作就可以省去这个步骤直接使用方法名调用</p>
+</li>
+<li><p>格式:<code>import static 包名.类名.方法名;</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> java.lang.Math.random;  <span class="comment">//静态导入包</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Test</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        System.out.println(random();)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/31/JavaSE/P45%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_instanceof%E5%92%8C%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/31/JavaSE/P45%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_instanceof%E5%92%8C%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" class="post-title-link" itemprop="url">P45面向对象_instanceof和类型转换</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-31 17:06:55" itemprop="dateCreated datePublished" datetime="2022-10-31T17:06:55+08:00">2022-10-31</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-18 23:17:00" itemprop="dateModified" datetime="2022-11-18T23:17:00+08:00">2022-11-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="instanceof关键字"><a href="#instanceof关键字" class="headerlink" title="instanceof关键字"></a>instanceof关键字</h2><ul>
+<li>用于判断两个类型之间是否存在继承关系</li>
+<li>若存在返回true,否则返回false</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//Object &gt; Person &gt; Student</span></span><br><span class="line">        <span class="comment">//Object &gt; Person &gt; Teacher</span></span><br><span class="line">        <span class="comment">//Object &gt; String</span></span><br><span class="line">        <span class="type">Object</span> <span class="variable">object</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line"></span><br><span class="line">        System.out.println(object <span class="keyword">instanceof</span> Student); <span class="comment">//true</span></span><br><span class="line">        System.out.println(object <span class="keyword">instanceof</span> Person);  <span class="comment">//true</span></span><br><span class="line">        System.out.println(object <span class="keyword">instanceof</span> Object);  <span class="comment">//true</span></span><br><span class="line">        System.out.println(object <span class="keyword">instanceof</span> Teacher);  <span class="comment">//false</span></span><br><span class="line">        System.out.println(object <span class="keyword">instanceof</span> String);  <span class="comment">//false</span></span><br><span class="line"></span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Teacher</span> <span class="keyword">extends</span> <span class="title class_">Person</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">extends</span> <span class="title class_">Person</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span>&#123;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="引用类型转换"><a href="#引用类型转换" class="headerlink" title="引用类型转换"></a>引用类型转换</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//高==&gt;低，不需要手动类型转换</span></span><br><span class="line">        <span class="type">Person</span> <span class="variable">obj1</span> <span class="operator">=</span>  <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line"></span><br><span class="line">        obj1.go();  <span class="comment">//正常输出: go!</span></span><br><span class="line">        obj1.run();  <span class="comment">//无法输出，因为对象obj1是Person类型</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//将这个obj1对象转换为Student类型，我们就可以使用Student类型的方法了！</span></span><br><span class="line">        ((Student)obj1).run();  <span class="comment">//正常输出: go!</span></span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">extends</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">run</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;run!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">go</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;go!&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>类型转换注意点:</strong><ol>
+<li>父类引用指向子类的对象</li>
+<li>把子类转换为父类，向上转型</li>
+<li>把父类转换为子类，向下转型: 强制转换</li>
+<li>类型转换的作用: 方便方法的调用，减少重复的代码</li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/31/JavaSE/P44%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E4%BB%80%E4%B9%88%E6%98%AF%E5%A4%9A%E6%80%81/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -967,225 +1150,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/JavaSE/P36%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E5%9B%9E%E9%A1%BE%E6%96%B9%E6%B3%95%E7%9A%84%E5%AE%9A%E4%B9%89/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/26/JavaSE/P36%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E5%9B%9E%E9%A1%BE%E6%96%B9%E6%B3%95%E7%9A%84%E5%AE%9A%E4%B9%89/" class="post-title-link" itemprop="url">P36面向对象_回顾方法的定义</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-10-26 10:00:36" itemprop="dateCreated datePublished" datetime="2022-10-26T10:00:36+08:00">2022-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-27 10:24:56" itemprop="dateModified" datetime="2022-10-27T10:24:56+08:00">2022-10-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="回顾方法及加深"><a href="#回顾方法及加深" class="headerlink" title="回顾方法及加深"></a>回顾方法及加深</h2><h3 id="方法的定义："><a href="#方法的定义：" class="headerlink" title="方法的定义："></a>方法的定义：</h3><ul>
-<li><strong>修饰符</strong></li>
-<li><strong>返回类型</strong></li>
-<li><strong>break 和 return 的区别：</strong><ul>
-<li>break 跳出switch, 结束循环</li>
-<li>return 结束方法，返回一个返回值</li>
-</ul>
-</li>
-<li><strong>方法名：</strong><ul>
-<li>注意规范(首字符小写驼峰)</li>
-<li>见名知意</li>
-</ul>
-</li>
-<li><strong>参数列表：</strong><ul>
-<li>参数类型，参数名</li>
-<li>可变长参数列表</li>
-</ul>
-</li>
-<li><strong>异常抛出：</strong><ul>
-<li>疑问，后面讲解</li>
-</ul>
-</li>
-</ul>
-<h3 id="方法的调用："><a href="#方法的调用：" class="headerlink" title="方法的调用："></a>方法的调用：</h3><ul>
-<li><strong>静态方法:</strong><ul>
-<li>静态方法是与类一同初始化的方法</li>
-<li>使用静态方法使用 “类名.方法名” 的格式来调用</li>
-</ul>
-</li>
-<li><strong>非静态方法:</strong><ul>
-<li>非静态方法是在对象实例化后才能调用的方法</li>
-<li>使用非静态方法需要先实例化对象，再使用 “对象名.方法名” 的格式来调用</li>
-</ul>
-</li>
-<li><strong>形参和实参:</strong><ul>
-<li>形式参数和实际参数的类型要一一对应</li>
-</ul>
-</li>
-<li><strong>值传递和引用传递:</strong><ul>
-<li>Java中的参数都为值传递</li>
-<li>见Demo04,05</li>
-</ul>
-</li>
-<li><strong>this 关键字</strong></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//Demo01 类</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo01</span>&#123;</span><br><span class="line">    <span class="comment">//main 方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*</span></span><br><span class="line"><span class="comment">    修饰符 返回值类型 方法名 (...)&#123;</span></span><br><span class="line"><span class="comment">        //方法体</span></span><br><span class="line"><span class="comment">        return 返回值;</span></span><br><span class="line"><span class="comment">    &#125;</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line">    <span class="comment">//return 结束方法，返回一个结果！</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">sayHello</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;hello,world!&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">max</span><span class="params">(<span class="type">int</span> a; <span class="type">int</span> b)</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> a&gt;b ? a : b;  <span class="comment">//三元运算符</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo02</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        Student.staticSay();  </span><br><span class="line">        <span class="comment">//静态方法用类名.方法名直接调用</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//动态方法不可以直接调用，需要先实例化为对象</span></span><br><span class="line">        <span class="comment">//实例化： 对象类型 对象名 = 对象值;</span></span><br><span class="line">        <span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line">        student.say();</span><br><span class="line">        <span class="comment">//实例化后使用对象名.方法名调用动态方法</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">    <span class="comment">//静态方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">staticSay</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;学生说话了。&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//动态方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">say</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;学生说话了.&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//静态方法与类一同存在，一同初始化，而动态方法在对象实例化之后才存在</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo04</span>&#123;</span><br><span class="line">    <span class="comment">//值传递演示</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">int</span> <span class="variable">a</span> <span class="operator">=</span> <span class="number">1</span>;</span><br><span class="line">        System.out.println(a);</span><br><span class="line"></span><br><span class="line">        Demo04.change(a);</span><br><span class="line"></span><br><span class="line">        System.out.println(a); <span class="comment">//输出为 1</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//返回值为空</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">change</span><span class="params">(<span class="type">int</span> a)</span>&#123;</span><br><span class="line">        <span class="number">1</span> = <span class="number">10</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//Java方法参数传递为值传递，在方法中改变参数的值并不会影响参数变量原本的值</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo05</span>&#123;</span><br><span class="line">    <span class="comment">//引用传递演示</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">Person</span> <span class="variable">person</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"></span><br><span class="line">        System.out.println(person.name);  <span class="comment">//null</span></span><br><span class="line"></span><br><span class="line">        Demo05.change(person);</span><br><span class="line"></span><br><span class="line">        System.out.println(person.name);  <span class="comment">//名字</span></span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">change</span><span class="params">(Person person)</span>&#123;</span><br><span class="line">        <span class="comment">//person是一个对象: 指向的 ---&gt; Person person = new Person();</span></span><br><span class="line">        person.name = <span class="string">&quot;名字&quot;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//定义了一个Person类，有一个属性: name</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    String name;  <span class="comment">//null</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/JavaSE/P35%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E4%BB%80%E4%B9%88%E6%98%AF%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/26/JavaSE/P35%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E4%BB%80%E4%B9%88%E6%98%AF%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/" class="post-title-link" itemprop="url">P35面向对象_什么是面向对象</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-10-26 10:00:35" itemprop="dateCreated datePublished" datetime="2022-10-26T10:00:35+08:00">2022-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-27 10:24:18" itemprop="dateModified" datetime="2022-10-27T10:24:18+08:00">2022-10-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="面向对象-amp-面向过程"><a href="#面向对象-amp-面向过程" class="headerlink" title="面向对象&amp;面向过程"></a>面向对象&amp;面向过程</h2><ul>
-<li><strong>面向过程思想:</strong><ul>
-<li>步骤清晰简单，第一步做什么，第二步做什么…</li>
-<li>面向过程适合处理一些较为简单的问题</li>
-</ul>
-</li>
-<li><strong>面向对象思想:</strong><ul>
-<li>物以类聚，分类的思维模式，思考问题首先解决问题需要那些分类，然后对这些分类进行单独思考。最后，才对某个分类下的细节进行面向过程的思索。</li>
-<li>面向对象适合处理复杂的问题，适合处理需要多人协作的问题</li>
-</ul>
-</li>
-</ul>
-<blockquote>
-<p>对于描述复杂的事物，为了从宏观上把握，从整体上合理分析，我们需要使用面向对象的思路来分析整个系统。但是，具体到微观操作，仍需要面向过程的思路去解决问题</p>
-</blockquote>
-<h2 id="什么是面向对象"><a href="#什么是面向对象" class="headerlink" title="什么是面向对象"></a>什么是面向对象</h2><ul>
-<li>面向对象编程(Object-Oriented Programming, OOP)</li>
-<li>面向对象的本质就是:<strong>以类的方式组织代码，以对象的组织(封装)数据。</strong></li>
-<li>抽象</li>
-<li>三大特性:<ul>
-<li><strong>封装</strong></li>
-<li><strong>继承</strong></li>
-<li><strong>多态</strong></li>
-</ul>
-</li>
-<li>从知识论角度考虑是先有对象后有类。对象，具体的事物。类,是抽象的，是对对象的抽象</li>
-<li>从代码运行角度考虑是先有类后又对象。类是对象的模板。</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1257,7 +1221,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">157</span>
+          <span class="site-state-item-count">159</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
