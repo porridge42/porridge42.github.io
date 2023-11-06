@@ -183,6 +183,106 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/JavaSE/P37%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/26/JavaSE/P37%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E7%B1%BB%E4%B8%8E%E5%AF%B9%E8%B1%A1%E7%9A%84%E5%88%9B%E5%BB%BA/" class="post-title-link" itemprop="url">P37面向对象_类与对象的创建</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-26 10:00:37" itemprop="dateCreated datePublished" datetime="2022-10-26T10:00:37+08:00">2022-10-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-27 10:24:30" itemprop="dateModified" datetime="2022-10-27T10:24:30+08:00">2022-10-27</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="类与对象的关系"><a href="#类与对象的关系" class="headerlink" title="类与对象的关系"></a>类与对象的关系</h2><ul>
+<li><p><strong>类是一种抽象的数据类型，它是对某一类事物整体描述&#x2F;定义，但是并不能代表某一个具体的事物。</strong></p>
+<ul>
+<li>动物，植物，手机，电脑…..</li>
+<li>Person类，Pet类， Car类等，这些类都是用来描述&#x2F;定义一类具体事物应该具备的特点和行为<br/></li>
+</ul>
+</li>
+<li><p><strong>对象是抽象概念的具体实例。</strong></p>
+<ul>
+<li>张三就是一个具体实例，张三家里的旺财就是狗的一个具体实例。</li>
+<li>能够体现出特点，展现出功能的是具体的实例，而不是一个抽象的概念。</li>
+</ul>
+</li>
+</ul>
+<h2 id="创建与初始化对象"><a href="#创建与初始化对象" class="headerlink" title="创建与初始化对象"></a>创建与初始化对象</h2><ul>
+<li><p><strong>使用new关键字创建对象</strong></p>
+</li>
+<li><p>使用new关键字创建的时候，除了分配内存空间之外，还会给创建好的对象进行默认的初始化以及类中构造器的调用</p>
+<br/>
+</li>
+<li><p>类中的构造器也称为构造方法，是在进行创建对象的手必须要调用的。并且构造器有以下两个特点:</p>
+<ol>
+<li>必须和类的名字相同</li>
+<li>必须没有返回值类型，也不能写void</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//类: 抽象的，实例化</span></span><br><span class="line">        <span class="comment">//类实例化后悔返回一个自己的对象</span></span><br><span class="line">        <span class="comment">//student对象就是一个Student类的具体实例</span></span><br><span class="line">        <span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line">        <span class="type">Student</span> <span class="variable">xiaoming</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line">        <span class="type">Student</span> <span class="variable">xiaohong</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line"></span><br><span class="line">        xiaoming.name = <span class="string">&quot;小明&quot;</span>;</span><br><span class="line">        xiaoming.age = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">        System.out.println(xiaoming.name);</span><br><span class="line">        System.out.println(xiaoming.age);</span><br><span class="line"></span><br><span class="line">        xiaohong.name = <span class="string">&quot;小红&quot;</span>;</span><br><span class="line">        xiaohong.age = <span class="number">3</span>;</span><br><span class="line"></span><br><span class="line">        System.out.println(xiaohong.name);</span><br><span class="line">        System.out.println(xiaohong.age);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">    <span class="comment">//属性: 字段</span></span><br><span class="line">    String name;</span><br><span class="line">    <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//方法</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">study</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;学生在学习。&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/JavaSE/P36%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E5%9B%9E%E9%A1%BE%E6%96%B9%E6%B3%95%E7%9A%84%E5%AE%9A%E4%B9%89/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1026,90 +1126,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/JavaSE/P27%E6%95%B0%E7%BB%84_%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E7%BB%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/26/JavaSE/P27%E6%95%B0%E7%BB%84_%E4%BB%80%E4%B9%88%E6%98%AF%E6%95%B0%E7%BB%84/" class="post-title-link" itemprop="url">P27数组_什么是数组</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-10-26 10:00:27" itemprop="dateCreated datePublished" datetime="2022-10-26T10:00:27+08:00">2022-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-27 10:23:36" itemprop="dateModified" datetime="2022-10-27T10:23:36+08:00">2022-10-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="数组的定义"><a href="#数组的定义" class="headerlink" title="数组的定义:"></a>数组的定义:</h2><ul>
-<li>数组是相同类型数据的有序集合。</li>
-<li>数组描述的是相同类型的若干个数据，按照一定的先后次序排列组合而成。</li>
-<li>其中，每一个数据称作一个数组元素，每个数组元素可以通过一个下标来访问它们。</li>
-</ul>
-<h2 id="数组的声明和创建"><a href="#数组的声明和创建" class="headerlink" title="数组的声明和创建:"></a>数组的声明和创建:</h2><ul>
-<li>首先必须声明数组变量，才能在程序中使用数组。声明数组变量的语法:<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dataType[] arrayRefVar;   <span class="comment">//首选的方法</span></span><br><span class="line">或</span><br><span class="line">dataType arrayRefVar[];   <span class="comment">//效果相同</span></span><br></pre></td></tr></table></figure></li>
-<li>Java语言使用new操作符来创建数组，语法如下:<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dataType[] arrayRefVar = <span class="keyword">new</span> <span class="title class_">dataType</span>[arraySize]</span><br></pre></td></tr></table></figure></li>
-<li>数组的元素是通过索引访问的，数组索引从0开始。</li>
-<li>获取数组长度:<code>array.lenth</code><br>例:<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayDemo01</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="type">int</span>[] nums;  <span class="comment">//1.声明一个数组</span></span><br><span class="line"></span><br><span class="line">        nums = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">10</span>];  <span class="comment">//2.创建数组(分配空间)</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//也可以连起来: int[] nums = new int[10];</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//3.给数组中的元素赋值</span></span><br><span class="line">        nums[<span class="number">0</span>] = <span class="number">1</span>;</span><br><span class="line">        nums[<span class="number">1</span>] = <span class="number">2</span>;</span><br><span class="line">        nums[<span class="number">2</span>] = <span class="number">3</span>;</span><br><span class="line">        nums[<span class="number">3</span>] = <span class="number">4</span>;</span><br><span class="line">        nums[<span class="number">4</span>] = <span class="number">5</span>;</span><br><span class="line">        nums[<span class="number">5</span>] = <span class="number">6</span>;</span><br><span class="line">        nums[<span class="number">6</span>] = <span class="number">7</span>;</span><br><span class="line">        nums[<span class="number">7</span>] = <span class="number">8</span>;</span><br><span class="line">        nums[<span class="number">8</span>] = <span class="number">9</span>;</span><br><span class="line">        nums[<span class="number">9</span>] = <span class="number">10</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//计算所有元素的和</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">sum</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; nums.length; i++)&#123;</span><br><span class="line">            sum += nums[i];</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;总和为:&quot;</span>+ sum);</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1181,7 +1197,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">159</span>
+          <span class="site-state-item-count">160</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},"path":"search.xml"};
+  </script>
+
+  <meta name="description" content="特征工程-降维 学习目标： 引用VarianceThreshold实现删除低方差特征 了解相关系数的特点和计算 应用相关系数实现特征选择    定义： 降维是只在某些限定条件下。降低随机变量（特征）个数，得到一组不相关的主变量的过程.     相关特征（什么是相关） 例如：相对湿度与降雨量之间的相关. 等等… 正是因为在训练的时候录，我们都是使用特征进行学习。如果特征本上存在问题或者特征之间相关性">
+<meta property="og:type" content="article">
+<meta property="og:title" content="P4_sklearn特征降维">
+<meta property="og:url" content="http://example.com/2023/11/05/sklearn/4_sklearn%E7%89%B9%E5%BE%81%E9%99%8D%E7%BB%B4/index.html">
+<meta property="og:site_name" content="NanBlog 稀饭目标">
+<meta property="og:description" content="特征工程-降维 学习目标： 引用VarianceThreshold实现删除低方差特征 了解相关系数的特点和计算 应用相关系数实现特征选择    定义： 降维是只在某些限定条件下。降低随机变量（特征）个数，得到一组不相关的主变量的过程.     相关特征（什么是相关） 例如：相对湿度与降雨量之间的相关. 等等… 正是因为在训练的时候录，我们都是使用特征进行学习。如果特征本上存在问题或者特征之间相关性">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231105130621.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231105132916.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231105203605.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231105203744.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231105203807.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231106092011.png">
+<meta property="article:published_time" content="2023-11-05T03:05:00.000Z">
+<meta property="article:modified_time" content="2023-11-06T01:52:48.909Z">
+<meta property="article:author" content="porridge42">
+<meta property="article:tag" content="博客">
+<meta property="article:tag" content="Python">
+<meta property="article:tag" content="人工智能">
+<meta property="article:tag" content="机器学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/porridge42/picgo/main/20231105130621.png">
+
+<link rel="canonical" href="http://example.com/2023/11/05/sklearn/4_sklearn%E7%89%B9%E5%BE%81%E9%99%8D%E7%BB%B4/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>P4_sklearn特征降维 | NanBlog 稀饭目标</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">NanBlog 稀饭目标</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-fa fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result">
+  <div id="no-result">
+    <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/05/sklearn/4_sklearn%E7%89%B9%E5%BE%81%E9%99%8D%E7%BB%B4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          P4_sklearn特征降维
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-11-05 11:05:00" itemprop="dateCreated datePublished" datetime="2023-11-05T11:05:00+08:00">2023-11-05</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-06 09:52:48" itemprop="dateModified" datetime="2023-11-06T09:52:48+08:00">2023-11-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sklearn/" itemprop="url" rel="index"><span itemprop="name">sklearn</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="特征工程-降维"><a href="#特征工程-降维" class="headerlink" title="特征工程-降维"></a>特征工程-降维</h1><ul>
+<li>学习目标：<ul>
+<li>引用VarianceThreshold实现删除低方差特征</li>
+<li>了解相关系数的特点和计算</li>
+<li>应用相关系数实现特征选择</li>
+</ul>
+</li>
+</ul>
+<h3 id="定义："><a href="#定义：" class="headerlink" title="定义："></a>定义：</h3><ul>
+<li><strong>降维</strong>是只在某些限定条件下。<strong>降低随机变量（特征）个数</strong>，得到一组<strong>不相关</strong>的主变量的过程.</li>
+</ul>
+<p> <img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231105130621.png"></p>
+<ul>
+<li>相关特征（什么是相关）<ul>
+<li>例如：相对湿度与降雨量之间的相关.</li>
+<li>等等…<blockquote>
+<p>正是因为在训练的时候录，我们都是使用特征进行学习。如果特征本上存在问题或者特征之间相关性比较强，对算法学习预测会影响比较大</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="降维的两种方式："><a href="#降维的两种方式：" class="headerlink" title="降维的两种方式："></a>降维的两种方式：</h3><ul>
+<li>特征选择</li>
+<li>主成分分析（可以理解为一种特征提取的方式）<br/></li>
+</ul>
+<h2 id="特征选择"><a href="#特征选择" class="headerlink" title="特征选择"></a>特征选择</h2><h3 id="什么是特征选择"><a href="#什么是特征选择" class="headerlink" title="什么是特征选择"></a>什么是特征选择</h3><ul>
+<li><p>定义： 数据中包含<strong>冗余或相关变量（或称特征、属性、指标等）</strong>，旨在从<strong>原有特征中找出特征</strong>。<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231105132916.png"></p>
+<blockquote>
+<p>如果在此处添加一个特征“知否有爪子”或者“是否有眼睛”类似的特征，明显就是属于冗余特征</p>
+</blockquote>
+</li>
+<li><p>如何使用数学方法找出并去除数据中的冗余&#x2F;相关特征？</p>
+</li>
+<li><p><strong>方法：</strong></p>
+<ul>
+<li>Fillter(过滤式)：主要探究特征本身特点、特征与特征和目标之间关联<ul>
+<li>方差选择法：低方差特征过滤</li>
+<li>相关系数</li>
+</ul>
+</li>
+<li>Embedded(嵌入式)：算法自动选择特征（特征与目标值之间的关联）<ul>
+<li>决策树：信息熵、信息增益</li>
+<li>正则化：L1、L2</li>
+<li>深度学习：卷积等</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="过滤式"><a href="#过滤式" class="headerlink" title="过滤式"></a>过滤式</h3><h4 id="方差选择法："><a href="#方差选择法：" class="headerlink" title="方差选择法："></a>方差选择法：</h4><ul>
+<li><p>删除低方差的一些特征，在结合方差的大小来考虑这个方式的角度。</p>
+<ul>
+<li>特征方差小：某个特征大多样本的值都比较相近</li>
+<li>特征方差大：某个特征很多样本呢的值都有差别</li>
+</ul>
+</li>
+<li><p><strong>API：</strong></p>
+<ul>
+<li>sklearn.feature_selection.VarianceThreshold(thrshold &#x3D; 0.0)<ul>
+<li>删除所有低方差特征</li>
+<li>Variance.fit_transform(ndrray[n_samples, n_features])</li>
+<li>返回值：训练集相差异低于threshold的特征将被删除。默认值是保留所有非零方差特征，即删除所有样本中具有相同值的特征。<br/></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>数据计算<br>我们对某些股票的指标特征之间进行一个筛选，数据在”factor_returns.csv”文件中，除去’index’,’data’,’return’列不考虑（这些类型不匹配，也不是所需要的指标）<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231105203605.png"></p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> VarianceThreshold</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1、导入数据</span></span><br><span class="line">data = pd.read_csv(<span class="string">&#x27;./factor_returns.csv&#x27;</span>)</span><br><span class="line">data = data.iloc[:, <span class="number">1</span>:-<span class="number">2</span>]</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;data：\n&quot;</span>, data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2、初始化VarianceThreshold并制定方差阈值</span></span><br><span class="line">transfer = VarianceThreshold(threshold = <span class="number">10</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3、调用fit_transform</span></span><br><span class="line">data_new = transfer.fit_transform(data)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;data_new：\n&quot;</span>, pd.DataFrame(data_new))</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231105203744.png"><br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231105203807.png"></p>
+</li>
+</ul>
+<h4 id="相关系数"><a href="#相关系数" class="headerlink" title="相关系数"></a>相关系数</h4><ul>
+<li><p>皮尔逊相关系数（Pearson Correlation Coefficient）</p>
+<ul>
+<li>反应变量之间相关关系密切程度的统计指标</li>
+</ul>
+</li>
+<li><p>公式<br>$$<br>r &#x3D; \frac{n\Sigma xy - \Sigma x \Sigma y}<br>{\sqrt{n\Sigma x^2 - (\Sigma x)^2}\sqrt{n\Sigma y^2 - (\Sigma y)^2}}<br>$$<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231106092011.png"><br>&#x3D; 0.9942<br><strong>所以我们最终得出结论是广告投入费与月平均销售额之间有高度的正相关关系。</strong></p>
+<br/>
+</li>
+<li><p><strong>特点：</strong></p>
+</li>
+<li><p>相关系数的值介于$-1$与$1$之间，即$-1\le r\le 1$。其性质如下：</p>
+<ul>
+<li>当$r&gt;0$时，表示两变量正相关，$r&lt;0$时，两变量为负相关</li>
+<li>当$0&lt;|r|&lt;1$时,表示两变量为完全相关，当$r&#x3D;0$时，表示两变量间无相关关系</li>
+<li>当$0&lt;|r|&lt;1$时，表示两变量存在一定程度的相关。且$|r|$越接近1，两变量间线性关系月密切；$|r|$越接近与$0$，表示两变量的线性相关越弱</li>
+<li>一般可按三级划分：$|r|&lt;0.4$为低度相关；$0.4\le |r|&lt;0.7$为显著性相关；$0.7\le |r|&lt;1$为高度线型相关</li>
+</ul>
+</li>
+<li><p><strong>API：</strong></p>
+<ul>
+<li>from scipu.stats import pearsonr<ul>
+<li>x：(N,) array_like</li>
+<li>y：(N,) array_like</li>
+<li>返回值：Pearson相关系数<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> VarianceThreshold</span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> pearsonr</span><br><span class="line">data = pd.read_csv(<span class="string">&#x27;./factor_returns.csv&#x27;</span>)</span><br><span class="line">data = data.iloc[:, <span class="number">1</span>:-<span class="number">2</span>]</span><br><span class="line">transfer = VarianceThreshold(threshold = <span class="number">10</span>)</span><br><span class="line">data_new = transfer.fit_transform(data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算两个变量之间的相关系数</span></span><br><span class="line">r = pearsonr(data[<span class="string">&quot;pe_ratio&quot;</span>], data[<span class="string">&quot;pb_ratio&quot;</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;相关系数：\n&quot;</span>, r)</span><br></pre></td></tr></table></figure>
+输出：<br>相关系数：<br> (-0.004389322779936285, 0.8327205496564927)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%8D%9A%E5%AE%A2/" rel="tag"># 博客</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+              <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="tag"># 人工智能</a>
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2023/11/02/sklearn/3_sklearn%E7%89%B9%E5%BE%81%E9%A2%84%E5%A4%84%E7%90%86/" rel="prev" title="P3_sklearn特征预处理">
+      <i class="fa fa-chevron-left"></i> P3_sklearn特征预处理
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E5%B7%A5%E7%A8%8B-%E9%99%8D%E7%BB%B4"><span class="nav-number">1.</span> <span class="nav-text">特征工程-降维</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9A%E4%B9%89%EF%BC%9A"><span class="nav-number">1.0.1.</span> <span class="nav-text">定义：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%8D%E7%BB%B4%E7%9A%84%E4%B8%A4%E7%A7%8D%E6%96%B9%E5%BC%8F%EF%BC%9A"><span class="nav-number">1.0.2.</span> <span class="nav-text">降维的两种方式：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9"><span class="nav-number">1.1.</span> <span class="nav-text">特征选择</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E7%89%B9%E5%BE%81%E9%80%89%E6%8B%A9"><span class="nav-number">1.1.1.</span> <span class="nav-text">什么是特征选择</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%87%E6%BB%A4%E5%BC%8F"><span class="nav-number">1.1.2.</span> <span class="nav-text">过滤式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%96%B9%E5%B7%AE%E9%80%89%E6%8B%A9%E6%B3%95%EF%BC%9A"><span class="nav-number">1.1.2.1.</span> <span class="nav-text">方差选择法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E7%B3%BB%E6%95%B0"><span class="nav-number">1.1.2.2.</span> <span class="nav-text">相关系数</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="porridge42"
+      src="/images/avatar.gif">
+  <p class="site-author-name" itemprop="name">porridge42</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">160</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/porridge42" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;porridge42" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">porridge42</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+
+<script>
+  if (typeof MathJax === 'undefined') {
+    window.MathJax = {
+      loader: {
+          load: ['[tex]/mhchem'],
+        source: {
+          '[tex]/amsCd': '[tex]/amscd',
+          '[tex]/AMScd': '[tex]/amscd'
+        }
+      },
+      tex: {
+        inlineMath: {'[+]': [['$', '$']]},
+          packages: {'[+]': ['mhchem']},
+        tags: 'ams'
+      },
+      options: {
+        renderActions: {
+          findScript: [10, doc => {
+            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+              const display = !!node.type.match(/; *mode=display/);
+              const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+              const text = document.createTextNode('');
+              node.parentNode.replaceChild(text, node);
+              math.start = {node: text, delim: '', n: 0};
+              math.end = {node: text, delim: '', n: 0};
+              doc.math.push(math);
+            });
+          }, '', false],
+          insertedScript: [200, () => {
+            document.querySelectorAll('mjx-container').forEach(node => {
+              let target = node.parentNode;
+              if (target.nodeName.toLowerCase() === 'li') {
+                target.parentNode.classList.add('has-jax');
+              }
+            });
+          }, '', false]
+        }
+      }
+    };
+    (function () {
+      var script = document.createElement('script');
+      script.src = '//cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+      script.defer = true;
+      document.head.appendChild(script);
+    })();
+  } else {
+    MathJax.startup.document.state(0);
+    MathJax.texReset();
+    MathJax.typeset();
+  }
+</script>
+
+    
+
+  
+
+</body>
+</html>
