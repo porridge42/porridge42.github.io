@@ -183,6 +183,311 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/03/JavaSE/P50%E5%BC%82%E5%B8%B8_Error%E5%92%8CException/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/03/JavaSE/P50%E5%BC%82%E5%B8%B8_Error%E5%92%8CException/" class="post-title-link" itemprop="url">P50异常_Ereor和Exception</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-03 15:59:00" itemprop="dateCreated datePublished" datetime="2022-11-03T15:59:00+08:00">2022-11-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-04 12:16:58" itemprop="dateModified" datetime="2022-11-04T12:16:58+08:00">2022-11-04</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="异常机制"><a href="#异常机制" class="headerlink" title="异常机制"></a>异常机制</h2><h3 id="什么是异常"><a href="#什么是异常" class="headerlink" title="什么是异常:"></a>什么是异常:</h3><ul>
+<li>软件程序在运行过程中，非常可能遇到异常问题，我们叫异常，英文是 Exception, 意为例外。这些例外情况需要怎么让我们写的程序作出合理的处理。而不至于程序崩溃。</li>
+<li>异常指程序运行中出现的不期而至的各种状况，如:文件找不到，网络连接失败，非法参数等。</li>
+<li>异常发生在程序运行期间，它影响了正常的程序执行流程。</li>
+</ul>
+<h3 id="简单分类"><a href="#简单分类" class="headerlink" title="简单分类:"></a>简单分类:</h3><ol>
+<li><p>检查性异常：最具代表性的检查性异常是用户错误问题引起的异常，这是程序员无法预见的。例如要打开一个不存在的文件时，一个异常就发生了，这些异常在编译时不能被简单地忽略。</p>
+<br/>
+</li>
+<li><p>运行时异常：运行时异常是可能被程序员避免的异常。与检查性异常相反，运行时异常可以在编译时被忽略。</p>
+<br/>
+</li>
+<li><p>错误(Error)：错误不是异常，而是脱离程序员控制的问题。错误在代码中通常被忽略。例如，当栈溢出时，一个错误就发生了，他们在编译也检查不到的。</p>
+</li>
+</ol>
+<h3 id="异常的体系结构"><a href="#异常的体系结构" class="headerlink" title="异常的体系结构:"></a>异常的体系结构:</h3><ul>
+<li><p>Java把异常当做对象来处理，并定义一个基类java.lang.Throwable作为所有异常的超类。</p>
+<br/>
+</li>
+<li><p>在Java API中已经定义了许多异常类，这些异常分为两大类，错误Error和异常Excrption<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221103162029.png"></p>
+</li>
+</ul>
+<h3 id="Error"><a href="#Error" class="headerlink" title="Error"></a>Error</h3><ul>
+<li><p>Error类对象由Java虚拟机生成并抛出，大多数错误与代码编写者所执行的操作无关。</p>
+<br/>
+</li>
+<li><p>Java虚拟机运行错误(VirtualMachineError),当JVM不再有继续执行所需的内存资源时，将出现 OutOfMemoryError。这些异常发生时，Java虚拟机(JVM)一般会选择线程终止。</p>
+<br/>
+</li>
+<li><p>还有发生在虚拟机试图执行应用时，如定义错误(NoClassDefFoundError),链接错误(LinkageError)。这些错误是不可查的，因为它们在应用程序的控制和处理能力之外，而且绝大多数是程序运行时不允许出现的状况。</p>
+</li>
+</ul>
+<h3 id="Exception"><a href="#Exception" class="headerlink" title="Exception"></a>Exception</h3><ul>
+<li><p>在Exception分支中有一个重要的子类RuntimeException(运行时异常)</p>
+<ul>
+<li>ArrayIndexOutOfBoundsException(数组下标越界)</li>
+<li>NullPointerException(空指针异常)</li>
+<li>ArithmeticException(算数异常)</li>
+<li>MissingResourceException(丢失资源)</li>
+<li>ClassNotFoundException(找不到类)</li>
+<li>等等异常,这些异常是不检查异常，程序中可以选择捕获处理，也可以不处理。<br/></li>
+</ul>
+</li>
+<li><p>这些异常一般是由程序逻辑错误引起的，程序应该从逻辑角度尽可能避免这类异常的发生；</p>
+<br/>
+</li>
+<li><p><strong>Error和Exception的区别:</strong></p>
+<ul>
+<li>Error通常是灾难性的致命的错误，是程序无法控制和处理的，但出现这些异常时，Java虚拟机(JVM)一般会选择终止线程；</li>
+<li>Exception通常情况下是可以被程序处理的，并且在程序中应该尽可能的去处理这些异常。</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/03/JavaSE/P49%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E5%86%85%E9%83%A8%E7%B1%BB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/03/JavaSE/P49%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E5%86%85%E9%83%A8%E7%B1%BB/" class="post-title-link" itemprop="url">P49面向对象_内部类</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-11-03 11:23:00 / 修改时间：15:46:06" itemprop="dateCreated datePublished" datetime="2022-11-03T11:23:00+08:00">2022-11-03</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="内部类"><a href="#内部类" class="headerlink" title="内部类"></a>内部类</h2><ul>
+<li>内部类就是在一个类的内部再定义一个类，比如，A类中定义一个B类，那么B类相对A类来说就称为内部类，而A类相对B类来说就是外部类了。</li>
+<li>有以下几种：<ol>
+<li>成员内部类</li>
+<li>静态内部类</li>
+<li>局部内部类</li>
+<li>匿名内部类<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">Outer</span> <span class="variable">outer</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Outer</span>();</span><br><span class="line">        <span class="comment">//如果要实例化内部类，需要用外部类的对象来new</span></span><br><span class="line">        Outer.<span class="type">Inner</span> <span class="variable">inner</span> <span class="operator">=</span> outer.<span class="keyword">new</span> <span class="title class_">Inner</span>();</span><br><span class="line">        inner.getID();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Outer</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> <span class="variable">id</span> <span class="operator">=</span> <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">out</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;这是外部类的方法&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Inner</span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">in</span><span class="params">()</span>&#123;</span><br><span class="line">            System.out.println(<span class="string">&quot;这是内部类的方法&quot;</span>);</span><br><span class="line"></span><br><span class="line">            <span class="comment">//内外部类可以直接获得外部类的私有属性</span></span><br><span class="line">            <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">getID</span><span class="params">()</span>&#123;</span><br><span class="line">                System.out.println(id);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/02/JavaSE/P48%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E6%8E%A5%E5%8F%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/02/JavaSE/P48%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E6%8E%A5%E5%8F%A3/" class="post-title-link" itemprop="url">P48面向对象_接口</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-02 09:33:00" itemprop="dateCreated datePublished" datetime="2022-11-02T09:33:00+08:00">2022-11-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-11-03 11:21:42" itemprop="dateModified" datetime="2022-11-03T11:21:42+08:00">2022-11-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="接口的概念"><a href="#接口的概念" class="headerlink" title="接口的概念"></a>接口的概念</h2><ul>
+<li><p>普通类：只有具体实现</p>
+</li>
+<li><p>抽象类：具体实现和规范(抽象方法)都有</p>
+</li>
+<li><p>接口: 只有规范(自己无法写方法)</p>
+<br/>
+</li>
+<li><p>接口就是规范，定义的是一组规则，体现了现实世界中“如果你是…则必须能…”的思想。</p>
+</li>
+<li><p>接口的本质是契约，就像我们人间的法律一样。制定好后大家都遵守。</p>
+</li>
+<li><p>面向对象的精髓，是对对象的抽象，最能体现这一点的就是接口。为什么我们讨论设计模式都只针对具备了抽象能力的语(比如c++,java,c#)等，就是因为设计模式所研究的，实际上就是如何合理的去抽象。</p>
+<br/>
+</li>
+<li><p>接口的定义方法: interface+接口名</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title class_">UserService</span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//接口中定义的所有属性都默认为静态常量，相当于自带public static final修饰符</span></span><br><span class="line">    <span class="type">int</span> <span class="variable">AGE</span> <span class="operator">=</span><span class="number">99</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//接口中的所有定义都是抽象的,相当于自带public abstract修饰符</span></span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(String name)</span>;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(String name)</span>;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(String name)</span>;</span><br><span class="line">    <span class="keyword">void</span> <span class="title function_">query</span><span class="params">(String name)</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//接口的实现类  使用 implements 关键字</span></span><br><span class="line"><span class="comment">//实现接口的类，必须要重写接口中的方法</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">UserServiceImpl</span> <span class="keyword">implements</span> <span class="title class_">UserService</span>&#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">add</span><span class="params">(String name)</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">delete</span><span class="params">(String name)</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">update</span><span class="params">(String name)</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">query</span><span class="params">(String name)</span>&#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li><p>接口的作用与特点:</p>
+<ol>
+<li>约束</li>
+<li>定义一些方法，让不同的人实现</li>
+<li>方法均为 public abstract</li>
+<li>属性均为 public static final</li>
+<li>接口不能被实例化（接口中不存在构造方法）</li>
+<li>可以用implements关键字可以实现多个接口</li>
+<li>实现接口的类必须要重写接口中定义的方法</li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/01/JavaSE/P47%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E6%8A%BD%E8%B1%A1%E7%B1%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -846,308 +1151,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/JavaSE/P40%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E5%B0%81%E8%A3%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/26/JavaSE/P40%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E5%B0%81%E8%A3%85/" class="post-title-link" itemprop="url">P40面向对象_封装</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-10-26 10:00:40" itemprop="dateCreated datePublished" datetime="2022-10-26T10:00:40+08:00">2022-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-27 10:24:46" itemprop="dateModified" datetime="2022-10-27T10:24:46+08:00">2022-10-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="封装"><a href="#封装" class="headerlink" title="封装"></a>封装</h2><ul>
-<li><strong>该露的露，该藏的藏</strong><ul>
-<li>我们程序设计要追求“高内聚，低耦合”。高内聚就是类的内部数据操作细节自己完成，不允许外部干涉；低耦合: 仅暴露少量的方法给外部使用。</li>
-</ul>
-</li>
-<li><strong>封装 (数据的隐藏)</strong><ul>
-<li>通常，应禁止直接访问一个对象中数据的实际表示，而应通过操作接口开访问，这称为信息隐藏。</li>
-</ul>
-</li>
-<li><strong>属性私有， get&#x2F;set</strong></li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(Srting[] args)</span>&#123;</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line"></span><br><span class="line">        s1.setName(<span class="string">&quot;小明&quot;</span>);</span><br><span class="line">        System.out.println(s1.getName());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//属性私有</span></span><br><span class="line">    <span class="keyword">private</span> String name;   <span class="comment">//名字</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> id;   <span class="comment">//学号</span></span><br><span class="line">    <span class="keyword">private</span> <span class="type">char</span> sex;   <span class="comment">//性别</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">//提供一些可以操作这个属性的方法</span></span><br><span class="line">    <span class="comment">//提供一些 public 的 get set 方法</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// get 获得这个数据</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">this</span>.name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//set 给这个数据设置值</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><strong>封装的优点:</strong></p>
-<ol>
-<li>提高程序的安全性，保护数据</li>
-<li>隐藏代码实现细节</li>
-<li>统一接口</li>
-<li>提高系统可维护性</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/JavaSE/P39%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E5%AF%B9%E8%B1%A1%E7%AE%80%E5%8D%95%E5%B0%8F%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/26/JavaSE/P39%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E5%AF%B9%E8%B1%A1%E7%AE%80%E5%8D%95%E5%B0%8F%E7%BB%93/" class="post-title-link" itemprop="url">P39面向对象_对象简单小结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-10-26 10:00:39" itemprop="dateCreated datePublished" datetime="2022-10-26T10:00:39+08:00">2022-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-27 10:24:54" itemprop="dateModified" datetime="2022-10-27T10:24:54+08:00">2022-10-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li><strong>类与对象:</strong><ul>
-<li>类是一个模板: 抽象，对象时一个具体的实例</li>
-</ul>
-</li>
-<li><strong>方法:</strong><ul>
-<li>定义，调用</li>
-</ul>
-</li>
-<li><strong>对象的引用:</strong><ul>
-<li>引用类型： 除了基本类型(8个)</li>
-<li>对象是用过引用来操作的: 栈—&gt; 堆</li>
-</ul>
-</li>
-<li><strong>属性: 字段 Field 成员变量</strong><ul>
-<li>默认初始化:</li>
-<li>数字: 0 0.0</li>
-<li>char: u0000</li>
-<li>boolean: false</li>
-<li>引用: null</li>
-<li>修饰符 属性类型 属性名 &#x3D; 属性值;</li>
-</ul>
-</li>
-<li><strong>对象的创建和使用</strong><ul>
-<li>必须要使用 new 关键字创造对象，构造器 Person person &#x3D; new Person();</li>
-<li>对象的属性 person.name</li>
-<li>对象的方法 person.sleep();</li>
-</ul>
-</li>
-<li><strong>类</strong><ul>
-<li>静态的属性  属性</li>
-<li>动态的行为  方法<br/></li>
-</ul>
-</li>
-</ul>
-<p>‘封装， 继承， 多态’</p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/JavaSE/P38%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E6%9E%84%E9%80%A0%E5%99%A8%E8%AF%A6%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/26/JavaSE/P38%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E6%9E%84%E9%80%A0%E5%99%A8%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">P38面向对象_构造器详解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-10-26 10:00:38" itemprop="dateCreated datePublished" datetime="2022-10-26T10:00:38+08:00">2022-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-27 10:24:54" itemprop="dateModified" datetime="2022-10-27T10:24:54+08:00">2022-10-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="构造方法"><a href="#构造方法" class="headerlink" title="构造方法"></a>构造方法</h2><p>前面提到过的构造器也就是构造方法又有两个特点</p>
-<ol>
-<li>必须和类的名字相同</li>
-<li>必须没有返回值类型，也不能写void</li>
-</ol>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//new 实例化了一个对象</span></span><br><span class="line">        <span class="type">Person</span> <span class="variable">person</span> <span class="operator">=</span> Person();</span><br><span class="line">        <span class="type">Person</span> <span class="variable">xiaoming</span> <span class="operator">=</span> Person(<span class="string">&quot;小明&quot;</span>);</span><br><span class="line"></span><br><span class="line">        System.out.println(person.name);  <span class="comment">//null</span></span><br><span class="line">        System.out.println(xiaoming.name);  <span class="comment">//小明</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    <span class="comment">//一个类即使什么都不写，它也悔存在一个方法</span></span><br><span class="line">    <span class="comment">//显示的定义构造器</span></span><br><span class="line"></span><br><span class="line">    String name;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//实例化初始值</span></span><br><span class="line">    <span class="comment">//使用 new 关键字，本质实在调用构造器</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">()</span>&#123;   <span class="comment">//无参构造器</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//有参构造: 一旦定义了有参构造，无参就必须显式定义</span></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Person</span><span class="params">(String name)</span>&#123;  <span class="comment">//有参构造器</span></span><br><span class="line">        <span class="built_in">this</span>.name = name;  <span class="comment">// 初始化参数</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<blockquote>
-<ol>
-<li>在new实例化生成对象时，本质上就是在调用类中定义的构造器</li>
-<li>使用构造器用来初始化值</li>
-</ol>
-</blockquote>
-<ul>
-<li><strong>无参构造器:</strong><ul>
-<li>类自带的无参数构造方法,但没有显式定义构造方法是无参构造器默认存在</li>
-<li>但显式定义了有参构造器后，无参构造器会被替代，可以再将无参构造器显式定义出来已实现有参无参的重载</li>
-</ul>
-</li>
-<li><strong>有参构造器:</strong><ul>
-<li>默认类不自带有参构造器，需要手动定义</li>
-<li>有参构造器的参数就是在使用 new 实例化对象时传入的实际参数</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/10/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/10/">10</a><span class="page-number current">11</span><a class="page-number" href="/page/12/">12</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/12/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1215,7 +1222,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">160</span>
+          <span class="site-state-item-count">163</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

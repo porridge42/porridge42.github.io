@@ -183,6 +183,277 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/04/JavaSE/P80%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_LinkedList%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/04/JavaSE/P80%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_LinkedList%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">P80集合框架_LinkedList的使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-12-04 22:45:00" itemprop="dateCreated datePublished" datetime="2022-12-04T22:45:00+08:00">2022-12-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-06 01:53:58" itemprop="dateModified" datetime="2022-12-06T01:53:58+08:00">2022-12-06</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="LinkedList使用："><a href="#LinkedList使用：" class="headerlink" title="LinkedList使用："></a>LinkedList使用：</h1><ul>
+<li>双向链表结构实现，增删块，查询慢</li>
+<li>LinkedList与ArrayList的对比:<ul>
+<li>采取不同的数据结构实现，数据在内存中存储的形式不同:</li>
+<li><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221206013723.png"></li>
+<li>ArrayList中存储的数据在内存中都是连续的，而LinkedList由于使用的是列表结构，所以元素在内存中不是连续存储的。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.LinkedList;</span><br><span class="line"><span class="keyword">import</span> java.util.ListIterator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        <span class="comment">//创建集合</span></span><br><span class="line">        <span class="type">LinkedList</span> <span class="variable">linkedList</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">LinkedList</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//添加元素</span></span><br><span class="line">        <span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;刘德华&quot;</span>, <span class="number">20</span>);</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;郭富城&quot;</span>, <span class="number">22</span>);</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;郭富城&quot;</span>, <span class="number">18</span>);</span><br><span class="line">        linkedList.add(s1);</span><br><span class="line">        linkedList.add(s2);</span><br><span class="line">        linkedList.add(s3);</span><br><span class="line">        System.out.println(<span class="string">&quot;元素个数：&quot;</span>+linkedList.size());</span><br><span class="line">        System.out.println(linkedList.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//删除</span></span><br><span class="line">        <span class="comment">//linkedList.remove(new Student(&quot;刘德华&quot;, 20));</span></span><br><span class="line">        <span class="comment">//System.out.println(&quot;删除之后：&quot;+linkedList.size());</span></span><br><span class="line">        <span class="comment">//linkedList.clear();</span></span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;-----------------&quot;</span>);</span><br><span class="line">        <span class="comment">//遍历</span></span><br><span class="line">        <span class="comment">//使用for</span></span><br><span class="line">        System.out.println(<span class="string">&quot;使用for循环遍历：&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; linkedList.size(); i++) &#123;</span><br><span class="line">            System.out.println(linkedList.get(i));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//使用增强for</span></span><br><span class="line">        System.out.println(<span class="string">&quot;使用增强for遍历：&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (Object each : linkedList) &#123;</span><br><span class="line">            <span class="type">Student</span> <span class="variable">s</span> <span class="operator">=</span> (Student) each;</span><br><span class="line">            System.out.println(s.toString());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//使用迭代器</span></span><br><span class="line">        System.out.println(<span class="string">&quot;使用迭代器遍历：&quot;</span>);</span><br><span class="line">        <span class="type">Iterator</span> <span class="variable">it</span> <span class="operator">=</span> linkedList.iterator();</span><br><span class="line">        <span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">            <span class="type">Student</span> <span class="variable">s</span> <span class="operator">=</span> (Student) it.next();</span><br><span class="line">            System.out.println(s.toString());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//使用列表迭代器</span></span><br><span class="line">        System.out.println(<span class="string">&quot;使用列表迭代器正向遍历：&quot;</span>);</span><br><span class="line">        <span class="type">ListIterator</span> <span class="variable">lit</span> <span class="operator">=</span> linkedList.listIterator();</span><br><span class="line">        <span class="keyword">while</span> (lit.hasNext()) &#123;</span><br><span class="line">            <span class="type">Student</span> <span class="variable">s</span> <span class="operator">=</span> (Student) lit.next();</span><br><span class="line">            System.out.println(s.toString());</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;使用列表迭代器反向遍历：&quot;</span>);</span><br><span class="line">        <span class="keyword">while</span> (lit.hasPrevious()) &#123;</span><br><span class="line">            <span class="type">Student</span> <span class="variable">s</span> <span class="operator">=</span> (Student) lit.previous();</span><br><span class="line">            System.out.println(s.toString());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;-----------------&quot;</span>);</span><br><span class="line">        <span class="comment">//判断</span></span><br><span class="line">        System.out.println(linkedList.contains(s1));</span><br><span class="line">        System.out.println(linkedList.isEmpty());</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;-----------------&quot;</span>);</span><br><span class="line">        <span class="comment">//获取下标</span></span><br><span class="line">        System.out.println(linkedList.indexOf(s1));</span><br><span class="line">        System.out.println(linkedList.indexOf(s2));</span><br><span class="line">        System.out.println(linkedList.indexOf(s3));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221205001836.png"></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/12/02/JavaSE/P79%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_Vector%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/12/02/JavaSE/P79%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_Vector%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">P79集合框架_Vector的使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-12-02 23:31:00 / 修改时间：23:54:06" itemprop="dateCreated datePublished" datetime="2022-12-02T23:31:00+08:00">2022-12-02</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="Vector与ArrayList的对比："><a href="#Vector与ArrayList的对比：" class="headerlink" title="Vector与ArrayList的对比："></a>Vector与ArrayList的对比：</h1><ul>
+<li>ArrayList 【重点】：<ul>
+<li>数组结构实现，查询快、增删慢；</li>
+<li>JDK1.2版本，运行效率快、线程不安全。</li>
+</ul>
+</li>
+<li>Vector：<ul>
+<li>数组结构实现，查询快、增删慢；</li>
+<li>JDK1.0版本，运行效率慢、线程安全。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Enumeration;</span><br><span class="line"><span class="keyword">import</span> java.util.Vector;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo1</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//创建集合</span></span><br><span class="line">        <span class="type">Vector</span> <span class="variable">vector</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Vector</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//添加元素</span></span><br><span class="line">        vector.add(<span class="string">&quot;草莓&quot;</span>);</span><br><span class="line">        vector.add(<span class="string">&quot;芒果&quot;</span>);</span><br><span class="line">        vector.add(<span class="string">&quot;西瓜&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;元素个数：&quot;</span>+vector.size());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//遍历</span></span><br><span class="line">        <span class="comment">//使用枚举器(vector特有)</span></span><br><span class="line">        System.out.println(<span class="string">&quot;使用枚举器遍历:&quot;</span>);</span><br><span class="line">        <span class="type">Enumeration</span> <span class="variable">en</span> <span class="operator">=</span> vector.elements();</span><br><span class="line">        <span class="keyword">while</span> (en.hasMoreElements())&#123;</span><br><span class="line">            <span class="type">Object</span> <span class="variable">o</span> <span class="operator">=</span> en.nextElement();</span><br><span class="line">            <span class="type">String</span> <span class="variable">s</span> <span class="operator">=</span> (String) o;</span><br><span class="line">            System.out.println(s);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//判断</span></span><br><span class="line">        System.out.println(<span class="string">&quot;判断:&quot;</span>);</span><br><span class="line">        System.out.println(vector.contains(<span class="string">&quot;西瓜&quot;</span>));</span><br><span class="line">        System.out.println(vector.isEmpty());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//vector的其他方法</span></span><br><span class="line">        <span class="comment">//firstElement、lastElement、lementAt();</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221202235358.png"></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/30/JavaSE/P78%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_ArrayList%E7%9A%84%E4%BD%BF%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/11/30/JavaSE/P78%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_ArrayList%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">P78集合框架_ArrayList的使用</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-11-30 00:40:00" itemprop="dateCreated datePublished" datetime="2022-11-30T00:40:00+08:00">2022-11-30</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-12-02 23:31:22" itemprop="dateModified" datetime="2022-12-02T23:31:22+08:00">2022-12-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="ArrayList的使用"><a href="#ArrayList的使用" class="headerlink" title="ArrayList的使用"></a>ArrayList的使用</h1><ul>
+<li><p>添加元素</p>
+</li>
+<li><p>删除元素</p>
+<ul>
+<li>使用remove方法删除相同对象</li>
+</ul>
+</li>
+<li><p>遍历元素</p>
+<ul>
+<li>使用迭代器<ul>
+<li>Iterator迭代器</li>
+<li>ListIterator列表迭代器</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>判断元素</p>
+<ul>
+<li>contains方法判断是否存在指定元素</li>
+<li>判断相同对象同remove需要重写equals</li>
+</ul>
+</li>
+<li><p>查找元素</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.Iterator;</span><br><span class="line"><span class="keyword">import</span> java.util.ListIterator;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo1</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//创建集合</span></span><br><span class="line">        <span class="type">ArrayList</span> <span class="variable">arrayList</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;-----------添加元素------------&quot;</span>);</span><br><span class="line">        <span class="comment">//添加元素</span></span><br><span class="line">        <span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;刘德华&quot;</span>, <span class="number">20</span>);</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;郭富城&quot;</span>, <span class="number">22</span>);</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;梁朝伟&quot;</span>, <span class="number">18</span>);</span><br><span class="line">        arrayList.add(s1);</span><br><span class="line">        arrayList.add(s2);</span><br><span class="line">        arrayList.add(s3);</span><br><span class="line">        System.out.println(<span class="string">&quot;元素个数:&quot;</span>+arrayList.size());</span><br><span class="line">        System.out.println(arrayList.toString());</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;-----------遍历元素------------&quot;</span>);</span><br><span class="line">        <span class="comment">//遍历元素</span></span><br><span class="line">        System.out.println(<span class="string">&quot;使用迭代器:&quot;</span>);</span><br><span class="line">        <span class="comment">//使用迭代器</span></span><br><span class="line">        <span class="type">Iterator</span> <span class="variable">it</span> <span class="operator">=</span> arrayList.iterator();</span><br><span class="line">        <span class="keyword">while</span> (it.hasNext()) &#123;</span><br><span class="line">            <span class="type">Student</span> <span class="variable">s</span> <span class="operator">=</span> (Student) it.next();</span><br><span class="line">            System.out.println(s.toString());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;使用列表迭代器:&quot;</span>);</span><br><span class="line">        <span class="comment">//使用列表迭代器</span></span><br><span class="line">        <span class="type">ListIterator</span> <span class="variable">lit</span> <span class="operator">=</span> arrayList.listIterator();</span><br><span class="line">        <span class="keyword">while</span> (lit.hasNext()) &#123;</span><br><span class="line">            <span class="type">Student</span> <span class="variable">s</span> <span class="operator">=</span> (Student) lit.next();</span><br><span class="line">            System.out.println(s.toString());</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(<span class="string">&quot;逆序:&quot;</span>);</span><br><span class="line">        <span class="keyword">while</span> (lit.hasPrevious()) &#123;</span><br><span class="line">            <span class="type">Student</span> <span class="variable">s</span> <span class="operator">=</span> (Student) lit.previous();</span><br><span class="line">            System.out.println(s.toString());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;-----------判断元素------------&quot;</span>);</span><br><span class="line">        <span class="comment">//判断元素</span></span><br><span class="line">        System.out.println(<span class="string">&quot;是否包含s1:\n&quot;</span>+arrayList.contains(s1));</span><br><span class="line">        System.out.println(<span class="string">&quot;是否包含new Student(\&quot;刘德华\&quot;, 20):\n&quot;</span>+arrayList.contains(<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;刘德华&quot;</span>, <span class="number">20</span>)));</span><br><span class="line">        System.out.println(<span class="string">&quot;是否为空:\n&quot;</span>+arrayList.isEmpty());</span><br><span class="line"></span><br><span class="line">        System.out.println(<span class="string">&quot;-----------判断元素------------&quot;</span>);</span><br><span class="line">        <span class="comment">//查找元素</span></span><br><span class="line">        System.out.println(arrayList.indexOf(s3));</span><br><span class="line">        System.out.println(arrayList.indexOf(<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;梁朝伟&quot;</span>, <span class="number">18</span>)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221201005425.png"></p>
+</li>
+<li><p><strong>如何实现remove方法相同对象删除功能：</strong></p>
+<ul>
+<li>使用remove方法传入的对象，如果地址不是待删除对象本身，则无法删除:<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;刘德华&quot;</span>, <span class="number">20</span>);</span><br><span class="line">arrayList.remove(<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;刘德华&quot;</span>, <span class="number">20</span>));</span><br></pre></td></tr></table></figure></li>
+<li>remove方法判断传入对象为什么对象使用的是对象内继承自Object类的equals方法,该方法比较的为对象的引用地址。</li>
+<li>若此时想要通过比较对象的属性内容来判断是否为待删除对象本身，则需要在Student类中重写equals方法。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span>&#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="keyword">public</span> <span class="type">boolean</span> <span class="title function_">equals</span><span class="params">(Object obj)</span> &#123;</span><br><span class="line">      <span class="comment">//1.判断是不是同一个对象</span></span><br><span class="line">      <span class="keyword">if</span> (<span class="built_in">this</span> == obj) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//2.判断是否为空</span></span><br><span class="line">      <span class="keyword">if</span> (obj == <span class="literal">null</span>) &#123;</span><br><span class="line">          <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//3.判断是否是Student类型</span></span><br><span class="line">      <span class="keyword">if</span> (obj <span class="keyword">instanceof</span> Student) &#123;</span><br><span class="line">          <span class="type">Student</span> <span class="variable">s</span> <span class="operator">=</span> (Student)obj;</span><br><span class="line">          <span class="comment">//4.比较属性</span></span><br><span class="line">          <span class="keyword">if</span> (<span class="built_in">this</span>.name.equals(s.getName()) &amp;&amp; <span class="built_in">this</span>.age == s.getAge()) &#123;</span><br><span class="line">              <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">          &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="comment">//5.不满足条件返回</span></span><br><span class="line">      <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/30/JavaSE/P77%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_List%E7%9A%84%E5%AE%9E%E7%8E%B0%E7%B1%BB/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -820,259 +1091,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/20/JavaSE/P70%E5%B8%B8%E7%94%A8%E7%B1%BB_System%E7%B1%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/20/JavaSE/P70%E5%B8%B8%E7%94%A8%E7%B1%BB_System%E7%B1%BB/" class="post-title-link" itemprop="url">P70常用类_System类</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-11-20 01:07:00" itemprop="dateCreated datePublished" datetime="2022-11-20T01:07:00+08:00">2022-11-20</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-21 01:42:34" itemprop="dateModified" datetime="2022-11-21T01:42:34+08:00">2022-11-21</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="System类"><a href="#System类" class="headerlink" title="System类"></a>System类</h2><ul>
-<li><p>System系统类，主要用于获取系统的属性数据和其他操作，构造方法为私有。</p>
-</li>
-<li><p>常用方法列表<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221120011118.png"></p>
-<br/>
-</li>
-<li><p>arraycopy()方法:</p>
-<ul>
-<li>该方法是一个本地方法，没有方法体，具体是由jvm内部使用c或c++代码来实现的，所以效率比较高。</li>
-<li>字符串array对象中的array.copyOf()方法内部，实际上就是调用本方法来实现的。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo4</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//System.arraycopy()方法: 数组的复制</span></span><br><span class="line">        <span class="comment">//src: 原数组</span></span><br><span class="line">        <span class="comment">//srcPos: 从哪个位置开始复制 0</span></span><br><span class="line">        <span class="comment">//dest: 目标数组的位置</span></span><br><span class="line">        <span class="comment">//length: 复制的长度</span></span><br><span class="line">        <span class="type">int</span>[] src = &#123;<span class="number">20</span>,<span class="number">18</span>,<span class="number">15</span>,<span class="number">8</span>,<span class="number">35</span>,<span class="number">26</span>,<span class="number">45</span>,<span class="number">90</span>&#125;;</span><br><span class="line">        <span class="type">int</span>[] dest = <span class="keyword">new</span> <span class="title class_">int</span>[<span class="number">8</span>];</span><br><span class="line"></span><br><span class="line">        System.arraycopy(src, <span class="number">0</span>, dest, <span class="number">0</span>, src.length);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> each : dest) &#123;</span><br><span class="line">            System.out.println(each);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">		<span class="comment">//currentTimeMillis()方法: 返回从1970.1.1到现在过去的毫秒值</span></span><br><span class="line">		System.out.println(System.currentTimeMillis());</span><br><span class="line"></span><br><span class="line">		<span class="comment">//System.gc()方法: 通知垃圾回收器回收垃圾</span></span><br><span class="line">		<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;aaa&quot;</span>, <span class="number">19</span>);</span><br><span class="line">		<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;bbb&quot;</span>, <span class="number">19</span>);</span><br><span class="line">		<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;ccc&quot;</span>, <span class="number">19</span>);</span><br><span class="line"></span><br><span class="line">		System.gc();</span><br><span class="line">		<span class="comment">//创建了三个对象但是不赋给任何变量，此时就产生了三个垃圾对象，使用System.gc()方法可以手动通知jvm回收垃圾</span></span><br><span class="line"></span><br><span class="line">		<span class="comment">//System.exit()方法: 退出jvm</span></span><br><span class="line">		System.exit(<span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">		System.out.println(<span class="string">&quot;我在exit()方法之后！&quot;</span>);</span><br><span class="line">		<span class="comment">//因为此时jvm已经退出所以并不会执行这行代码</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221121014217.png"></li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/18/JavaSE/P69%E5%B8%B8%E7%94%A8%E7%B1%BB_SimpleDateFormat/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/18/JavaSE/P69%E5%B8%B8%E7%94%A8%E7%B1%BB_SimpleDateFormat/" class="post-title-link" itemprop="url">P69常用类_SimpleDateFormat</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-11-18 23:18:00" itemprop="dateCreated datePublished" datetime="2022-11-18T23:18:00+08:00">2022-11-18</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-20 01:07:04" itemprop="dateModified" datetime="2022-11-20T01:07:04+08:00">2022-11-20</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="SimpleDateFormat"><a href="#SimpleDateFormat" class="headerlink" title="SimpleDateFormat"></a>SimpleDateFormat</h2><ul>
-<li>SimpleDateFormat是一个与语言环境有关的方式来格式化和解释日期的具体类。</li>
-<li>进行格式化（日期-&gt;文本）、解析（文本-&gt;日期）。</li>
-<li>常用的时间模式字母<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221118231316.png"><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.text.SimpleDateFormat;</span><br><span class="line"><span class="keyword">import</span> java.util.Date;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo3</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String [] args)</span> <span class="keyword">throws</span> ParseException &#123;</span><br><span class="line">        <span class="comment">//创建SimpleDateFormat对象</span></span><br><span class="line">        <span class="type">SimpleDateFormat</span> <span class="variable">sdf</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy年MM月dd日 HH:mm:ss&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//创建Date</span></span><br><span class="line">        <span class="type">Date</span> <span class="variable">date</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Date</span>();</span><br><span class="line"></span><br><span class="line">        <span class="comment">//格式化(把Date对象转换为字符串)</span></span><br><span class="line">        <span class="type">String</span> <span class="variable">str</span> <span class="operator">=</span> sdf.format(date);</span><br><span class="line">        System.out.println(str);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//解析(把字符串转成Date对象)</span></span><br><span class="line">        <span class="type">SimpleDateFormat</span> <span class="variable">sdf2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">SimpleDateFormat</span>(<span class="string">&quot;yyyy/MM/dd&quot;</span>);</span><br><span class="line">        <span class="type">Date</span> <span class="variable">date2</span> <span class="operator">=</span> sdf2.parse(<span class="string">&quot;1990/05/01&quot;</span>);</span><br><span class="line">        System.out.println(date2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221118235806.png"></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/17/JavaSE/P68%E5%B8%B8%E7%94%A8%E7%B1%BB_Calendar%E7%B1%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/11/17/JavaSE/P68%E5%B8%B8%E7%94%A8%E7%B1%BB_Calendar%E7%B1%BB/" class="post-title-link" itemprop="url">P68常用类_Calendar类</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-11-17 23:04:00" itemprop="dateCreated datePublished" datetime="2022-11-17T23:04:00+08:00">2022-11-17</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-11-18 23:08:38" itemprop="dateModified" datetime="2022-11-18T23:08:38+08:00">2022-11-18</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Calendar类"><a href="#Calendar类" class="headerlink" title="Calendar类"></a>Calendar类</h2><ul>
-<li>Calendar提供类获取或设置各种日历字段的方法。</li>
-<li>构造方法<ul>
-<li>protected Calendar();</li>
-<li>由于使用了protected修饰符，所以无法直接创建对象。</li>
-</ul>
-</li>
-<li>常用方法列表:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221117230812.png"><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo02</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="comment">//创建Calendar对象</span></span><br><span class="line">        <span class="type">Calendar</span> <span class="variable">calendar</span> <span class="operator">=</span>Calendar.getInstance();</span><br><span class="line">        System.out.println(calendar.getTime().toLocaleString());</span><br><span class="line">        System.out.println(calendar.getTimeInMillis());</span><br><span class="line">        <span class="comment">//获取时间信息</span></span><br><span class="line">        <span class="comment">//获取年</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">year</span> <span class="operator">=</span> calendar.get(Calendar.YEAR);</span><br><span class="line">        <span class="comment">//月 0-11</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">month</span> <span class="operator">=</span> calendar.get(Calendar.MONTH);</span><br><span class="line">        <span class="comment">//日</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">day</span> <span class="operator">=</span> calendar.get(Calendar.DAY_OF_MONTH);</span><br><span class="line">        <span class="comment">//小时</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">hour</span> <span class="operator">=</span> calendar.get(Calendar.HOUR_OF_DAY);  <span class="comment">//HOUR 12小时 HOUR_OF_DAY 24小时</span></span><br><span class="line">        <span class="comment">//分钟</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">minute</span> <span class="operator">=</span> calendar.get(Calendar.MINUTE);</span><br><span class="line">        <span class="comment">//秒</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">second</span> <span class="operator">=</span> calendar.get(Calendar.SECOND);</span><br><span class="line"></span><br><span class="line">        System.out.println(year+<span class="string">&quot;年&quot;</span>+(month+<span class="number">1</span>)+<span class="string">&quot;月&quot;</span>+day+<span class="string">&quot;日&quot;</span>+hour+<span class="string">&quot;时&quot;</span>+minute+<span class="string">&quot;分&quot;</span>+second+<span class="string">&quot;秒&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//修改时间</span></span><br><span class="line">        <span class="type">Calendar</span> <span class="variable">calendar2</span> <span class="operator">=</span> Calendar.getInstance();</span><br><span class="line">        calendar2.set(Calendar.DAY_OF_MONTH, <span class="number">5</span>);</span><br><span class="line">        System.out.println(calendar2.getTime().toLocaleString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//add方法修改时间</span></span><br><span class="line">        calendar2.add(Calendar.HOUR, <span class="number">1</span>);</span><br><span class="line">        System.out.println(calendar2.getTime().toLocaleString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//补充方法</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">max</span> <span class="operator">=</span> calendar2.getActualMaximum(Calendar.DAY_OF_MONTH);</span><br><span class="line">        <span class="type">int</span> <span class="variable">min</span> <span class="operator">=</span> calendar2.getActualMinimum(Calendar.DAY_OF_MONTH);</span><br><span class="line">        System.out.println(max);</span><br><span class="line">        System.out.println(min);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221118230809.png"></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1140,7 +1162,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">160</span>
+          <span class="site-state-item-count">163</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

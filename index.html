@@ -183,6 +183,410 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/06/sklearn/7_sklearn%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9%E4%B8%8E%E8%B0%83%E4%BC%98/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/06/sklearn/7_sklearn%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9%E4%B8%8E%E8%B0%83%E4%BC%98/" class="post-title-link" itemprop="url">P7_模型选择与调优</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-12-06 10:17:00" itemprop="dateCreated datePublished" datetime="2023-12-06T10:17:00+08:00">2023-12-06</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-07 09:29:32" itemprop="dateModified" datetime="2023-12-07T09:29:32+08:00">2023-12-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sklearn/" itemprop="url" rel="index"><span itemprop="name">sklearn</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="模型选择与调优"><a href="#模型选择与调优" class="headerlink" title="模型选择与调优"></a>模型选择与调优</h2><h3 id="什么是交叉验证（Cross-Validation）："><a href="#什么是交叉验证（Cross-Validation）：" class="headerlink" title="什么是交叉验证（Cross Validation）："></a>什么是交叉验证（Cross Validation）：</h3><ul>
+<li>交叉验证：将拿到的训练数据，分为训练和验证集。以下图为例：将数据分为4份，其中一份作为验证集。然后经过3次（组）的测试，每次都要更换不同的验证集。即得到4组模型的结果，平均值作为最终结果。又称4折交叉验证。<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231206185045.png"></li>
+<li>为什么需要交叉验证：<ul>
+<li>交叉验证的目的：<strong>为了让评估的模型更加准确可信</strong><blockquote>
+<p>问题：交叉验证只是对于参数得出更好的结果，那么怎么选择或者调优参数？</p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="超参数搜索-网格搜索（Grid-Search）"><a href="#超参数搜索-网格搜索（Grid-Search）" class="headerlink" title="超参数搜索-网格搜索（Grid Search）"></a>超参数搜索-网格搜索（Grid Search）</h3><ul>
+<li>通常情况下，<strong>有很多参数是需要手动指定的（例如K近邻算法中的K值）, 这种叫超参数。</strong> 但是手动过程繁杂，所以需要对模型预设几种超参数组合。<strong>每种超参数都采用交叉验证来进行评估。最后选出最优参数组合建立模型。</strong></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">K值</th>
+<th align="right">K&#x3D;3</th>
+<th>k&#x3D;5</th>
+<th>k&#x3D;7</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">模型</td>
+<td align="right">模型1</td>
+<td>模型2</td>
+<td>模型3</td>
+</tr>
+</tbody></table>
+<ul>
+<li>模型选择与调用API：<ul>
+<li>sklearn.model_selection.GridSearchCV(estimator, param_grid&#x3D;None, cv&#x3D;None)<ul>
+<li>对估计器的指定参数值进行详尽搜索</li>
+<li>estimator：估计器对象</li>
+<li>param_gtid：估计器参数(dict){“n_neighbors”:[1,3,5]}</li>
+<li>cv：指定几折交叉验证</li>
+<li>fit()：输入训练数据</li>
+<li>score()：准确率</li>
+<li>结果分析：<ul>
+<li>最佳参数：<code>best_params_</code></li>
+<li>最佳结果：<code>best_score_</code></li>
+<li>最佳估计器：<code>best_estimator_</code></li>
+<li>交叉验证结果：<code>cv_results_</code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="鸢尾花案例增加K值调优"><a href="#鸢尾花案例增加K值调优" class="headerlink" title="鸢尾花案例增加K值调优"></a>鸢尾花案例增加K值调优</h3><ul>
+<li>只用GridSearchCV构建预估器<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> GridSearchCV</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用knn算法对鸢尾花进行分类</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1) 获取数据</span></span><br><span class="line">iris = load_iris()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2) 划分数据集</span></span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, random_state=<span class="number">114514</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3) 特征工程：标准化</span></span><br><span class="line">transfer = StandardScaler()</span><br><span class="line">x_train = transfer.fit_transform(x_train)</span><br><span class="line">x_test = transfer.transform(x_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4) KNN算法预估器</span></span><br><span class="line">estimator = KNeighborsClassifier(n_neighbors=<span class="number">3</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 加入网格搜索交叉验证</span></span><br><span class="line"><span class="comment"># 参数准备</span></span><br><span class="line">param_dict = &#123;<span class="string">&quot;n_neighbors&quot;</span>: [<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">9</span>, <span class="number">11</span>]&#125;</span><br><span class="line">estimator = GridSearchCV(estimator, param_grid=param_dict, cv=<span class="number">10</span>)</span><br><span class="line"></span><br><span class="line">estimator.fit(x_train, y_train)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5) 模型评估</span></span><br><span class="line"><span class="comment"># 方法1：直接比对真实值和预测值</span></span><br><span class="line">y_predict = estimator.predict(x_test)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;y_predict:\n&quot;</span>, y_predict)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;直接比对真实值和预测值：\n&quot;</span>, y_test == y_predict)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法2：计算准确率</span></span><br><span class="line">score = estimator.score(x_test, y_test)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;准确率为：\n&quot;</span>, score)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;最佳参数：\n&quot;</span>, estimator.best_params_)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;最佳结果：\n&quot;</span>, estimator.best_score_)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;最佳估计器：\n&quot;</span>, estimator.best_estimator_)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;交叉验证结果：\n&quot;</span>, estimator.cv_results_)</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231207092922.png"></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/09/sklearn/6_KNN%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/11/09/sklearn/6_KNN%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">P6_KNN算法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-11-09 09:50:00" itemprop="dateCreated datePublished" datetime="2023-11-09T09:50:00+08:00">2023-11-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-16 20:37:52" itemprop="dateModified" datetime="2023-11-16T20:37:52+08:00">2023-11-16</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sklearn/" itemprop="url" rel="index"><span itemprop="name">sklearn</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="K-近邻算法学习目标"><a href="#K-近邻算法学习目标" class="headerlink" title="K-近邻算法学习目标"></a>K-近邻算法学习目标</h2><ul>
+<li>学习目标：<ul>
+<li>K-近邻算法的距离公式</li>
+<li>K-近邻算饭的超参数K值以及取值问题</li>
+<li>K-近邻算法的优缺点</li>
+<li>应用KNeighbrosClassifier实现分类</li>
+<li>了解分类算法的评估标准准确率</li>
+</ul>
+</li>
+<li>应用：<ul>
+<li>鸢尾花数据集预测</li>
+<li>Facebook签到位置预测</li>
+</ul>
+</li>
+<li>内容：<ul>
+<li>什么是K-近邻算法</li>
+<li>K-近邻算法API</li>
+<li>案例：鸢尾花种类预测</li>
+<li>K-近邻总结</li>
+</ul>
+</li>
+</ul>
+<h2 id="K-近邻算法-KNN-原理"><a href="#K-近邻算法-KNN-原理" class="headerlink" title="K-近邻算法(KNN)原理"></a>K-近邻算法(KNN)原理</h2><p>K Nearest Neighbor算法又叫KNN算法，这个算法是机器学习里面一个比较经典的算法，总体来说KNN算法是相对比较容易理解的算法</p>
+<ul>
+<li>定义<ul>
+<li>若果一个样本在特征空间中的k个最相似（即特征空间中最邻近）的样本中大多数属于某一个类别，则该样本也属于这个类别。</li>
+</ul>
+</li>
+<li>距离公式<ul>
+<li>连个样本的距离可以通过如下公式计算，又叫欧氏距离</li>
+<li>比如说：a(a1,a2,a3),b(b1,b2,b3)<br>$$<br>\sqrt{(a1-b1)^2+(a2-b2)^2+(a3-b3)^2}<br>$$</li>
+</ul>
+</li>
+</ul>
+<h2 id="K-近邻算法API"><a href="#K-近邻算法API" class="headerlink" title="K-近邻算法API"></a>K-近邻算法API</h2><ul>
+<li>sklearn.neighbors.KNeighbrosClassifier(n_neighbors&#x3D;5, algorithm&#x3D;’auto’)<ul>
+<li>n_neighbors：int,可选（默认为&#x3D;5），k_neighbors查询默认使用的邻居数</li>
+<li>algorithm：{‘auto, ‘ball_ress, ‘kd_tree’, ‘brute’},可选用与计算最邻近邻居的算法：’ball_tree’将会使用BallTree,’kd_tree’将使用KDTree。’auto’将尝试根据传递给fit方法的值来决定最合适的算法。（不同实现方式影响效率）</li>
+</ul>
+</li>
+</ul>
+<h2 id="案例：鸢尾花种类预测"><a href="#案例：鸢尾花种类预测" class="headerlink" title="案例：鸢尾花种类预测"></a>案例：鸢尾花种类预测</h2><ul>
+<li>数据集简介：<ul>
+<li>示例数量：150（三个类各有50个）</li>
+<li>属性数量：4（数值型，数值型，帮助预测的属性和类）</li>
+<li><strong>Attribute Information:</strong><ul>
+<li>sepal length 萼片长度（厘米）</li>
+<li>sepal width 萼片宽度（厘米）</li>
+<li>petal length 花瓣长度（厘米）</li>
+<li>petal width 花瓣宽度（厘米）<ul>
+<li><strong>class:</strong></li>
+<li>Iris-Setosa 山鸢尾</li>
+<li>Iris-Versicolour 变色鸢尾</li>
+<li>Iris-Virginica 维吉尼亚鸢尾</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>流程规划：</strong></li>
+</ul>
+<ol>
+<li>获取数据</li>
+<li>划分数据集</li>
+<li>特征工程-标准化</li>
+<li>KNN算法预估器</li>
+<li>模型评估<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用knn算法对鸢尾花进行分类</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 1) 获取数据</span></span><br><span class="line">iris = load_iris()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2) 划分数据集</span></span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, random_state=<span class="number">114514</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3) 特征工程：标准化</span></span><br><span class="line">transfer = StandardScaler()</span><br><span class="line">x_train = transfer.fit_transform(x_train)</span><br><span class="line">x_test = transfer.transform(x_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4) KNN算法预估器</span></span><br><span class="line">estimator = KNeighborsClassifier(n_neighbors=<span class="number">3</span>)</span><br><span class="line">estimator.fit(x_train, y_train)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5) 模型评估</span></span><br><span class="line"><span class="comment"># 方法1：直接比对真实值和预测值</span></span><br><span class="line">y_predict = estimator.predict(x_test)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;y_predict:\n&quot;</span>, y_predict)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;直接比对真实值和预测值：\n&quot;</span>, y_test == y_predict)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 方法2：计算准确率</span></span><br><span class="line">score = estimator.score(x_test, y_test)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;准确率为：\n&quot;</span>, score)</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231114144536.png"></li>
+</ol>
+<h2 id="KNN算法总结："><a href="#KNN算法总结：" class="headerlink" title="KNN算法总结："></a>KNN算法总结：</h2><ul>
+<li>优点：<ul>
+<li>简单，易于理解，易于实现，无需训练</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>懒惰算法，对测试样本分类时的计算量打，内存开销大</li>
+<li>必须指定K值，K值选择不当则分类精度不能保证</li>
+</ul>
+</li>
+<li>使用场景：小数据场景，几千~几万样本具体场景具体业务与测试</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/07/sklearn/5_sklearn%E8%BD%AC%E6%8D%A2%E5%99%A8%E5%92%8C%E4%BC%B0%E8%AE%A1%E5%99%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/11/07/sklearn/5_sklearn%E8%BD%AC%E6%8D%A2%E5%99%A8%E5%92%8C%E4%BC%B0%E8%AE%A1%E5%99%A8/" class="post-title-link" itemprop="url">P5_sklearn转换器和估计器</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-11-07 19:54:00" itemprop="dateCreated datePublished" datetime="2023-11-07T19:54:00+08:00">2023-11-07</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-11-09 09:48:57" itemprop="dateModified" datetime="2023-11-09T09:48:57+08:00">2023-11-09</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sklearn/" itemprop="url" rel="index"><span itemprop="name">sklearn</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="分类算法-sklearn转换器与估计器"><a href="#分类算法-sklearn转换器与估计器" class="headerlink" title="分类算法-sklearn转换器与估计器"></a>分类算法-sklearn转换器与估计器</h1><h2 id="转换器"><a href="#转换器" class="headerlink" title="转换器"></a>转换器</h2><ul>
+<li>回忆一下之前的特征工程步骤：<ul>
+<li>1、实例化（实例化的是一个转换器类(Transformer)）</li>
+<li>2、调用fit_transform（对于文档建立分类词频矩阵，不能同时调用）</li>
+</ul>
+</li>
+<li>我们把特诊工程的结接口称之为转换器，其中转换器调用有这么几种形式<ul>
+<li>fit_transform</li>
+<li>fit</li>
+<li>transform</li>
+</ul>
+</li>
+</ul>
+<h2 id="估计器（sklearn机器学习算法的实现）"><a href="#估计器（sklearn机器学习算法的实现）" class="headerlink" title="估计器（sklearn机器学习算法的实现）"></a>估计器（sklearn机器学习算法的实现）</h2><ul>
+<li><p>在sklearn中，估计器(estimator)是一个重要的角色，是一类实现了算法的API</p>
+<ul>
+<li>1、用于分类的估计器：<ul>
+<li>sklearn.neighbors k-近邻算法</li>
+<li>sklearn.naive_bayes 贝叶斯</li>
+<li>sklearn.linear_model.LogisticRegression 逻辑回归</li>
+<li>sklearn.tree 决策树与随机森林</li>
+</ul>
+</li>
+<li>2、用于回归的估计器：<ul>
+<li>sklearn.linear_model.LinearRegression 线型回归</li>
+<li>sklearn.linear_model.Ridge 岭回归</li>
+</ul>
+</li>
+<li>3、用于无监督学习的估计器<ul>
+<li>sklearn.cluster.KMeans 聚类<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/II4LU%7E7VRFUYWLNIXAJAV5F.png"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>估计器的使用：</p>
+<ul>
+<li>1、实例化一个estimator</li>
+<li>2、estimator.fit(x_tran, y_tran) 计算<ul>
+<li>–调用完毕，模型生成</li>
+</ul>
+</li>
+<li>3、模型评估：<ol>
+<li>直接比对真实值和预测值<br>y_predict &#x3D; estimator.predict(x_test)<br>y_test &#x3D;&#x3D; y_predict </li>
+<li>计算准确率<br>estimator.score(x_test, y_test)</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/11/05/sklearn/4_sklearn%E7%89%B9%E5%BE%81%E9%99%8D%E7%BB%B4/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -214,7 +618,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-11-06 09:52:48" itemprop="dateModified" datetime="2023-11-06T09:52:48+08:00">2023-11-06</time>
+                <time title="修改时间：2023-11-07 19:50:49" itemprop="dateModified" datetime="2023-11-07T19:50:49+08:00">2023-11-07</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -333,12 +737,70 @@
 <li>from scipu.stats import pearsonr<ul>
 <li>x：(N,) array_like</li>
 <li>y：(N,) array_like</li>
-<li>返回值：Pearson相关系数<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> VarianceThreshold</span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> pearsonr</span><br><span class="line">data = pd.read_csv(<span class="string">&#x27;./factor_returns.csv&#x27;</span>)</span><br><span class="line">data = data.iloc[:, <span class="number">1</span>:-<span class="number">2</span>]</span><br><span class="line">transfer = VarianceThreshold(threshold = <span class="number">10</span>)</span><br><span class="line">data_new = transfer.fit_transform(data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算两个变量之间的相关系数</span></span><br><span class="line">r = pearsonr(data[<span class="string">&quot;pe_ratio&quot;</span>], data[<span class="string">&quot;pb_ratio&quot;</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;相关系数：\n&quot;</span>, r)</span><br></pre></td></tr></table></figure>
-输出：<br>相关系数：<br> (-0.004389322779936285, 0.8327205496564927)</li>
+<li>返回值：Pearson相关系数<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_selection <span class="keyword">import</span> VarianceThreshold</span><br><span class="line"><span class="keyword">from</span> scipy.stats <span class="keyword">import</span> pearsonr</span><br><span class="line">data = pd.read_csv(<span class="string">&#x27;./factor_returns.csv&#x27;</span>)</span><br><span class="line">data = data.iloc[:, <span class="number">1</span>:-<span class="number">2</span>]</span><br><span class="line">transfer = VarianceThreshold(threshold = <span class="number">10</span>)</span><br><span class="line">data_new = transfer.fit_transform(data)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算两个变量之间的相关系数</span></span><br><span class="line">r1 = pearsonr(data[<span class="string">&quot;pe_ratio&quot;</span>], data[<span class="string">&quot;pb_ratio&quot;</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;pe_ratio与pb_ratio之间的相关系数：\n&quot;</span>, r1)</span><br><span class="line">r2 = pearsonr(data[<span class="string">&quot;revenue&quot;</span>], data[<span class="string">&quot;total_expense&quot;</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;revenue与total_expense之间的相关系数：\n&quot;</span>, r2)</span><br></pre></td></tr></table></figure>
+输出：<br>pe_ratio与pb_ratio之间的相关系数：<br> (-0.004389322779936285, 0.8327205496564927)<br>revenue与total_expense之间的相关系数：<br> (0.99584504131361, 0.0)</li>
 </ul>
 </li>
 </ul>
 </li>
+<li><p>当两个特征变量相关型很高时如何操作：</p>
+<ul>
+<li>选取其中一个</li>
+<li>加权求和</li>
+<li>主成分分析</li>
+</ul>
+</li>
+</ul>
+<h4 id="主成分分析："><a href="#主成分分析：" class="headerlink" title="主成分分析："></a>主成分分析：</h4><ul>
+<li><p>什么是主成分分析(PCA)：</p>
+<ul>
+<li>定义：<strong>高维数据转换为低维数据的过程</strong>，在此过程中可能会<strong>舍弃原有数据、创造新的变量</strong></li>
+<li>作用：<strong>是数据维数压缩，尽可能降低元数据的维数（复杂度），损失少量的信息。</strong></li>
+<li>应用：回归分析或者聚类分析当中</li>
+<li>原理简介：<br>假设对于给定的5个点，数据如下：<br><code>(-1, -2), (-1, 0), (0, 0), (2, 1), (0, 1)</code><br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231106155048.png"><br>要求将这个二维的数据简成一维，并算是少量的信息<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231106155220.png"><br><strong>找到一个合适的直线，通过一个矩阵运算得出主成分分析的结果</strong><br>$$<br>Y&#x3D;(\frac{1}{\sqrt{2}}\enspace\frac{1}{\sqrt{2}})<br>\begin{pmatrix}-1&amp;-1&amp;0&amp;2&amp;0\newline-2&amp;0&amp;0&amp;1&amp;1\end{pmatrix}<br>&#x3D;(\frac{-3}{\sqrt{2}}\enspace\frac{-1}{\sqrt{2}}\enspace 0\enspace\frac{3}{\sqrt{2}}\enspace\frac{-1}{\sqrt{2}})<br>$$</li>
+</ul>
+</li>
+<li><p><strong>API：</strong></p>
+</li>
+<li><p>sklearn.decomposition.PCA(n_components&#x3D;None)</p>
+<ul>
+<li>将数据分解为较低维数空间</li>
+<li>n_components：<ul>
+<li>小数：表示保留百分之多少的信息</li>
+<li>整数：减少到多少特征</li>
+</ul>
+</li>
+<li>PCA.fit_transform(ndarray[n_samples, n_features])</li>
+<li>返回值：转换后指定维度的array</li>
+</ul>
+</li>
+<li><p>计算示例：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[[<span class="number">2</span>,<span class="number">8</span>,<span class="number">4</span>,<span class="number">5</span>],</span><br><span class="line">[<span class="number">6</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">8</span>],</span><br><span class="line">[<span class="number">5</span>,<span class="number">4</span>,<span class="number">9</span>,<span class="number">1</span>]]</span><br></pre></td></tr></table></figure>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"></span><br><span class="line">data = [[<span class="number">2</span>,<span class="number">8</span>,<span class="number">4</span>,<span class="number">5</span>],[<span class="number">6</span>,<span class="number">3</span>,<span class="number">0</span>,<span class="number">8</span>],[<span class="number">5</span>,<span class="number">4</span>,<span class="number">9</span>,<span class="number">1</span>]]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1、实例化一个转换器类</span></span><br><span class="line">transfer = PCA(n_components=<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2、调用fit_transform</span></span><br><span class="line">data_new = transfer.fit_transform(data)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;data_new：\n&quot;</span>, data_new)</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231106195504.png"></p>
+</li>
+</ul>
+<h2 id="案例：探究用户对物品分类的喜好细分降维"><a href="#案例：探究用户对物品分类的喜好细分降维" class="headerlink" title="案例：探究用户对物品分类的喜好细分降维"></a>案例：探究用户对物品分类的喜好细分降维</h2><ul>
+<li>数据如下：<ul>
+<li>order_products_prior.csv：订单与商品信息<ul>
+<li>字段：<strong>order_id, product_id,</strong> add_to_cart_order, reordered</li>
+</ul>
+</li>
+<li>products.csv：商品信息<ul>
+<li>字段：<strong>product_id,</strong> product_name, aisle_id, department_id</li>
+</ul>
+</li>
+<li>orders.csv：用户的订单信息<ul>
+<li>字段：<strong>order_id, user_id,</strong> eval_set, order_number, …</li>
+</ul>
+</li>
+<li>aisles.csv：商品所属具体物品类别<ul>
+<li>字段：<strong>aisle_id, aisle</strong><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> sklearn.decomposition <span class="keyword">import</span> PCA</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1、获取数据</span></span><br><span class="line">order_products = pd.read_csv(<span class="string">&quot;./instacart/order_products__prior.csv&quot;</span>)</span><br><span class="line">products = pd.read_csv(<span class="string">&quot;./instacart/products.csv&quot;</span>)</span><br><span class="line">orders = pd.read_csv(<span class="string">&quot;./instacart/orders.csv&quot;</span>)</span><br><span class="line">aisles = pd.read_csv(<span class="string">&quot;./instacart/aisles.csv&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2、合并表</span></span><br><span class="line">tab1 = pd.merge(aisles, products, on=[<span class="string">&quot;aisle_id&quot;</span>, <span class="string">&quot;aisle_id&quot;</span>])</span><br><span class="line">tab2 = pd.merge(tab1, order_products, on=[<span class="string">&quot;product_id&quot;</span>, <span class="string">&quot;product_id&quot;</span>])</span><br><span class="line">tab3 = pd.merge(tab2, orders, on=[<span class="string">&quot;order_id&quot;</span>, <span class="string">&quot;order_id&quot;</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;合并后的原始数据：\n&quot;</span>, tab3)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3、找到user_id和aisle之间的关系</span></span><br><span class="line">table = pd.crosstab(tab3[<span class="string">&quot;user_id&quot;</span>], tab3[<span class="string">&quot;aisle&quot;</span>])</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;user_id与aisle的交叉表：\n&quot;</span>, table)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4、PCA降维</span></span><br><span class="line">transfer = PCA(n_components=<span class="number">0.95</span>)</span><br><span class="line">data_new = transfer.fit_transform(table)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;降维后的数据：\n&quot;</span>, data_new)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;降维后的维度：\n&quot;</span>, data_new.shape)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>输出：</strong><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br></pre></td><td class="code"><pre><span class="line">合并后的原始数据：</span><br><span class="line">           aisle_id                       aisle  product_id  \</span><br><span class="line"><span class="number">0</span>                <span class="number">1</span>       prepared soups salads         <span class="number">209</span>   </span><br><span class="line"><span class="number">1</span>                <span class="number">1</span>       prepared soups salads       <span class="number">22853</span>   </span><br><span class="line"><span class="number">2</span>                <span class="number">4</span>               instant foods       <span class="number">12087</span>   </span><br><span class="line"><span class="number">3</span>                <span class="number">4</span>               instant foods       <span class="number">47570</span>   </span><br><span class="line"><span class="number">4</span>               <span class="number">13</span>              prepared meals       <span class="number">10089</span>   </span><br><span class="line"><span class="meta">... </span>           ...                         ...         ...   </span><br><span class="line"><span class="number">32434484</span>       <span class="number">134</span>  specialty wines champagnes       <span class="number">47713</span>   </span><br><span class="line"><span class="number">32434485</span>       <span class="number">134</span>  specialty wines champagnes       <span class="number">49562</span>   </span><br><span class="line"><span class="number">32434486</span>       <span class="number">134</span>  specialty wines champagnes       <span class="number">49562</span>   </span><br><span class="line"><span class="number">32434487</span>       <span class="number">134</span>  specialty wines champagnes       <span class="number">49562</span>   </span><br><span class="line"><span class="number">32434488</span>       <span class="number">134</span>  specialty wines champagnes       <span class="number">49562</span>   </span><br><span class="line"></span><br><span class="line">                                      product_name  department_id  order_id  \</span><br><span class="line"><span class="number">0</span>                              Italian Pasta Salad             <span class="number">20</span>     <span class="number">94246</span>   </span><br><span class="line"><span class="number">1</span>                                Pesto Pasta Salad             <span class="number">20</span>     <span class="number">94246</span>   </span><br><span class="line"><span class="number">2</span>                 Chicken Flavor Ramen Noodle Soup              <span class="number">9</span>     <span class="number">94246</span>   </span><br><span class="line"><span class="number">3</span>         Original Flavor Macaroni &amp; Cheese Dinner              <span class="number">9</span>     <span class="number">94246</span>   </span><br><span class="line"><span class="number">4</span>                                           Dolmas             <span class="number">20</span>     <span class="number">94246</span>   </span><br><span class="line"><span class="meta">... </span>                                           ...            ...       ...   </span><br><span class="line"><span class="number">32434484</span>                            Sparkling Rose              <span class="number">5</span>   <span class="number">3014872</span>   </span><br><span class="line"><span class="number">32434485</span>             Blanc De Noirs Sparkling Wine              <span class="number">5</span>     <span class="number">34570</span>   </span><br><span class="line"><span class="number">32434486</span>             Blanc De Noirs Sparkling Wine              <span class="number">5</span>    <span class="number">250923</span>   </span><br><span class="line"><span class="number">32434487</span>             Blanc De Noirs Sparkling Wine              <span class="number">5</span>   <span class="number">1319402</span>   </span><br><span class="line"><span class="number">32434488</span>             Blanc De Noirs Sparkling Wine              <span class="number">5</span>   <span class="number">2298986</span>   </span><br><span class="line"></span><br><span class="line">          add_to_cart_order  reordered  user_id eval_set  order_number  \</span><br><span class="line"><span class="number">0</span>                         <span class="number">5</span>          <span class="number">0</span>   <span class="number">114082</span>    prior            <span class="number">26</span>   </span><br><span class="line"><span class="number">1</span>                         <span class="number">4</span>          <span class="number">0</span>   <span class="number">114082</span>    prior            <span class="number">26</span>   </span><br><span class="line"><span class="number">2</span>                        <span class="number">15</span>          <span class="number">0</span>   <span class="number">114082</span>    prior            <span class="number">26</span>   </span><br><span class="line"><span class="number">3</span>                        <span class="number">14</span>          <span class="number">1</span>   <span class="number">114082</span>    prior            <span class="number">26</span>   </span><br><span class="line"><span class="number">4</span>                        <span class="number">25</span>          <span class="number">0</span>   <span class="number">114082</span>    prior            <span class="number">26</span>   </span><br><span class="line"><span class="meta">... </span>                    ...        ...      ...      ...           ...   </span><br><span class="line"><span class="number">32434484</span>                  <span class="number">1</span>          <span class="number">0</span>    <span class="number">63218</span>    prior             <span class="number">1</span>   </span><br><span class="line"><span class="number">32434485</span>                  <span class="number">1</span>          <span class="number">1</span>    <span class="number">37901</span>    prior            <span class="number">13</span>   </span><br><span class="line"><span class="number">32434486</span>                  <span class="number">1</span>          <span class="number">1</span>    <span class="number">26431</span>    prior            <span class="number">27</span>   </span><br><span class="line"><span class="number">32434487</span>                  <span class="number">1</span>          <span class="number">1</span>    <span class="number">26431</span>    prior            <span class="number">34</span>   </span><br><span class="line"><span class="number">32434488</span>                  <span class="number">1</span>          <span class="number">0</span>    <span class="number">37901</span>    prior             <span class="number">9</span>   </span><br><span class="line"></span><br><span class="line">          order_dow  order_hour_of_day  days_since_prior_order  </span><br><span class="line"><span class="number">0</span>                 <span class="number">0</span>                 <span class="number">20</span>                     <span class="number">1.0</span>  </span><br><span class="line"><span class="number">1</span>                 <span class="number">0</span>                 <span class="number">20</span>                     <span class="number">1.0</span>  </span><br><span class="line"><span class="number">2</span>                 <span class="number">0</span>                 <span class="number">20</span>                     <span class="number">1.0</span>  </span><br><span class="line"><span class="number">3</span>                 <span class="number">0</span>                 <span class="number">20</span>                     <span class="number">1.0</span>  </span><br><span class="line"><span class="number">4</span>                 <span class="number">0</span>                 <span class="number">20</span>                     <span class="number">1.0</span>  </span><br><span class="line"><span class="meta">... </span>            ...                ...                     ...  </span><br><span class="line"><span class="number">32434484</span>          <span class="number">1</span>                 <span class="number">14</span>                     NaN  </span><br><span class="line"><span class="number">32434485</span>          <span class="number">3</span>                  <span class="number">9</span>                    <span class="number">13.0</span>  </span><br><span class="line"><span class="number">32434486</span>          <span class="number">5</span>                 <span class="number">11</span>                    <span class="number">10.0</span>  </span><br><span class="line"><span class="number">32434487</span>          <span class="number">2</span>                 <span class="number">14</span>                     <span class="number">7.0</span>  </span><br><span class="line"><span class="number">32434488</span>          <span class="number">2</span>                 <span class="number">11</span>                    <span class="number">13.0</span>  </span><br><span class="line"></span><br><span class="line">[<span class="number">32434489</span> rows x <span class="number">14</span> columns]</span><br><span class="line">user_id与aisle的交叉表：</span><br><span class="line"> aisle    air fresheners candles  asian foods  baby accessories  \</span><br><span class="line">user_id                                                          </span><br><span class="line"><span class="number">1</span>                             <span class="number">0</span>            <span class="number">0</span>                 <span class="number">0</span>   </span><br><span class="line"><span class="number">2</span>                             <span class="number">0</span>            <span class="number">3</span>                 <span class="number">0</span>   </span><br><span class="line"><span class="number">3</span>                             <span class="number">0</span>            <span class="number">0</span>                 <span class="number">0</span>   </span><br><span class="line"><span class="number">4</span>                             <span class="number">0</span>            <span class="number">0</span>                 <span class="number">0</span>   </span><br><span class="line"><span class="number">5</span>                             <span class="number">0</span>            <span class="number">2</span>                 <span class="number">0</span>   </span><br><span class="line"><span class="meta">... </span>                        ...          ...               ...   </span><br><span class="line"><span class="number">206205</span>                        <span class="number">0</span>            <span class="number">0</span>                 <span class="number">1</span>   </span><br><span class="line"><span class="number">206206</span>                        <span class="number">0</span>            <span class="number">4</span>                 <span class="number">0</span>   </span><br><span class="line"><span class="number">206207</span>                        <span class="number">0</span>            <span class="number">0</span>                 <span class="number">0</span>   </span><br><span class="line"><span class="number">206208</span>                        <span class="number">0</span>            <span class="number">3</span>                 <span class="number">0</span>   </span><br><span class="line"><span class="number">206209</span>                        <span class="number">0</span>            <span class="number">1</span>                 <span class="number">0</span>   </span><br><span class="line"></span><br><span class="line">aisle    baby bath body care  baby food formula  bakery desserts  \</span><br><span class="line">user_id                                                            </span><br><span class="line"><span class="number">1</span>                          <span class="number">0</span>                  <span class="number">0</span>                <span class="number">0</span>   </span><br><span class="line"><span class="number">2</span>                          <span class="number">0</span>                  <span class="number">0</span>                <span class="number">0</span>   </span><br><span class="line"><span class="number">3</span>                          <span class="number">0</span>                  <span class="number">0</span>                <span class="number">0</span>   </span><br><span class="line"><span class="number">4</span>                          <span class="number">0</span>                  <span class="number">0</span>                <span class="number">0</span>   </span><br><span class="line"><span class="number">5</span>                          <span class="number">0</span>                  <span class="number">0</span>                <span class="number">0</span>   </span><br><span class="line"><span class="meta">... </span>                     ...                ...              ...   </span><br><span class="line"><span class="number">206205</span>                     <span class="number">0</span>                  <span class="number">0</span>                <span class="number">0</span>   </span><br><span class="line"><span class="number">206206</span>                     <span class="number">0</span>                  <span class="number">0</span>                <span class="number">0</span>   </span><br><span class="line"><span class="number">206207</span>                     <span class="number">0</span>                  <span class="number">1</span>                <span class="number">0</span>   </span><br><span class="line"><span class="number">206208</span>                     <span class="number">0</span>                  <span class="number">3</span>                <span class="number">0</span>   </span><br><span class="line"><span class="number">206209</span>                     <span class="number">0</span>                  <span class="number">0</span>                <span class="number">0</span>   </span><br><span class="line"></span><br><span class="line">aisle    baking ingredients  baking supplies decor  beauty  beers coolers  \</span><br><span class="line">user_id                                                                     </span><br><span class="line"><span class="number">1</span>                         <span class="number">0</span>                      <span class="number">0</span>       <span class="number">0</span>              <span class="number">0</span>   </span><br><span class="line"><span class="number">2</span>                         <span class="number">2</span>                      <span class="number">0</span>       <span class="number">0</span>              <span class="number">0</span>   </span><br><span class="line"><span class="number">3</span>                         <span class="number">0</span>                      <span class="number">0</span>       <span class="number">0</span>              <span class="number">0</span>   </span><br><span class="line"><span class="number">4</span>                         <span class="number">0</span>                      <span class="number">0</span>       <span class="number">0</span>              <span class="number">0</span>   </span><br><span class="line"><span class="number">5</span>                         <span class="number">0</span>                      <span class="number">0</span>       <span class="number">0</span>              <span class="number">0</span>   </span><br><span class="line"><span class="meta">... </span>                    ...                    ...     ...            ...   </span><br><span class="line"><span class="number">206205</span>                    <span class="number">0</span>                      <span class="number">0</span>       <span class="number">0</span>              <span class="number">0</span>   </span><br><span class="line"><span class="number">206206</span>                    <span class="number">4</span>                      <span class="number">1</span>       <span class="number">0</span>              <span class="number">0</span>   </span><br><span class="line"><span class="number">206207</span>                    <span class="number">0</span>                      <span class="number">0</span>       <span class="number">0</span>              <span class="number">0</span>   </span><br><span class="line"><span class="number">206208</span>                    <span class="number">4</span>                      <span class="number">0</span>       <span class="number">0</span>              <span class="number">0</span>   </span><br><span class="line"><span class="number">206209</span>                    <span class="number">0</span>                      <span class="number">0</span>       <span class="number">0</span>              <span class="number">0</span>   </span><br><span class="line"></span><br><span class="line">aisle    ...  spreads  tea  tofu meat alternatives  tortillas flat bread  \</span><br><span class="line">user_id  ...                                                               </span><br><span class="line"><span class="number">1</span>        ...        <span class="number">1</span>    <span class="number">0</span>                       <span class="number">0</span>                     <span class="number">0</span>   </span><br><span class="line"><span class="number">2</span>        ...        <span class="number">3</span>    <span class="number">1</span>                       <span class="number">1</span>                     <span class="number">0</span>   </span><br><span class="line"><span class="number">3</span>        ...        <span class="number">4</span>    <span class="number">1</span>                       <span class="number">0</span>                     <span class="number">0</span>   </span><br><span class="line"><span class="number">4</span>        ...        <span class="number">0</span>    <span class="number">0</span>                       <span class="number">0</span>                     <span class="number">1</span>   </span><br><span class="line"><span class="number">5</span>        ...        <span class="number">0</span>    <span class="number">0</span>                       <span class="number">0</span>                     <span class="number">0</span>   </span><br><span class="line"><span class="meta">... </span>     ...      ...  ...                     ...                   ...   </span><br><span class="line"><span class="number">206205</span>   ...        <span class="number">0</span>    <span class="number">0</span>                       <span class="number">0</span>                     <span class="number">0</span>   </span><br><span class="line"><span class="number">206206</span>   ...        <span class="number">1</span>    <span class="number">0</span>                       <span class="number">0</span>                     <span class="number">0</span>   </span><br><span class="line"><span class="number">206207</span>   ...        <span class="number">3</span>    <span class="number">4</span>                       <span class="number">0</span>                     <span class="number">2</span>   </span><br><span class="line"><span class="number">206208</span>   ...        <span class="number">5</span>    <span class="number">0</span>                       <span class="number">0</span>                     <span class="number">7</span>   </span><br><span class="line"><span class="number">206209</span>   ...        <span class="number">0</span>    <span class="number">0</span>                       <span class="number">0</span>                     <span class="number">0</span>   </span><br><span class="line"></span><br><span class="line">aisle    trail mix snack mix  trash bags liners  vitamins supplements  \</span><br><span class="line">user_id                                                                 </span><br><span class="line"><span class="number">1</span>                          <span class="number">0</span>                  <span class="number">0</span>                     <span class="number">0</span>   </span><br><span class="line"><span class="number">2</span>                          <span class="number">0</span>                  <span class="number">0</span>                     <span class="number">0</span>   </span><br><span class="line"><span class="number">3</span>                          <span class="number">0</span>                  <span class="number">0</span>                     <span class="number">0</span>   </span><br><span class="line"><span class="number">4</span>                          <span class="number">0</span>                  <span class="number">0</span>                     <span class="number">0</span>   </span><br><span class="line"><span class="number">5</span>                          <span class="number">0</span>                  <span class="number">0</span>                     <span class="number">0</span>   </span><br><span class="line"><span class="meta">... </span>                     ...                ...                   ...   </span><br><span class="line"><span class="number">206205</span>                     <span class="number">0</span>                  <span class="number">0</span>                     <span class="number">0</span>   </span><br><span class="line"><span class="number">206206</span>                     <span class="number">0</span>                  <span class="number">1</span>                     <span class="number">0</span>   </span><br><span class="line"><span class="number">206207</span>                     <span class="number">1</span>                  <span class="number">0</span>                     <span class="number">0</span>   </span><br><span class="line"><span class="number">206208</span>                     <span class="number">0</span>                  <span class="number">0</span>                     <span class="number">0</span>   </span><br><span class="line"><span class="number">206209</span>                     <span class="number">0</span>                  <span class="number">1</span>                     <span class="number">0</span>   </span><br><span class="line"></span><br><span class="line">aisle    water seltzer sparkling water  white wines  yogurt  </span><br><span class="line">user_id                                                      </span><br><span class="line"><span class="number">1</span>                                    <span class="number">0</span>            <span class="number">0</span>       <span class="number">1</span>  </span><br><span class="line"><span class="number">2</span>                                    <span class="number">2</span>            <span class="number">0</span>      <span class="number">42</span>  </span><br><span class="line"><span class="number">3</span>                                    <span class="number">2</span>            <span class="number">0</span>       <span class="number">0</span>  </span><br><span class="line"><span class="number">4</span>                                    <span class="number">1</span>            <span class="number">0</span>       <span class="number">0</span>  </span><br><span class="line"><span class="number">5</span>                                    <span class="number">0</span>            <span class="number">0</span>       <span class="number">3</span>  </span><br><span class="line"><span class="meta">... </span>                               ...          ...     ...  </span><br><span class="line"><span class="number">206205</span>                               <span class="number">0</span>            <span class="number">0</span>       <span class="number">5</span>  </span><br><span class="line"><span class="number">206206</span>                               <span class="number">1</span>            <span class="number">0</span>       <span class="number">0</span>  </span><br><span class="line"><span class="number">206207</span>                              <span class="number">11</span>            <span class="number">0</span>      <span class="number">15</span>  </span><br><span class="line"><span class="number">206208</span>                               <span class="number">0</span>            <span class="number">0</span>      <span class="number">33</span>  </span><br><span class="line"><span class="number">206209</span>                               <span class="number">0</span>            <span class="number">0</span>       <span class="number">3</span>  </span><br><span class="line"></span><br><span class="line">[<span class="number">206209</span> rows x <span class="number">134</span> columns]</span><br><span class="line"></span><br><span class="line">降维后的数据：</span><br><span class="line"> [[-<span class="number">24.21565874</span>   <span class="number">2.4294272</span>   -<span class="number">2.46636975</span> ...  -<span class="number">0.08877715</span>  -<span class="number">0.38087761</span>    <span class="number">0.21568831</span>]</span><br><span class="line"> [  <span class="number">6.46320807</span>  <span class="number">36.75111647</span>   <span class="number">8.38255336</span> ...   <span class="number">1.912145</span>     <span class="number">1.79468946</span>   -<span class="number">0.70142249</span>]</span><br><span class="line"> [ -<span class="number">7.99030162</span>   <span class="number">2.40438257</span> -<span class="number">11.03006405</span> ...  -<span class="number">0.72188348</span>  -<span class="number">1.15719089</span>   -<span class="number">0.23704277</span>]</span><br><span class="line"> ...</span><br><span class="line"> [  <span class="number">8.61143331</span>   <span class="number">7.70129866</span>   <span class="number">7.95240226</span> ...   <span class="number">0.23971061</span>  -<span class="number">0.78590175</span>   -<span class="number">2.65945606</span>]</span><br><span class="line"> [ <span class="number">84.08621987</span>  <span class="number">20.41873398</span>   <span class="number">8.05410372</span> ...  -<span class="number">1.66893212</span>   <span class="number">0.5042934</span>    <span class="number">3.82546312</span>]</span><br><span class="line"> [-<span class="number">13.95345619</span>   <span class="number">6.64621821</span>  -<span class="number">5.23030367</span> ...  -<span class="number">1.64144758</span>  -<span class="number">3.39233648</span>   -<span class="number">0.31410713</span>]]</span><br><span class="line">降维后的维度：</span><br><span class="line"> (<span class="number">206209</span>, <span class="number">44</span>)</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 </ul>
 
       
@@ -1199,274 +1661,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/30/OpenCV/28_%E6%9F%A5%E6%89%BE%E4%B8%8E%E7%BB%98%E5%88%B6%E8%BD%AE%E5%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/30/OpenCV/28_%E6%9F%A5%E6%89%BE%E4%B8%8E%E7%BB%98%E5%88%B6%E8%BD%AE%E5%BB%93/" class="post-title-link" itemprop="url">P28_查找与绘制轮廓</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-10-30 20:36:00" itemprop="dateCreated datePublished" datetime="2023-10-30T20:36:00+08:00">2023-10-30</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-10-31 09:47:14" itemprop="dateModified" datetime="2023-10-31T09:47:14+08:00">2023-10-31</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="什么是图像轮廓"><a href="#什么是图像轮廓" class="headerlink" title="什么是图像轮廓"></a>什么是图像轮廓</h2><ul>
-<li>图像轮廓是具有相同颜色或灰度的连续点的曲线.轮廓在形状分析和物体的检测和识别中很有用。</li>
-<li>轮廓的作用：<ul>
-<li>用于图形分析</li>
-<li>武德的识别和检测</li>
-</ul>
-</li>
-<li>注意点：<ul>
-<li>为了检测的准确性，需要先对图像进行<strong>二值化</strong>或<strong>Canny</strong>操作。</li>
-<li>画轮廓时会修改输入的图像，如果之后想继续使用原始图像，应该将原始图像储存到其他变量中。</li>
-</ul>
-</li>
-</ul>
-<h2 id="查找轮廓"><a href="#查找轮廓" class="headerlink" title="查找轮廓"></a>查找轮廓</h2><ul>
-<li>findContours(image, mode, method[, contours[, hierarchy[, offset]]])<ul>
-<li>mode：查找轮廓的模式<ul>
-<li>RETR_EXTERNAL &#x3D; 0，表示只检测外轮廓.<br> <img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231030204248.png"></li>
-<li>RETR_LIST &#x3D; 1，检测的轮廓不建立等级关系，即检测所有轮廓，较为常用.<br> <img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231030204407.png"></li>
-<li>RETR_CCOMP &#x3D; 2，每层最多两级，从小到大，从里到外.<br> <img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231030204535.png"></li>
-<li>RETR_TREE &#x3D; 3，按照树形存储，从大到小，从右到左.<br> <img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231030204645.png"></li>
-</ul>
-</li>
-<li>method，轮廓近似方法，也叫ApproximationMode<ul>
-<li>CHAIN_APPROX_NONE，保留轮廓上的点</li>
-<li>CHAIN_APPROX_SIMPLE，只保存角点，比如四边形，只保留四边形的四个角点，存储信息烧，比较常用</li>
-</ul>
-</li>
-<li>函数返回contouts和hierachy两个值，即轮廓和层级.</li>
-</ul>
-</li>
-</ul>
-<h2 id="绘制轮廓"><a href="#绘制轮廓" class="headerlink" title="绘制轮廓"></a>绘制轮廓</h2><ul>
-<li>drawContours(image, contours, contourldx, color[, thickness[, lineType[, hierachy[, maxLevel[, offset]]]]])<ul>
-<li>image：要绘制轮廓的图像.</li>
-<li>contours：轮廓点.</li>
-<li>contourldx：要绘制轮廓的编号. -1表示绘制所有轮廓.</li>
-<li>color：绘制轮廓线的颜色.</li>
-<li>thickness：要绘制轮廓线的线宽. -1表示全部填充.<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入原图</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;maomaochong.jpg&#x27;</span>)</span><br><span class="line"><span class="comment"># 转换为灰度图</span></span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line"><span class="comment"># 高斯模糊</span></span><br><span class="line">blur_img = cv2.GaussianBlur(gray, (<span class="number">5</span>, <span class="number">5</span>), sigmaX=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># canny</span></span><br><span class="line">canny_img = cv2.Canny(blur_img, <span class="number">64</span>, <span class="number">128</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 轮廓查找，返回两个结果或，轮廓和层级</span></span><br><span class="line">result, contours, hierarchy = cv2.findContours(canny_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制轮廓会直接修改原图.</span></span><br><span class="line"><span class="comment"># 如果要保持原图不变，可以copy一份</span></span><br><span class="line">img_copy = img.copy()</span><br><span class="line">cv2.drawContours(img_copy, contours, -<span class="number">1</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, np.hstack((img, img_copy)))</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231031092656.png"></li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/30/OpenCV/27_%E9%A1%B6%E5%B8%BD%E8%BF%90%E7%AE%97%E4%B8%8E%E9%BB%91%E5%B8%BD%E8%BF%90%E7%AE%97/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/30/OpenCV/27_%E9%A1%B6%E5%B8%BD%E8%BF%90%E7%AE%97%E4%B8%8E%E9%BB%91%E5%B8%BD%E8%BF%90%E7%AE%97/" class="post-title-link" itemprop="url">P27_顶帽运算与黑帽运算</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-10-30 20:28:00 / 修改时间：20:35:19" itemprop="dateCreated datePublished" datetime="2023-10-30T20:28:00+08:00">2023-10-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="顶帽操作"><a href="#顶帽操作" class="headerlink" title="顶帽操作"></a>顶帽操作</h2><ul>
-<li>顶帽 &#x3D; 原图 - 开运算</li>
-<li>开运算的效果是去除图像外的噪点，原图 - 开运算就得到了去掉的噪点.<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;xx.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 注意调整kernel以保留小图形</span></span><br><span class="line">kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (<span class="number">9</span>, <span class="number">9</span>))</span><br><span class="line"></span><br><span class="line">dst = cv2.morphologyEx(img, cv2.MORPH_TOPHAT, kernel, iterations=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, np.hstack((img, dst)))</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231030203059.png"></li>
-</ul>
-<h2 id="黑帽操作"><a href="#黑帽操作" class="headerlink" title="黑帽操作"></a>黑帽操作</h2><ul>
-<li>黑帽 &#x3D; 原图 - 闭运算</li>
-<li>闭运算可以将图像内部的噪点去掉，那么原图 - 闭运算的结果就是图型内部的噪点.<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;xxx.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 注意调整kernel以保留小图形</span></span><br><span class="line">kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (<span class="number">9</span>, <span class="number">9</span>))</span><br><span class="line"></span><br><span class="line">dst = cv2.morphologyEx(img, cv2.MORPH_BLACKHAT, kernel, iterations=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, np.hstack((img, dst)))</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231030203458.png"></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/30/OpenCV/26_%E5%BD%A2%E6%80%81%E5%AD%A6%E6%A2%AF%E5%BA%A6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/30/OpenCV/26_%E5%BD%A2%E6%80%81%E5%AD%A6%E6%A2%AF%E5%BA%A6/" class="post-title-link" itemprop="url">P26_形态学梯度</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-10-30 20:15:00 / 修改时间：20:28:08" itemprop="dateCreated datePublished" datetime="2023-10-30T20:15:00+08:00">2023-10-30</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="形态学梯度"><a href="#形态学梯度" class="headerlink" title="形态学梯度"></a>形态学梯度</h2><ul>
-<li>梯度 &#x3D; 原图 - 腐蚀</li>
-<li>腐蚀之后原图的边缘变小了，原图 - 腐蚀就看见恶意得到腐蚀掉的部分，即边缘.<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;r_xx.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 调节kernel大小以获得更清晰的边缘</span></span><br><span class="line">kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (<span class="number">3</span>, <span class="number">3</span>))</span><br><span class="line"></span><br><span class="line">dst = cv2.morphologyEx(img, cv2.MORPH_GRADIENT, kernel, iterations=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, np.hstack((img, dst)))</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231030202441.png"></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1534,7 +1732,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">160</span>
+          <span class="site-state-item-count">163</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

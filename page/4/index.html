@@ -183,6 +183,352 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/28/OpenCV/7_%E5%9B%BE%E5%83%8F%E7%9A%84%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/28/OpenCV/7_%E5%9B%BE%E5%83%8F%E7%9A%84%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97/" class="post-title-link" itemprop="url">P7_图像的算数运算</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-10-28 13:37:00 / 修改时间：19:18:46" itemprop="dateCreated datePublished" datetime="2023-10-28T13:37:00+08:00">2023-10-28</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="图像的加减乘除运算"><a href="#图像的加减乘除运算" class="headerlink" title="图像的加减乘除运算"></a>图像的加减乘除运算</h2><h3 id="图像的加运算"><a href="#图像的加运算" class="headerlink" title="图像的加运算"></a>图像的加运算</h3><h4 id="图像与图像相加"><a href="#图像与图像相加" class="headerlink" title="图像与图像相加"></a>图像与图像相加</h4><ul>
+<li>图片与图片相加：<strong>对应像素的值相加</strong>.</li>
+<li>两种方法，使用<code>+</code>运算符或使用cv2.add()函数执行图像的加法运算</li>
+<li>运算规则：<ul>
+<li>使用<code>+</code>运算符：超出255的数字会被截断（相当于%255或-255）.</li>
+<li>使用cv2.add()：超过255的值全部设为255.</li>
+</ul>
+</li>
+<li>加法操作要求两个图片的长宽相同，通道数相同.<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">fsize = (<span class="number">215</span>, <span class="number">215</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 读取图片</span></span><br><span class="line">img1 = cv2.imread(<span class="string">&#x27;./avatar.png&#x27;</span>)</span><br><span class="line">img2 = cv2.imread(<span class="string">&#x27;./avatar1.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">print</span>(img1.shape)</span><br><span class="line"><span class="built_in">print</span>(img2.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 做加法前需要把图片的形状变得完全一致</span></span><br><span class="line"><span class="comment"># 通过rcv2.resize()函数修改图片的大小</span></span><br><span class="line">fimg1 = cv2.resize(img1, fsize)</span><br><span class="line">fimg2 = cv2.resize(img2, fsize)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 展示相加前的图像</span></span><br><span class="line">imghstack = np.hstack((fimg1, fimg2))</span><br><span class="line">cv2.imshow(<span class="string">&#x27;input&#x27;</span>, imghstack)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 图片与图片相加：</span></span><br><span class="line"><span class="comment"># 使用+</span></span><br><span class="line">res_1 = fimg1 + fimg2</span><br><span class="line"><span class="comment"># 使用add()</span></span><br><span class="line">res_2 = cv2.add(fimg1, fimg2)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;use +&#x27;</span>, res_1)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;add()&#x27;</span>, res_2)</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028182522.png"></li>
+</ul>
+<h5 id="图像与一个值相加"><a href="#图像与一个值相加" class="headerlink" title="图像与一个值相加"></a>图像与一个值相加</h5><ul>
+<li>图像与单个数相加：每个像素分别与这个值相加.</li>
+<li>只能使用<code>+</code>运算符，cv2.add()函数不适用此类运算.</li>
+<li>运算规则：同上使用<code>+</code>运算符，超出255的数字会被截断（相当于%255或-255）<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 图片与单个数字相加：</span></span><br><span class="line"><span class="comment"># 使用+</span></span><br><span class="line">res1, res2 = fimg1 + <span class="number">100</span>, fimg2 +<span class="number">100</span></span><br><span class="line"></span><br><span class="line">hstack = np.hstack(res1, res2)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;use +&#x27;</span>, hstack)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;add()&#x27;</span>, hstack)</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028184905.png"></li>
+</ul>
+<h3 id="图像的减乘除"><a href="#图像的减乘除" class="headerlink" title="图像的减乘除"></a>图像的减乘除</h3><ul>
+<li>所有运算规则同加法</li>
+</ul>
+<h4 id="图像的减法运算"><a href="#图像的减法运算" class="headerlink" title="图像的减法运算"></a>图像的减法运算</h4><ul>
+<li>图像减图像，可以使用cv2.subtract()函数或<code>-</code>运算符，规则同加法</li>
+<li>图像减一个数，只能使用运算符，规则同加法<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 图像的减法运算示例代码</span></span><br><span class="line">res1_1, res1_2 = fimg1 - <span class="number">100</span>, fimg2 - <span class="number">100</span></span><br><span class="line">res2_1, res2_2 = fimg1 - fimg2, cv2.subtract(fimg1, fimg2)</span><br><span class="line"></span><br><span class="line">res1_hstack = np.hstack((res1_1, res1_2))</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;fimg1,fimg2 - 100&#x27;</span>, res1_hstack)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;use -&#x27;</span>, res2_1)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;subtract()&#x27;</span>, res2_2)</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028190559.png"></li>
+</ul>
+<h4 id="图像的乘法运算"><a href="#图像的乘法运算" class="headerlink" title="图像的乘法运算"></a>图像的乘法运算</h4><ul>
+<li>图像乘图像，可以使用cv2.multiply()函数或<code>*</code>运算符，规则同加法</li>
+<li>图像乘一个数，只能使用运算符，规则同加法<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 图像的乘法运算示例代码</span></span><br><span class="line">res1_1, res1_2 = fimg1 * <span class="number">100</span>, fimg2 * <span class="number">100</span></span><br><span class="line">res2_1, res2_2 = fimg1 * fimg2, cv2.multiply(fimg1, fimg2)</span><br><span class="line"></span><br><span class="line">res1_hstack = np.hstack((res1_1, res1_2))</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;fimg1,fimg2 * 100&#x27;</span>, res1_hstack)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;use *&#x27;</span>, res2_1)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;multply()&#x27;</span>, res2_2)</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028191258.png"></li>
+</ul>
+<h4 id="图像的除法运算"><a href="#图像的除法运算" class="headerlink" title="图像的除法运算"></a>图像的除法运算</h4><ul>
+<li>图像除图像，可以使用cv2.divede()函数或<code>/</code>运算符，规则同加法</li>
+<li>图像除一个数，只能使用运算符，规则同加法<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 图像的除法运算示例代码</span></span><br><span class="line">res1_1, res1_2 = fimg1 / <span class="number">100</span>, fimg2 / <span class="number">100</span></span><br><span class="line">res2_1, res2_2 = fimg1 / fimg2, cv2.divide(fimg1, fimg2)</span><br><span class="line"></span><br><span class="line">res1_hstack = np.hstack((res1_1, res1_2))</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;fimg1,fimg2 / 100&#x27;</span>, res1_hstack)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;use /&#x27;</span>, res2_1)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;divide()&#x27;</span>, res2_2)</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028191702.png"></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/28/OpenCV/10_resize%E6%96%B9%E6%B3%95%E7%94%A8%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/28/OpenCV/10_resize%E6%96%B9%E6%B3%95%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">P10_resize方法用法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-10-28 12:07:00" itemprop="dateCreated datePublished" datetime="2023-10-28T12:07:00+08:00">2023-10-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-29 12:37:44" itemprop="dateModified" datetime="2023-10-29T12:37:44+08:00">2023-10-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="图像的放大与缩小"><a href="#图像的放大与缩小" class="headerlink" title="图像的放大与缩小"></a>图像的放大与缩小</h2><ul>
+<li><p>resize(src, dsize[, fx[,fy[, interpolation]]])</p>
+<ul>
+<li>src：要缩放的图片</li>
+<li>dsize：缩放后的图片大小，元组和列表表示均可.</li>
+<li>dst：可选参数，缩放之后的输出图片.</li>
+<li>fx, yx：x轴和y轴的缩放比，即高度和宽度的缩放比.</li>
+<li>interpolation：插值算法，只要有以下几种：<ul>
+<li>INTER_NEAREST：邻近插值，速度快，效果差.</li>
+<li>INTER_LINEAR：双线性插值，使用原图中的4个点进行插值，默认为此选项.</li>
+<li>INTER_CUBIC：三次插值，原图中的16个点.</li>
+<li>INTER_AREA：区域插值，效果最好，计算时间最长.<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img1 = cv2.imread(<span class="string">&#x27;./avatar1.png&#x27;</span>)</span><br><span class="line">img2 = cv2.imread(<span class="string">&#x27;./avatar2.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 打印两张图片的原始尺寸</span></span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;img1原始尺寸：&#x27;</span>, img1.shape)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;img2原始尺寸：&#x27;</span>, img2.shape)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 将img1缩放至与img2相同尺寸</span></span><br><span class="line">resized_img2 = cv2.resize(img2, (img1.shape[-<span class="number">2</span>::-<span class="number">1</span>]))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 展示缩放后的图片与原图进行对比</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, np.hstack((img1, resized_img2)))</span><br><span class="line">cv2.imshow(<span class="string">&#x27;img2&#x27;</span>, img2)</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028230433.png"></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>使用不同插值算法：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img2 = cv2.imread(<span class="string">&#x27;./avatar2.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用不同插值算法</span></span><br><span class="line">new_img1 = cv2.resize(img2, (<span class="number">500</span>, <span class="number">500</span>), interpolation=cv2.INTER_NEAREST)</span><br><span class="line">new_img2 = cv2.resize(img2, (<span class="number">500</span>, <span class="number">500</span>), interpolation=cv2.INTER_LINEAR)</span><br><span class="line">new_img3 = cv2.resize(img2, (<span class="number">500</span>, <span class="number">500</span>), interpolation=cv2.INTER_CUBIC)  <span class="comment"># 默认效果</span></span><br><span class="line">new_img4 = cv2.resize(img2, (<span class="number">500</span>, <span class="number">500</span>), interpolation=cv2.INTER_AREA)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 展示缩放后的图片与原图进行对比</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output1&#x27;</span>, new_img1)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;output2&#x27;</span>, new_img2)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;output3&#x27;</span>, new_img3)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;output4&#x27;</span>, new_img4)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;img2&#x27;</span>, img2)</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028233647.png"></p>
+</li>
+<li><p>按xy比例缩放：</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img2 = cv2.imread(<span class="string">&#x27;./avatar2.png&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 按比例缩放</span></span><br><span class="line">new_img = cv2.resize(img2, dsize=<span class="literal">None</span>, fx=<span class="number">1.5</span>, fy=<span class="number">2</span>, interpolation=cv2.INTER_AREA)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 展示缩放后的图片与原图进行对比</span></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, new_img)</span><br><span class="line">cv2.imshow(<span class="string">&#x27;img2&#x27;</span>, img2)</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028234316.png"></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/27/OpenCV/6_%E7%BB%98%E5%88%B6%E5%9B%BE%E5%BD%A2%E4%B8%8E%E6%96%87%E5%AD%97/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/10/27/OpenCV/6_%E7%BB%98%E5%88%B6%E5%9B%BE%E5%BD%A2%E4%B8%8E%E6%96%87%E5%AD%97/" class="post-title-link" itemprop="url">P6_绘制图形与文字</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-10-27 09:39:00" itemprop="dateCreated datePublished" datetime="2023-10-27T09:39:00+08:00">2023-10-27</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-10-28 19:18:30" itemprop="dateModified" datetime="2023-10-28T19:18:30+08:00">2023-10-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <blockquote>
+<p>利用OpenCv提供的绘制图形api可以轻松的在图像上绘制各种图形，比如直线，矩形，圆，椭圆等图形。</p>
+</blockquote>
+<h3 id="直线和矩形"><a href="#直线和矩形" class="headerlink" title="直线和矩形"></a>直线和矩形</h3><ul>
+<li><p>line(img, pt1, pt2, color, thickness, lineType, shift)</p>
+<ul>
+<li>img：在哪个图像上画线</li>
+<li>pt1, pt2：开始点，结束点（元组）指定线的开始与结束位置</li>
+<li>color：颜色</li>
+<li>thickness：线宽</li>
+<li>lineType：线型，线型为-1, 4, 6, 16,默认为8</li>
+<li>shift：坐标缩放比例<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建纯黑图像背景用来画图</span></span><br><span class="line">img = np.zeros((<span class="number">480</span>, <span class="number">640</span>, <span class="number">3</span>), np.uint8)</span><br><span class="line"><span class="comment"># line(img, pt1, pt2, color, thickness, lineType, shift)</span></span><br><span class="line"><span class="comment"># lineType参数代表线的粗糙度，数值越大越光滑</span></span><br><span class="line">cv2.line(img, (<span class="number">10</span>, <span class="number">20</span>), (<span class="number">550</span>, <span class="number">320</span>), (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">5</span>, <span class="number">4</span>)  </span><br><span class="line">cv2.line(img, (<span class="number">10</span>, <span class="number">50</span>), (<span class="number">550</span>, <span class="number">350</span>), (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">5</span>, <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;draw&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231027101156.png"></li>
+</ul>
+</li>
+<li><p>rectangle(img, pt1, pt2, color, thickness lineType, shift)</p>
+<ul>
+<li>参数与line()函数一致<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建纯黑图像背景用来画图</span></span><br><span class="line">img = np.zeros((<span class="number">480</span>, <span class="number">640</span>, <span class="number">3</span>), np.uint8)</span><br><span class="line"></span><br><span class="line">cv2.rectangle(img, (<span class="number">10</span>, <span class="number">20</span>), (<span class="number">550</span>, <span class="number">320</span>), (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">5</span>, <span class="number">4</span>)</span><br><span class="line">cv2.rectangle(img, (<span class="number">50</span>, <span class="number">70</span>), (<span class="number">500</span>, <span class="number">300</span>), (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">5</span>, <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;draw&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231027103431.png"></li>
+</ul>
+</li>
+</ul>
+<h3 id="圆形"><a href="#圆形" class="headerlink" title="圆形"></a>圆形</h3><ul>
+<li>circle(img, center, radius, color, thickness, lineType, shift)<ul>
+<li>img：在哪个图像上画圆</li>
+<li>center：中心点（元组）</li>
+<li>radius：半径</li>
+<li>color：颜色</li>
+<li>thickness 线宽</li>
+<li>lineType：线型，线型为-1, 4, 6, 16,默认为8</li>
+<li>shift：坐标缩放比例<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建纯黑图像背景用来画图</span></span><br><span class="line">img = np.zeros((<span class="number">480</span>, <span class="number">640</span>, <span class="number">3</span>), np.uint8)</span><br><span class="line"></span><br><span class="line">cv2.circle(img, (<span class="number">320</span>, <span class="number">240</span>), <span class="number">50</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">5</span>, <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;draw&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231027105711.png"></li>
+</ul>
+</li>
+</ul>
+<h3 id="椭圆"><a href="#椭圆" class="headerlink" title="椭圆"></a>椭圆</h3><ul>
+<li>ellipse(img, 中心点, 长宽的一半, 角度, 从哪个角度开始，从哪个角度结束, …)<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231027110652.png"><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建纯黑图像背景用来画图</span></span><br><span class="line">img = np.zeros((<span class="number">480</span>, <span class="number">640</span>, <span class="number">3</span>), np.uint8)</span><br><span class="line"></span><br><span class="line">cv2.ellipse(img, (<span class="number">170</span>, <span class="number">240</span>), (<span class="number">100</span>, <span class="number">50</span>), <span class="number">0</span>, <span class="number">0</span>, <span class="number">360</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>], <span class="number">5</span>, <span class="number">16</span>)</span><br><span class="line">cv2.ellipse(img, (<span class="number">490</span>, <span class="number">240</span>), (<span class="number">100</span>, <span class="number">50</span>), <span class="number">45</span>, <span class="number">0</span>, <span class="number">360</span>, [<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>], <span class="number">5</span>, <span class="number">16</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;draw&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231027111346.png"></li>
+</ul>
+<h3 id="多边形"><a href="#多边形" class="headerlink" title="多边形"></a>多边形</h3><ul>
+<li>polylines(img, pts, isClosed, color, thickness, lineType bottomLeftOrigin)<ul>
+<li>img：绘制在那张图像上</li>
+<li>pts：多边形角点集合(元组或列表, int32)</li>
+<li>isClosed：多边形是否闭合</li>
+<li>color：颜色</li>
+<li>thickness：线宽</li>
+<li>lineType：线型</li>
+<li><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment"># 创建纯黑图像背景用来画图</span></span><br><span class="line">img = np.zeros((<span class="number">480</span>, <span class="number">640</span>, <span class="number">3</span>), np.uint8)</span><br><span class="line"></span><br><span class="line">pts = np.array([(<span class="number">250</span>, <span class="number">100</span>), (<span class="number">100</span>, <span class="number">300</span>), (<span class="number">50</span>, <span class="number">280</span>)], np.int32)</span><br><span class="line"><span class="comment"># 注意：pts是3维的</span></span><br><span class="line">cv2.polylines(img, [pts], <span class="literal">True</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">5</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;draw&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231027154118.png"></li>
+</ul>
+</li>
+<li>填充多边形：fillPoly()函数</li>
+<li>参数与polylines相同<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 创建纯黑图像背景用来画图</span></span><br><span class="line">img = np.zeros((<span class="number">480</span>, <span class="number">640</span>, <span class="number">3</span>), np.uint8)</span><br><span class="line"></span><br><span class="line">pts = np.array([(<span class="number">250</span>, <span class="number">100</span>), (<span class="number">100</span>, <span class="number">300</span>), (<span class="number">50</span>, <span class="number">280</span>)], np.int32)</span><br><span class="line"><span class="comment"># 注意：pts是3维的</span></span><br><span class="line">cv2.fillPoly(img, [pts], (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>))</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;draw&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231027160042.png"></li>
+</ul>
+<h3 id="文本"><a href="#文本" class="headerlink" title="文本"></a>文本</h3><ul>
+<li><p>putText(img, text, org, fontFace, fontScale, color, thinkness, lineType, bottomLeftOrigin)</p>
+<ul>
+<li>text：要绘制的文本</li>
+<li>org：文本在图片中的左下角坐标</li>
+<li>fontFace：字体类型即字体</li>
+<li>fontScale：字体大小<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建纯黑图像背景用来画图</span></span><br><span class="line">img = np.zeros((<span class="number">480</span>, <span class="number">640</span>, <span class="number">3</span>), np.uint8)</span><br><span class="line"></span><br><span class="line">cv2.putText(img, <span class="string">&#x27;Hello,OpenCV!&#x27;</span>, (<span class="number">50</span>, <span class="number">280</span>), cv2.FONT_HERSHEY_COMPLEX, <span class="number">2</span>, (<span class="number">0</span>, <span class="number">0</span> , <span class="number">255</span>))</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;draw&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231027161759.png"></li>
+</ul>
+</li>
+<li><p><strong>绘制中文文本：</strong></p>
+</li>
+<li><p>opencv无法绘制中文文本，需要借助pillow包的功能实现绘制中文字体</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> ImageFont, ImageDraw, Image</span><br><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line">img = np.full((<span class="number">500</span>, <span class="number">500</span>, <span class="number">3</span>), fill_value=<span class="number">255</span>, dtype=np.uint8)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入字体文件</span></span><br><span class="line">font = ImageFont.truetype(<span class="string">&#x27;./Deng.ttf&#x27;</span>, <span class="number">15</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 创建一个pillow的图片</span></span><br><span class="line">img_pil = Image.fromarray(img)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 利用draw去绘制中文</span></span><br><span class="line">draw = ImageDraw.Draw(img_pil)</span><br><span class="line">draw.text((<span class="number">100</span>, <span class="number">250</span>), <span class="string">&#x27;你好！&#x27;</span>, font=font, fill=(<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>))</span><br><span class="line"></span><br><span class="line"><span class="comment">#重新变回ndarray</span></span><br><span class="line">img = np.array(img_pil)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231028132311.png"></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/26/OpenCV/5_%E9%A2%9C%E8%89%B2%E9%80%9A%E9%81%93%E7%9A%84%E5%88%86%E7%A6%BB%E4%B8%8E%E5%90%88%E5%B9%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -983,320 +1329,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/25/JavaSE/P101IO%E6%B5%81_%E5%AF%B9%E8%B1%A1%E6%B5%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/25/JavaSE/P101IO%E6%B5%81_%E5%AF%B9%E8%B1%A1%E6%B5%81/" class="post-title-link" itemprop="url">P101IO流_对象流</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-05-25 21:12:00" itemprop="dateCreated datePublished" datetime="2023-05-25T21:12:00+08:00">2023-05-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-29 22:22:13" itemprop="dateModified" datetime="2023-05-29T22:22:13+08:00">2023-05-29</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="对象流-ObjectOutputStream-x2F-ObjectInputStream"><a href="#对象流-ObjectOutputStream-x2F-ObjectInputStream" class="headerlink" title="对象流: ObjectOutputStream&#x2F;ObjectInputStream"></a>对象流: ObjectOutputStream&#x2F;ObjectInputStream</h2><ul>
-<li>对象流就是可以将对象写入文件或从文件中读取数据再重建成对象的流.</li>
-<li><strong>对象流特点:</strong><ul>
-<li>增强了缓冲区功能.</li>
-<li>增强了读写8中基本数据类型和字符串功能.</li>
-<li><strong>增强了读写对象的功能：</strong><ul>
-<li><code>readObject()</code>从流中读取一个对象.</li>
-<li><code>writeObject(Object obj)</code>向流中写入一个对象.<blockquote>
-<p>使用流传输对象的过程称为序列化、反序列化.</p>
-</blockquote>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3><ul>
-<li>将对象通过对象流写入文件的过程称为序列化.</li>
-<li><strong>被序列化的对象必须实现<code>Serializable</code>接口.</strong><ul>
-<li><code>Serializable</code>接口是一个标记接口,不含有任何属性和方法，仅作标记改类可被序列化.<br/></li>
-</ul>
-</li>
-</ul>
-<p>序列化示例:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectOutputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo7</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="comment">//1创建对象流</span></span><br><span class="line">        <span class="type">FileOutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;C:\\Users\\23971\\Desktop\\IdeaProjects\\IOstream\\files\\Demo7\\stu.bin&quot;</span>);</span><br><span class="line">        <span class="type">ObjectOutputStream</span> <span class="variable">oos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectOutputStream</span>(fos);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2序列化(写入操作)</span></span><br><span class="line">        <span class="type">Student</span> <span class="variable">zhangsan</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;张三&quot;</span>, <span class="number">20</span>);</span><br><span class="line">        oos.writeObject(zhangsan);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3关闭</span></span><br><span class="line">        oos.close();</span><br><span class="line">        System.out.println(<span class="string">&quot;序列化完毕&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">implements</span> <span class="title class_">Serializable</span> &#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">int</span> age;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">(String name, <span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">public</span> <span class="title function_">Student</span><span class="params">()</span> &#123;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">getName</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setName</span><span class="params">(String name)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.name = name;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">getAge</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">setAge</span><span class="params">(<span class="type">int</span> age)</span> &#123;</span><br><span class="line">        <span class="built_in">this</span>.age = age;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> String <span class="title function_">toString</span><span class="params">()</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">&quot;Student&#123;&quot;</span> +</span><br><span class="line">                <span class="string">&quot;name=&#x27;&quot;</span> + name + <span class="string">&#x27;\&#x27;&#x27;</span> +</span><br><span class="line">                <span class="string">&quot;, age=&quot;</span> + age +</span><br><span class="line">                <span class="string">&#x27;&#125;&#x27;</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h3 id="反序列化"><a href="#反序列化" class="headerlink" title="反序列化"></a>反序列化</h3><ul>
-<li>从文件中读取数据并重建对象的过程称为序列化.</li>
-</ul>
-<p>序列化示例:</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.ObjectInputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo8</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="comment">//1创建对象输入流</span></span><br><span class="line">        <span class="type">FileInputStream</span> <span class="variable">fis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;C:\\Users\\23971\\Desktop\\IdeaProjects\\IOstream\\files\\Demo7\\stu.bin&quot;</span>);</span><br><span class="line">        <span class="type">ObjectInputStream</span> <span class="variable">ois</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">ObjectInputStream</span>(fis);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2反序列化</span></span><br><span class="line">        <span class="type">Student</span> <span class="variable">s</span> <span class="operator">=</span> (Student)ois.readObject();</span><br><span class="line">        System.out.println(s.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3关闭</span></span><br><span class="line">        ois.close();</span><br><span class="line">        System.out.println(<span class="string">&quot;执行完毕&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>注：使用ois读取文件时同一个文件只能读取一次，若重复读取则会报<code>java.io.EOFException</code>异常.<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20230529185835.png"></li>
-</ul>
-<h3 id="对象流注意事项"><a href="#对象流注意事项" class="headerlink" title="对象流注意事项"></a>对象流注意事项</h3><ol>
-<li><p>序列化类必须要实现Serializable接口.</p>
-</li>
-<li><p>序列化类中对象属性（引用类型属性）要求实现Serializable接口.</p>
-</li>
-<li><p>实现Serializable接口的类理论是需要声明一个<code>serialVersionUID</code>属性:</p>
-<ul>
-<li><pre><code class="java">public class Student implements Serializable &#123;
-    private static final long serialVersionUID = 100L;
-    private String name;
-    private int age;
-    ......
-&#125;
-</code></pre>
-</li>
-<li><code>serialVersionUID</code>：序列化版本号ID,保证序列化的类和反序列化的类是同一个类.<br/></li>
-</ul>
-</li>
-<li><p>含有<code>transient</code>关键字修饰的类不能被序列化.</p>
-<blockquote>
-<p><code>transient</code>：瞬间的，使用该修饰符定义的属性止咳存在于内存之中.</p>
-</blockquote>
-</li>
-<li><p>含有静态（static）属性的类也不能序列化.</p>
-</li>
-<li><p>序列化多个对象，可以借助集合实现.</p>
-</li>
-</ol>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/24/JavaSE/P100IO%E6%B5%81_%E5%AD%97%E8%8A%82%E7%BC%93%E5%86%B2%E6%B5%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/24/JavaSE/P100IO%E6%B5%81_%E5%AD%97%E8%8A%82%E7%BC%93%E5%86%B2%E6%B5%81/" class="post-title-link" itemprop="url">P100IO流_字节缓冲流</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-05-24 22:45:00" itemprop="dateCreated datePublished" datetime="2023-05-24T22:45:00+08:00">2023-05-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-25 21:08:08" itemprop="dateModified" datetime="2023-05-25T21:08:08+08:00">2023-05-25</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="字节缓冲流"><a href="#字节缓冲流" class="headerlink" title="字节缓冲流"></a>字节缓冲流</h2><ul>
-<li><strong>缓冲流: BufferedInputStream&#x2F;BufferedOutputStream</strong><ul>
-<li>提高IO效率，减少访问磁盘的次数：</li>
-<li>数据存储在缓冲区中，flush是将缓存区的内容写入文件中，也可以直接close<br/></li>
-</ul>
-</li>
-</ul>
-<h3 id="字节缓冲输入流BufferedInputStream"><a href="#字节缓冲输入流BufferedInputStream" class="headerlink" title="字节缓冲输入流BufferedInputStream:"></a>字节缓冲输入流BufferedInputStream:</h3><ul>
-<li><strong>初始化：初始化参数需要传入一个底层节点流(fis就属于一种底层节点流)：</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FileInputStream</span> <span class="variable">fis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;文件路径&quot;</span>);</span><br><span class="line"><span class="type">BufferedInputStream</span> <span class="variable">bis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedInputStream</span>(fis);</span><br></pre></td></tr></table></figure></li>
-<li><strong>字节缓冲流支持使用内置缓冲区和使用自定义的缓冲区：</strong><ul>
-<li>使用内置的缓冲区:  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> data=<span class="number">0</span>;</span><br><span class="line">   <span class="keyword">while</span>((data=bis.read())!=-<span class="number">1</span>) &#123;</span><br><span class="line">       System.out.print((<span class="type">char</span>)data);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></li>
-<li>使用自定义的缓冲区  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">byte</span>[] buf = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">       <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">while</span> ((count = bis.read(buf))!=-<span class="number">1</span>) &#123;</span><br><span class="line">           System.out.println(<span class="keyword">new</span> <span class="title class_">String</span>(buf,<span class="number">0</span>,count));</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
-<strong>使用bis读取文件示例：</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo5</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="comment">//从字节缓冲流中读取</span></span><br><span class="line">        <span class="comment">//1创建字节缓冲流</span></span><br><span class="line">        <span class="type">FileInputStream</span> <span class="variable">fis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;C:\\Users\\23971\\Desktop\\IdeaProjects\\IOstream\\files\\Demo5\\aaa.txt&quot;</span>);</span><br><span class="line">        <span class="type">BufferedInputStream</span> <span class="variable">bis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedInputStream</span>(fis);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.1读取(使用内置缓冲区)</span></span><br><span class="line">        <span class="type">int</span> data=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>((data=bis.read())!=-<span class="number">1</span>) &#123;</span><br><span class="line">            System.out.print((<span class="type">char</span>)data);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.2读取(使用自定义缓冲区)</span></span><br><span class="line">        <span class="type">byte</span>[] buf = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> ((count = bis.read(buf))!=-<span class="number">1</span>) &#123;</span><br><span class="line">            System.out.println(<span class="keyword">new</span> <span class="title class_">String</span>(buf,<span class="number">0</span>,count));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3关闭</span></span><br><span class="line">        bis.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<h3 id="字节缓冲输出流BufferedOutputStream"><a href="#字节缓冲输出流BufferedOutputStream" class="headerlink" title="字节缓冲输出流BufferedOutputStream:"></a>字节缓冲输出流BufferedOutputStream:</h3><ul>
-<li><strong>初始化：初始化参数与输字节缓冲入流类似，需要传入一个输入流对象：</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FileOutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputSttream</span>(<span class="string">&quot;输出文件路径&quot;</span>);</span><br><span class="line"><span class="type">BufferedOutputStream</span> <span class="variable">bos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedOutputStream</span>(fos);</span><br></pre></td></tr></table></figure></li>
-<li><strong>flush()方法：</strong><br>字节缓冲流调用write()方法时输出是先写入到缓冲区，当调用flush()方法时，才会将缓冲区内的数据写入硬盘；该方法在执行close()关闭流的时候也会自动执行。<br/></li>
-</ul>
-<p><strong>使用bos写入文件示例：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo6</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="comment">//1创建字节输出缓冲流</span></span><br><span class="line">        <span class="type">FileOutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;C:\\Users\\23971\\Desktop\\IdeaProjects\\IOstream\\files\\Demo5,6\\bbb.txt&quot;</span>);</span><br><span class="line">        <span class="type">BufferedOutputStream</span> <span class="variable">bos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedOutputStream</span>(fos);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2写入文件</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="comment">//写入一次数据刷新一次(防止数据丢失)</span></span><br><span class="line">            bos.write(<span class="string">&quot;helloworld\r\n&quot;</span>.getBytes());   <span class="comment">//写入内置缓冲区</span></span><br><span class="line">            bos.flush();   <span class="comment">//刷新到硬盘</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3关闭</span></span><br><span class="line">        bos.close();   <span class="comment">//执行此方法时也会内部调用一次flush()</span></span><br><span class="line">        System.out.println(<span class="string">&quot;输出完毕&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/24/JavaSE/P99IO%E6%B5%81_%E5%AD%97%E8%8A%82%E6%B5%81%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/05/24/JavaSE/P99IO%E6%B5%81_%E5%AD%97%E8%8A%82%E6%B5%81%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">P99IO流_字节流复制文件</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-05-24 21:42:00" itemprop="dateCreated datePublished" datetime="2023-05-24T21:42:00+08:00">2023-05-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-25 20:08:05" itemprop="dateModified" datetime="2023-05-25T20:08:05+08:00">2023-05-25</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="字节流案例演示"><a href="#字节流案例演示" class="headerlink" title="字节流案例演示"></a>字节流案例演示</h2><ul>
-<li>使用文件字节流实现对文件的复制<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//实例化</span></span><br><span class="line"><span class="type">FileInputStream</span> <span class="variable">fis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;输入文件路径&quot;</span>);</span><br><span class="line"><span class="type">FileOutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;输出文件路径&quot;</span>);</span><br></pre></td></tr></table></figure></li>
-<li>定义一个缓冲区，一个整型变量计数，使用循环一边读一边写。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">byte</span>[] buf = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line"><span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>((count = fis.read(buf))!=-<span class="number">1</span>) &#123;</span><br><span class="line">            fos.write(buf,<span class="number">0</span>,count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-<li>关闭流<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//3关闭</span></span><br><span class="line">fis.close();</span><br><span class="line">fos.close();</span><br><span class="line">System.out.println(<span class="string">&quot;复制完毕&quot;</span>);</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo3</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">//1实例化: 文件字节输入流，文件字节输出流</span></span><br><span class="line">        <span class="type">FileInputStream</span> <span class="variable">fis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;C:\\Users\\23971\\Desktop\\IdeaProjects\\IOstream\\files\\Demo3\\001.JPG&quot;</span>);</span><br><span class="line">        <span class="type">FileOutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;C:\\Users\\23971\\Desktop\\IdeaProjects\\IOstream\\files\\Demo3\\002.JPG&quot;</span>);</span><br><span class="line">        <span class="comment">//2一边读一边写</span></span><br><span class="line">        <span class="type">byte</span>[] buf = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>((count = fis.read(buf))!=-<span class="number">1</span>) &#123;</span><br><span class="line">            fos.write(buf,<span class="number">0</span>,count);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//3关闭</span></span><br><span class="line">        fis.close();</span><br><span class="line">        fos.close();</span><br><span class="line">        System.out.println(<span class="string">&quot;复制完毕&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1364,7 +1400,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">160</span>
+          <span class="site-state-item-count">163</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
