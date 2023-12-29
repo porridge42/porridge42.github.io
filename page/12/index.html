@@ -183,6 +183,302 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/31/JavaSE/P43%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E6%96%B9%E6%B3%95%E7%9A%84%E9%87%8D%E5%86%99/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/31/JavaSE/P43%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E6%96%B9%E6%B3%95%E7%9A%84%E9%87%8D%E5%86%99/" class="post-title-link" itemprop="url">P43面向对象_方法的重写</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2022-10-31 02:39:12 / 修改时间：17:00:52" itemprop="dateCreated datePublished" datetime="2022-10-31T02:39:12+08:00">2022-10-31</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="方法的重写"><a href="#方法的重写" class="headerlink" title="方法的重写"></a>方法的重写</h2><ul>
+<li>需要有继承关系，子类重写父类的方法</li>
+<li>重写只有方法的重写</li>
+<li>方法的重写的特点：<ol>
+<li>方法名必须相同</li>
+<li>参数列表必须相同</li>
+<li>方法体不同</li>
+<li>修饰符: 范围可以扩大但不能缩小</li>
+<li>抛出的异常: 范围可以缩小但不能扩大<blockquote>
+<p>重写方法的意义:父类的功能，子类不一定需要，或者不一定满足》</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">A</span> <span class="variable">a</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">A</span>();</span><br><span class="line">        a.test();   <span class="comment">//A</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//父类的引用指向了子类</span></span><br><span class="line">        <span class="type">B</span> <span class="variable">b</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">A</span>();   <span class="comment">//子类重写了父类的方法</span></span><br><span class="line">        b.test();   <span class="comment">//B</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">A</span> <span class="keyword">extends</span> <span class="title class_">B</span>&#123;</span><br><span class="line">    <span class="comment">//Override  重写</span></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;A=&gt;test()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">B</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">()</span>&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;B=&gt;test()&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221031022242.png"></li>
+</ol>
+</li>
+<li><strong>注:不能重写的方法:</strong><ol>
+<li>static 静态方法，从属于类，与实例对象无关</li>
+<li>final 常量方法，常量不可改变</li>
+<li>private 私有方法</li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/29/JavaSE/P42%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_Super%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/29/JavaSE/P42%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_Super%E8%AF%A6%E8%A7%A3/" class="post-title-link" itemprop="url">P42面向对象_Super详解</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-29 23:44:55" itemprop="dateCreated datePublished" datetime="2022-10-29T23:44:55+08:00">2022-10-29</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-30 00:37:32" itemprop="dateModified" datetime="2022-10-30T00:37:32+08:00">2022-10-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Super关键字"><a href="#Super关键字" class="headerlink" title="Super关键字"></a>Super关键字</h2><ul>
+<li><p>对比this关键字，this代表当前类，super代表父类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line">        student.test(<span class="string">&quot;Name&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">extends</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> <span class="string">&quot;StudentName&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">test</span><span class="params">(String name)</span>&#123;</span><br><span class="line">        System.out.println(name);</span><br><span class="line">        System.out.println(<span class="built_in">this</span>.name);</span><br><span class="line">        System.out.println(<span class="built_in">super</span>.name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    <span class="keyword">protected</span> <span class="type">String</span> <span class="variable">name</span> <span class="operator">=</span> <span class="string">&quot;PersonName&quot;</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221029235550.png"></p>
+<blockquote>
+<p>父类中使用private关键字定义的属性和方法无法在子类中使用super关键字访问到</p>
+</blockquote>
+</li>
+<li><p><strong>继承关系下构造器的调用：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Student</span> <span class="keyword">extends</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    Student()&#123;</span><br><span class="line">        <span class="comment">//super();   //隐藏代码：调用父类构造器</span></span><br><span class="line">        System.out.println(<span class="string">&quot;Student的无参构造执行了！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">    Person()&#123;</span><br><span class="line">        System.out.println(<span class="string">&quot;Person的无参构造执行了！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20221030001825.png"></p>
+</li>
+<li><p><strong>证明了在实例化子类，调用子类的无参构造之前先调用了父类的无参构造器。</strong></p>
+<br/></li>
+</ul>
+<h2 id="Super总结："><a href="#Super总结：" class="headerlink" title="Super总结："></a>Super总结：</h2><ul>
+<li>super注意点:<ol>
+<li>super调用父类的构造方法，必须在构造方法的第一个</li>
+<li>super必须只能出现在子类的方法或者构造方法中</li>
+<li>super和this不能同时调用构造该方法</li>
+</ol>
+</li>
+<li>对比this：<ol>
+<li>代表的对象不同:<ul>
+<li>this: 本身调用者这个对象</li>
+<li>super: 代表父类对象的引用</li>
+</ul>
+</li>
+<li>前提:<ul>
+<li>this: 没有继承也可以用</li>
+<li>super: 只能在继承条件才可以使用</li>
+</ul>
+</li>
+<li>构造方法:<ul>
+<li>this();  本身的构造</li>
+<li>super();  父类的构造</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/JavaSE/P41%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E4%BB%80%E4%B9%88%E6%98%AF%E7%BB%A7%E6%89%BF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2022/10/26/JavaSE/P41%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E4%BB%80%E4%B9%88%E6%98%AF%E7%BB%A7%E6%89%BF/" class="post-title-link" itemprop="url">P41面向对象_什么是继承</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2022-10-26 10:00:41" itemprop="dateCreated datePublished" datetime="2022-10-26T10:00:41+08:00">2022-10-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-10-30 00:00:54" itemprop="dateModified" datetime="2022-10-30T00:00:54+08:00">2022-10-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="继承概念"><a href="#继承概念" class="headerlink" title="继承概念"></a>继承概念</h2><ul>
+<li><p>继承的本质是对某一批类的抽象，从而实现对现实世界更好的建模。</p>
+</li>
+<li><p><strong>extands</strong>的意思的“扩展”。子类是父类的扩展。</p>
+<br/>
+</li>
+<li><p><strong>Java中类只有单继承，没有多继承</strong>，一个父类可以有多个子类，但一个子类只能直接继承一个父类。</p>
+<br/>
+
+<ul>
+<li>继承是类和类之间的一种关系。除此之外，类和类之间的关系还有依赖，组合，聚合等。</li>
+<li>继承关系的两个类，一个为子类(派生类),一个为父类(基类)。子类继承父类，使用关键字extends来表示。</li>
+<li>子类和父类之间，从意义上讲应该具有”is a”的关系</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">	<span class="comment">//人 : 父类</span></span><br><span class="line">	<span class="keyword">public</span> <span class="type">int</span> <span class="variable">money</span> <span class="operator">=</span> <span class="number">10_0000_0000</span>;</span><br><span class="line">	<span class="keyword">public</span> <span class="keyword">void</span> <span class="title function_">say</span><span class="params">()</span>&#123;</span><br><span class="line">		System.out.println(<span class="string">&quot;说了一句话。&quot;</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//使用public修饰符定义的属性和方法可以被子类继承，要是使用private关键字定义的则无法被继承</span></span><br><span class="line">	<span class="comment">/*</span></span><br><span class="line"><span class="comment">		修饰符优先级排序:</span></span><br><span class="line"><span class="comment">		public</span></span><br><span class="line"><span class="comment">		protected</span></span><br><span class="line"><span class="comment">		default</span></span><br><span class="line"><span class="comment">		private</span></span><br><span class="line"><span class="comment">	*/</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Students</span> <span class="keyword">extends</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">	<span class="comment">//学生 is 人 : 派生类, 子类</span></span><br><span class="line">	</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Teacher</span> <span class="keyword">extends</span> <span class="title class_">Person</span>&#123;</span><br><span class="line">	<span class="comment">//老师 is 学生 : 派生类, 子类</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Application</span>&#123;</span><br><span class="line">	<span class="type">Student</span> <span class="variable">student</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>();</span><br><span class="line">	student.say();</span><br><span class="line">	<span class="comment">//student对象的类中并没有定义say方法，说明该方法是从Person类中继承而来的</span></span><br><span class="line">	System.out.println(student.money);</span><br><span class="line">	<span class="comment">//同理，属性也可以继承</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>在Java中，所有的类都直接或者间接的继承Object类，Object类是所有类的父类</p>
+</blockquote>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/JavaSE/P40%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1_%E5%B0%81%E8%A3%85/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -892,267 +1188,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/JavaSE/P33%E6%95%B0%E7%BB%84_%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/26/JavaSE/P33%E6%95%B0%E7%BB%84_%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F/" class="post-title-link" itemprop="url">P33数组_冒泡排序</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-10-26 10:00:33" itemprop="dateCreated datePublished" datetime="2022-10-26T10:00:33+08:00">2022-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-27 14:44:54" itemprop="dateModified" datetime="2022-10-27T14:44:54+08:00">2022-10-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><ul>
-<li>冒泡排序是最出名的排序算法之一，总共用八大排序算法</li>
-<li>分步:<ol>
-<li>比较数组中，两个相邻的元素，如果第一个数比第二个数大，就交换他们的位置</li>
-<li>每一次比较，都会产生出一个最大，或者最小的数字</li>
-<li>下一轮则可以少一次排序</li>
-<li>依次循环，直到结束<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayDemo07</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">int</span>[] a =&#123;<span class="number">1</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">57</span>,<span class="number">32</span>,<span class="number">6</span>,<span class="number">3</span>&#125;;</span><br><span class="line">        </span><br><span class="line">        <span class="type">int</span>[] sort = sort(a);</span><br><span class="line">        System.out.println(Arrays.toString(sort)); </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//冒泡排序</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="type">int</span>[] sort(<span class="type">int</span>[] array)&#123;</span><br><span class="line">        <span class="comment">//临时变量</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">temp</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//外层循环，判断我们这个要走多少次</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; array.length-<span class="number">1</span>; i++)&#123;</span><br><span class="line">            <span class="comment">//内层循环,比较判断两个数，如果第一个数比第二个数大，则交换位置</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; array.length-<span class="number">1</span>-i; j++)&#123;</span><br><span class="line">                <span class="keyword">if</span> (array[j+<span class="number">1</span>] &lt; array[j])&#123;</span><br><span class="line">                    temp = array[j];</span><br><span class="line">                    array[j] = array[j+<span class="number">1</span>];</span><br><span class="line">                    array[j+<span class="number">1</span>] = temp;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> array;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221024165601.png"></li>
-</ol>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/JavaSE/P32%E6%95%B0%E7%BB%84_Arrays%E7%B1%BB%E8%AE%B2%E8%A7%A3/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/26/JavaSE/P32%E6%95%B0%E7%BB%84_Arrays%E7%B1%BB%E8%AE%B2%E8%A7%A3/" class="post-title-link" itemprop="url">P32数组_Arrays类讲解</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-10-26 10:00:32" itemprop="dateCreated datePublished" datetime="2022-10-26T10:00:32+08:00">2022-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-27 14:44:32" itemprop="dateModified" datetime="2022-10-27T14:44:32+08:00">2022-10-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Arrays类"><a href="#Arrays类" class="headerlink" title="Arrays类:"></a>Arrays类:</h2><ul>
-<li><p>数组的工具类java.util.Arrays</p>
-</li>
-<li><p>由于数组对象本身没有什么方法可以提供我们调用，但API中提供了一个工具类Arrays供我们使用，从而可以对数据对象进行一些基本的操作。</p>
-</li>
-<li><p><strong>查看JDK帮助文档</strong></p>
-</li>
-<li><p>Array类中的方法都是static修饰的静态方法，在使用的时候可以直接使用类名进行调用，而“不用”使用对象来调用(注意: 是“不用”而不是“不能”)</p>
-<br/>
-</li>
-<li><p>具有以下常用功能:</p>
-<ul>
-<li>给数组排序: 通过 fill 方法。</li>
-<li>对数组排序: 通过 sort 方法,按升序。</li>
-<li>比较数组: 通过 equals 方法比较数组中元素是否相等。</li>
-<li>查找数组元素: 通过 binarySearch 方法能对排序好的数组进行二分查找法操作。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayDemo06</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">int</span>[] a =&#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">9090</span>,<span class="number">31231</span>,<span class="number">543</span>,<span class="number">21</span>,<span class="number">3</span>,<span class="number">23</span>&#125;;</span><br><span class="line"></span><br><span class="line">        System.out.println(a);</span><br><span class="line">        <span class="comment">//输出: [I@1b6d3586 </span></span><br><span class="line">        System.out.println(Arrays.toString(a));</span><br><span class="line">        <span class="comment">//输出: [1, 2, 3, 4, 9090, 31231, 543, 21, 3, 23]</span></span><br><span class="line"></span><br><span class="line">        Arrays.sort(a);  <span class="comment">//排序</span></span><br><span class="line">        System.out.println(Arrays.toString(a));</span><br><span class="line">        <span class="comment">//输出: [1, 2, 3, 3, 4, 21, 23, 543, 9090, 31231]</span></span><br><span class="line"></span><br><span class="line">        Arrays.fill(a, <span class="number">0</span>);  <span class="comment">//填充</span></span><br><span class="line">        System.out.println(Arrays.toString(a));</span><br><span class="line">        <span class="comment">//输出: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]</span></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221024160046.png"></li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/26/JavaSE/P31%E6%95%B0%E7%BB%84_%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2022/10/26/JavaSE/P31%E6%95%B0%E7%BB%84_%E4%BA%8C%E7%BB%B4%E6%95%B0%E7%BB%84/" class="post-title-link" itemprop="url">P31数组_二维数组</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2022-10-26 10:00:31" itemprop="dateCreated datePublished" datetime="2022-10-26T10:00:31+08:00">2022-10-26</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2022-10-27 14:43:54" itemprop="dateModified" datetime="2022-10-27T14:43:54+08:00">2022-10-27</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h2><ul>
-<li>多维数组可以看成是数组的数组，比如二维数组就是一个特殊的一维数组，其每一个元素都是一个一维数组。</li>
-<li>二维数组:<br><code>int a[][] = new int[2][5];</code></li>
-<li>解析: 以上二位数组 a 可以看成一个两行五列的数组。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayDemo05</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">int</span>[][] arrays = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;, &#123;<span class="number">2</span>,<span class="number">3</span>&#125;, &#123;<span class="number">3</span>,<span class="number">4</span>&#125;, &#123;<span class="number">4</span>,<span class="number">5</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line">        printArray(arrays[<span class="number">0</span>]);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//打印数组元素</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">printArray</span><span class="params">(<span class="type">int</span>[] arrays)</span>&#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arrays.length; i++)&#123;</span><br><span class="line">            System.out.print(arrays[i]+<span class="string">&quot; &quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221024151602.png"></li>
-</ul>
-<p><strong>二维数组的长度:</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayDemo05</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">int</span>[][] arrays = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;, &#123;<span class="number">2</span>,<span class="number">3</span>&#125;, &#123;<span class="number">3</span>,<span class="number">4</span>&#125;, &#123;<span class="number">4</span>,<span class="number">5</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line">        System.out.println(arrays.length);</span><br><span class="line">        System.out.println(arrays[<span class="number">0</span>].length);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221024151756.png"><br>二维数组本身的长度为4，它包含了四个长度两个元素的一维数组。<br><strong>循环输出二维数组:</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">ArrayDemo05</span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span>&#123;</span><br><span class="line">        <span class="type">int</span>[][] arrays = &#123;&#123;<span class="number">1</span>,<span class="number">2</span>&#125;, &#123;<span class="number">2</span>,<span class="number">3</span>&#125;, &#123;<span class="number">3</span>,<span class="number">4</span>&#125;, &#123;<span class="number">4</span>,<span class="number">5</span>&#125;&#125;;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//使用两层循环输出整个二维数组</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; arrays.length; i++)&#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="type">int</span> <span class="variable">j</span> <span class="operator">=</span> <span class="number">0</span>; j &lt; arrays[i].length; j++)&#123;</span><br><span class="line">                System.out.println(arrays[i][j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>输出:<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/QQ20221024152449.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1224,7 +1259,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-count">166</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

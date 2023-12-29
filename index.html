@@ -183,6 +183,522 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/18/sklearn/10_%E5%86%B3%E7%AD%96%E6%A0%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/18/sklearn/10_%E5%86%B3%E7%AD%96%E6%A0%91/" class="post-title-link" itemprop="url">P10_决策树</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-12-18 16:53:00" itemprop="dateCreated datePublished" datetime="2023-12-18T16:53:00+08:00">2023-12-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-29 12:09:29" itemprop="dateModified" datetime="2023-12-29T12:09:29+08:00">2023-12-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sklearn/" itemprop="url" rel="index"><span itemprop="name">sklearn</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="认识决策树"><a href="#认识决策树" class="headerlink" title="认识决策树"></a>认识决策树</h3><ul>
+<li>决策树的思想来源非常朴素，；程序设计中的条件分支结构就是if-else结构，最早的决策树就是利用这类结构分割数据的一种分类学习方法</li>
+<li>例子：<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231219102416.png"></li>
+<li>为什么吧年龄放在最上面判断？<ul>
+<li>首先判断年龄可以排除更多不符合的选项</li>
+<li>如何确定判断的顺序是决策树算法需要做到的关键</li>
+</ul>
+</li>
+<li>通过下一个例子，理解决策树具体如何实现分类：<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231219103759.png"></li>
+<li>已知四个特征值，预测是否贷款<ul>
+<li>先看年龄-&gt;信贷情况-&gt;工作（三层判断）</li>
+<li>先看房子-&gt;工作（两层判断）</li>
+</ul>
+</li>
+<li>由上面可知先看房子是更加高效的决策方法，我们需要使用数学的方式来找出最优决策方法。</li>
+</ul>
+<h3 id="信息熵与信息增益"><a href="#信息熵与信息增益" class="headerlink" title="信息熵与信息增益"></a>信息熵与信息增益</h3><ul>
+<li><strong>信息熵的定义：</strong><ul>
+<li>H的专业术语称之为信息熵，单位为比特。<br>$$<br>H(X) &#x3D; -\sum_{i&#x3D;1}^{n}P(x_i)log_bP(x_i)<br>$$</li>
+</ul>
+</li>
+<li><strong>决策树的划分依据之一：信息增益</strong><ul>
+<li>定义与公式<br>特征A对训练数据集D的信息增益g(D,A)，定义为集合D的信息熵H(D)与特征A给定条件下D的信息条件熵H(D|A)之差，即公式为：<br>$$<br>g(D, A) &#x3D; H(D) - H(D|A)<br>$$<br>公式的详细解释：</li>
+</ul>
+</li>
+<li>信息熵的计算：<br>$$<br>H(D) &#x3D; -\sum_{k&#x3D;1}^{K}\frac{|C_k|}{|D|}log_b\frac{|C_k|}{|D|}<br>$$</li>
+<li>条件熵的计算：<br>$$<br>H(D|A) &#x3D; \sum_{i&#x3D;1}^{n}\frac{|D_i|}{D}H(D_i)&#x3D;-\sum_{i&#x3D;1}^{n}\frac{|D_ik|}{|D_i|}log_b\frac{|D_ik|}{|D_i|}<br>$$<br>注：C_k表示属于某个类别的样本数<blockquote>
+<p>信息熵增益表示得知特征x的信息而信息的不确定性减少的程度使得类Y的信息熵减少的程度</p>
+</blockquote>
+</li>
+<li>决策树的原理不治信息增益这一种，还有其他几个原理类似的方案：<ul>
+<li>ID3<ul>
+<li>信息增益 最大的准则</li>
+</ul>
+</li>
+<li>C4.5<ul>
+<li>信息增益比 最大的准则</li>
+</ul>
+</li>
+<li>CART<ul>
+<li>分类树：基尼系数 最小的准则 在sklearn仲可以选择划分的默认原则</li>
+<li>优势：划分更加细致（从后面的例子数显示来理解）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="决策树API"><a href="#决策树API" class="headerlink" title="决策树API"></a>决策树API</h3><ul>
+<li><p>class sklearn.tree.DecisionTreeClassifier(criterion&#x3D;’gini’, max_depth&#x3D;None, random_state&#x3D;None)</p>
+<ul>
+<li>决策树分类器</li>
+<li>criterion默认是’qini’下属，也可以选择信息增益的上’entropy’</li>
+<li>max_depth：树的深度大小</li>
+<li>random_state：随机数种子</li>
+</ul>
+</li>
+<li><p>对比决策树与knn算法</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler</span><br><span class="line"><span class="keyword">from</span> sklearn.neighbors <span class="keyword">import</span> KNeighborsClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeClassifier</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">knn</span>():</span><br><span class="line">    <span class="comment"># 使用knn算法对鸢尾花进行分类</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># 1) 获取数据</span></span><br><span class="line">    iris = load_iris()</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 2) 划分数据集</span></span><br><span class="line">    x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, random_state=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 3) 特征工程：标准化</span></span><br><span class="line">    transfer = StandardScaler()</span><br><span class="line">    x_train = transfer.fit_transform(x_train)</span><br><span class="line">    x_test = transfer.transform(x_test)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 4) KNN算法预估器</span></span><br><span class="line">    estimator = KNeighborsClassifier(n_neighbors=<span class="number">3</span>)</span><br><span class="line">    estimator.fit(x_train, y_train)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 5) 模型评估</span></span><br><span class="line">    <span class="comment"># 方法1：直接比对真实值和预测值</span></span><br><span class="line">    y_predict = estimator.predict(x_test)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;y_predict:\n&quot;</span>, y_predict)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;直接比对真实值和预测值：\n&quot;</span>, y_test == y_predict)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 方法2：计算准确率</span></span><br><span class="line">    score = estimator.score(x_test, y_test)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;准确率为：\n&quot;</span>, score)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">tree</span>():</span><br><span class="line">    <span class="comment"># 使用决策树算法对鸢尾花进行分类</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 1) 获取数据</span></span><br><span class="line">    iris = load_iris()</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 2) 划分数据集</span></span><br><span class="line">    x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, random_state=<span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 3) 决策树算法预估器</span></span><br><span class="line">    estimator = DecisionTreeClassifier(criterion=<span class="string">&quot;entropy&quot;</span>)</span><br><span class="line">    estimator.fit(x_train, y_train)</span><br><span class="line">    </span><br><span class="line">    <span class="comment"># 4) 模型评估</span></span><br><span class="line">    <span class="comment"># 方法1：直接比对真实值和预测值</span></span><br><span class="line">    y_predict = estimator.predict(x_test)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;y_predict:\n&quot;</span>, y_predict)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;直接比对真实值和预测值：\n&quot;</span>, y_test == y_predict)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># 方法2：计算准确率</span></span><br><span class="line">    score = estimator.score(x_test, y_test)</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;准确率为：\n&quot;</span>, score)</span><br><span class="line">    </span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;使用knn算法对鸢尾花进行分类：\n&quot;</span>)</span><br><span class="line">    knn()</span><br><span class="line">    <span class="built_in">print</span>(<span class="string">&quot;使用决策树算法对鸢尾花进行分类：\n&quot;</span>)</span><br><span class="line">    tree()</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231229112849.png"></p>
+</li>
+</ul>
+<h3 id="决策树可视化"><a href="#决策树可视化" class="headerlink" title="决策树可视化"></a>决策树可视化</h3><h4 id="保存树的结构到dot文件"><a href="#保存树的结构到dot文件" class="headerlink" title="保存树的结构到dot文件"></a>保存树的结构到dot文件</h4><ul>
+<li>sklearn.tree.export_graphviz()该函数能导出DOT格式<ul>
+<li>tree.export_graphviz(estimator, out_file&#x3D;’tree.dot’, feature_names&#x3D;[“,”])<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> DecisionTreeClassifier</span><br><span class="line"><span class="keyword">from</span> sklearn.tree <span class="keyword">import</span> export_graphviz</span><br><span class="line"></span><br><span class="line">iris = load_iris()</span><br><span class="line">    </span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(iris.data, iris.target, random_state=<span class="number">1</span>)</span><br><span class="line">    </span><br><span class="line">estimator = DecisionTreeClassifier(criterion=<span class="string">&quot;entropy&quot;</span>)</span><br><span class="line">estimator.fit(x_train, y_train)</span><br><span class="line"></span><br><span class="line">export_graphviz(estimator, out_file=<span class="string">&#x27;iris_tree.dot&#x27;</span>, feature_names=iris.feature_names)</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li>导出dot文件的内容：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">digraph Tree &#123;</span><br><span class="line">node [shape=box] ;</span><br><span class="line">0 [label=&quot;petal width (cm) &lt;= 0.8\nentropy = 1.581\nsamples = 112\nvalue = [37, 34, 41]&quot;] ;</span><br><span class="line">1 [label=&quot;entropy = 0.0\nsamples = 37\nvalue = [37, 0, 0]&quot;] ;</span><br><span class="line">0 -&gt; 1 [labeldistance=2.5, labelangle=45, headlabel=&quot;True&quot;] ;</span><br><span class="line">2 [label=&quot;petal width (cm) &lt;= 1.65\nentropy = 0.994\nsamples = 75\nvalue = [0, 34, 41]&quot;] ;</span><br><span class="line">0 -&gt; 2 [labeldistance=2.5, labelangle=-45, headlabel=&quot;False&quot;] ;</span><br><span class="line">3 [label=&quot;petal length (cm) &lt;= 4.95\nentropy = 0.494\nsamples = 37\nvalue = [0, 33, 4]&quot;] ;</span><br><span class="line">2 -&gt; 3 ;</span><br><span class="line">4 [label=&quot;entropy = 0.0\nsamples = 32\nvalue = [0, 32, 0]&quot;] ;</span><br><span class="line">3 -&gt; 4 ;</span><br><span class="line">5 [label=&quot;petal width (cm) &lt;= 1.55\nentropy = 0.722\nsamples = 5\nvalue = [0, 1, 4]&quot;] ;</span><br><span class="line">3 -&gt; 5 ;</span><br><span class="line">6 [label=&quot;entropy = 0.0\nsamples = 3\nvalue = [0, 0, 3]&quot;] ;</span><br><span class="line">5 -&gt; 6 ;</span><br><span class="line">7 [label=&quot;petal length (cm) &lt;= 5.45\nentropy = 1.0\nsamples = 2\nvalue = [0, 1, 1]&quot;] ;</span><br><span class="line">5 -&gt; 7 ;</span><br><span class="line">8 [label=&quot;entropy = 0.0\nsamples = 1\nvalue = [0, 1, 0]&quot;] ;</span><br><span class="line">7 -&gt; 8 ;</span><br><span class="line">9 [label=&quot;entropy = 0.0\nsamples = 1\nvalue = [0, 0, 1]&quot;] ;</span><br><span class="line">7 -&gt; 9 ;</span><br><span class="line">10 [label=&quot;petal length (cm) &lt;= 4.85\nentropy = 0.176\nsamples = 38\nvalue = [0, 1, 37]&quot;] ;</span><br><span class="line">2 -&gt; 10 ;</span><br><span class="line">11 [label=&quot;sepal width (cm) &lt;= 3.1\nentropy = 0.811\nsamples = 4\nvalue = [0, 1, 3]&quot;] ;</span><br><span class="line">10 -&gt; 11 ;</span><br><span class="line">12 [label=&quot;entropy = 0.0\nsamples = 3\nvalue = [0, 0, 3]&quot;] ;</span><br><span class="line">11 -&gt; 12 ;</span><br><span class="line">13 [label=&quot;entropy = 0.0\nsamples = 1\nvalue = [0, 1, 0]&quot;] ;</span><br><span class="line">11 -&gt; 13 ;</span><br><span class="line">14 [label=&quot;entropy = 0.0\nsamples = 34\nvalue = [0, 0, 34]&quot;] ;</span><br><span class="line">10 -&gt; 14 ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>可以使用在线网站或者其它工具查看dot文件生成的树状图：<ul>
+<li><a target="_blank" rel="noopener" href="http://webgraphviz.com/">http://webgraphviz.com/</a></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">digraph Tree &#123;</span><br><span class="line">node [shape=box] ;</span><br><span class="line">0 [label=&quot;petal width (cm) &lt;= 0.8\nentropy = 1.581\nsamples = 112\nvalue = [37, 34, 41]&quot;] ;</span><br><span class="line">1 [label=&quot;entropy = 0.0\nsamples = 37\nvalue = [37, 0, 0]&quot;] ;</span><br><span class="line">0 -&gt; 1 [labeldistance=2.5, labelangle=45, headlabel=&quot;True&quot;] ;</span><br><span class="line">2 [label=&quot;petal width (cm) &lt;= 1.65\nentropy = 0.994\nsamples = 75\nvalue = [0, 34, 41]&quot;] ;</span><br><span class="line">0 -&gt; 2 [labeldistance=2.5, labelangle=-45, headlabel=&quot;False&quot;] ;</span><br><span class="line">3 [label=&quot;petal length (cm) &lt;= 4.95\nentropy = 0.494\nsamples = 37\nvalue = [0, 33, 4]&quot;] ;</span><br><span class="line">2 -&gt; 3 ;</span><br><span class="line">4 [label=&quot;entropy = 0.0\nsamples = 32\nvalue = [0, 32, 0]&quot;] ;</span><br><span class="line">3 -&gt; 4 ;</span><br><span class="line">5 [label=&quot;petal width (cm) &lt;= 1.55\nentropy = 0.722\nsamples = 5\nvalue = [0, 1, 4]&quot;] ;</span><br><span class="line">3 -&gt; 5 ;</span><br><span class="line">6 [label=&quot;entropy = 0.0\nsamples = 3\nvalue = [0, 0, 3]&quot;] ;</span><br><span class="line">5 -&gt; 6 ;</span><br><span class="line">7 [label=&quot;petal length (cm) &lt;= 5.45\nentropy = 1.0\nsamples = 2\nvalue = [0, 1, 1]&quot;] ;</span><br><span class="line">5 -&gt; 7 ;</span><br><span class="line">8 [label=&quot;entropy = 0.0\nsamples = 1\nvalue = [0, 1, 0]&quot;] ;</span><br><span class="line">7 -&gt; 8 ;</span><br><span class="line">9 [label=&quot;entropy = 0.0\nsamples = 1\nvalue = [0, 0, 1]&quot;] ;</span><br><span class="line">7 -&gt; 9 ;</span><br><span class="line">10 [label=&quot;petal length (cm) &lt;= 4.85\nentropy = 0.176\nsamples = 38\nvalue = [0, 1, 37]&quot;] ;</span><br><span class="line">2 -&gt; 10 ;</span><br><span class="line">11 [label=&quot;sepal width (cm) &lt;= 3.1\nentropy = 0.811\nsamples = 4\nvalue = [0, 1, 3]&quot;] ;</span><br><span class="line">10 -&gt; 11 ;</span><br><span class="line">12 [label=&quot;entropy = 0.0\nsamples = 3\nvalue = [0, 0, 3]&quot;] ;</span><br><span class="line">11 -&gt; 12 ;</span><br><span class="line">13 [label=&quot;entropy = 0.0\nsamples = 1\nvalue = [0, 1, 0]&quot;] ;</span><br><span class="line">11 -&gt; 13 ;</span><br><span class="line">14 [label=&quot;entropy = 0.0\nsamples = 34\nvalue = [0, 0, 34]&quot;] ;</span><br><span class="line">10 -&gt; 14 ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="决策树总结"><a href="#决策树总结" class="headerlink" title="决策树总结"></a>决策树总结</h3><ul>
+<li>优点：<ul>
+<li>简单的理解和解释，树木可视化</li>
+<li>可解释能力强</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>决策树可能过于复杂，容易导致过拟合</li>
+</ul>
+</li>
+<li>改进：<ul>
+<li>减cart算法（决策树API中已经实现，随机森林参数调优有相关介绍）</li>
+<li>随机森林</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/17/sklearn/9_%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/17/sklearn/9_%E6%9C%B4%E7%B4%A0%E8%B4%9D%E5%8F%B6%E6%96%AF%E7%AE%97%E6%B3%95/" class="post-title-link" itemprop="url">P9_朴素贝叶斯算法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-12-17 20:01:00" itemprop="dateCreated datePublished" datetime="2023-12-17T20:01:00+08:00">2023-12-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-18 16:46:01" itemprop="dateModified" datetime="2023-12-18T16:46:01+08:00">2023-12-18</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sklearn/" itemprop="url" rel="index"><span itemprop="name">sklearn</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="概率基础"><a href="#概率基础" class="headerlink" title="概率基础"></a>概率基础</h3><ul>
+<li>概率定义为一件事情发生的可能性<ul>
+<li>扔出一枚硬币，结果头像朝上</li>
+</ul>
+</li>
+<li>P(X)：取值在[0,1]</li>
+</ul>
+<h4 id="女神是否喜欢计算案例"><a href="#女神是否喜欢计算案例" class="headerlink" title="女神是否喜欢计算案例"></a>女神是否喜欢计算案例</h4><p>在将这两个概率之前，通过一个例子，来计算一些结果：<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231217210247.png"></p>
+<ul>
+<li>问题如下：<ol>
+<li>女神喜欢的概率？<ul>
+<li>P(喜欢) &#x3D; 4&#x2F;7</li>
+</ul>
+</li>
+<li>职业是程序员并且体型匀称的概率？<ul>
+<li>P(程序员, 匀称) &#x3D; 1&#x2F;7</li>
+</ul>
+</li>
+<li>在女神喜欢的条件下，职业是程序员的概率？<ul>
+<li>P(程序员|喜欢) &#x3D; 2&#x2F;4 &#x3D; 1&#x2F;2</li>
+</ul>
+</li>
+<li>在女神喜欢的条件下，职业是程序员，体重是超重的概率？<ul>
+<li>P(程序员, 超重|喜欢) &#x3D; 1&#x2F;4</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="联合概率、条件概率与相互独立"><a href="#联合概率、条件概率与相互独立" class="headerlink" title="联合概率、条件概率与相互独立"></a>联合概率、条件概率与相互独立</h3><ul>
+<li>联合概率：包含多个条件，且所有条件同时成立的概率<ul>
+<li>记作：P(A, B)</li>
+<li>例如：P(程序员，匀称)，P(程序员,超重|喜欢)</li>
+</ul>
+</li>
+<li>条件概率：就是事件A在另一个事件B已经发生的条件下的发生概率。<ul>
+<li>记作：P(A|B)</li>
+<li>例如：P(程序员|喜欢)，P(程序员，超重|喜欢)</li>
+</ul>
+</li>
+<li>相互独立：如果P(A，B) &#x3D; P(A)P(B)，则称事件A与事件B相互独立。<ul>
+<li><strong>P(A, B) &#x3D; P(A)P(B) &lt;&#x3D;&gt; 事件A与事件B相互独立</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="贝叶斯公式"><a href="#贝叶斯公式" class="headerlink" title="贝叶斯公式"></a>贝叶斯公式</h3><ul>
+<li>公式<br>$$<br>P(C|W) &#x3D; \frac{P(W|C)P(C)}{P(W)}<br>$$<br>注：w为给定文档的特征值（频数统计，预测文档提供），c为文档化类别<br/></li>
+</ul>
+<h4 id="计算案例"><a href="#计算案例" class="headerlink" title="计算案例"></a>计算案例</h4><p>用上面问题中的数据带入贝叶斯公式：</p>
+<blockquote>
+<p>$$<br>P(喜欢|产品, 超重) &#x3D; \frac{P(产品, 超重|喜欢)P(喜欢)}{P(产品, 超重)}<br>$$</p>
+</blockquote>
+<p>上式中，P(产品, 超重|喜欢)和P(产品,超重)的结果均为0，导致无法计算结果。这是因为我们的样本量太少了，不具有代表性，本来现实生活中，肯定是存在职业是产品经理并且体重超重搞得人的，P(产品, 超重)不肯为0；而且事件“职业是产品经理”和事件“体重超重”通常被认为是相互独立的事件，但是，根据我们有限的7个样本计算“P(产品, 超重)&#x3D;P(产品)*P(超重)”不成立。<br>而朴素贝叶斯可以帮我们解决这个问题。<br>朴素贝叶斯，简单理解，就是假定了特征与特征之间相互独立的贝叶斯公式。<br>也就是说，朴素贝叶斯，之所以朴素，就在于假定了特征与特征相互独立。<br>所以，上面问题如果按照朴素贝叶斯的思路来解决，就可以是</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">P(产品, 超重) = P(产品)*P(超重) = <span class="number">2</span>/<span class="number">7</span> * <span class="number">3</span>/<span class="number">7</span> = <span class="number">6</span>/<span class="number">49</span></span><br><span class="line">P(产品, 超重|喜欢) = P(产品|喜欢)*P(超重|喜欢) = <span class="number">1</span>/<span class="number">2</span> * <span class="number">1</span>/<span class="number">4</span> = <span class="number">1</span>/<span class="number">8</span></span><br><span class="line">P(喜欢|产品, 超重) = P(产品, 超重|喜欢)P(喜欢)/P(产品, 超重) = <span class="number">1</span>/<span class="number">8</span> *<span class="number">4</span>/<span class="number">7</span> / <span class="number">6</span>/<span class="number">49</span> = <span class="number">7</span>/<span class="number">12</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>朴素的意义：<ul>
+<li>假设：<ul>
+<li>假定特征与特征之间相互独立。</li>
+<li>P(产品经理, 超重) &#x3D; P(产品)*P(超重)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>朴素贝叶斯：<ul>
+<li>朴素 + 贝叶斯公式</li>
+</ul>
+</li>
+<li>应用场景：<ul>
+<li>常用于文本分类<ul>
+<li>以单词为特征（通常认为单词之间相互独立）<br/></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>那么这个公式如果在文章分类的场景中，我们可以这样看：<br>$$<br>P(C|F1, F2, …) &#x3D; \frac{P(F1, F2, …|C)P(C)}{P(F1, F2, …)}<br>$$<br>其中c可以是不同类别</p>
+<ul>
+<li>P(C)：每个文档类别的概率（某文档类别数&#x2F;总文档数量）</li>
+<li>P(W|C)：给定类别下特征（被预测文档中出现的词）的概率<ul>
+<li>计算方法：P(F1|C) &#x3D; Ni&#x2F;N (训练文档中去计算)<ul>
+<li>Ni为该F1词在C类别所有文档中出现的次数</li>
+<li>N为所属类别C下的文档中所有词出现的次数和</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>P(F1, F2, …)预测文档中每个词的概率</li>
+</ul>
+<p>如果计算两个类别概率比较：<br><strong>所以我们只要比较前面的大小就可以，得出谁的概率大</strong></p>
+<h3 id="文章分类计算"><a href="#文章分类计算" class="headerlink" title="文章分类计算"></a>文章分类计算</h3><p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231218110251.png"></p>
+<ul>
+<li>计算结果<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">P(Chinese|C) = <span class="number">5</span>/<span class="number">8</span></span><br><span class="line">P(Tokyo|C) = <span class="number">0</span></span><br><span class="line">P(Japan|C) = <span class="number">0</span></span><br></pre></td></tr></table></figure></li>
+<li>这里因为样本太少，出现了概率为0的情况，为了解决这种情况，需要引入拉普拉斯平滑系数</li>
+</ul>
+<h4 id="拉普拉斯平滑系数"><a href="#拉普拉斯平滑系数" class="headerlink" title="拉普拉斯平滑系数"></a>拉普拉斯平滑系数</h4><p>目的：防止计算出的分类概率为0<br>$$<br>P(F1|C) &#x3D;  \frac{Ni+\alpha}{N+\alpha m}<br>$$<br>$\alpha$为指定的系数一般为1，m为训练文档中统计出的<strong>特征词</strong>的个数</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">P(Chinese|C) = (<span class="number">5</span>+<span class="number">1</span>) / (<span class="number">8</span>+<span class="number">1</span>*<span class="number">6</span>) = <span class="number">6</span>/<span class="number">14</span> = <span class="number">3</span>/<span class="number">7</span></span><br><span class="line">P(Tokyo|C) = (<span class="number">0</span>+<span class="number">1</span>) / (<span class="number">8</span>+<span class="number">1</span>*<span class="number">6</span>) = <span class="number">1</span>/<span class="number">14</span></span><br><span class="line">P(Japan|C) = (<span class="number">0</span>+<span class="number">1</span>) / (<span class="number">8</span>+<span class="number">1</span>*<span class="number">6</span>) = <span class="number">1</span>/<span class="number">14</span></span><br></pre></td></tr></table></figure>
+<h3 id="朴素贝叶斯分类算法API"><a href="#朴素贝叶斯分类算法API" class="headerlink" title="朴素贝叶斯分类算法API"></a>朴素贝叶斯分类算法API</h3><ul>
+<li>sklearn.naive_bayes.MultinomialNB(aplha &#x3D; 1.0)<ul>
+<li>朴素贝叶斯分类</li>
+<li>aplpha：拉普拉斯平滑系数</li>
+</ul>
+</li>
+</ul>
+<h3 id="案例：20类新闻分类"><a href="#案例：20类新闻分类" class="headerlink" title="案例：20类新闻分类"></a>案例：20类新闻分类</h3><p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231218114613.png"></p>
+<h4 id="步骤分析"><a href="#步骤分析" class="headerlink" title="步骤分析"></a>步骤分析</h4><ol>
+<li>获取数据</li>
+<li>划分数据集</li>
+<li>特征工程<br>  文本特征抽取（TFIDF）</li>
+<li>朴素贝叶斯预估器流程</li>
+<li>模型评估</li>
+</ol>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> fetch_20newsgroups</span><br><span class="line"><span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split</span><br><span class="line"><span class="keyword">from</span> sklearn.feature_extraction.text <span class="keyword">import</span> TfidfVectorizer</span><br><span class="line"><span class="keyword">from</span> sklearn.naive_bayes <span class="keyword">import</span> MultinomialNB</span><br><span class="line"></span><br><span class="line"><span class="comment"># 1) 获取数据</span></span><br><span class="line">news = fetch_20newsgroups(subset=<span class="string">&#x27;all&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2) 划分数据集</span></span><br><span class="line">x_train, x_test, y_train, y_test = train_test_split(news.data, news.target)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3) 特征工程：文本特征抽取-tfidf</span></span><br><span class="line">transfer = TfidfVectorizer()</span><br><span class="line">x_train = transfer.fit_transform(x_train)</span><br><span class="line">x_test = transfer.transform(x_test)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 4) 朴素贝叶斯算法预估器流程</span></span><br><span class="line">estimator = MultinomialNB()</span><br><span class="line">estimator.fit(x_train, y_train)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 5) 模型评估</span></span><br><span class="line"><span class="comment">#直接比对真实值与预测值：</span></span><br><span class="line">y_predict = estimator.predict(x_test)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;y_predict:\n&quot;</span>, y_predict)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;直接比对真实值与预测值：\n&quot;</span>, y_test == y_predict)</span><br><span class="line"><span class="comment">#计算准确率</span></span><br><span class="line">score = estimator.score(x_test, y_test)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&quot;准确率为：\n&quot;</span>, score)</span><br></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231218160652.png"></p>
+<h3 id="朴素贝叶斯算法总结："><a href="#朴素贝叶斯算法总结：" class="headerlink" title="朴素贝叶斯算法总结："></a>朴素贝叶斯算法总结：</h3><ul>
+<li>优点：<ul>
+<li>朴素贝叶斯模型发源于古典数学理论，有稳定的分类效率。</li>
+<li>对缺失值不太敏感，算法也比较简单，常用于文本分类。</li>
+<li>分类准确度高（相对的），速度快。</li>
+</ul>
+</li>
+<li>缺点：<ul>
+<li>由于使用了样本属性独立性的假设，所以如果特征属性由于关联时其效果不好。</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/08/sklearn/8_facebook%E7%AD%BE%E5%88%B0%E4%BD%8D%E7%BD%AE%E9%A2%84%E6%B5%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/12/08/sklearn/8_facebook%E7%AD%BE%E5%88%B0%E4%BD%8D%E7%BD%AE%E9%A2%84%E6%B5%8B/" class="post-title-link" itemprop="url">P8_facebook签到位置预测</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-12-08 16:08:00" itemprop="dateCreated datePublished" datetime="2023-12-08T16:08:00+08:00">2023-12-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-12-15 11:17:37" itemprop="dateModified" datetime="2023-12-15T11:17:37+08:00">2023-12-15</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/sklearn/" itemprop="url" rel="index"><span itemprop="name">sklearn</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="案例：预测facebook签到位置"><a href="#案例：预测facebook签到位置" class="headerlink" title="案例：预测facebook签到位置"></a>案例：预测facebook签到位置</h2><ul>
+<li>数据集介绍：<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231215105849.png"></li>
+<li>流程分析：<ol>
+<li>获取数据</li>
+<li>处理数据<ul>
+<li>目的：<br>特征值 x<br>目标值 y<ul>
+<li>缩小数据范围<br>  2 &lt;  x &lt; 2.5<br>  1.0 &lt; y &lt; 1.5</li>
+<li>time -&gt; 年月日时分秒</li>
+<li>过滤签到次数少的地点</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>特征工程：标准化</li>
+<li>KNN算法预估流程</li>
+<li>模型选择与调优</li>
+<li>模型评估</li>
+</ol>
+</li>
+</ul>
+<pre><code class="py">import pandas as pd
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import StandardScaler
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.model_selection import GridSearchCV
+
+# 1.导入数据集
+data = pd.read_csv(&quot;./FBlocation/train.csv&quot;)
+
+# 2.基本数据处理
+# 1) 缩小数据范围
+data = data.query(&quot;x &lt; 2.5 &amp; x &gt; 2 &amp; y &lt; 1.5 &amp; y &gt; 1.0&quot;)
+
+# 2) 处理时间特征
+time_value = pd.to_datetime(data[&quot;time&quot;], unit=&quot;s&quot;)
+date = pd.DatetimeIndex(time_value)
+data[&quot;day&quot;] = date.day
+data[&quot;weekday&quot;] = date.weekday
+data[&quot;hour&quot;] = date.hour
+
+# 3) 过滤签到次数少的地点
+place_count = data.groupby(&quot;place_id&quot;).count()[&quot;row_id&quot;]
+data[&quot;place_id&quot;].isin(place_count[place_count &gt; 3].index.values)
+data_final = data[data[&quot;place_id&quot;].isin(place_count[place_count &gt; 3].index.values)]
+
+# 筛选特征值和目标值
+x = data_final[[&quot;x&quot;, &quot;y&quot;, &quot;accuracy&quot;, &quot;day&quot;, &quot;weekday&quot;, &quot;hour&quot;]]
+y = data_final[&quot;place_id&quot;]
+
+# 数据集划分
+x_train, x_test, y_train, y_test = train_test_split(x, y)
+
+# 特征工程：标准化
+transfer = StandardScaler()
+x_train = transfer.fit_transform(x_train)
+x_test = transfer.transform(x_test)
+
+# KNN算法预估器
+estimator = KNeighborsClassifier(n_neighbors=3)
+
+# 加入网格搜索交叉验证
+# 参数准备
+param_dict = &#123;&quot;n_neighbors&quot;: [1, 3, 5, 7, 9, 11]&#125;
+estimator = GridSearchCV(estimator, param_grid=param_dict, cv=10)
+
+estimator.fit(x_train, y_train)
+
+# 模型评估
+# 方法1：直接比对真实值和预测值
+y_predict = estimator.predict(x_test)
+print(&quot;y_predict:\n&quot;, y_predict)
+print(&quot;直接比对真实值和预测值：\n&quot;, y_test == y_predict)
+
+# 方法2：计算准确率
+score = estimator.score(x_test, y_test)
+print(&quot;准确率为：\n&quot;, score)
+
+print(&quot;最佳参数：\n&quot;, estimator.best_params_)
+print(&quot;最佳结果：\n&quot;, estimator.best_score_)
+print(&quot;最佳估计器：\n&quot;, estimator.best_estimator_)
+print(&quot;交叉验证结果：\n&quot;, estimator.cv_results_)
+</code></pre>
+<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231215111652.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/12/06/sklearn/7_sklearn%E6%A8%A1%E5%9E%8B%E9%80%89%E6%8B%A9%E4%B8%8E%E8%B0%83%E4%BC%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -214,7 +730,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-12-07 09:29:32" itemprop="dateModified" datetime="2023-12-07T09:29:32+08:00">2023-12-07</time>
+                <time title="修改时间：2023-12-08 16:07:32" itemprop="dateModified" datetime="2023-12-08T16:07:32+08:00">2023-12-08</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -1413,254 +1929,6 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/31/OpenCV/31_%E5%A4%96%E6%8E%A5%E7%9F%A9%E5%BD%A2/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/31/OpenCV/31_%E5%A4%96%E6%8E%A5%E7%9F%A9%E5%BD%A2/" class="post-title-link" itemprop="url">P31_外接矩形</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-10-31 10:30:00 / 修改时间：15:05:17" itemprop="dateCreated datePublished" datetime="2023-10-31T10:30:00+08:00">2023-10-31</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="最小外接矩形与最大外接矩形"><a href="#最小外接矩形与最大外接矩形" class="headerlink" title="最小外接矩形与最大外接矩形"></a>最小外接矩形与最大外接矩形</h2><ul>
-<li>外接矩形氛围最小外接矩形和最大外接矩形.</li>
-<li>下图中红色矩形是最小外接矩形，绿色为最大外接矩形.<br>  <img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231031103244.png"></li>
-<li>minAreaRect(points) 最小外接矩形<ul>
-<li>points：即轮廓</li>
-<li>返回元组，内容是一个旋转矩形(RotatedRect)的参数：矩形的起始坐标x, y,矩形的宽度和高度，矩形的选择角度</li>
-</ul>
-</li>
-<li>boundingRect(points) 最大外接矩形<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入原图</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;wave.png&#x27;</span>)</span><br><span class="line"><span class="comment"># 转换为灰度图</span></span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line"><span class="comment"># 高斯模糊</span></span><br><span class="line">blur_img = cv2.GaussianBlur(gray, (<span class="number">5</span>, <span class="number">5</span>), sigmaX=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># canny</span></span><br><span class="line">canny_img = cv2.Canny(blur_img, <span class="number">64</span>, <span class="number">128</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 轮廓查找，返回两个结果或，轮廓和层级</span></span><br><span class="line">result, contours, hierarchy = cv2.findContours(canny_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line"></span><br><span class="line">img_copy = canny_img.copy()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制最小外接矩形与最大外接矩形</span></span><br><span class="line"><span class="comment"># 获取最小外接矩形，返回一个RotatedRect对象rect</span></span><br><span class="line">rect = cv2.minAreaRect(contours[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(rect)</span><br><span class="line"><span class="comment"># boxPoints()函数，帮我们从rect中算出选装矩形的四个坐标点</span></span><br><span class="line"><span class="comment"># 注意坐标必须是整数，使用round()函数对坐标进行四舍五入</span></span><br><span class="line">box = cv2.boxPoints(rect)</span><br><span class="line">box = np.<span class="built_in">round</span>(box).astype(<span class="string">&#x27;int64&#x27;</span>)</span><br><span class="line"><span class="built_in">print</span>(box)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制最小外接矩形，使用红色</span></span><br><span class="line">cv2.drawContours(img, [box], <span class="number">0</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line"><span class="comment"># 获取最大外接矩形,直接返回坐标与长宽四个值</span></span><br><span class="line">x, y, w, h = cv2.boundingRect(contours[<span class="number">1</span>])</span><br><span class="line"><span class="comment"># 使用rectangle()函数直接绘出最大外接矩形，使用绿色以区分</span></span><br><span class="line">cv2.rectangle(img, (x, y), (x + w, y + h), (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;img&#x27;</span>, img)</span><br><span class="line"><span class="comment">#cv2.imshow(&#x27;output&#x27;, np.hstack((img, img_copy)))</span></span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231031150008.png"></li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/31/OpenCV/30_%E5%A4%9A%E8%BE%B9%E5%BD%A2%E9%80%BC%E8%BF%91%E4%B8%8E%E5%87%B8%E5%8C%85/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/31/OpenCV/30_%E5%A4%9A%E8%BE%B9%E5%BD%A2%E9%80%BC%E8%BF%91%E4%B8%8E%E5%87%B8%E5%8C%85/" class="post-title-link" itemprop="url">P20_多边形逼近与凸包</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-10-31 10:00:00 / 修改时间：10:30:15" itemprop="dateCreated datePublished" datetime="2023-10-31T10:00:00+08:00">2023-10-31</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="多边形逼近"><a href="#多边形逼近" class="headerlink" title="多边形逼近"></a>多边形逼近</h2><ul>
-<li><strong>findContours后轮廓信息contours可能过于复杂不平滑，可以使用approxPolyDP函数对该多边形曲线做适当近似</strong>，这就是轮廓的多边形逼近.</li>
-<li>approxPloyDP就是以多边形去逼近轮廓，采用的是Douglas-Peucker算法（方法名中的DP）</li>
-<li>DP算法的原理比较简单，核心就是不断找多边形最远的点加入形成新的多边形，知道最短距离小于指定的精度。</li>
-<li>approxPolyDP(curve, epsilon, closed[, approxCurve])<ul>
-<li>curve：要逼近的轮廓</li>
-<li>epsilon：即DP算法使用的阈值</li>
-<li>closed：轮廓是否闭合<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 使用多边形逼近</span></span><br><span class="line">approx = cv2.approxPolyDP(contours[<span class="number">11</span>], <span class="number">20</span>, closed=<span class="literal">True</span>)</span><br><span class="line">cv2.drawContours(img_copy, [approx], <span class="number">0</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>)</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231031101547.png"></li>
-</ul>
-</li>
-<li>使用多边形逼近，近似模拟手的轮廓.<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入原图</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;hand.png&#x27;</span>)</span><br><span class="line"><span class="comment"># 转换为灰度图</span></span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line"><span class="comment"># 高斯模糊</span></span><br><span class="line">blur_img = cv2.GaussianBlur(gray, (<span class="number">5</span>, <span class="number">5</span>), sigmaX=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># canny</span></span><br><span class="line">canny_img = cv2.Canny(blur_img, <span class="number">64</span>, <span class="number">128</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 轮廓查找，返回两个结果或，轮廓和层级</span></span><br><span class="line">result, contours, hierarchy = cv2.findContours(canny_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line"></span><br><span class="line"><span class="comment"># print(hierarchy)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制轮廓会直接修改原图.</span></span><br><span class="line"><span class="comment"># 如果要保持原图不变，可以copy一份</span></span><br><span class="line">img_copy = img.copy()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用多边形逼近</span></span><br><span class="line">approx = cv2.approxPolyDP(contours[<span class="number">1</span>], <span class="number">20</span>, closed=<span class="literal">True</span>)</span><br><span class="line">cv2.drawContours(img_copy, [approx], <span class="number">0</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, np.hstack((img, img_copy)))</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231031101900.png"></li>
-</ul>
-<h2 id="凸包"><a href="#凸包" class="headerlink" title="凸包"></a>凸包</h2><ul>
-<li>逼近多边形是轮廓的高度近似，但有的时候，我们更希望使用一个多边形的凸包来简化它。凸包和逼近多边形很像，直播怒过他是物体最外形的凸多边形。凸包指的是完全包含原有的轮廓，并且仅由轮廓上的点所构成的多边形。凸包的每一处都是凸的，即在凸包内连接任意两点的直线都在凸包的内部。在凸包内，任意连续三个点的内角小于180°.</li>
-<li>convexHull(points[, hull[, clockwise[, returnPoints]]])<ul>
-<li>points：即轮廓</li>
-<li>clockwise：顺时针绘制<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> cv2</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># 导入原图</span></span><br><span class="line">img = cv2.imread(<span class="string">&#x27;hand.png&#x27;</span>)</span><br><span class="line"><span class="comment"># 转换为灰度图</span></span><br><span class="line">gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)</span><br><span class="line"><span class="comment"># 高斯模糊</span></span><br><span class="line">blur_img = cv2.GaussianBlur(gray, (<span class="number">5</span>, <span class="number">5</span>), sigmaX=<span class="number">1</span>)</span><br><span class="line"><span class="comment"># canny</span></span><br><span class="line">canny_img = cv2.Canny(blur_img, <span class="number">64</span>, <span class="number">128</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 轮廓查找，返回两个结果或，轮廓和层级</span></span><br><span class="line">result, contours, hierarchy = cv2.findContours(canny_img, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)</span><br><span class="line"></span><br><span class="line"><span class="comment"># print(hierarchy)</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 绘制轮廓会直接修改原图.</span></span><br><span class="line"><span class="comment"># 如果要保持原图不变，可以copy一份</span></span><br><span class="line">img_copy = img.copy()</span><br><span class="line"></span><br><span class="line"><span class="comment"># 使用多边形逼近</span></span><br><span class="line">approx = cv2.approxPolyDP(contours[<span class="number">1</span>], <span class="number">20</span>, closed=<span class="literal">True</span>)</span><br><span class="line">cv2.drawContours(img_copy, [approx], <span class="number">0</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算凸包</span></span><br><span class="line">hull = cv2.convexHull(contours[<span class="number">0</span>])</span><br><span class="line"><span class="comment"># 绘出凸包</span></span><br><span class="line">cv2.drawContours(img_copy, [hull], <span class="number">0</span>, (<span class="number">0</span>, <span class="number">255</span>, <span class="number">0</span>), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line">cv2.imshow(<span class="string">&#x27;output&#x27;</span>, np.hstack((img, img_copy)))</span><br><span class="line"></span><br><span class="line">cv2.waitKey(<span class="number">0</span>)</span><br><span class="line">cv2.destroyAllWindows()</span><br></pre></td></tr></table></figure>
-<img src="https://raw.githubusercontent.com/porridge42/picgo/main/20231031102723.png"></li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/10/31/OpenCV/29_%E8%BD%AE%E5%BB%93%E7%9A%84%E9%9D%A2%E7%A7%AF%E4%B8%8E%E5%91%A8%E9%95%BF/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/10/31/OpenCV/29_%E8%BD%AE%E5%BB%93%E7%9A%84%E9%9D%A2%E7%A7%AF%E4%B8%8E%E5%91%A8%E9%95%BF/" class="post-title-link" itemprop="url">P29_轮廓的面积与周长</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-10-31 09:36:00 / 修改时间：10:11:36" itemprop="dateCreated datePublished" datetime="2023-10-31T09:36:00+08:00">2023-10-31</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OpenCV/" itemprop="url" rel="index"><span itemprop="name">OpenCV</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <ul>
-<li>轮廓面积是每个轮廓中所有的像素点围成区域的面积，单位为像素。</li>
-<li>轮廓面积是轮廓重要的统计特性之一，通过轮廓面积的大小可以进一步分析每个轮廓隐含的信息，例如通过轮廓面积区分物体大小识别不同的物体。</li>
-</ul>
-<p>在查找到轮廓后，可能会有很多细小的轮廓，我们可以通过轮廓的面积进行过滤.</p>
-<ul>
-<li>contourArea(contour)</li>
-<li>arcLength(curve, closed)<ul>
-<li>curve及轮廓.</li>
-<li>closed是否为闭合的轮廓.<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="comment"># 绘制轮廓会直接修改原图.</span></span><br><span class="line"><span class="comment"># 如果要保持原图不变，可以copy一份</span></span><br><span class="line">img_copy = img.copy()</span><br><span class="line">cv2.drawContours(img_copy, contours, -<span class="number">1</span>, (<span class="number">0</span>, <span class="number">0</span>, <span class="number">255</span>), <span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算轮廓面积 </span></span><br><span class="line">area = cv2.contourArea(contours[<span class="number">1</span>])</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;area：&#x27;</span>, area)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 计算轮廓周长</span></span><br><span class="line">perimeter = cv2.arcLength(contours[<span class="number">1</span>], closed=<span class="literal">True</span>)</span><br><span class="line"><span class="built_in">print</span>(<span class="string">&#x27;rerimeter：&#x27;</span>, perimeter)</span><br><span class="line"></span><br><span class="line"><span class="comment"># 输出：</span></span><br><span class="line"><span class="comment"># area： 0.5</span></span><br><span class="line"><span class="comment"># rerimeter： 82.72792184352875</span></span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
@@ -1732,7 +2000,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">163</span>
+          <span class="site-state-item-count">166</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
