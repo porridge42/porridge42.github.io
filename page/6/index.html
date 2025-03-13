@@ -183,6 +183,500 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/24/JavaSE/P100IO%E6%B5%81_%E5%AD%97%E8%8A%82%E7%BC%93%E5%86%B2%E6%B5%81/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/24/JavaSE/P100IO%E6%B5%81_%E5%AD%97%E8%8A%82%E7%BC%93%E5%86%B2%E6%B5%81/" class="post-title-link" itemprop="url">P100IO流_字节缓冲流</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-24 22:45:00" itemprop="dateCreated datePublished" datetime="2023-05-24T22:45:00+08:00">2023-05-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-25 21:08:08" itemprop="dateModified" datetime="2023-05-25T21:08:08+08:00">2023-05-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="字节缓冲流"><a href="#字节缓冲流" class="headerlink" title="字节缓冲流"></a>字节缓冲流</h2><ul>
+<li><strong>缓冲流: BufferedInputStream&#x2F;BufferedOutputStream</strong><ul>
+<li>提高IO效率，减少访问磁盘的次数：</li>
+<li>数据存储在缓冲区中，flush是将缓存区的内容写入文件中，也可以直接close<br/></li>
+</ul>
+</li>
+</ul>
+<h3 id="字节缓冲输入流BufferedInputStream"><a href="#字节缓冲输入流BufferedInputStream" class="headerlink" title="字节缓冲输入流BufferedInputStream:"></a>字节缓冲输入流BufferedInputStream:</h3><ul>
+<li><strong>初始化：初始化参数需要传入一个底层节点流(fis就属于一种底层节点流)：</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FileInputStream</span> <span class="variable">fis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;文件路径&quot;</span>);</span><br><span class="line"><span class="type">BufferedInputStream</span> <span class="variable">bis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedInputStream</span>(fis);</span><br></pre></td></tr></table></figure></li>
+<li><strong>字节缓冲流支持使用内置缓冲区和使用自定义的缓冲区：</strong><ul>
+<li>使用内置的缓冲区:  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> data=<span class="number">0</span>;</span><br><span class="line">   <span class="keyword">while</span>((data=bis.read())!=-<span class="number">1</span>) &#123;</span><br><span class="line">       System.out.print((<span class="type">char</span>)data);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure></li>
+<li>使用自定义的缓冲区  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">byte</span>[] buf = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">       <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">       <span class="keyword">while</span> ((count = bis.read(buf))!=-<span class="number">1</span>) &#123;</span><br><span class="line">           System.out.println(<span class="keyword">new</span> <span class="title class_">String</span>(buf,<span class="number">0</span>,count));</span><br><span class="line">       &#125;</span><br></pre></td></tr></table></figure>
+<strong>使用bis读取文件示例：</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo5</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="comment">//从字节缓冲流中读取</span></span><br><span class="line">        <span class="comment">//1创建字节缓冲流</span></span><br><span class="line">        <span class="type">FileInputStream</span> <span class="variable">fis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;C:\\Users\\23971\\Desktop\\IdeaProjects\\IOstream\\files\\Demo5\\aaa.txt&quot;</span>);</span><br><span class="line">        <span class="type">BufferedInputStream</span> <span class="variable">bis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedInputStream</span>(fis);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.1读取(使用内置缓冲区)</span></span><br><span class="line">        <span class="type">int</span> data=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>((data=bis.read())!=-<span class="number">1</span>) &#123;</span><br><span class="line">            System.out.print((<span class="type">char</span>)data);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2.2读取(使用自定义缓冲区)</span></span><br><span class="line">        <span class="type">byte</span>[] buf = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> ((count = bis.read(buf))!=-<span class="number">1</span>) &#123;</span><br><span class="line">            System.out.println(<span class="keyword">new</span> <span class="title class_">String</span>(buf,<span class="number">0</span>,count));</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3关闭</span></span><br><span class="line">        bis.close();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+<h3 id="字节缓冲输出流BufferedOutputStream"><a href="#字节缓冲输出流BufferedOutputStream" class="headerlink" title="字节缓冲输出流BufferedOutputStream:"></a>字节缓冲输出流BufferedOutputStream:</h3><ul>
+<li><strong>初始化：初始化参数与输字节缓冲入流类似，需要传入一个输入流对象：</strong><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">FileOutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputSttream</span>(<span class="string">&quot;输出文件路径&quot;</span>);</span><br><span class="line"><span class="type">BufferedOutputStream</span> <span class="variable">bos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedOutputStream</span>(fos);</span><br></pre></td></tr></table></figure></li>
+<li><strong>flush()方法：</strong><br>字节缓冲流调用write()方法时输出是先写入到缓冲区，当调用flush()方法时，才会将缓冲区内的数据写入硬盘；该方法在执行close()关闭流的时候也会自动执行。<br/></li>
+</ul>
+<p><strong>使用bos写入文件示例：</strong></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.BufferedOutputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo6</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="comment">//1创建字节输出缓冲流</span></span><br><span class="line">        <span class="type">FileOutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;C:\\Users\\23971\\Desktop\\IdeaProjects\\IOstream\\files\\Demo5,6\\bbb.txt&quot;</span>);</span><br><span class="line">        <span class="type">BufferedOutputStream</span> <span class="variable">bos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">BufferedOutputStream</span>(fos);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2写入文件</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">10</span>; i++) &#123;</span><br><span class="line">            <span class="comment">//写入一次数据刷新一次(防止数据丢失)</span></span><br><span class="line">            bos.write(<span class="string">&quot;helloworld\r\n&quot;</span>.getBytes());   <span class="comment">//写入内置缓冲区</span></span><br><span class="line">            bos.flush();   <span class="comment">//刷新到硬盘</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//3关闭</span></span><br><span class="line">        bos.close();   <span class="comment">//执行此方法时也会内部调用一次flush()</span></span><br><span class="line">        System.out.println(<span class="string">&quot;输出完毕&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/24/JavaSE/P99IO%E6%B5%81_%E5%AD%97%E8%8A%82%E6%B5%81%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/24/JavaSE/P99IO%E6%B5%81_%E5%AD%97%E8%8A%82%E6%B5%81%E5%A4%8D%E5%88%B6%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">P99IO流_字节流复制文件</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-24 21:42:00" itemprop="dateCreated datePublished" datetime="2023-05-24T21:42:00+08:00">2023-05-24</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-25 20:08:05" itemprop="dateModified" datetime="2023-05-25T20:08:05+08:00">2023-05-25</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="字节流案例演示"><a href="#字节流案例演示" class="headerlink" title="字节流案例演示"></a>字节流案例演示</h2><ul>
+<li>使用文件字节流实现对文件的复制<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//实例化</span></span><br><span class="line"><span class="type">FileInputStream</span> <span class="variable">fis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;输入文件路径&quot;</span>);</span><br><span class="line"><span class="type">FileOutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;输出文件路径&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+<li>定义一个缓冲区，一个整型变量计数，使用循环一边读一边写。<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">byte</span>[] buf = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line"><span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>((count = fis.read(buf))!=-<span class="number">1</span>) &#123;</span><br><span class="line">            fos.write(buf,<span class="number">0</span>,count);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+<li>关闭流<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//3关闭</span></span><br><span class="line">fis.close();</span><br><span class="line">fos.close();</span><br><span class="line">System.out.println(<span class="string">&quot;复制完毕&quot;</span>);</span><br></pre></td></tr></table></figure></li>
+</ul>
+<hr>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo3</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">//1实例化: 文件字节输入流，文件字节输出流</span></span><br><span class="line">        <span class="type">FileInputStream</span> <span class="variable">fis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;C:\\Users\\23971\\Desktop\\IdeaProjects\\IOstream\\files\\Demo3\\001.JPG&quot;</span>);</span><br><span class="line">        <span class="type">FileOutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;C:\\Users\\23971\\Desktop\\IdeaProjects\\IOstream\\files\\Demo3\\002.JPG&quot;</span>);</span><br><span class="line">        <span class="comment">//2一边读一边写</span></span><br><span class="line">        <span class="type">byte</span>[] buf = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">        <span class="type">int</span> <span class="variable">count</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>((count = fis.read(buf))!=-<span class="number">1</span>) &#123;</span><br><span class="line">            fos.write(buf,<span class="number">0</span>,count);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//3关闭</span></span><br><span class="line">        fis.close();</span><br><span class="line">        fos.close();</span><br><span class="line">        System.out.println(<span class="string">&quot;复制完毕&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/24/NumPy/P8_%E6%95%B0%E5%AD%A6%E5%92%8C%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/24/NumPy/P8_%E6%95%B0%E5%AD%A6%E5%92%8C%E7%BB%9F%E8%AE%A1%E6%96%B9%E6%B3%95/" class="post-title-link" itemprop="url">P8_数学和统计方法</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2023-05-24 20:29:00 / 修改时间：21:02:00" itemprop="dateCreated datePublished" datetime="2023-05-24T20:29:00+08:00">2023-05-24</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NumPy/" itemprop="url" rel="index"><span itemprop="name">NumPy</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/21/NumPy/P7_NumPy%E5%B8%B8%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%95%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/21/NumPy/P7_NumPy%E5%B8%B8%E7%94%A8%E9%9A%8F%E6%9C%BA%E6%95%B0/" class="post-title-link" itemprop="url">P7_NumPy常用随机数</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-21 20:20:00" itemprop="dateCreated datePublished" datetime="2023-05-21T20:20:00+08:00">2023-05-21</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-24 20:30:27" itemprop="dateModified" datetime="2023-05-24T20:30:27+08:00">2023-05-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NumPy/" itemprop="url" rel="index"><span itemprop="name">NumPy</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="seed向随机数生成器传传递随机状态种子："><a href="#seed向随机数生成器传传递随机状态种子：" class="headerlink" title="seed向随机数生成器传传递随机状态种子："></a>seed向随机数生成器传传递随机状态种子：</h3><ul>
+<li>只要random.seed(*)seed里面的值一样，那随机出来的结果就一样。所以说，seed的作用就是让随机结果可以重现。也就是说当我们设置相同的seed，每次生成的随机数相同。如果不设置seed，则每次会生成不同的随机数。使用同一个种子，每次生成的随机数序列都是相同的。<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> random</span><br><span class="line">random.seed(<span class="number">10</span>)</span><br><span class="line"><span class="built_in">print</span>(random.random())</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="randint-随机整数"><a href="#randint-随机整数" class="headerlink" title="randint 随机整数:"></a>randint 随机整数:</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.random.randint(<span class="number">3</span>)  <span class="comment"># 在0到3之间生成一个随机整数</span></span><br><span class="line">b = np.random.randint(<span class="number">1</span>,<span class="number">10</span>) <span class="comment"># 在1到10之间生成一个随机整数</span></span><br><span class="line">c = np.random.randint(<span class="number">1</span>,<span class="number">10</span>,size=(<span class="number">5</span>,)) <span class="comment"># 在1到10之间生成5列的随机一维数组</span></span><br><span class="line">d = np.random.randint(<span class="number">1</span>,<span class="number">10</span>,size=(<span class="number">3</span>,<span class="number">5</span>)) <span class="comment"># 在1到10之间生成3行5列的随机二维数组</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a)</span><br><span class="line"><span class="number">1</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(b)</span><br><span class="line"><span class="number">5</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(c)</span><br><span class="line">[<span class="number">2</span> <span class="number">6</span> <span class="number">4</span> <span class="number">9</span> <span class="number">4</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(d)</span><br><span class="line">[[<span class="number">9</span> <span class="number">9</span> <span class="number">1</span> <span class="number">4</span> <span class="number">5</span>]</span><br><span class="line"> [<span class="number">2</span> <span class="number">5</span> <span class="number">8</span> <span class="number">5</span> <span class="number">9</span>]</span><br><span class="line"> [<span class="number">3</span> <span class="number">8</span> <span class="number">8</span> <span class="number">1</span> <span class="number">9</span>]]</span><br></pre></td></tr></table></figure>
+<h3 id="random-生成0-0至1-0之间的随机小数："><a href="#random-生成0-0至1-0之间的随机小数：" class="headerlink" title="random 生成0.0至1.0之间的随机小数："></a>random 生成0.0至1.0之间的随机小数：</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.random.random(<span class="number">3</span>) <span class="comment"># 生成3个0至1之间的随机小数</span></span><br><span class="line">b = np.random.random(size=(<span class="number">2</span>,<span class="number">3</span>)) <span class="comment"># 生成2行3列0至1之间的随机小数二维数组</span></span><br><span class="line">c = np.random.random(size=(<span class="number">3</span>,<span class="number">2</span>,<span class="number">2</span>)) <span class="comment"># 生成3块2行2列0至1之间的随机小数二维数组</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a)</span><br><span class="line">[<span class="number">0.25813906</span> <span class="number">0.82466797</span> <span class="number">0.72042472</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(b)</span><br><span class="line">[[<span class="number">0.53770224</span> <span class="number">0.27216829</span> <span class="number">0.52956564</span>]</span><br><span class="line"> [<span class="number">0.85333164</span> <span class="number">0.46672623</span> <span class="number">0.96336447</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(c)</span><br><span class="line">[[[<span class="number">0.96124204</span> <span class="number">0.62181928</span>]</span><br><span class="line">  [<span class="number">0.46219458</span> <span class="number">0.8472617</span> ]]</span><br><span class="line"></span><br><span class="line"> [[<span class="number">0.40510907</span> <span class="number">0.43173369</span>]</span><br><span class="line">  [<span class="number">0.48500043</span> <span class="number">0.40644189</span>]]</span><br><span class="line"></span><br><span class="line"> [[<span class="number">0.20826501</span> <span class="number">0.11260162</span>]</span><br><span class="line">  [<span class="number">0.80804678</span> <span class="number">0.46113368</span>]]]</span><br></pre></td></tr></table></figure>
+<h3 id="choice-从一维数组中生成随机数："><a href="#choice-从一维数组中生成随机数：" class="headerlink" title="choice 从一维数组中生成随机数："></a>choice 从一维数组中生成随机数：</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">第一个三参数是一个一维数组，如果只有一个数的话，相当于range(这个数)</span></span><br><span class="line"><span class="string">第二个参数是需要生成数组的shape，如果只有一个数就会生成一维数组，这个数就是一维数组的元素个数</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">a = np.random.choice(<span class="number">5</span>,<span class="number">3</span>) <span class="comment"># 从range(5)中随机生成3列的一维数组</span></span><br><span class="line">b = np.random.choice(<span class="number">5</span>,(<span class="number">2</span>,<span class="number">3</span>)) <span class="comment"># 从range(5)中随机生成2行3列的二维数组</span></span><br><span class="line">c = np.random.choice([<span class="number">1</span>,<span class="number">2</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">8</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">9</span>],<span class="number">3</span>) <span class="comment"># 从[1,2,9,4,8,6,7,9]中随机生成3列的一维数组</span></span><br><span class="line">d = np.random.choice([<span class="number">1</span>,<span class="number">2</span>,<span class="number">9</span>,<span class="number">4</span>,<span class="number">8</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">9</span>],(<span class="number">2</span>,<span class="number">3</span>)) <span class="comment"># 从[1,2,9,4,8,6,7,9]中随机生成2行3列的二维数组</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a)</span><br><span class="line">[<span class="number">1</span> <span class="number">1</span> <span class="number">4</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(b)</span><br><span class="line">[[<span class="number">0</span> <span class="number">0</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">3</span> <span class="number">3</span> <span class="number">0</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(c)</span><br><span class="line">[<span class="number">7</span> <span class="number">9</span> <span class="number">9</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(d)</span><br><span class="line">[[<span class="number">1</span> <span class="number">4</span> <span class="number">9</span>]</span><br><span class="line"> [<span class="number">9</span> <span class="number">4</span> <span class="number">7</span>]]</span><br></pre></td></tr></table></figure>
+<h3 id="shuffle-把一个数组进行随机排列："><a href="#shuffle-把一个数组进行随机排列：" class="headerlink" title="shuffle 把一个数组进行随机排列："></a>shuffle 把一个数组进行随机排列：</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.arange(<span class="number">10</span>) </span><br><span class="line">np.random.shuffle(a)</span><br><span class="line">b = np.arange(<span class="number">20</span>).reshape(<span class="number">4</span>,<span class="number">5</span>)</span><br><span class="line">np.random.shuffle(b)</span><br><span class="line">c = np.arange(<span class="number">12</span>).reshape(<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>)</span><br><span class="line">np.random.shuffle(c[<span class="number">0</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a)</span><br><span class="line">[<span class="number">9</span> <span class="number">3</span> <span class="number">8</span> <span class="number">6</span> <span class="number">4</span> <span class="number">2</span> <span class="number">7</span> <span class="number">0</span> <span class="number">5</span> <span class="number">1</span>]</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">多维数组只是按行随机，列不变</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(b)</span><br><span class="line">[[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>]</span><br><span class="line"> [<span class="number">15</span> <span class="number">16</span> <span class="number">17</span> <span class="number">18</span> <span class="number">19</span>]</span><br><span class="line"> [ <span class="number">5</span>  <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span>]</span><br><span class="line"> [<span class="number">10</span> <span class="number">11</span> <span class="number">12</span> <span class="number">13</span> <span class="number">14</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(c)</span><br><span class="line">[[[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>]</span><br><span class="line">  [ <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span>]]</span><br><span class="line"></span><br><span class="line"> [[ <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>]</span><br><span class="line">  [ <span class="number">9</span> <span class="number">10</span> <span class="number">11</span>]]]</span><br></pre></td></tr></table></figure>
+<h3 id="permutation-把一个数组随机排列或者数字全排列："><a href="#permutation-把一个数组随机排列或者数字全排列：" class="headerlink" title="permutation 把一个数组随机排列或者数字全排列："></a>permutation 把一个数组随机排列或者数字全排列：</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">与np.random.shuffle()效果一样，但是是返回新数组作为结果，而不改变原本的数组</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line">a = np.random.permutation(<span class="number">10</span>) <span class="comment"># 此处效果与shuffle一样</span></span><br><span class="line">b = np.arange(<span class="number">9</span>).reshape((<span class="number">3</span>,<span class="number">3</span>))</span><br><span class="line">c = np.random.permutation(b)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a)[<span class="number">6</span> <span class="number">4</span> <span class="number">1</span> <span class="number">8</span> <span class="number">2</span> <span class="number">5</span> <span class="number">0</span> <span class="number">7</span> <span class="number">3</span> <span class="number">9</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(b)</span><br><span class="line">[[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span>]</span><br><span class="line"> [<span class="number">3</span> <span class="number">4</span> <span class="number">5</span>]</span><br><span class="line"> [<span class="number">6</span> <span class="number">7</span> <span class="number">8</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(c)</span><br><span class="line">[[<span class="number">3</span> <span class="number">4</span> <span class="number">5</span>]</span><br><span class="line"> [<span class="number">6</span> <span class="number">7</span> <span class="number">8</span>]</span><br><span class="line"> [<span class="number">0</span> <span class="number">1</span> <span class="number">2</span>]]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(b)  <span class="comment"># 再次检查b数组，发现数组的并没有改变</span></span><br><span class="line">[[<span class="number">0</span> <span class="number">1</span> <span class="number">2</span>]</span><br><span class="line"> [<span class="number">3</span> <span class="number">4</span> <span class="number">5</span>]</span><br><span class="line"> [<span class="number">6</span> <span class="number">7</span> <span class="number">8</span>]]</span><br></pre></td></tr></table></figure>
+<h3 id="normal-生成正态分布数字："><a href="#normal-生成正态分布数字：" class="headerlink" title="normal 生成正态分布数字："></a>normal 生成正态分布数字：</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="string">正态分布，又叫常态分布，又叫高斯分布</span></span><br><span class="line"><span class="string">normal [平均值，方差，size]</span></span><br><span class="line"><span class="string">&#x27;&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.random.normal(<span class="number">1</span>,<span class="number">10</span>,<span class="number">10</span>) <span class="comment"># 平均值1，方差10，10个数</span></span><br><span class="line"><span class="built_in">print</span>(a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a)</span><br><span class="line">[ -<span class="number">4.80972345</span>   <span class="number">3.21754202</span> -<span class="number">13.62124253</span>  -<span class="number">1.81390496</span>  -<span class="number">7.0960738</span></span><br><span class="line">  <span class="number">15.51276455</span> -<span class="number">12.6628616</span>    <span class="number">5.33833257</span>   <span class="number">5.26607505</span>  -<span class="number">1.06609945</span>]</span><br></pre></td></tr></table></figure>
+<h3 id="uniform-均匀分布："><a href="#uniform-均匀分布：" class="headerlink" title="uniform 均匀分布："></a>uniform 均匀分布：</h3><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.random.uniform(<span class="number">1</span>,<span class="number">10</span>,<span class="number">10</span>) <span class="comment"># 在1到10之间生成10个随机数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a)</span><br><span class="line">[<span class="number">2.27906803</span> <span class="number">5.56558209</span> <span class="number">9.8278692</span>  <span class="number">5.00394756</span> <span class="number">6.07593014</span> <span class="number">6.34886202</span></span><br><span class="line"> <span class="number">2.01584024</span> <span class="number">1.84062662</span> <span class="number">9.66152769</span> <span class="number">2.93471345</span>]</span><br><span class="line"></span><br><span class="line">b = np.random.uniform(<span class="number">1</span>,<span class="number">10</span>,(<span class="number">2</span>,<span class="number">3</span>)) <span class="comment"># 在1到10之间生成2行3列共计6个随机数</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(b)</span><br><span class="line">[[<span class="number">5.53857595</span> <span class="number">2.80363056</span> <span class="number">4.01241531</span>]</span><br><span class="line"> [<span class="number">2.9359578</span>  <span class="number">1.56351089</span> <span class="number">6.47146616</span>]]</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/18/NumPy/P6_%E8%BD%B4%EF%BC%8C%E6%B2%BF%E8%BD%B4%E5%88%87%E7%89%87%E4%B8%8E%E8%BD%B4%E8%BD%AC%E7%BD%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/18/NumPy/P6_%E8%BD%B4%EF%BC%8C%E6%B2%BF%E8%BD%B4%E5%88%87%E7%89%87%E4%B8%8E%E8%BD%B4%E8%BD%AC%E7%BD%AE/" class="post-title-link" itemprop="url">P6_轴，沿轴切片与轴转置</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-18 19:46:00" itemprop="dateCreated datePublished" datetime="2023-05-18T19:46:00+08:00">2023-05-18</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-24 20:30:26" itemprop="dateModified" datetime="2023-05-24T20:30:26+08:00">2023-05-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NumPy/" itemprop="url" rel="index"><span itemprop="name">NumPy</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="数组的轴"><a href="#数组的轴" class="headerlink" title="数组的轴"></a>数组的轴</h2><p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20230518194840.png"></p>
+<ul>
+<li>轴是多维数组中描述数组索引顺序的参数，数组有几维就有几个轴。</li>
+<li>轴的值从0开始，如三维数组拥有0,1,2三个轴。</li>
+<li>无论是几维数组，0维数组都代表对高维度索引顺序的轴，如在三维数组中0轴是“块”的索引，在二维数组中0轴是“行”的索引。</li>
+<li>多维数组的shape参数就是以不同维度在轴上的值表示的，假设一个三维数组的shape为(4,3,2),其中三个值分别代表(0轴,1轴,2轴),所以这是一个四块，三行，两列的三维数组。<blockquote>
+<p>凡是提到轴，先看数组维度，有几个为就有几个轴。</p>
+</blockquote>
+</li>
+</ul>
+<h2 id="沿轴切片"><a href="#沿轴切片" class="headerlink" title="沿轴切片"></a>沿轴切片</h2><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>],[<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>],[<span class="number">7</span>,<span class="number">8</span>,<span class="number">9</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a.shape)</span><br><span class="line">(<span class="number">3</span>, <span class="number">3</span>)</span><br></pre></td></tr></table></figure>
+<ul>
+<li>该数组的维度为(3,3),拥有0轴与1轴两个轴<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a[:<span class="number">2</span>])</span><br><span class="line">[[<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">4</span> <span class="number">5</span> <span class="number">6</span>]]</span><br></pre></td></tr></table></figure></li>
+<li>在上面切片操作中，:2是切片的第一个参数，第一个参数代表0轴，而0轴表示的是2维，所以这个切片实在2维这个维度上切的，又叫“沿0轴切片”<br>  <img src="https://raw.githubusercontent.com/porridge42/picgo/main/20230518213728.png"><figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a[:<span class="number">2</span>,<span class="number">1</span>:])</span><br><span class="line">[[<span class="number">2</span> <span class="number">3</span>]</span><br><span class="line"> [<span class="number">5</span> <span class="number">6</span>]]</span><br></pre></td></tr></table></figure></li>
+<li>在两个维度（轴）上各切一刀，第一个参数就是2维（0轴）上的索引[0]和索引[1]，既([1,2,3])和([4,5,6])这两个1维数组第2个参数就是1维（1轴），1:表示切取1维（1轴）上的索引[1]和索引[2]，既对数组([1,2,3])取([2,3])，对数组([4,5,6])取([5,6])<br>  <img src="https://raw.githubusercontent.com/porridge42/picgo/main/20230518214423.png"></li>
+</ul>
+<h2 id="数组转置"><a href="#数组转置" class="headerlink" title="数组转置"></a>数组转置</h2><ul>
+<li>使用transpose方法【行列转置】:<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.arange(<span class="number">24</span>).reshape((<span class="number">4</span>,<span class="number">6</span>))</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a)</span><br><span class="line">[[ <span class="number">0</span>  <span class="number">1</span>  <span class="number">2</span>  <span class="number">3</span>  <span class="number">4</span>  <span class="number">5</span>]</span><br><span class="line"> [ <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span> <span class="number">11</span>]</span><br><span class="line"> [<span class="number">12</span> <span class="number">13</span> <span class="number">14</span> <span class="number">15</span> <span class="number">16</span> <span class="number">17</span>]</span><br><span class="line"> [<span class="number">18</span> <span class="number">19</span> <span class="number">20</span> <span class="number">21</span> <span class="number">22</span> <span class="number">23</span>]]</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a.transpose())</span><br><span class="line">[[ <span class="number">0</span>  <span class="number">6</span> <span class="number">12</span> <span class="number">18</span>]</span><br><span class="line"> [ <span class="number">1</span>  <span class="number">7</span> <span class="number">13</span> <span class="number">19</span>]</span><br><span class="line"> [ <span class="number">2</span>  <span class="number">8</span> <span class="number">14</span> <span class="number">20</span>]</span><br><span class="line"> [ <span class="number">3</span>  <span class="number">9</span> <span class="number">15</span> <span class="number">21</span>]</span><br><span class="line"> [ <span class="number">4</span> <span class="number">10</span> <span class="number">16</span> <span class="number">22</span>]</span><br><span class="line"> [ <span class="number">5</span> <span class="number">11</span> <span class="number">17</span> <span class="number">23</span>]]</span><br></pre></td></tr></table></figure></li>
+<li>直接使用transpose方法，将原二维数组的每一行都换成了列，每一列都转成了行，也称为轴转置.</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/17/NumPy/P5_%E6%95%B0%E7%BB%84%E7%B4%A2%E5%BC%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="porridge42">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="NanBlog 稀饭目标">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2023/05/17/NumPy/P5_%E6%95%B0%E7%BB%84%E7%B4%A2%E5%BC%95/" class="post-title-link" itemprop="url">P5_数组索引</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2023-05-17 16:38:00" itemprop="dateCreated datePublished" datetime="2023-05-17T16:38:00+08:00">2023-05-17</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-05-24 20:30:25" itemprop="dateModified" datetime="2023-05-24T20:30:25+08:00">2023-05-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NumPy/" itemprop="url" rel="index"><span itemprop="name">NumPy</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="基础索引"><a href="#基础索引" class="headerlink" title="基础索引"></a>基础索引</h2><ul>
+<li>下标索引和切片：numpy数组基础索引方式与python一致支持下标与切片索引.<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</span><br><span class="line">A = np.array([[<span class="number">9</span>,<span class="number">8</span>,<span class="number">7</span>],</span><br><span class="line">			  [<span class="number">6</span>,<span class="number">5</span>,<span class="number">4</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a[<span class="number">3</span>])</span><br><span class="line"><span class="number">3</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a[<span class="number">2</span>:<span class="number">6</span>])</span><br><span class="line">[<span class="number">2</span> <span class="number">3</span> <span class="number">4</span> <span class="number">5</span>]</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(A[<span class="number">0</span>:<span class="number">2</span>,<span class="number">0</span>:<span class="number">2</span>])</span><br><span class="line">[[<span class="number">9</span> <span class="number">8</span>]</span><br><span class="line"> [<span class="number">6</span> <span class="number">5</span>]]</span><br></pre></td></tr></table></figure></li>
+<li>布尔索引：通过布尔运算（如：比较运算符）来获取符合指定条件的元素的数组.<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 获取大于5的元素</span></span><br><span class="line">a = np.array([[<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>],[<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>],[<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>],[<span class="number">9</span>,<span class="number">10</span>,<span class="number">11</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a[a&gt;<span class="number">5</span>])</span><br><span class="line">[ <span class="number">6</span>  <span class="number">7</span>  <span class="number">8</span>  <span class="number">9</span> <span class="number">10</span> <span class="number">11</span>]</span><br><span class="line"><span class="comment"># 过滤nan</span></span><br><span class="line">a = np.array([np.nan,  <span class="number">1</span>,<span class="number">2</span>,np.nan,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="built_in">print</span>(a[~np.isnan(a)])</span><br><span class="line">[<span class="number">1.</span> <span class="number">2.</span> <span class="number">3.</span> <span class="number">4.</span> <span class="number">5.</span>]</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://example.com/2023/05/14/NumPy/P4_%E6%95%B0%E7%BB%84%E7%9A%84%E8%AE%A1%E7%AE%97%E4%B8%8E%E5%B9%BF%E6%92%AD%E6%9C%BA%E5%88%B6/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -533,557 +1027,10 @@
   
   
 
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/24/JavaSE/P98IO%E6%B5%81_%E6%96%87%E4%BB%B6%E5%AD%97%E8%8A%82%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81%E7%9A%84%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/24/JavaSE/P98IO%E6%B5%81_%E6%96%87%E4%BB%B6%E5%AD%97%E8%8A%82%E8%BE%93%E5%85%A5%E8%BE%93%E5%87%BA%E6%B5%81%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">P98IO流_文件字节输入输出流的使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-04-24 20:16:00" itemprop="dateCreated datePublished" datetime="2023-04-24T20:16:00+08:00">2023-04-24</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-05-25 20:08:47" itemprop="dateModified" datetime="2023-05-25T20:08:47+08:00">2023-05-25</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="文件字节输入流FileInputStream"><a href="#文件字节输入流FileInputStream" class="headerlink" title="文件字节输入流FileInputStream:"></a>文件字节输入流FileInputStream:</h2><blockquote>
-<p>FileInputStream属于输入字节流的一个实现类，可以实现从文件中读取字节数据。</p>
-</blockquote>
-<ul>
-<li><p><strong>实例化：</strong></p>
-  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="comment">//1创建FileInputStream</span></span><br><span class="line">        <span class="type">FileInputStream</span> <span class="variable">fis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;文件路径&quot;</span>);</span><br></pre></td></tr></table></figure>
-<p>实例化fis对象时使用一个参数的构造方法，参数为文件路径，参数中的文件可能不存在，所以需要注意方法可能需要抛出异常。</p>
-</li>
-<li><p><strong>读取：</strong></p>
-<ul>
-<li>可以使用循环，一次一个字节读取  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">int</span> <span class="variable">data</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">while</span>((data=fis.read())!=-<span class="number">1</span>) &#123;</span><br><span class="line">        System.out.println(data);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></li>
-<li>也可以一次性读取多个字节，将数据存入数组中  <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="type">byte</span>[] buf = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line"><span class="type">int</span> <span class="variable">count3</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>((count3 = fis.read(buf)) != -<span class="number">1</span>) &#123;</span><br><span class="line">    System.out.println(<span class="keyword">new</span> <span class="title class_">String</span>(buf, <span class="number">0</span>, count3));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-<li><p><strong>关闭</strong></p>
-<ul>
-<li>IO流属于系统资源使用完毕需要关闭<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fis.close();</span><br></pre></td></tr></table></figure></li>
-</ul>
-</li>
-</ul>
-<hr>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.FileInputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo1</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception&#123;</span><br><span class="line">        <span class="comment">//1创建FileInputStream</span></span><br><span class="line">        <span class="type">FileInputStream</span> <span class="variable">fis</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileInputStream</span>(<span class="string">&quot;C:\\Users\\23971\\Desktop\\IdeaProjects\\IOstream\\files\\aaa.txt&quot;</span>);</span><br><span class="line">        <span class="comment">//2读取文件</span></span><br><span class="line">        <span class="comment">//2.1按一次一个字节的方式读取</span></span><br><span class="line">        <span class="comment">/*int data = 0;</span></span><br><span class="line"><span class="comment">        while((data=fis.read())!=-1) &#123;</span></span><br><span class="line"><span class="comment">            System.out.println(data);</span></span><br><span class="line"><span class="comment">        &#125;*/</span></span><br><span class="line">        <span class="comment">//2.2一次读取多个字节</span></span><br><span class="line">        <span class="comment">/*byte[] buf = new byte[3];</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        int count = fis.read(buf);</span></span><br><span class="line"><span class="comment">        System.out.println(new String(buf));</span></span><br><span class="line"><span class="comment">        int count2 = fis.read(buf);</span></span><br><span class="line"><span class="comment">        System.out.println(new String(buf));</span></span><br><span class="line"><span class="comment"></span></span><br><span class="line"><span class="comment">        System.out.println(&quot;count = &quot;+count);</span></span><br><span class="line"><span class="comment">        System.out.println(&quot;count2 = &quot;+count2);*/</span></span><br><span class="line">        <span class="type">byte</span>[] buf = <span class="keyword">new</span> <span class="title class_">byte</span>[<span class="number">1024</span>];</span><br><span class="line">        <span class="type">int</span> <span class="variable">count3</span> <span class="operator">=</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>((count3 = fis.read(buf)) != -<span class="number">1</span>) &#123;</span><br><span class="line">            System.out.println(<span class="keyword">new</span> <span class="title class_">String</span>(buf, <span class="number">0</span>, count3));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//3关闭</span></span><br><span class="line">        fis.close();</span><br><span class="line">        System.out.println(<span class="string">&quot;执行完毕！&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20230425194533.png"></p>
-<hr>
-<h2 id="文件字节输出流FileOutputStream"><a href="#文件字节输出流FileOutputStream" class="headerlink" title="文件字节输出流FileOutputStream:"></a>文件字节输出流FileOutputStream:</h2><blockquote>
-<p>FileOutputStream属于输入字节流的一个实现类，可以实现向文件中写入字节数据。</p>
-</blockquote>
-<ul>
-<li><p><strong>实例化:</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//实例化</span></span><br><span class="line"><span class="type">FileOutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;文件路径&quot;</span>, <span class="literal">true</span>);</span><br></pre></td></tr></table></figure>
-<p>设置构造方法第二个参数为true，表示不覆盖连续写入</p>
-</li>
-<li><p><strong>文件写入write()方法：</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//写入</span></span><br><span class="line">fos.write(<span class="number">97</span>);</span><br><span class="line">fos.write(<span class="string">&#x27;b&#x27;</span>);</span><br><span class="line">fos.write(<span class="string">&#x27;c&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="type">String</span> <span class="variable">string</span> <span class="operator">=</span><span class="string">&quot;Hello,world!&quot;</span>;</span><br><span class="line">fos.write(string.getBytes());</span><br></pre></td></tr></table></figure></li>
-<li><p><strong>关闭:</strong></p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//关闭</span></span><br><span class="line">        fos.close();</span><br><span class="line">        System.out.println(<span class="string">&quot;执行完毕&quot;</span>);</span><br></pre></td></tr></table></figure></li>
-</ul>
-<hr>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.io.FileOutputStream;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo2</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception &#123;</span><br><span class="line">        <span class="comment">//实例化</span></span><br><span class="line">        <span class="type">FileOutputStream</span> <span class="variable">fos</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">FileOutputStream</span>(<span class="string">&quot;C:\\Users\\23971\\Desktop\\IdeaProjects\\IOstream\\files\\bbb.txt&quot;</span>, <span class="literal">true</span>);</span><br><span class="line">        <span class="comment">//写入</span></span><br><span class="line">        fos.write(<span class="number">97</span>);</span><br><span class="line">        fos.write(<span class="string">&#x27;b&#x27;</span>);</span><br><span class="line">        fos.write(<span class="string">&#x27;c&#x27;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="type">String</span> <span class="variable">string</span> <span class="operator">=</span><span class="string">&quot;Hello,world!&quot;</span>;</span><br><span class="line">        fos.write(string.getBytes());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//关闭</span></span><br><span class="line">        fos.close();</span><br><span class="line">        System.out.println(<span class="string">&quot;执行完毕&quot;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20230524214010.png"><br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20230524214043.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/04/23/JavaSE/P97IO%E6%B5%81_%E5%AD%97%E8%8A%82%E6%B5%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/04/23/JavaSE/P97IO%E6%B5%81_%E5%AD%97%E8%8A%82%E6%B5%81/" class="post-title-link" itemprop="url">P97IO流_字节流</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-04-23 19:33:00" itemprop="dateCreated datePublished" datetime="2023-04-23T19:33:00+08:00">2023-04-23</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-24 20:16:27" itemprop="dateModified" datetime="2023-04-24T20:16:27+08:00">2023-04-24</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="字节流抽象类"><a href="#字节流抽象类" class="headerlink" title="字节流抽象类"></a>字节流抽象类</h2><ul>
-<li>字节流的父类(抽象类):<br><img src="https://raw.githubusercontent.com/porridge42/picgo/main/20230423194008.png"></li>
-<li>字节流有分为个父类，一种用来输入，一种用来输出。</li>
-</ul>
-<h2 id="文件字节流"><a href="#文件字节流" class="headerlink" title="文件字节流"></a>文件字节流</h2><ul>
-<li>文件字节流属于字节流的一个<strong>实现类</strong>:</li>
-<li>FileInputStream字节输入流:<ul>
-<li><code>public int read(byte[] b)</code> &#x2F;&#x2F;从流中读取多格字节，将读到的内容存入b数组，会返回实际读到的字节数；如果读到文件的尾部，则会返回-1。</li>
-</ul>
-</li>
-<li>FileOutputStream字节输出流：<ul>
-<li><code>public void write(byte[] b)</code> &#x2F;&#x2F;一次写多个字节，将b数组中所有字节，写入输出流。</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/21/JavaSE/P96IO%E6%B5%81_%E4%BB%80%E4%B9%88%E6%98%AF%E6%B5%81/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/21/JavaSE/P96IO%E6%B5%81_%E4%BB%80%E4%B9%88%E6%98%AF%E6%B5%81/" class="post-title-link" itemprop="url">P96IO流_什么是流</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-03-21 19:35:00" itemprop="dateCreated datePublished" datetime="2023-03-21T19:35:00+08:00">2023-03-21</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-04-23 19:34:12" itemprop="dateModified" datetime="2023-04-23T19:34:12+08:00">2023-04-23</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h1 id="什么是流"><a href="#什么是流" class="headerlink" title="什么是流"></a>什么是流</h1><ul>
-<li>概念：内存与存储设备之间传输数据的通道</li>
-<li>流的分类:<ul>
-<li>按方向【重点】:<ul>
-<li>输入流：将&lt;存储设备&gt;中的内容读入到&lt;内存&gt;中。</li>
-<li>输出流：将&lt;内存&gt;中的内容写入到&lt;存储设备&gt;中。</li>
-</ul>
-</li>
-<li>按单位：<ul>
-<li>字节流：一字节为单位，可以读写所有数据。</li>
-<li>字符流：以字符为单位，只能读写文本数据。</li>
-</ul>
-</li>
-<li>按功能：<ul>
-<li>节点流：具有实际传输数据的读写功能。</li>
-<li>过滤流：在节点流的基础之上增强的功能。</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/16/JavaSE/P95%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_%E6%80%BB%E7%BB%93/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/16/JavaSE/P95%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_%E6%80%BB%E7%BB%93/" class="post-title-link" itemprop="url">P95集合框架_总结</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-03-16 19:24:00" itemprop="dateCreated datePublished" datetime="2023-03-16T19:24:00+08:00">2023-03-16</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-19 19:37:56" itemprop="dateModified" datetime="2023-03-19T19:37:56+08:00">2023-03-19</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="集合框架总结"><a href="#集合框架总结" class="headerlink" title="集合框架总结"></a>集合框架总结</h2><ul>
-<li>集合的概念：<ul>
-<li>对象的容器，和数组类似，定义了对多个对象进行操作的常用方法。</li>
-</ul>
-</li>
-<li>List集合：<ul>
-<li>有序、有下标、元素可以重复。(ArrayList、LinkedList、Vector)</li>
-</ul>
-</li>
-<li>Set集合：<ul>
-<li>无序、无下标、元素补课重复。(HashSet、TreeSet)</li>
-</ul>
-</li>
-<li>Map集合：<ul>
-<li>存储一对数据，无序、无下标、键不可重复，值可以重复。(HashMap、HashTable、TreeMap)</li>
-</ul>
-</li>
-<li>Collections：<ul>
-<li>集合工具类，定义了除了存取以外的集合常用方法。</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/14/JavaSE/P94%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_Collections%E5%B7%A5%E5%85%B7%E7%B1%BB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/14/JavaSE/P94%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_Collections%E5%B7%A5%E5%85%B7%E7%B1%BB/" class="post-title-link" itemprop="url">P94集合框架_Collections工具类</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2023-03-14 20:13:00" itemprop="dateCreated datePublished" datetime="2023-03-14T20:13:00+08:00">2023-03-14</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2023-03-16 19:19:16" itemprop="dateModified" datetime="2023-03-16T19:19:16+08:00">2023-03-16</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="Collection工具类"><a href="#Collection工具类" class="headerlink" title="Collection工具类"></a>Collection工具类</h2><ul>
-<li>概念: 集合工具类，定义了除了存取以外的集合常用方法。</li>
-<li>方法:<ul>
-<li><code>public static void reverse(List&lt;?&gt; list)</code> &#x2F;&#x2F;反转集合中元素的顺序</li>
-<li><code>public static void shuffle(List&lt;?&gt; list)</code> &#x2F;&#x2F;随机重置集合元素的顺序</li>
-<li><code>public static void sort(List&lt;T&gt; list)</code>  &#x2F;&#x2F;升序排序（元素类型必须实现Comparable接口）</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo4</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        List&lt;Integer&gt; list = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        list.add(<span class="number">20</span>);</span><br><span class="line">        list.add(<span class="number">5</span>);</span><br><span class="line">        list.add(<span class="number">12</span>);</span><br><span class="line">        list.add(<span class="number">30</span>);</span><br><span class="line">        list.add(<span class="number">6</span>);</span><br><span class="line">        <span class="comment">//sort排序</span></span><br><span class="line">        System.out.println(<span class="string">&quot;排序之前：&quot;</span>+list.toString());</span><br><span class="line">        Collections.sort(list);</span><br><span class="line">        System.out.println(<span class="string">&quot;排序之后：&quot;</span>+list.toString());</span><br><span class="line">        <span class="comment">//sort方法还支持第二个参数为比较器的定制规则比较的重载</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//binarySearch二分查找</span></span><br><span class="line">        <span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> Collections.binarySearch(list, <span class="number">30</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;30的下标：&quot;</span>+i);</span><br><span class="line"></span><br><span class="line">        <span class="comment">//copy复制</span></span><br><span class="line">        List&lt;Integer&gt; dest = <span class="keyword">new</span> <span class="title class_">ArrayList</span>&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="type">int</span> <span class="variable">k</span> <span class="operator">=</span> <span class="number">0</span>;k &lt; list.size();k++) &#123;</span><br><span class="line">            dest.add(<span class="number">0</span>);</span><br><span class="line">        &#125;<span class="comment">//copy方法要求拷贝目标必须和源集合大小一致，这个循环是为了保证目标集合和源集合大小一致</span></span><br><span class="line">        Collections.copy(dest, list);</span><br><span class="line">        System.out.println(<span class="string">&quot;拷贝之后(dest)：&quot;</span>+dest.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//reverse反转</span></span><br><span class="line">        Collections.reverse(list);</span><br><span class="line">        System.out.println(<span class="string">&quot;反转之后(list)：&quot;</span>+list.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//shuffle打乱</span></span><br><span class="line">        Collections.shuffle(list);</span><br><span class="line">        System.out.println(<span class="string">&quot;打乱之后(list)：&quot;</span>+list.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//补充</span></span><br><span class="line">        System.out.println(<span class="string">&quot;----补充----&quot;</span>);</span><br><span class="line">        <span class="comment">//集合转为数组</span></span><br><span class="line">        System.out.println(<span class="string">&quot;----集合转为数组----&quot;</span>);</span><br><span class="line">        Integer[] arr = list.toArray(<span class="keyword">new</span> <span class="title class_">Integer</span>[<span class="number">0</span>]);</span><br><span class="line">        System.out.println(<span class="string">&quot;数组长度:&quot;</span>+arr.length);</span><br><span class="line">        System.out.println(Arrays.toString(arr));</span><br><span class="line"></span><br><span class="line">        <span class="comment">//数组转为集合</span></span><br><span class="line">        System.out.println(<span class="string">&quot;----数组转为集合----&quot;</span>);</span><br><span class="line">        String[] names = &#123;<span class="string">&quot;张三&quot;</span>,<span class="string">&quot;李四&quot;</span>,<span class="string">&quot;王五&quot;</span>&#125;;</span><br><span class="line">        List&lt;String&gt; list2 = Arrays.asList(names);</span><br><span class="line">        <span class="comment">//注:当数组转为集合后集合会变成一个受限集合，不允许修改或删除</span></span><br><span class="line">        System.out.println(<span class="string">&quot;集合大小:&quot;</span>+list2.size());</span><br><span class="line">        System.out.println(list2.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/202303161918481.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
-      
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/03/14/JavaSE/P93%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_TreeMap%E7%9A%84%E4%BD%BF%E7%94%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="porridge42">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="NanBlog 稀饭目标">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          
-            <a href="/2023/03/14/JavaSE/P93%E9%9B%86%E5%90%88%E6%A1%86%E6%9E%B6_TreeMap%E7%9A%84%E4%BD%BF%E7%94%A8/" class="post-title-link" itemprop="url">P93集合框架_TreeMap的使用</a>
-        </h2>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              
-
-              <time title="创建时间：2023-03-14 19:22:00 / 修改时间：20:11:50" itemprop="dateCreated datePublished" datetime="2023-03-14T19:22:00+08:00">2023-03-14</time>
-            </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/JavaSE/" itemprop="url" rel="index"><span itemprop="name">JavaSE</span></a>
-                </span>
-            </span>
-
-          
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <h2 id="TreeMap"><a href="#TreeMap" class="headerlink" title="TreeMap"></a>TreeMap</h2><ul>
-<li>存储结构：红黑树</li>
-<li>可以对Key进行自动排序</li>
-</ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">class</span> <span class="title class_">Demo3</span> &#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title function_">main</span><span class="params">(String[] args)</span> &#123;</span><br><span class="line">        TreeMap&lt;Student, String&gt; treeMap = <span class="keyword">new</span> <span class="title class_">TreeMap</span>&lt;&gt;(<span class="keyword">new</span> <span class="title class_">Comparator</span>&lt;Student&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="type">int</span> <span class="title function_">compare</span><span class="params">(Student o1, Student o2)</span> &#123;</span><br><span class="line">                <span class="type">int</span> <span class="variable">n2</span> <span class="operator">=</span> o1.getStuNo() - o2.getStuNo();</span><br><span class="line">                <span class="keyword">return</span> n2;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        <span class="comment">//1添加元素</span></span><br><span class="line">        <span class="type">Student</span> <span class="variable">s1</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;孙悟空&quot;</span>, <span class="number">100</span>);</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s2</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;猪八戒&quot;</span>, <span class="number">101</span>);</span><br><span class="line">        <span class="type">Student</span> <span class="variable">s3</span> <span class="operator">=</span> <span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;沙和尚&quot;</span>, <span class="number">102</span>);</span><br><span class="line">        treeMap.put(s1, <span class="string">&quot;北京&quot;</span>);</span><br><span class="line">        treeMap.put(s2, <span class="string">&quot;上海&quot;</span>);</span><br><span class="line">        treeMap.put(s3, <span class="string">&quot;深圳&quot;</span>);</span><br><span class="line">        System.out.println(<span class="string">&quot;元素个数：&quot;</span>+treeMap.size());</span><br><span class="line">        System.out.println(treeMap.toString());</span><br><span class="line"></span><br><span class="line">        <span class="comment">//2删除</span></span><br><span class="line">        <span class="comment">//treeMap.remove(s3);</span></span><br><span class="line">        <span class="comment">//System.out.println(treeMap.toString());</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">//3遍历</span></span><br><span class="line">        <span class="comment">//3.1使用KeySet()方法</span></span><br><span class="line">        System.out.println(<span class="string">&quot;----使用KeySet()遍历----&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (Student key :treeMap.keySet()) &#123;</span><br><span class="line">            System.out.println(key.toString()+<span class="string">&quot;-----&quot;</span>+treeMap.get(key));</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="comment">//3.2使用entrySet()方法</span></span><br><span class="line">        System.out.println(<span class="string">&quot;----使用entrySet()遍历----&quot;</span>);</span><br><span class="line">        <span class="keyword">for</span> (Map.Entry&lt;Student, String&gt; entry : treeMap.entrySet()) &#123;</span><br><span class="line">            System.out.println(entry.getKey().toString()+<span class="string">&quot;-----&quot;</span>+entry.getValue());</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">//4判断</span></span><br><span class="line">        System.out.println(treeMap.containsKey(<span class="keyword">new</span> <span class="title class_">Student</span>(<span class="string">&quot;沙和尚&quot;</span>, <span class="number">102</span>)));</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p><img src="https://raw.githubusercontent.com/porridge42/picgo/main/202303142011379.png"></p>
-
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/17/">17</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
+    <a class="extend prev" rel="prev" href="/page/5/"><i class="fa fa-angle-left" aria-label="上一页"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><span class="page-number current">6</span><a class="page-number" href="/page/7/">7</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/7/"><i class="fa fa-angle-right" aria-label="下一页"></i></a>
   </nav>
 
 
@@ -1151,20 +1098,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">166</span>
+          <span class="site-state-item-count">172</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-count">9</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-count">11</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -1176,6 +1123,17 @@
   </div>
 
 
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title">
+      <i class="fa fa-fw fa-link"></i>
+      Links
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="https://blog.sorali.org/" title="https:&#x2F;&#x2F;blog.sorali.org" rel="noopener" target="_blank">lisolaris's blog</a>
+        </li>
+    </ul>
+  </div>
 
       </div>
 
@@ -1196,7 +1154,7 @@
 <div class="copyright">
   
   &copy; 
-  <span itemprop="copyrightYear">2023</span>
+  <span itemprop="copyrightYear">2025</span>
   <span class="with-love">
     <i class="fa fa-user"></i>
   </span>
